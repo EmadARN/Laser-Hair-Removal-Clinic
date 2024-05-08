@@ -1,7 +1,12 @@
+import RightBar from "@/Components/ِdrawer/Drawer";
 import React from "react";
 
-const index = () => {
-  return <div>index</div>;
+const Home = () => {
+  return (
+    <div>
+      <RightBar />
+    </div>
+  );
 };
 
-export default index;
+export default Home;
