@@ -1,7 +1,6 @@
 import React from "react";
-import { XCircleIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XCircleIcon } from "@heroicons/react/24/outline";
 const {
-  Button,
   Drawer,
   DrawerOverlay,
   DrawerContent,
@@ -9,7 +8,7 @@ const {
   useDisclosure,
   Icon,
 } = require("@chakra-ui/react");
-import { Box } from "@chakra-ui/react";
+import { Box, IconButton } from "@chakra-ui/react";
 import BodyContent from "./widgets/BodyContent";
 import BtnReservation from "@/Common/btnReservation/BtnReservation";
 
@@ -19,8 +18,13 @@ const RightBar = () => {
 
   return (
     <>
-      <Button ref={btnRef} colorScheme="teal" onClick={onOpen}></Button>
-
+      <IconButton
+        ref={btnRef}
+        size={"sm"}
+        icon={<Bars3Icon />}
+        aria-label={"Open Menu"}
+        onClick={onOpen}
+      />
       <Drawer
         isOpen={isOpen}
         placement="right"
