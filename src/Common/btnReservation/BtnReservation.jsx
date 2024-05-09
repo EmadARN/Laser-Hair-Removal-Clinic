@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import React from "react";
 
-const BtnReservation = ({ onClose }) => {
+const BtnReservation = ({ onClose, text}) => {
   return (
     <Button
       p="28px"
@@ -17,7 +17,7 @@ const BtnReservation = ({ onClose }) => {
       mr={3}
       onClick={onClose}
     >
-      دریافت نوبت
+    {text}
     </Button>
   );
 };
