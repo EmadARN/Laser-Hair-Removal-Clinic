@@ -1,9 +1,11 @@
-import { Text } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 import { DataFaQsOne } from "../DataFaQs";
 import Section_title from "@/Common/section-title";
+import { useState } from "react";
 
 function FaQs() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <Box
@@ -19,20 +21,42 @@ function FaQs() {
           <Text pb={3} fontSize="14px">
             افرادی که تمایل به لیزر درمانی دارند باید بدانند که:
           </Text>
-          {DataFaQsOne.map((item) => {
-            return (
-              <Text
-                key={item.id}
-                lineHeight="35px"
-                color="gray"
-                fontSize="14px"
-                textAlign="justify"
-              >
-                {item.Title}
-              </Text>
-            );
-          })}
+          {!show
+            ? DataFaQsOne.slice(0, 3).map((item) => {
+                return (
+                  <Text
+                    key={item.id}
+                    lineHeight="35px"
+                    color="gray"
+                    fontSize="14px"
+                    textAlign="justify"
+                  >
+                    {item.Title}
+                  </Text>
+                );
+              })
+            : DataFaQsOne.map((item) => {
+                return (
+                  <Text
+                    key={item.id}
+                    lineHeight="35px"
+                    color="gray"
+                    fontSize="14px"
+                    textAlign="justify"
+                  >
+                    {item.Title}
+                  </Text>
+                );
+              })}
         </Box>
+        <Text
+          cursor="pointer"
+          color="#757BE6"
+          onClick={() => setShow(true)}
+          display={show && "none"}
+        >
+          مشاهده بیشتر
+        </Text>
       </Box>
     </>
   );

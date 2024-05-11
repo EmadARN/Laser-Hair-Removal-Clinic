@@ -15,7 +15,7 @@ const Experienced_years = () => {
         </Text>
       </Box>
 
-      <Box mb={4}>
+      <Box mb={7}>
         <Text lineHeight={2} textAlign="center" color="#999" fontSize="14px">
           برای رزرو نوبت و استفاده از خدمات لیزر درمانی کلینیک لیانا میتوانید
           نوبت خود را بصورت آنلاین رزرو کرده و در زمان انتخاب شده در کلینیک حضور

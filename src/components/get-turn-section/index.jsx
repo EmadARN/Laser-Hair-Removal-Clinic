@@ -1,4 +1,4 @@
-import { Box, Center, Container, Flex, Grid } from "@chakra-ui/react";
+import { Flex, Grid } from "@chakra-ui/react";
 import { get_turn_data } from "./data";
 import Main_Layout from "./widgets/main-layout/Main_Layout";
 import Section_title from "@/common/section-title";
@@ -8,7 +8,6 @@ const Main_get_turn = () => {
     <Grid
       display="flex"
       flexDirection="column"
-      w="100%"
       px={{ base: 10, md: 28 }}
       py={10}
       mx={2}
@@ -25,7 +24,7 @@ const Main_get_turn = () => {
         );
       })}
 
-      <Flex justifyContent={"center"}>
+      <Flex justifyContent={"center"} mt={3}>
         <BtnReservation text="دریافت نوبت" px="22px" py="18px" />
       </Flex>
     </Grid>
