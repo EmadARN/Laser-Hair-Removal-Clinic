@@ -1,7 +1,14 @@
+import RightBar from "@/Components/ِdrawer/Drawer";
+
+import NavBar from "@/Container/navbar/NavBar";
 import React from "react";
 
-const index = () => {
-  return <div>index</div>;
+const Home = () => {
+  return (
+    <div>
+      <NavBar />
+    </div>
+  );
 };
 
-export default index;
+export default Home;
