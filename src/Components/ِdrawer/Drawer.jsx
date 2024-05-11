@@ -46,7 +46,7 @@ const RightBar = () => {
           <DrawerBody>
             <BodyContent />
             <Box display="flex" justifyContent="start" mt={10}>
-              <BtnReservation onClose={onClose} />
+              <BtnReservation onClose={onClose} text={"دریافت نوبت"} />
             </Box>
           </DrawerBody>
         </DrawerContent>
