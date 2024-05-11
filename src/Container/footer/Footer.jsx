@@ -21,7 +21,7 @@ export default function Footer() {
     <Box bg={useColorModeValue("#7563DC")} color={useColorModeValue("gray.50")}>
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 2 }} spacing={8}>
-          <Stack align={"flex-start"}>
+          <Stack align={"flex-start"} fontWeight="bold" fontSize="16px">
             <Link href={"#"}>خانه</Link>
             <Link py={1} href={"#"}>
               درباره لیزر و سوالات متداول

@@ -23,6 +23,10 @@ const RightBar = () => {
         size={"sm"}
         icon={<Bars3Icon />}
         aria-label={"Open Menu"}
+        bgColor="#ffffff"
+        _hover={{
+          bgColor: "#ffffff",
+        }}
         onClick={onOpen}
       />
       <Drawer
