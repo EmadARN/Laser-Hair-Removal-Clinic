@@ -1,8 +1,9 @@
-import { Button, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 import { DataFaQsOne } from "../DataFaQs";
 import Section_title from "@/Common/section-title";
 import { useState } from "react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 function FaQs() {
   const [show, setShow] = useState(false);
@@ -48,15 +49,23 @@ function FaQs() {
                   </Text>
                 );
               })}
+          <Box
+            pt={4}
+            pr={1}
+            cursor="pointer"
+            color="#757BE6"
+            onClick={() => setShow(true)}
+            display={show && "none"}
+            fontWeight="bold"
+          >
+            <Box display="flex" justifyContent="start" alignItems="center">
+              <Text>مشاهده بیشتر</Text>
+              <Text w={5} h={5} mr={2} mt={2}>
+                <ChevronDownIcon />
+              </Text>
+            </Box>
+          </Box>
         </Box>
-        <Text
-          cursor="pointer"
-          color="#757BE6"
-          onClick={() => setShow(true)}
-          display={show && "none"}
-        >
-          مشاهده بیشتر
-        </Text>
       </Box>
     </>
   );
