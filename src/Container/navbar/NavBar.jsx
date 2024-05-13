@@ -11,6 +11,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import RightBar from "@/Components/ِdrawer/Drawer";
+import Profile_Modal from "@/Components/modal/profile-modal/Profile_Modal";
 
 export default function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,6 +56,7 @@ export default function NavBar() {
           <Flex alignItems={"center"}>
             <Menu>
               <MenuButton
+                onClick={onOpen}
                 as={Button}
                 rounded={"full"}
                 variant={"link"}
@@ -71,11 +73,12 @@ export default function NavBar() {
             </Menu>
           </Flex>
         </Flex>
-
         {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}></Stack>
-          </Box>
+          <Profile_Modal
+            onOpen={onOpen}
+            onClose={onClose}
+            isOpen={isOpen}
+          ></Profile_Modal>
         ) : null}
       </Box>
     </>
