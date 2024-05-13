@@ -23,6 +23,10 @@ const RightBar = () => {
         size={"sm"}
         icon={<Bars3Icon />}
         aria-label={"Open Menu"}
+        bgColor="#ffffff"
+        _hover={{
+          bgColor: "#ffffff",
+        }}
         onClick={onOpen}
       />
       <Drawer
@@ -46,7 +50,7 @@ const RightBar = () => {
           <DrawerBody>
             <BodyContent />
             <Box display="flex" justifyContent="start" mt={10}>
-              <BtnReservation onClose={onClose} />
+              <BtnReservation onClose={onClose} text={"دریافت نوبت"} />
             </Box>
           </DrawerBody>
         </DrawerContent>

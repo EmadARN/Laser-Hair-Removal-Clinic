@@ -5,3 +5,15 @@
 .display-flex{
     display: flex;
 }
+
+a {
+  text-decoration: none !important;
+}
+body::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 50px;
+}

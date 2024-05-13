@@ -3,7 +3,6 @@ import {
   Flex,
   Avatar,
   HStack,
-  IconButton,
   Button,
   Menu,
   MenuButton,
@@ -15,15 +14,38 @@ import RightBar from "@/Components/ِdrawer/Drawer";
 
 export default function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const Logo = (props) => {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        height={32}
+        stroke="currentColor"
+        width={32}
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3"
+        />
+      </svg>
+    );
+  };
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box
+        w={"100%"}
+        position={"fixed"}
+        bg={useColorModeValue("#F8F9FA")}
+        px={4}
+        zIndex={5}
+      >
         <Flex h={16} alignItems="center" justifyContent={"space-between"}>
-
           <RightBar />
           <HStack spacing={8} alignItems={"center"}>
-            <Box>Logo</Box>
+            <Box color={"#7563DC"}>
+              <Logo />
+            </Box>
             <HStack
               as={"nav"}
               spacing={4}
