@@ -111,10 +111,9 @@ const VerificationCode = () => {
               borderRadius="10px"
               textAlign="center"
               bgColor="#7563DC"
-              sx={{
-                "&:hover": {
-                  bgColor: "#7563DC",
-                },
+              _hover={{
+                bgColor: "purple.100",
+                color: "purple.500",
               }}
               id="mybtn"
             >

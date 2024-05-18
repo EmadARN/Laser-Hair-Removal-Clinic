@@ -58,7 +58,10 @@ export default function Profile_Modal({onClose,onOpen,isOpen}) {
               bgColor="#9c91e0"
               width="100%"
               color="white"
-              sx={{ "&:hover": { bgColor: "#9c91e0" } }}
+              _hover={{
+                bgColor: "purple.100",
+                color: "purple.500",
+              }}
             >
               ادامه
             </Button>
