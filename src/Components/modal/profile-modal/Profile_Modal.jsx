@@ -15,22 +15,24 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
-export default function Profile_Modal({onClose,onOpen,isOpen}) {
+export default function Profile_Modal({onClose,isOpen,setPage,page}) {
   
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
-  return (
-    <>
-      {/* <Button onClick={onOpen}>Open Modal</Button> */}
 
-      <Modal
+if(page === 0) {
+
+
+  return(
+    <Modal
+      
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
       >
-        <ModalOverlay />
+        <ModalOverlay  />
         <ModalContent w={80}>
           <Box p={5} display="flex" justifyContent="space-between" width="100%">
             <Text>ورود/ثبت نام</Text>
@@ -55,6 +57,7 @@ export default function Profile_Modal({onClose,onOpen,isOpen}) {
 
           <ModalFooter display="flex" justifyContent="center" width="100%">
             <Button
+            onClick={() =>setPage(page + 1)}
               bgColor="#9c91e0"
               width="100%"
               color="white"
@@ -68,6 +71,10 @@ export default function Profile_Modal({onClose,onOpen,isOpen}) {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
-  );
+  )
+}else{
+  return null
+}
+
+ 
 }

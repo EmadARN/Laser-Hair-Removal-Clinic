@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { Grid, Box, Text, Input, Button } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
 import BodyModal from "./BodyModal";
+import { IoIosArrowBack } from "react-icons/io";
 
-const VerificationCode = () => {
+const VerificationCode = ({ setPage, page }) => {
   const [inputCode, setInputCode] = useState(["", "", "", ""]);
-  const [close, setClose] = useState(true);
+
   const nextInput = useRef([]);
   const buttonFocus = useRef();
 
@@ -33,81 +34,84 @@ const VerificationCode = () => {
     }
   };
 
-  if (close) {
+  const handleClick = () => {
+    setPage(page - 1);
+  };
+
+  if (page === 1) {
     return (
-      <Grid
-        w="100%"
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        h="100vh"
+      <Box
+        sx={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px" }}
+        width={{ base: "auto", sm: "60%", md: "30%" }}
+        h="auto"
+        bgColor="#fff"
+        borderRadius="10px"
+        p={6}
+        display="flex"
+        flexDirection="column"
       >
-        <Box
-          sx={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px" }}
-          width={{ base: "auto", sm: "60%", md: "30%" }}
-          h="auto"
-          bgColor="#fff"
-          borderRadius="10px"
-          p={6}
-          display="flex"
-          flexDirection="column"
-        >
-          <Box mb={4} display="flex" w="100%" justifyContent="space-between">
-            <Box>
-              <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "sm" }}>
-                کد تایید
-              </Text>
-            </Box>
-
-            <Box as="button">
-              <MdCancel onClick={() => setClose(false)}></MdCancel>
-            </Box>
-          </Box>
-          <BodyModal />
-          <Box
-            display="flex"
-            flexDirection="row-reverse"
-            mb={6}
-            width="100%"
-            justifyContent="space-around"
-          >
-            {inputCode.map((value, index) => (
-              <>
-                <Input
-                  textAlign="center"
-                  width="15%"
-                  key={index}
-                  type="number"
-                  maxLength={1}
-                  value={value}
-                  ref={(el) => (nextInput.current[index] = el)}
-                  onChange={(event) => handleCodeChange(event, index)}
-                  onKeyDown={(event) => handleKeyDown(event, index)}
-                  onFocus={(event) => event.target.select()}
-                ></Input>
-              </>
-            ))}
+        <Box mb={4} display="flex" w="100%" justifyContent="space-between">
+          <Box>
+            <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "sm" }}>
+              کد تایید
+            </Text>
           </Box>
 
-          <Box w="100%" display="flex" justifyContent="center">
+          <Box as="button">
             <Button
-              ref={buttonFocus}
-              w="90%"
-              borderRadius="10px"
-              textAlign="center"
-              bgColor="#7563DC"
-              color="purple.50"
-              _hover={{
-                bgColor: "purple.100",
-                color: "purple.500",
-              }}
-              id="mybtn"
+            onClick={handleClick}
+              rightIcon={<IoIosArrowBack size={'13px'}  />}
+            
             >
-              ادامه
+              <Text fontSize={{ base: "xs", md: "xs" }}>بازگشت</Text>
             </Button>
           </Box>
         </Box>
-      </Grid>
+        <BodyModal />
+        <Box
+          display="flex"
+          flexDirection="row-reverse"
+          mb={6}
+          width="100%"
+          justifyContent="space-around"
+        >
+          {inputCode.map((value, index) => (
+            <>
+              <Input
+                textAlign="center"
+                width="15%"
+                key={index}
+                type="number"
+                maxLength={1}
+                value={value}
+                ref={(el) => (nextInput.current[index] = el)}
+                onChange={(event) => handleCodeChange(event, index)}
+                onKeyDown={(event) => handleKeyDown(event, index)}
+                onFocus={(event) => event.target.select()}
+              ></Input>
+            </>
+          ))}
+        </Box>
+
+        <Box w="100%" display="flex" justifyContent="center">
+          <Button
+            onClick={() => setPage((next) => next + 1)}
+            ref={buttonFocus}
+            w="90%"
+            borderRadius="10px"
+            textAlign="center"
+            bgColor="#7563DC"
+            color="purple.50"
+            _hover={{
+              bgColor: "purple.100",
+              color: "purple.500",
+            }}
+            id="mybtn"
+          >
+            ادامه
+          </Button>
+        </Box>
+      </Box>
     );
   } else {
     null;
