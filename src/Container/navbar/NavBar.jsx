@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import RightBar from "@/Components/ِdrawer/Drawer";
 import Profile_Modal from "@/Components/modal/profile-modal/Profile_Modal";
+import MainModal from "@/Components/modal/main";
 
 export default function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -74,7 +75,8 @@ export default function NavBar() {
           </Flex>
         </Flex>
         {isOpen ? (
-         <Profile_Modal onOpen={onOpen} onClose={onClose} isOpen={isOpen}></Profile_Modal>
+          <MainModal onOpen={onOpen} onClose={onClose} isOpen={isOpen}></MainModal>
+         
         ) : null}
       </Box>
     </>
