@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Grid, Box, Text, Input, Button } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
+import BodyModal from "./BodyModal";
 
 const VerificationCode = () => {
   const [inputCode, setInputCode] = useState(["", "", "", ""]);
   const [close, setClose] = useState(true);
-  const [secconds, setSecconds] = useState(5);
+  const nextInput = useRef([]);
+  const buttonFocus = useRef();
 
   const handleCodeChange = (event, index) => {
     const newcode = [...inputCode];
@@ -13,32 +15,25 @@ const VerificationCode = () => {
     setInputCode(newcode);
 
     if (index < 3) {
-      const nextInput = document.querySelector(
-        `input[data-index="${index + 1}"]`
-      );
-
-      nextInput.focus();
+      nextInput.current[index + 1].focus();
     } else {
-      const buttonFocus = document.querySelector("#mybtn");
-      buttonFocus.focus();
+      buttonFocus.current.focus();
+    }
+  };
+  const handleKeyDown = (event, index) => {
+    if (event.key === "Backspace") {
+      if (index > 0) {
+        setTimeout(() => {
+          nextInput.current[index - 1].focus();
+        }, 1); // زمان تأخیر را به میلی ثانیه تنظیم کنید
+      } else if (index === 0) {
+        nextInput.current[index].value = "";
+        event.preventDefault();
+      }
     }
   };
 
-  useEffect(() => {
-    if (secconds > 0) {
-      const interval = setInterval(() => {
-        setSecconds(secconds - 1);
-      }, 1000);
-
-      return () => clearInterval(interval);
-    } else if (secconds === 0) {
-      document.getElementById("box").classList.add("display-none");
-      document.getElementById("resend-code").classList.remove("display-none");
-      document.getElementById("resend-code").classList.add("display-flex");
-    }
-  }, [secconds]);
-
-  if (close === true) {
+  if (close) {
     return (
       <Grid
         w="100%"
@@ -59,28 +54,16 @@ const VerificationCode = () => {
         >
           <Box mb={4} display="flex" w="100%" justifyContent="space-between">
             <Box>
-              <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "sm" }}>کد تایید</Text>
+              <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "sm" }}>
+                کد تایید
+              </Text>
             </Box>
 
             <Box as="button">
               <MdCancel onClick={() => setClose(false)}></MdCancel>
             </Box>
           </Box>
-
-          <Box mb={4}>
-            <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "md" }}>
-              کد تایید به شماره ی ۰۹۱۹۰۹۷۸۰۴۲ارسال شد
-            </Text>
-          </Box>
-
-          <Box id="box" mb={6}>
-            {" "}
-            <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "md" }}>ارسال مجدد کد تایید در {secconds}</Text>
-          </Box>
-          <Box id="resend-code" className="display-none" mb={6} as="button">
-            <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "sm" }}>ارسال مجدد کد؟</Text>
-          </Box>
-
+          <BodyModal />
           <Box
             display="flex"
             flexDirection="row-reverse"
@@ -94,11 +77,12 @@ const VerificationCode = () => {
                   textAlign="center"
                   width="15%"
                   key={index}
-                  data-index={index}
                   type="number"
                   maxLength={1}
                   value={value}
+                  ref={(el) => (nextInput.current[index] = el)}
                   onChange={(event) => handleCodeChange(event, index)}
+                  onKeyDown={(event) => handleKeyDown(event, index)}
                   onFocus={(event) => event.target.select()}
                 ></Input>
               </>
@@ -107,10 +91,12 @@ const VerificationCode = () => {
 
           <Box w="100%" display="flex" justifyContent="center">
             <Button
+              ref={buttonFocus}
               w="90%"
               borderRadius="10px"
               textAlign="center"
               bgColor="#7563DC"
+              color="purple.50"
               _hover={{
                 bgColor: "purple.100",
                 color: "purple.500",

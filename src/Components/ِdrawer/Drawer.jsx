@@ -20,7 +20,8 @@ const RightBar = () => {
     <>
       <IconButton
         ref={btnRef}
-        size={"sm"}
+        mr={-1}
+        size={"xs"}
         icon={<Bars3Icon />}
         aria-label={"Open Menu"}
         bgColor="#ffffff"
