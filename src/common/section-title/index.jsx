@@ -7,7 +7,7 @@ const Section_title = ({ section_title }) => {
       ></Box>
 
       <Text
-        sx={{ fontsize: { base: "md", lg: "lg" } }}
+         fontSize={{ base: "xs", md:"sm" }}
         fontWeight={"bold"}
         mr={2}
       >
