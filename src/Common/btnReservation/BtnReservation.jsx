@@ -1,12 +1,13 @@
 import { Button } from "@chakra-ui/react";
 import React from "react";
 
-const BtnReservation = ({ onClose, text, px, py }) => {
+const BtnReservation = ({ onClose, text, px, py ,width,rounded}) => {
   return (
     <Button
+    width={width}
       px={px}
       py={py}
-      rounded="50px"
+      rounded={rounded}
       variant="solid"
       bgColor="#7563DC"
       color="purple.50"
