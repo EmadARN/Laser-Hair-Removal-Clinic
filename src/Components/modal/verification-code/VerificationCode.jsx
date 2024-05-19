@@ -3,13 +3,15 @@ import { Grid, Box, Text, Input, Button } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
 import BodyModal from "./BodyModal";
 import { IoIosArrowBack } from "react-icons/io";
-
+import { useRouter } from "next/router";
 const VerificationCode = ({ setPage, page }) => {
   const [inputCode, setInputCode] = useState(["", "", "", ""]);
 
   const nextInput = useRef([]);
   const buttonFocus = useRef();
 
+  const router = useRouter();
+  // کد های پریدن به اینپوت بعدی در تابع زیر
   const handleCodeChange = (event, index) => {
     const newcode = [...inputCode];
     newcode[index] = event.target.value;
@@ -21,6 +23,8 @@ const VerificationCode = ({ setPage, page }) => {
       buttonFocus.current.focus();
     }
   };
+
+  // کد های برگشتن به اینپوت قبلی در صورت پاک کردن کردن در تابع زیر
   const handleKeyDown = (event, index) => {
     if (event.key === "Backspace") {
       if (index > 0) {
@@ -34,8 +38,14 @@ const VerificationCode = ({ setPage, page }) => {
     }
   };
 
+  // کد برگشتن به مرحه ی عقب برای عوش کردن شماره هممراه
   const handleClick = () => {
     setPage(page - 1);
+  };
+
+  // کد هدایت شدن به صفحه ی داشبورد پس  از کلیک روی دکمه ی ادامه
+  const functionClick = () => {
+    router.push("/User_Profile");
   };
 
   if (page === 1) {
@@ -59,9 +69,8 @@ const VerificationCode = ({ setPage, page }) => {
 
           <Box as="button">
             <Button
-            onClick={handleClick}
-              rightIcon={<IoIosArrowBack size={'13px'}  />}
-            
+              onClick={handleClick}
+              rightIcon={<IoIosArrowBack size={"13px"} />}
             >
               <Text fontSize={{ base: "xs", md: "xs" }}>بازگشت</Text>
             </Button>
@@ -95,7 +104,7 @@ const VerificationCode = ({ setPage, page }) => {
 
         <Box w="100%" display="flex" justifyContent="center">
           <Button
-            onClick={() => setPage((next) => next + 1)}
+            onClick={functionClick}
             ref={buttonFocus}
             w="90%"
             borderRadius="10px"
