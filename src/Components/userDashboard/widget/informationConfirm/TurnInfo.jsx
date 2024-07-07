@@ -1,10 +1,8 @@
 import React from "react";
-import { Box, Grid, Text, Button } from "@chakra-ui/react";
-import { CiHome } from "react-icons/ci";
-import { FaArrowLeftLong } from "react-icons/fa6";
+import { Box, Text } from "@chakra-ui/react";
+import { TurnData } from "./dataForMap";
 import Section_title from "@/Common/section-title";
-import { dataForMap } from "./dataForMap";
-const UserInformation = () => {
+const TurnInfo = () => {
   return (
     <Box
       sx={{
@@ -29,9 +27,9 @@ const UserInformation = () => {
         borderRadius="10px"
       >
         <Box pr={2} textAlign="right" w="100%">
-          <Section_title section_title="اطلاعات مرجع"></Section_title>
+          <Section_title section_title="اطلاعات نوبت"></Section_title>
         </Box>
-        {dataForMap.map((item) => {
+        {TurnData.map((item) => {
           return (
             <>
               <Box
@@ -76,4 +74,4 @@ const UserInformation = () => {
   );
 };
 
-export default UserInformation;
+export default TurnInfo;

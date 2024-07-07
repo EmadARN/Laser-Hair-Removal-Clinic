@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Box, Text } from "@chakra-ui/react";
 import { Checkbox, Button } from "@chakra-ui/react";
+import { AcceptBtn } from "@/Common/acceptBtn/AcceptBtn";
 
 const ChoosingPayAmount = () => {
   const [checkboxColor, setCheckboxColor] = useState(false);
@@ -22,7 +23,7 @@ const ChoosingPayAmount = () => {
       display="flex"
       flexDirection="column"
       alignItems="center"
-      justifyContent="flex-end"
+      justifyContent="center"
     >
       <Box
         borderRadius={"10px"}
@@ -60,15 +61,12 @@ const ChoosingPayAmount = () => {
         >
           <Box display={"flex"} p={2} alignItems={"center"}>
             <Box ml={3}>
-              {" "}
               <Box ml={2}>
-                {" "}
                 <Checkbox
                   name="checkboxGroup"
                   onChange={handleChanged}
                   colorScheme="purple"
                 >
-                  {" "}
                   ودیعه
                 </Checkbox>
               </Box>
@@ -90,7 +88,6 @@ const ChoosingPayAmount = () => {
         >
           <Box display={"flex"} p={2} alignItems={"center"}>
             <Box ml={2}>
-              {" "}
               <Checkbox
                 name="checkboxGroup"
                 colorScheme="purple"
@@ -106,14 +103,7 @@ const ChoosingPayAmount = () => {
           </Box>
         </Box>
         <Box width="100%" display="flex" justifyContent="center" p={3}>
-          <Button
-            sx={{ "&:hover": { bgColor: "#347391" } }}
-            bgColor={"#2aafed"}
-            color="#fff"
-            w={"95%"}
-          >
-            تایید اطلاعات{" "}
-          </Button>
+          <AcceptBtn text="پرداخت" />
         </Box>
       </Box>
     </Grid>

@@ -24,7 +24,7 @@ const StepperPrototype = () => {
   return (
     <Stepper
       sx={{
-        w: "50%",
+        w: "100%",
         m: "auto",
       }}
       size="lg"

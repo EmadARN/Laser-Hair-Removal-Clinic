@@ -2,12 +2,10 @@ import React from "react";
 import { Box, Grid, Text, Button } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import Image from "next/image";
-import BtnReservation from "@/Common/btnReservation/BtnReservation";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
 
-const User_Profile = () => {
-
+const Dashboard = ({ page, setPage }) => {
   return (
     <Grid
       display={"flex"}
@@ -90,11 +88,23 @@ const User_Profile = () => {
         </Box>
 
         <Box display="flex" justifyContent="center" width="100%">
-          <BtnReservation
-            rounded="20px"
-            text="رزرو نوبت"
+          <Button
             width="90%"
-          ></BtnReservation>
+            rounded="20px"
+            variant="solid"
+            bgColor="#7563DC"
+            color="purple.50"
+            _hover={{
+              bgColor: "purple.100",
+              color: "purple.500",
+            }}
+            transition=".5s"
+            mr={3}
+            fontWeight="500"
+            onClick={() => setPage(page + 1)}
+          >
+            رزرو نوبت
+          </Button>
         </Box>
       </Box>
 
@@ -156,4 +166,4 @@ const User_Profile = () => {
   );
 };
 
-export default User_Profile;
+export default Dashboard;

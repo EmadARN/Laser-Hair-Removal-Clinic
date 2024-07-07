@@ -1,6 +1,5 @@
 import CardProductView from "@/Common/CardProductView/CardProductView";
 import React from "react";
-import { day, shift, time } from "../../Common/CardProductView/data";
 import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
 import {
   Accordion,
@@ -11,8 +10,9 @@ import {
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import AccordionMenu from "@/Common/accordionMenu/AccordionMenu";
+import { day, shift, time } from "@/Common/CardProductView/data";
 
-const TurnChoice = () => {
+const Date = () => {
   const PurpleSquare = styled.div`
     width: 20px;
     height: 20px;
@@ -71,4 +71,4 @@ const TurnChoice = () => {
   );
 };
 
-export default TurnChoice;
+export default Date;
