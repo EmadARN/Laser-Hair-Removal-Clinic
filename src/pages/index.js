@@ -9,7 +9,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <Layout>
+    <Layout bgColor={"#F7F7F7"}>
       <CaptionSlider />
       <Main_get_turn />
       <Box my={8}>

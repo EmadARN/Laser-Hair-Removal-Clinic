@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Grid, Box, Text, Button } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import { UserData } from "./DataForProfile";
-const UserProfile = () => {
+const FinalReserve = () => {
   const [viewMore, setViewMore] = useState(false);
   return (
     <Grid
@@ -137,4 +137,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default FinalReserve;

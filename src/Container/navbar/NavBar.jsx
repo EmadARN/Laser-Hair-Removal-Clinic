@@ -14,7 +14,7 @@ import RightBar from "@/Components/ِdrawer/Drawer";
 import Profile_Modal from "@/Components/modal/profile-modal/Profile_Modal";
 import MainModal from "@/Components/modal/main";
 
-export default function NavBar() {
+export default function NavBar({ bgColor }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const Logo = (props) => {
     return (
@@ -35,13 +35,7 @@ export default function NavBar() {
   };
   return (
     <>
-      <Box
-        w={"100%"}
-        position={"fixed"}
-        bg={useColorModeValue("#F8F9FA")}
-        px={4}
-        zIndex={5}
-      >
+      <Box w={"100%"} position={"fixed"} bg={bgColor} px={4} zIndex={5}>
         <Flex h={16} alignItems="center" justifyContent={"space-between"}>
           <RightBar />
           <HStack spacing={8} alignItems={"center"}>
@@ -75,8 +69,11 @@ export default function NavBar() {
           </Flex>
         </Flex>
         {isOpen ? (
-          <MainModal onOpen={onOpen} onClose={onClose} isOpen={isOpen}></MainModal>
-         
+          <MainModal
+            onOpen={onOpen}
+            onClose={onClose}
+            isOpen={isOpen}
+          ></MainModal>
         ) : null}
       </Box>
     </>

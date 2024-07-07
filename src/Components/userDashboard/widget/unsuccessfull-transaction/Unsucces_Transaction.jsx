@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Box, Text,Button } from "@chakra-ui/react";
+import { Grid, Box, Text, Button } from "@chakra-ui/react";
 import { IoMdCheckmark } from "react-icons/io";
 import BtnReservation from "@/Common/btnReservation/BtnReservation";
 const Unsucces_Transaction = () => {
@@ -57,7 +57,12 @@ const Unsucces_Transaction = () => {
           </Box>
 
           <Box>
-            <Text fontSize={{ sm: "13px", md: "15px"}} color={'#555'}> درصورتی که از حساب شما مبلغی کم شده باشد،<br/>طی ۷۲ ساعت به حساب شما بازگردانده میشود </Text>
+            <Text fontSize={{ sm: "13px", md: "15px" }} color={"#555"}>
+              {" "}
+              درصورتی که از حساب شما مبلغی کم شده باشد،
+              <br />
+              طی ۷۲ ساعت به حساب شما بازگردانده میشود{" "}
+            </Text>
           </Box>
 
           {/* <Box>
@@ -68,16 +73,26 @@ const Unsucces_Transaction = () => {
           </Box> */}
         </Box>
 
-
         <Box mt={2}>
-            <Text fontSize={{ sm: "13px", md: "15px"}} textAlign={'center'} color={'#555'}>نوبت شما تا ۲۰ دقیقه در حالت رزرو باقی میماند.<br/>لطفا برای نهایی کردن سفارش خود به  صفحه ی پرداخت بازگردید.</Text>
+          <Text
+            fontSize={{ sm: "13px", md: "15px" }}
+            textAlign={"center"}
+            color={"#555"}
+          >
+            نوبت شما تا ۲۰ دقیقه در حالت رزرو باقی میماند.
+            <br />
+            لطفا برای نهایی کردن سفارش خود به صفحه ی پرداخت بازگردید.
+          </Text>
         </Box>
 
-
-
-        <Box display={'flex'} justifyContent={'space-between'} width={'95%'} mt={4}>
-            <BtnReservation text='صفحه ی پرداخت'></BtnReservation>
-            <Button>بازگشت به خانه</Button>
+        <Box
+          display={"flex"}
+          justifyContent={"space-between"}
+          width={"95%"}
+          mt={4}
+        >
+          <BtnReservation text="صفحه ی پرداخت"></BtnReservation>
+          <Button>بازگشت به خانه</Button>
         </Box>
       </Box>
     </Grid>
