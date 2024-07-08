@@ -1,6 +1,7 @@
 import { Box, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { data } from "../data";
+import Link from "next/link";
 
 const BodyContent = () => {
   return (
@@ -18,13 +19,15 @@ const BodyContent = () => {
               <Icon color="gray.500" fontSize={"26px"}>
                 {item.icon}
               </Icon>
-              <Text
-                _hover={{
-                  color: "blue.500",
-                }}
-              >
-                {item.title}
-              </Text>
+              <Link href={item.src}>
+                <Text
+                  _hover={{
+                    color: "blue.500",
+                  }}
+                >
+                  {item.title}
+                </Text>
+              </Link>
             </Box>
           </>
         );

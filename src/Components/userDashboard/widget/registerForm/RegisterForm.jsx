@@ -12,7 +12,14 @@ import React from "react";
 
 const RegisterForm = () => {
   return (
-    <Box>
+    <Box
+      width={"40%"}
+      mx={"auto"}
+      mt={5}
+      bgColor={"white"}
+      p={8}
+      rounded={"8px"}
+    >
       <FormControl isRequired>
         <FormLabel>نام</FormLabel>
         <Input />
@@ -23,7 +30,7 @@ const RegisterForm = () => {
         <FormLabel>کدملی (باید 11 رقمی )</FormLabel>
         <Input />
       </FormControl>
-      <FormControl isRequired>
+      <FormControl isRequired pt={8}>
         <Flex color={"blue"} alignItems={"center"}>
           <ExclamationCircleIcon width={"12px"} />
           <Text fontSize={"12px"}>دارو ها و بیماری های مهم</Text>
@@ -33,7 +40,7 @@ const RegisterForm = () => {
         <FormLabel>سابقه بیماری پوستی</FormLabel>
         <Input />
       </FormControl>
-      <AccordionMenu />
+      {/* <AccordionMenu /> */}
     </Box>
   );
 };

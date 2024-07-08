@@ -2,10 +2,9 @@ export const Boxstyle1 = (displayxsHome) => {
   const s1 = {
     display: "flex",
     gap: "5px",
-    overflowX: "auto",
+    overflowX: { base: "auto", sm: "none" },
     maxWidt: "900px",
     width: "85vw",
-
   };
   return s1;
 };
@@ -13,11 +12,11 @@ export const Boxstyle1 = (displayxsHome) => {
 export const style1 = (bgColor, item) => {
   const s1 = {
     minWidth: "130px",
-    maxHeight: { xs: "160px", md: "160px" },
+    minHeight: item.h1 && item.h2 && item.name ? "120px" : "50px",
     width: "94%",
-    height: { xs: "65%", md: "100%" },
+    height: { xs: "100%", md: "100%" },
     backgroundColor: bgColor(item),
-    padding: { xs: 2, md: 5, lg: 7 },
+    padding: { xs: 2, md: 8, lg: 7 },
     borderRadius: "15px",
     cursor: "pointer",
   };
@@ -27,7 +26,7 @@ export const style1 = (bgColor, item) => {
 
 export const style2 = (colorText, item) => {
   const s2 = {
-    fontSize: "30px",
+    fontSize: "20px",
     display: "flex",
     justifyContent: "center",
     color: colorText(item),

@@ -10,7 +10,7 @@ const ChoosingArea = ({ page, setPage }) => {
       <StepperPrototype />
       <TitleUserDashboard />
       <AreaChoice />
-      <AcceptBtn page={page} setPage={setPage} text="ادامه" />
+      <AcceptBtn page={page} setPage={setPage} text="ادامه" bgColor={"white"} />
     </>
   );
 };

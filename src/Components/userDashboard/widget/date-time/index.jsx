@@ -10,7 +10,7 @@ const Date_Time = ({ page, setPage }) => {
       <StepperPrototype />
       <TitleUserDashboard />
       <Date />
-      <AcceptBtn page={page} setPage={setPage} text="ادامه" />
+      <AcceptBtn page={page} setPage={setPage} text="ادامه" bgColor={"white"}/>
     </>
   );
 };

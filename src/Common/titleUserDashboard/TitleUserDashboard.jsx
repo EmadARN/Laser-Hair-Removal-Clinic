@@ -1,10 +1,10 @@
-import {  Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import { RiHome5Line } from "react-icons/ri";
 import { IoIosArrowRoundBack } from "react-icons/io";
 const TitleUserDashboard = () => {
   return (
-    <Flex justifyContent="space-between" bgColor="#1111">
+    <Flex justifyContent="space-between" bgColor="#1111" w={"full"}>
       <Text sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
         <span>
           <RiHome5Line size="24px" />

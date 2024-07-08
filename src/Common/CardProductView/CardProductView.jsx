@@ -12,11 +12,11 @@ function CardProductView({ displayxsHome, data }) {
     return ct;
   };
   const bgColor = (item) => {
-    const br = activeTab !== item.id ? "#f9f9f9" : "#c72929";
+    const br = activeTab !== item.id ? "#f9f9f9" : "#7563DC";
     return br;
   };
   return (
-    <Box mt={20} sx={Boxstyle1(displayxsHome)}>
+    <Box mt={12} sx={Boxstyle1(displayxsHome)}>
       {data.map((item) => {
         return (
           <CardProductView_List

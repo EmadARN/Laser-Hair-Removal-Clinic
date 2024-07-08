@@ -8,6 +8,7 @@ const OutputInformation = () => {
       sx={{
         alignItems: "center",
         m: "auto",
+    
         bgColor: "#fff",
         width: "100%",
         height: "auto",
@@ -25,6 +26,7 @@ const OutputInformation = () => {
         w="400px"
         justifyContent="center"
         borderRadius="10px"
+   
       >
         <Box pr={2} textAlign="right" w="100%">
           <Section_title section_title="اطلاعات مرجع"></Section_title>

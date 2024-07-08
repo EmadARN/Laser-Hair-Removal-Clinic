@@ -21,7 +21,12 @@ const ConfirmInfo = ({ page, setPage }) => {
       <Box mt={2}>
         <TurnInfo />
       </Box>
-      <AcceptBtn text="تایید اطلاعات" page={page} setPage={setPage} />
+      <AcceptBtn
+        text="تایید اطلاعات"
+        page={page}
+        setPage={setPage}
+        bgColor={"white"}
+      />
     </Grid>
   );
 };

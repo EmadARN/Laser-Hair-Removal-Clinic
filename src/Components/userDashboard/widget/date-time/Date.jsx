@@ -1,6 +1,6 @@
 import CardProductView from "@/Common/CardProductView/CardProductView";
 import React from "react";
-import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import {
   Accordion,
   AccordionItem,
@@ -22,11 +22,16 @@ const Date = () => {
   `;
   return (
     <Box>
-      <CardProductView data={day} />
-      <CardProductView data={shift} />
-      <CardProductView data={time} />
+      <Box mb={2} pr={4} pt={2} pb={12} bgColor={"white"} rounded={"8px"}>
+        <CardProductView data={day} />
+        <CardProductView data={shift} />
+        <Text pt={6}>
+          اوپراتور:<span>زیبا کرمی</span>
+        </Text>
+        <CardProductView data={time} />
+      </Box>
 
-      <Accordion defaultIndex={[0]} allowMultiple>
+      <Accordion defaultIndex={[0]} allowMultiple bgColor={"white"}>
         <AccordionItem>
           <h2>
             <AccordionButton display={"flex"} justifyContent={"end"}>
@@ -66,7 +71,9 @@ const Date = () => {
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
-      <AccordionMenu />
+      <Box bgColor={"white"} my={2}>
+        <AccordionMenu />
+      </Box>
     </Box>
   );
 };

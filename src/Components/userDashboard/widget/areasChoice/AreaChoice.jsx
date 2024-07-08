@@ -9,15 +9,18 @@ const AreaChoice = () => {
   const allChecked = checkedItems.every(Boolean);
 
   return (
-    <Flex flexDirection={"column"} alignItems={"center"}>
-      <Box>
+    <Flex
+      flexDirection={"column"}
+      alignItems={"center"}
+      justifyContent={"center"}
+    >
+      <Box bgColor={"white"} rounded={"8px"} p={8} mt={8}>
         <Box sx={{ display: "flex", alignSelf: "start" }}>
           <Text>نواحی مورد نظر خود را انتخاب کنید</Text>
         </Box>
         <Flex>
           <Stack mt={1} spacing={1}>
             <Checkbox
-              px={8}
               isChecked={allChecked}
               onChange={(e) => {
                 const newCheckedItems = [...checkedItems];
@@ -33,7 +36,7 @@ const AreaChoice = () => {
                   sx={{
                     border: "2px solid #1111",
                     rounded: "8px",
-                    minWidth: "500px",
+                    minWidth: { base: "300px", sm: "500px" },
                     width: "100%",
                     py: 1,
                   }}
@@ -58,7 +61,9 @@ const AreaChoice = () => {
                 </Flex>
               ))}
             </Stack>
-            <AccordionMenu />
+            <Box pt={8}>
+              <AccordionMenu />
+            </Box>
           </Stack>
         </Flex>
       </Box>

@@ -1,9 +1,17 @@
 import { Box, Button } from "@chakra-ui/react";
 import React from "react";
 
-export const AcceptBtn = ({ page, setPage, text }) => {
+export const AcceptBtn = ({ page, setPage, text, bgColor }) => {
   return (
-    <Box width="100%" display="flex" justifyContent="center" p={3}>
+    <Box
+      width="100%"
+      display="flex"
+      justifyContent="center"
+      p={3}
+      position={"sticky"}
+      bottom={0}
+      bgColor={bgColor}
+    >
       <Button
         sx={{ "&:hover": { bgColor: "#347391" } }}
         bgColor={"#2aafed"}

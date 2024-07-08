@@ -52,7 +52,6 @@ const ChoosingPayAmount = ({ page, setPage }) => {
         </Box>
 
         <Box
-          sx={{ bgColor: checkboxColor ? "#e5d2f4" : "#fff" }}
           w={"93%"}
           p={2}
           display={"flex"}
@@ -79,7 +78,6 @@ const ChoosingPayAmount = ({ page, setPage }) => {
         </Box>
 
         <Box
-          sx={{ bgColor: checkboxColor2 ? "#e5d2f4" : "#fff" }}
           w={"93%"}
           p={2}
           display={"flex"}
@@ -103,7 +101,12 @@ const ChoosingPayAmount = ({ page, setPage }) => {
           </Box>
         </Box>
         <Box width="100%" display="flex" justifyContent="center" p={3}>
-          <AcceptBtn text="پرداخت" page={page} setPage={setPage} />
+          <AcceptBtn
+            text="پرداخت"
+            page={page}
+            setPage={setPage}
+            bgColor={"transparent"}
+          />
         </Box>
       </Box>
     </Grid>

@@ -1,9 +1,5 @@
-import { GiConverseShoe } from "react-icons/gi";
-import { GiBallerinaShoes } from "react-icons/gi";
-import { GiMonclerJacket } from "react-icons/gi";
-import { FaChild } from "react-icons/fa";
-import { GiRomanToga } from "react-icons/gi";
-import { FaHatCowboy } from "react-icons/fa";
+import { FaSun } from "react-icons/fa";
+import { IoCloudyNightOutline } from "react-icons/io5";
 
 export const day = [
   {
@@ -47,24 +43,25 @@ export const day = [
 export const shift = [
   {
     id: 1,
-    h1: "icon",
-    name: "َشیفت صبح",
+    icon: <FaSun />,
+    text: "َشیفت صبح",
   },
+
   {
     id: 2,
-    h1: "icon",
-    name: "َشیفت عصر",
+    icon: <IoCloudyNightOutline />,
+    text: "َشیفت عصر",
   },
 ];
 export const time = [
   {
     id: 1,
 
-    name: "9 تا 11",
+    time: "9 تا 11",
   },
   {
     id: 2,
 
-    name: "4 تا 8",
+    time: "4 تا 8",
   },
 ];

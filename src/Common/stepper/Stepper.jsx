@@ -24,7 +24,8 @@ const StepperPrototype = () => {
   return (
     <Stepper
       sx={{
-        w: "100%",
+        minWidth: { base: "300px", sm: "500px" },
+        width: "100%",
         m: "auto",
       }}
       size="lg"
@@ -45,7 +46,7 @@ const StepperPrototype = () => {
               <StepStatus complete={`✅`} incomplete={`😅`} active={`📍`} />
             </StepIndicator>
 
-            <Box>
+            <Box whiteSpace={"nowrap"} display={{ base: "none", sm: "flex" }}>
               <StepDescription>{step.description}</StepDescription>
             </Box>
           </Box>

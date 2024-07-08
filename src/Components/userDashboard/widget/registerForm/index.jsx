@@ -10,7 +10,7 @@ const UserInformation = ({ page, setPage }) => {
       <StepperPrototype />
       <TitleUserDashboard />
       <RegisterForm />
-      <AcceptBtn page={page} setPage={setPage} text="ادامه" />
+      <AcceptBtn page={page} setPage={setPage} text="ادامه" bgColor={"white"} />
     </>
   );
 };

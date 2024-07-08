@@ -11,6 +11,7 @@ const {
 import { Box, IconButton } from "@chakra-ui/react";
 import BodyContent from "./widgets/BodyContent";
 import BtnReservation from "@/Common/btnReservation/BtnReservation";
+import Link from "next/link";
 
 const RightBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -51,7 +52,9 @@ const RightBar = () => {
           <DrawerBody>
             <BodyContent />
             <Box display="flex" justifyContent="start" mt={10}>
-              <BtnReservation onClose={onClose} text={"دریافت نوبت"} />
+              <Link href={"/UserDashboard"}>
+                <BtnReservation onClose={onClose} text={"دریافت نوبت"} />
+              </Link>
             </Box>
           </DrawerBody>
         </DrawerContent>
