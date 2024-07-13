@@ -8,7 +8,7 @@ const UserInformation = ({ page, setPage }) => {
   return (
     <>
       <StepperPrototype />
-      <TitleUserDashboard />
+      <TitleUserDashboard page={page} setPage={setPage} />
       <RegisterForm />
       <AcceptBtn page={page} setPage={setPage} text="ادامه" bgColor={"white"} />
     </>

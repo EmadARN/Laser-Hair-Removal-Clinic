@@ -175,7 +175,7 @@ const ReservationDone = () => {
             صفحه ی پروفایل
           </Button>
 
-          <Button fontSize={{ base: "13px", md: "14px" }} color={"purple"}>
+          <Button onClick={()=>location.href="/"} fontSize={{ base: "13px", md: "14px" }} color={"purple"}>
             بازگشت به خانه
           </Button>
         </Box>

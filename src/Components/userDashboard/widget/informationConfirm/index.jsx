@@ -16,7 +16,7 @@ const ConfirmInfo = ({ page, setPage }) => {
       gap={3}
     >
       <StepperPrototype />
-      <TitleUserDashboard />
+      <TitleUserDashboard page={page} setPage={setPage} />
       <OutputInformation />
       <Box mt={2}>
         <TurnInfo />
