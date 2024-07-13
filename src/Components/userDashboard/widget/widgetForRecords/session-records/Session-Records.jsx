@@ -3,124 +3,121 @@ import { Grid, Box, Text, Button } from "@chakra-ui/react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import Section_title from "@/Common/section-title";
 import { IoIosArrowBack } from "react-icons/io";
+import NavBar from "@/Container/navbar/NavBar";
 
-const Session_Records = ({setSteperState,steperState}) => {
+const Session_Records = ({ setSteperState, steperState }) => {
   return (
-    <Grid
-      alignItems={"center"}
-      display={"flex"}
-      justifyContent={"center"}
-      flexDirection={"column"}
-      width={"100%"}
-      h={"100vh"}
-      bgColor={"#F7F7F7"}
-    >
-      <Box mb={4} textAlign={"right"} w={{ base: "100%", md: "40%" }}>
-        <Button
-          leftIcon={<FaLongArrowAltRight />}
-          onClick={() => {
-            setSteperState(0);
-          }}
-        >
-          بازگشت
-        </Button>
-      </Box>
-      <Box
-        w={{ base: "100%", md: "40%" }}
-        boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
-        h={"auto"}
-        p={3}
+    <>
+      <NavBar bgColor="#ffffff" />
+      <Grid
+        alignItems={"center"}
+        display={"flex"}
+        justifyContent={"center"}
+        flexDirection={"column"}
+        width={"100%"}
+        h={"100vh"}
+        bgColor={"#F7F7F7"}
       >
-        <Box textAlign={"right"}>
-          <Section_title section_title="گزارش جلسات"></Section_title>
+        <Box mb={4} textAlign={"right"} w={{ base: "100%", md: "40%" }}>
+          <Button
+            leftIcon={<FaLongArrowAltRight />}
+            onClick={() => {
+              setSteperState(0);
+            }}
+          >
+            بازگشت
+          </Button>
         </Box>
         <Box
-          width={"100%"}
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems={"center"}
+          w={{ base: "100%", md: "40%" }}
+          boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+          h={"auto"}
+          p={3}
         >
-          <Box
-            w={"100%"}
-            display="flex"
-            justifyContent={"space-between"}
-            as="button"
-            // onClick={() => setSteperState(steperState + 1)}
-          >
-            <Box mb={4}>
-              <Text fontSize={{ base: "xs", md: "sm" }}> دوشنبه</Text>
-            </Box>
-
-            <Box>
-              <IoIosArrowBack />
-            </Box>
+          <Box textAlign={"right"}>
+            <Section_title section_title="گزارش جلسات"></Section_title>
           </Box>
-
-          <hr />
-
-
-
           <Box
-            w={"100%"}
-            display="flex"
-            justifyContent={"space-between"}
-            as="button"
-            // onClick={() => setSteperState(steperState + 1)}
+            width={"100%"}
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={"center"}
           >
-            <Box mb={4}>
-              <Text fontSize={{ base: "xs", md: "sm" }}> دوشنبه</Text>
+            <Box
+              w={"100%"}
+              display="flex"
+              justifyContent={"space-between"}
+              as="button"
+              onClick={() => setSteperState(steperState + 1)}
+            >
+              <Box mb={4}>
+                <Text fontSize={{ base: "xs", md: "sm" }}> دوشنبه</Text>
+              </Box>
+
+              <Box>
+                <IoIosArrowBack />
+              </Box>
             </Box>
 
-            <Box>
-              <IoIosArrowBack />
+            <hr />
+
+            <Box
+              w={"100%"}
+              display="flex"
+              justifyContent={"space-between"}
+              as="button"
+              // onClick={() => setSteperState(steperState + 1)}
+            >
+              <Box mb={4}>
+                <Text fontSize={{ base: "xs", md: "sm" }}> دوشنبه</Text>
+              </Box>
+
+              <Box>
+                <IoIosArrowBack />
+              </Box>
             </Box>
+
+            <hr />
+
+            <Box
+              w={"100%"}
+              display="flex"
+              justifyContent={"space-between"}
+              as="button"
+              // onClick={() => setSteperState(steperState + 1)}
+            >
+              <Box mb={4}>
+                <Text fontSize={{ base: "xs", md: "sm" }}> دوشنبه</Text>
+              </Box>
+
+              <Box>
+                <IoIosArrowBack />
+              </Box>
+            </Box>
+
+            <hr />
+
+            <Box
+              w={"100%"}
+              display="flex"
+              justifyContent={"space-between"}
+              as="button"
+              // onClick={() => setSteperState(steperState + 1)}
+            >
+              <Box mb={4}>
+                <Text fontSize={{ base: "xs", md: "sm" }}> دوشنبه</Text>
+              </Box>
+
+              <Box>
+                <IoIosArrowBack />
+              </Box>
+            </Box>
+
+            <hr />
           </Box>
-
-          <hr />
-
-
-
-          <Box
-            w={"100%"}
-            display="flex"
-            justifyContent={"space-between"}
-            as="button"
-            // onClick={() => setSteperState(steperState + 1)}
-          >
-            <Box mb={4}>
-              <Text fontSize={{ base: "xs", md: "sm" }}> دوشنبه</Text>
-            </Box>
-
-            <Box>
-              <IoIosArrowBack />
-            </Box>
-          </Box>
-
-          <hr />
-
-
-
-
-          <Box
-            w={"100%"}
-            display="flex"
-            justifyContent={"space-between"}
-            as="button"
-            // onClick={() => setSteperState(steperState + 1)}
-          >
-            <Box mb={4}>
-              <Text fontSize={{ base: "xs", md: "sm" }}> دوشنبه</Text>
-            </Box>
-
-            <Box>
-              <IoIosArrowBack />
-            </Box>
-          </Box>
-
-          <hr />
         </Box>
-      </Box>
-    </Grid>
+      </Grid>
+    </>
   );
 };
 
