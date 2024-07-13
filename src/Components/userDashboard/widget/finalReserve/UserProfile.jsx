@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Grid, Box, Text, Button,useDisclosure, } from "@chakra-ui/react";
+import { Grid, Box, Text, Button, useDisclosure } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import { UserData } from "./DataForProfile";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoExitOutline } from "react-icons/io5";
-import Session_Records from "../userDashboard/widgetForRecords/no-record/session-records/Session-Records";
-import CancelTurnModal from "./cancel turn modal/CancelTurnModal";
-const UserProfile = () => {
+
+import Session_Records from "../widgetForRecords/session-records/Session-Records";
+import CancelTurnModal from "../cancelTurn/cancel turn modal/CancelTurnModal";
+import SessionRecordSection from "@/Common/session_Record_section/SessionRecordSection";
+const FinalReserve = () => {
   const [viewMore, setViewMore] = useState(false);
   const [steperState, setSteperState] = useState(0);
 
@@ -128,8 +128,13 @@ const UserProfile = () => {
                   </>
                 );
               })}
-            
-           <Box mt={3} display={'flex'} justifyContent={'center'} width={'100%'}> <Button onClick={onOpen} width={'95%'} textAlign={'center'}>لغو نوبت</Button></Box>
+
+          <Box mt={3} display={"flex"} justifyContent={"center"} width={"100%"}>
+            {" "}
+            <Button onClick={onOpen} width={"95%"} textAlign={"center"}>
+              لغو نوبت
+            </Button>
+          </Box>
 
           <Box
             mt={3}
@@ -149,66 +154,17 @@ const UserProfile = () => {
           </Box>
         </Box>
 
-        <Box
-          mt={4}
-          width={{ base: "100%", md: "45%" }}
-          boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
-          borderRadius="10px"
-          p={4}
-          display="flex"
-          flexDirection={"column"}
-        >
-          <Box
-            w={"100%"}
-            display="flex"
-            justifyContent={"space-between"}
-            as="button"
-            onClick={() => setSteperState(steperState + 1)}
-          >
-            <Box mb={4}>
-              <Text fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
-            </Box>
-
-            <Box>
-              <IoIosArrowBack />
-            </Box>
-          </Box>
-
-          <hr />
-
-          <Box
-            w={"100%"}
-            display="flex"
-            justifyContent={"space-between"}
-            as="button"
-            mb={4}
-          >
-            <Box mt={2}>
-              <Text fontSize={{ base: "xs", md: "sm" }}> ناحیه کاربری</Text>
-            </Box>
-
-            <Box mt={2}>
-              <IoIosArrowBack />
-            </Box>
-          </Box>
-
-          <hr />
-
-          <Box mt={1} w={"100%"} display="flex" justifyContent={"flex-start"}>
-            <Button
-              fontSize={{ base: "xs", md: "sm" }}
-              variant={"ghost"}
-              color={"red"}
-              leftIcon={<IoExitOutline size={"18px"} />}
-            >
-              خروج از حساب کاربری
-            </Button>
-          </Box>
-        </Box>
+        <SessionRecordSection
+          setSteperState={setSteperState}
+          steperState={steperState}
+        />
 
         {isOpen ? (
-          <CancelTurnModal onOpen={onOpen} onClose={onClose} isOpen={isOpen}></CancelTurnModal>
-         
+          <CancelTurnModal
+            onOpen={onOpen}
+            onClose={onClose}
+            isOpen={isOpen}
+          ></CancelTurnModal>
         ) : null}
       </Grid>
     );
