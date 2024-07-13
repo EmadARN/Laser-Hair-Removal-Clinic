@@ -4,8 +4,6 @@ import Section_title from "@/Common/section-title";
 import Image from "next/image";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
-import NavBar from "@/Container/navbar/NavBar";
-import No_Records from "../no-record/No_Records";
 
 const Dashboard = ({ page, setPage }) => {
   const [steperState, setSteperState] = useState(0);
@@ -113,23 +111,23 @@ const Dashboard = ({ page, setPage }) => {
           </Box>
         </Box>
 
-      <Box
-        width={{ base: "100%", md: "45%" }}
-        bgColor="#fff"
-        borderRadius="10px"
-        p={4}
-        display="flex"
-        flexDirection={"column"}
-      >
         <Box
-          w={"100%"}
+          width={{ base: "100%", md: "45%" }}
+          bgColor="#fff"
+          borderRadius="10px"
+          p={4}
           display="flex"
-          justifyContent={"space-between"}
-          as="button"
+          flexDirection={"column"}
         >
-          <Box mb={4}>
-            <Text fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
-          </Box>
+          <Box
+            w={"100%"}
+            display="flex"
+            justifyContent={"space-between"}
+            as="button"
+          >
+            <Box mb={4}>
+              <Text fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
+            </Box>
 
             <Box>
               <IoIosArrowBack />
@@ -156,19 +154,20 @@ const Dashboard = ({ page, setPage }) => {
 
           <hr />
 
-        <Box mt={1} w={"100%"} display="flex" justifyContent={"flex-start"}>
-          <Button
-            fontSize={{ base: "xs", md: "sm" }}
-            variant={"ghost"}
-            color={"red"}
-            leftIcon={<IoExitOutline size={"18px"} />}
-          >
-            خروج از حساب کاربری
-          </Button>
+          <Box mt={1} w={"100%"} display="flex" justifyContent={"flex-start"}>
+            <Button
+              fontSize={{ base: "xs", md: "sm" }}
+              variant={"ghost"}
+              color={"red"}
+              leftIcon={<IoExitOutline size={"18px"} />}
+            >
+              خروج از حساب کاربری
+            </Button>
+          </Box>
         </Box>
-      </Box>
-    </Grid>
-  );
+      </Grid>
+    );
+  }
 };
 
 export default Dashboard;
