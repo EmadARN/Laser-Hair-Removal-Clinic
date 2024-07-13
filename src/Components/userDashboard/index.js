@@ -5,7 +5,7 @@ import Image from "next/image";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
 import NavBar from "@/Container/navbar/NavBar";
-import No_Records from "./widget/widgetForRecords/no-record/No_Records";
+
 import Session_Records from "./widget/widgetForRecords/session-records/Session-Records";
 import SessionRecordDetails from "./widget/widgetForRecords/sessionRecordDetails/SessionRecordDetails";
 
