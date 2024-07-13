@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Grid, Text, Button } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import Image from "next/image";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
 import NavBar from "@/Container/navbar/NavBar";
+import No_Records from "../no-record/No_Records";
 
 const Dashboard = ({ page, setPage }) => {
-  return (
-    <>
-      <NavBar bgColor="#ffffff" />
+  const [steperState, setSteperState] = useState(0);
 
+  if (steperState === 0) {
+    return (
       <Grid
         display={"flex"}
         flexDirection={"column"}
+        bgColor="#F7F7F7"
+        w={"100%"}
         alignItems={"center"}
         justifyContent={"center"}
-        pt={16}
-        pb={8}
-        bgColor={"#efefef"}
+        h={"100vh"}
       >
+        <Box mb={3} mt="50px">
+          <Image
+            src="/images/logo.png"
+            width={50}
+            height={50}
+            alt="image cant load"
+          />
+        </Box>
         <Box
           display={"flex"}
           justifyContent={"flex-start"}
@@ -104,23 +113,23 @@ const Dashboard = ({ page, setPage }) => {
           </Box>
         </Box>
 
+      <Box
+        width={{ base: "100%", md: "45%" }}
+        bgColor="#fff"
+        borderRadius="10px"
+        p={4}
+        display="flex"
+        flexDirection={"column"}
+      >
         <Box
-          width={{ base: "100%", md: "45%" }}
-          bgColor="#fff"
-          borderRadius="10px"
-          p={4}
+          w={"100%"}
           display="flex"
-          flexDirection={"column"}
+          justifyContent={"space-between"}
+          as="button"
         >
-          <Box
-            w={"100%"}
-            display="flex"
-            justifyContent={"space-between"}
-            as="button"
-          >
-            <Box mb={4}>
-              <Text fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
-            </Box>
+          <Box mb={4}>
+            <Text fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
+          </Box>
 
             <Box>
               <IoIosArrowBack />
@@ -147,19 +156,18 @@ const Dashboard = ({ page, setPage }) => {
 
           <hr />
 
-          <Box mt={1} w={"100%"} display="flex" justifyContent={"flex-start"}>
-            <Button
-              fontSize={{ base: "xs", md: "sm" }}
-              variant={"ghost"}
-              color={"red"}
-              leftIcon={<IoExitOutline size={"18px"} />}
-            >
-              خروج از حساب کاربری
-            </Button>
-          </Box>
+        <Box mt={1} w={"100%"} display="flex" justifyContent={"flex-start"}>
+          <Button
+            fontSize={{ base: "xs", md: "sm" }}
+            variant={"ghost"}
+            color={"red"}
+            leftIcon={<IoExitOutline size={"18px"} />}
+          >
+            خروج از حساب کاربری
+          </Button>
         </Box>
-      </Grid>
-    </>
+      </Box>
+    </Grid>
   );
 };
 
