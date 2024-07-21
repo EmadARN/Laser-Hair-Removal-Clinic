@@ -5,6 +5,7 @@ import { IoExitOutline } from "react-icons/io5";
 const SessionRecordSection = ({setSteperState,steperState}) => {
   return (
     <Box
+    bgColor={'#FFFFFF'}
           mt={4}
           width={{ base: "100%", md: "45%" }}
           boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
@@ -31,21 +32,7 @@ const SessionRecordSection = ({setSteperState,steperState}) => {
 
           <hr />
 
-          <Box
-            w={"100%"}
-            display="flex"
-            justifyContent={"space-between"}
-            as="button"
-            mb={4}
-          >
-            <Box mt={2}>
-              <Text fontSize={{ base: "xs", md: "sm" }}> ناحیه کاربری</Text>
-            </Box>
-
-            <Box mt={2}>
-              <IoIosArrowBack />
-            </Box>
-          </Box>
+    
 
           <hr />
 
