@@ -5,8 +5,9 @@ import Image from "next/image";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
 import NavBar from "@/Container/navbar/NavBar";
+import SessionRecordSection from "@/Common/session_Record_section/SessionRecordSection";
 
-const MainDashboard = () => {
+const MainDashboard = ({ page, setPage, setSteperState, steperState }) => {
   return (
     <>
       <NavBar bgColor="#ffffff" />
@@ -104,43 +105,10 @@ const MainDashboard = () => {
           </Box>
         </Box>
 
-        <Box
-          width={{ base: "100%", md: "45%" }}
-          bgColor="#fff"
-          borderRadius="10px"
-          p={4}
-          display="flex"
-          flexDirection={"column"}
-        >
-          <Box
-            w={"100%"}
-            display="flex"
-            justifyContent={"space-between"}
-            as="button"
-            onClick={() => setSteperState(steperState + 1)}
-          >
-            <Box mb={4}>
-              <Text fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
-            </Box>
-
-            <Box>
-              <IoIosArrowBack />
-            </Box>
-          </Box>
-
-          <hr />
-
-          <Box mt={1} w={"100%"} display="flex" justifyContent={"flex-start"}>
-            <Button
-              fontSize={{ base: "xs", md: "sm" }}
-              variant={"ghost"}
-              color={"red"}
-              leftIcon={<IoExitOutline size={"18px"} />}
-            >
-              خروج از حساب کاربری
-            </Button>
-          </Box>
-        </Box>
+        <SessionRecordSection
+          steperState={steperState}
+          setSteperState={setSteperState}
+        />
       </Grid>
     </>
   );
