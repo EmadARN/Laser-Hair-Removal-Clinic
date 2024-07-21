@@ -1,5 +1,6 @@
+import Section_title from "@/Common/section-title";
 import { Box, Text } from "@chakra-ui/react";
-import Title from "@/common/title/Title";
+
 import { useEffect, useState } from "react";
 
 function Wallet() {
@@ -22,7 +23,7 @@ function Wallet() {
   return (
     <>
       <Box w={"90%"} bgColor={"#f1f1f1"} borderRadius={"25px"} m={"0 auto"}>
-        <Title inTitle={"موجودی کیف پول شما"} />
+        <Section_title section_title={"موجودی کیف پول شما"} />
         <Box pb="5" m={"0 auto"} fontSize="30px" textAlign="center" width="90%">
           <Text style={{ color: balanceColor }}>
             موجودی کیف پول به تومان:
