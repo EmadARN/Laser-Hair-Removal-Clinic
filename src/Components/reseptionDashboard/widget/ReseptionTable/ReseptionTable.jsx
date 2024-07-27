@@ -12,12 +12,11 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { TableData } from "./Data";
-export const ReseptionTable = () => {
+export const ReseptionTable = (props) => {
   return (
     <TableContainer>
       <Table
-      
-      overflowY={'auto'}
+        overflowY={"auto"}
         width={"100%"}
         size={"md"}
         dir="rtl"
@@ -29,15 +28,19 @@ export const ReseptionTable = () => {
             return (
               <Tr id={item.id}>
                 <Td>
-                <Checkbox  border={'1px solid #444'} colorScheme='gray' ml={6}/>
+                  <Checkbox
+                    display={props.display}
+                    border={"1px solid #444"}
+                    colorScheme="gray"
+                    ml={6}
+                  />
                   {item.customerName}
-                  
                 </Td>
 
                 <Td>{item.rezervationTime}</Td>
                 <Td>{item.laserarea} </Td>
                 <Td>
-                  <Button color={"blue"}>پرداخت</Button>
+                  <Button color={"blue"}>{props.ButtonValue}</Button>
                 </Td>
                 <Td>
                   <Button color={"red"}>لغو نوبت</Button>
