@@ -4,20 +4,22 @@ import Main_get_turn from "@/Components/get-turn-section";
 import CaptionSlider from "@/Components/slider/CaptionSlider";
 import Suggstion from "@/Components/suggestion/Suggstion";
 import Layout from "@/Container";
+import DashboardReception from "@/Layout/SideBar/Sidebar";
 import { Box } from "@chakra-ui/react";
 import React from "react";
 
 const Home = () => {
   return (
-    <Layout bgColor={"#F7F7F7"}>
-      <CaptionSlider />
-      <Main_get_turn />
-      <Box my={8}>
-        <FaQs />
-      </Box>
-      <Suggstion />
-      <Experienced_years />
-    </Layout>
+    // <Layout bgColor={"#F7F7F7"}>
+    //   <CaptionSlider />
+    //   <Main_get_turn />
+    //   <Box my={8}>
+    //     <FaQs />
+    //   </Box>
+    //   <Suggstion />
+    //   <Experienced_years />
+    // </Layout>
+    <DashboardReception />
   );
 };
 
