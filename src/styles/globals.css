@@ -1,9 +1,9 @@
-.display-none{
-    display: none;
+.display-none {
+  display: none;
 }
 
-.display-flex{
-    display: flex;
+.display-flex {
+  display: flex;
 }
 
 a {
@@ -16,5 +16,4 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
   background-color: #999;
   border-radius: 50px;
-
 }

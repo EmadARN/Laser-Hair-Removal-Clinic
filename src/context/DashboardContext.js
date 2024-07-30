@@ -9,7 +9,6 @@ const DashboardContext = React.createContext({
 // Dashboard.js
 export const DashboardContextProvider = ({ children }) => {
   const [steperState, setSteperState] = useState(0);
-
   const value = { steperState, setSteperState };
 
   return (
