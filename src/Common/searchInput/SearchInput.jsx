@@ -1,10 +1,10 @@
-import React from 'react'
-import { Input } from '@chakra-ui/react'
-const SearchInput = ({props}) => {
+import React from "react";
+import { Input } from "@chakra-ui/react";
+const SearchInput = ({ placeholder, size }) => {
   return (
-    <Input placeholder='large size' size={props.size} />
+    <Input placeholder={placeholder} size={size} />
     //size:lg,sm,md
-  )
-}
+  );
+};
 
-export default SearchInput
+export default SearchInput;
