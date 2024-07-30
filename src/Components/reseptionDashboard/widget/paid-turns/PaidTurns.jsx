@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Stack, Text } from "@chakra-ui/react";
 import {
   Accordion,
   AccordionItem,
@@ -10,17 +10,21 @@ import {
 import { ReseptionTable } from "../ReseptionTable/ReseptionTable";
 const PaidTurns = () => {
   return (
-    <Accordion defaultIndex={[0]} allowMultiple>
+    <Accordion defaultIndex={[0]} allowMultiple mt={10}>
       <AccordionItem>
-        <h2>
-          <AccordionButton display={"flex"} justifyContent={"space-between"}>
+        <Text>
+          <AccordionButton
+            display={"flex"}
+            justifyContent={"space-between"}
+            p={0}
+          >
+            <Box>نوبت های پرداخت شده</Box>
             <Box as="span" textAlign="right">
-              نمایش
+              نمایش <AccordionIcon />
             </Box>
-            <AccordionIcon />
           </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
+        </Text>
+        <AccordionPanel pb={4} px={0}>
           <Stack>
             <ReseptionTable display="none" ButtonValue="ورود به شارژ" />
           </Stack>

@@ -1,6 +1,5 @@
 import Section_title from "@/Common/section-title";
 import { Box, Text } from "@chakra-ui/react";
-
 import { useEffect, useState } from "react";
 
 function Wallet() {
