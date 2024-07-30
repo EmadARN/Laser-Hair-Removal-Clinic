@@ -9,6 +9,9 @@ import Bottom from "./widgets/Bottom";
 import { Item } from "./widgets/Items";
 import { MdExitToApp } from "react-icons/md";
 import { ReseptionTable } from "@/Components/reseptionDashboard/widget/ReseptionTable/ReseptionTable";
+import HeaderDetails from "@/Components/reseptionDashboard/widget/headerDetails/HeaderDetails";
+import SearchInput from "@/Common/searchInput/SearchInput";
+import PaidTurns from "@/Components/reseptionDashboard/widget/paid-turns/PaidTurns";
 
 const SideBarDashboard = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -32,73 +35,65 @@ const SideBarDashboard = () => {
         },
       }}
     >
-      <Grid h="200px" templateColumns={"repeat(12, 1fr)"}>
-        <GridItem colSpan={1}>
-          <Sidebar collapsed={isCollapsed}>
-            <Menu iconShape="square">
-              {/* LOGO AND MENU ICON */}
-              <MenuItem
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                icon={isCollapsed ? <IoIosArrowBack /> : undefined}
-                style={{
-                  margin: "10px 0 20px 0",
-                  color: "gray",
-                }}
+      <Sidebar collapsed={isCollapsed}>
+        <Menu iconShape="square">
+          {/* LOGO AND MENU ICON */}
+          <MenuItem
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            icon={isCollapsed ? <IoIosArrowBack /> : undefined}
+            style={{
+              margin: "10px 0 20px 0",
+              color: "gray",
+            }}
+          >
+            {!isCollapsed && (
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                ml="15px"
               >
-                {!isCollapsed && (
-                  <Box
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    ml="15px"
-                  >
-                    <img
-                      alt="profile-user"
-                      width="40px"
-                      height="40px"
-                      src={`/images/logo.png`}
-                      style={{ cursor: "pointer", borderRadius: "10%" }}
-                    />
-                    <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                      <IoIosArrowForward />
-                    </IconButton>
-                  </Box>
-                )}
-              </MenuItem>
-              {!isCollapsed && <Header />}
-              <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-                <Body selected={selected} setSelected={setSelected} />
-              </Box>
-              {!isCollapsed && <Bottom />}
-              <Button
-                sx={{
-                  all: "unset",
-                  w: "100%",
-                  "&:hover": {
-                    bgColor: "transparent",
-                  },
-                  position: "absolute",
-                  bottom: 0,
-                }}
-              >
-                <Item
-                  colorHover={"red"}
-                  color={"red"}
-                  title="خروج از حساب کاربری"
-                  to="/team"
-                  icon={<MdExitToApp />}
-                  selected={selected}
-                  setSelected={setSelected}
+                <img
+                  alt="profile-user"
+                  width="40px"
+                  height="40px"
+                  src={`/images/logo.png`}
+                  style={{ cursor: "pointer", borderRadius: "10%" }}
                 />
-              </Button>
-            </Menu>
-          </Sidebar>
-        </GridItem>
-
-        <GridItem colSpan={11}>
-          <ReseptionTable />
-        </GridItem>
-      </Grid>
+                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                  <IoIosArrowForward />
+                </IconButton>
+              </Box>
+            )}
+          </MenuItem>
+          {!isCollapsed && <Header />}
+          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <Body selected={selected} setSelected={setSelected} />
+          </Box>
+          {!isCollapsed && <Bottom />}
+          <Button
+            sx={{
+              all: "unset",
+              w: "100%",
+              "&:hover": {
+                bgColor: "transparent",
+              },
+              position: "absolute",
+              bottom: 0,
+            }}
+          >
+            <Item
+              colorHover={"red"}
+              color={"red"}
+              title="خروج از حساب کاربری"
+              to="/team"
+              icon={<MdExitToApp />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          </Button>
+        </Menu>
+      </Sidebar>
     </Box>
   );
 };

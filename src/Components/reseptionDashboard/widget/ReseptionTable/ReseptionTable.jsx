@@ -10,17 +10,11 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { TableData } from "./Data";
-import HeaderDetails from "../headerDetails/HeaderDetails";
-import SearchInput from "@/Common/searchInput/SearchInput";
+
 export const ReseptionTable = () => {
   return (
     <>
-      <Box sx={{ pt: 6 }}>
-        <HeaderDetails />
-      </Box>
-      <Box sx={{ py: 6 }}>
-        <SearchInput size={"lg"} placeholder="جستجو در نوبت های روز" />
-      </Box>
+    
       <TableContainer>
         <Table
           overflowY={"auto"}
