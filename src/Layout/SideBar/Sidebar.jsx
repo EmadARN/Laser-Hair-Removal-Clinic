@@ -1,4 +1,4 @@
-import { Box, Button, Grid, GridItem, IconButton } from "@chakra-ui/react";
+import { Box, Button, IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import Header from "./widgets/Header";
@@ -8,10 +8,6 @@ import { IoIosArrowBack } from "react-icons/io";
 import Bottom from "./widgets/Bottom";
 import { Item } from "./widgets/Items";
 import { MdExitToApp } from "react-icons/md";
-import { ReseptionTable } from "@/Components/reseptionDashboard/widget/ReseptionTable/ReseptionTable";
-import HeaderDetails from "@/Components/reseptionDashboard/widget/headerDetails/HeaderDetails";
-import SearchInput from "@/Common/searchInput/SearchInput";
-import PaidTurns from "@/Components/reseptionDashboard/widget/paid-turns/PaidTurns";
 
 const SideBarDashboard = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -23,7 +19,7 @@ const SideBarDashboard = () => {
         "& .ps-sidebar-container": {
           backgroundColor: "rgba(255,255,255,0.1) !important",
           border: "1px solid lightgray!important",
-          h: "90vh",
+          h: "100vh",
           position: "relative",
         },
         "& .ps-menu-button": {

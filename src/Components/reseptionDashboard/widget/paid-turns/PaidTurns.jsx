@@ -10,20 +10,20 @@ import {
 import { ReseptionTable } from "../ReseptionTable/ReseptionTable";
 const PaidTurns = () => {
   return (
-    <Accordion defaultIndex={[0]} allowMultiple mt={10}>
+    <Accordion
+      defaultIndex={[0]}
+      allowMultiple
+      mt={10}
+      w={{ base: "100vw", md: "100%" }}
+    >
       <AccordionItem>
-        <Text>
-          <AccordionButton
-            display={"flex"}
-            justifyContent={"space-between"}
-            p={0}
-          >
-            <Box>نوبت های پرداخت شده</Box>
-            <Box as="span" textAlign="right">
-              نمایش <AccordionIcon />
-            </Box>
-          </AccordionButton>
-        </Text>
+        <AccordionButton display={"flex"} justifyContent={"space-between"}>
+          <Box>نوبت های پرداخت شده</Box>
+          <Box as="span" textAlign="right">
+            نمایش <AccordionIcon />
+          </Box>
+        </AccordionButton>
+
         <AccordionPanel pb={4} px={0}>
           <Stack>
             <ReseptionTable display="none" ButtonValue="ورود به شارژ" />

@@ -29,15 +29,37 @@ const PaginationDate = () => {
     setCurrent(index);
   }
   return (
-    <Flex sx={{ alignItems: "center", gap: 4 }}>
-      <Button onClick={() => dateHandler("neg")}>
+    <Flex
+      sx={{
+        alignItems: "center",
+        gap: 4,
+      }}
+    >
+      <Button
+        onClick={() => dateHandler("neg")}
+        sx={{
+          w: { base: "30px", md: "40px" },
+          h: { base: "30px", md: "40px" },
+          "& .chakra-button": {
+            fontSize: "18px",
+          },
+        }}
+      >
         <IoIosArrowForward />
       </Button>
-      <Flex>
-        <Text>امروز -</Text>
-        <Text>{dates[current].date}</Text>
+      <Flex py={6}>
+        <Text sx={{ fontSize: { base: "12px", md: "18px" } }}>امروز -</Text>
+        <Text sx={{ fontSize: { base: "12px", md: "18px" } }}>
+          {dates[current].date}
+        </Text>
       </Flex>
-      <Button sx={{}} onClick={() => dateHandler("pus")}>
+      <Button
+        sx={{
+          w: { base: "30px", md: "40px" },
+          h: { base: "30px", md: "40px" },
+        }}
+        onClick={() => dateHandler("pus")}
+      >
         <IoIosArrowBack />
       </Button>
     </Flex>

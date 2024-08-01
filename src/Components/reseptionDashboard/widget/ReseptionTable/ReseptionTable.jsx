@@ -13,8 +13,7 @@ import { TableData } from "./Data";
 
 export const ReseptionTable = () => {
   return (
-    <>
-    
+    <Box sx={{ w: { base: "100vw", md: "100%" }, px: 4 }}>
       <TableContainer>
         <Table
           overflowY={"auto"}
@@ -54,6 +53,6 @@ export const ReseptionTable = () => {
           </Tbody>
         </Table>
       </TableContainer>
-    </>
+    </Box>
   );
 };
