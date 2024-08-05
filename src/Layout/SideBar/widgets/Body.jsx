@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Item } from "./Items";
-import { SlCalender } from "react-icons/sl";
-import { IoMdPeople } from "react-icons/io";
-const Body = ({ selected, setSelected }) => {
+
+const Body = ({ selected, setSelected, admintDatas, receptionDatas }) => {
+  const [pathname, setPathname] = useState(null);
+  useEffect(() => {
+    setPathname(window.location.pathname);
+  }, []);
+  const adminOrRecption =
+    pathname === "/AdminDashboard"
+      ? admintDatas
+      : pathname === "/ReseptionDashboard"
+      ? receptionDatas
+      : [];
   return (
     <>
-      <Item
-        title="نوبت های روز"
-        to="/"
-        icon={<SlCalender />}
-        selected={selected}
-        setSelected={setSelected}
-        colorHover={"#868dfb"}
-        color={"gray"}
-      />
+      {adminOrRecption.map((item) => (
+        <React.Fragment key={item.key}>
+          <Item
+            title={item.amount}
+            to="/"
+            icon={item.icon}
+            selected={selected}
+            setSelected={setSelected}
+            colorHover={"#868dfb"}
+            color={"gray"}
+          />
+        </React.Fragment>
+      ))}
 
-      <Item
+      {/* <Item
         title="لیست مراجعین"
         to="/team"
         icon={<IoMdPeople />}
@@ -23,7 +36,7 @@ const Body = ({ selected, setSelected }) => {
         setSelected={setSelected}
         colorHover={"#868dfb"}
         color={"gray"}
-      />
+      /> */}
     </>
   );
 };

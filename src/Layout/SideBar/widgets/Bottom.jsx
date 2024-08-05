@@ -1,14 +1,14 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
-const Bottom = () => {
+const Bottom = ({ active }) => {
   return (
     <Box
       sx={{
         border: "1px solid #1111",
         borderRadius: "8px",
         w: "70%",
-        display: "flex",
+        display: active ? "flex" : "none",
         justifyContent: "center",
         flexDirection: "column",
         mt: 12,

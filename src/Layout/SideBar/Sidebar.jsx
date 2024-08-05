@@ -9,17 +9,23 @@ import Bottom from "./widgets/Bottom";
 import { Item } from "./widgets/Items";
 import { MdExitToApp } from "react-icons/md";
 
-const SideBarDashboard = () => {
+const SideBarDashboard = ({
+  admintDatas,
+  receptionDatas,
+  h,
+  textHead,
+  active,
+
+}) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-
   return (
     <Box
       sx={{
         "& .ps-sidebar-container": {
           backgroundColor: "rgba(255,255,255,0.1) !important",
           border: "1px solid lightgray!important",
-          h: "100vh",
+          h,
           position: "relative",
         },
         "& .ps-menu-button": {
@@ -62,11 +68,16 @@ const SideBarDashboard = () => {
               </Box>
             )}
           </MenuItem>
-          {!isCollapsed && <Header />}
+          {!isCollapsed && <Header textHead={textHead} />}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Body selected={selected} setSelected={setSelected} />
+            <Body
+              selected={selected}
+              setSelected={setSelected}
+              admintDatas={admintDatas}
+              receptionDatas={receptionDatas}
+            />
           </Box>
-          {!isCollapsed && <Bottom />}
+          {!isCollapsed && <Bottom active={active} />}
           <Button
             sx={{
               all: "unset",
