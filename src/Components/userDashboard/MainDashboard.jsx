@@ -2,8 +2,6 @@ import React from "react";
 import { Box, Grid, Text, Button } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import Image from "next/image";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoExitOutline } from "react-icons/io5";
 import NavBar from "@/Container/navbar/NavBar";
 import SessionRecordSection from "@/Common/session_Record_section/SessionRecordSection";
 
