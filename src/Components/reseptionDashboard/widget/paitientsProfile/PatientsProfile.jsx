@@ -1,31 +1,12 @@
 import React from "react";
 import { Grid, Box, Text, Input, Button } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
+import { FirstGrid, FirstBox } from "./style";
 const PatientsProfile = () => {
   return (
-    <Grid
-      width={"100%"}
-      height="100vh"
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
-      <Box
-        width={"70%"}
-        boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-        p={3}
-        h={"auto"}
-        display={"flex"}
-        flexDirection={"column"}
-      >
-        <Box
-          borderBottom={"2px solid #ddd"}
-          mb={4}
-          width={"100%"}
-          display={"flex"}
-          justifyContent={"space-between"}
-          p={3}
-        >
+    <Grid sx={FirstGrid}>
+      <Box>
+        <Box>
           <Text fontWeight={"bold"}> پروفایل مراجع</Text>
           <MdCancel />
         </Box>
@@ -50,7 +31,10 @@ const PatientsProfile = () => {
         </Box>
 
         <Box width={"100%"} mt={"4"}>
-          <Button width={"100%"} bgColor={'lightblue'}>  ورود به شارژ </Button>
+          <Button width={"100%"} bgColor={"lightblue"}>
+            {" "}
+            ورود به شارژ{" "}
+          </Button>
         </Box>
       </Box>
     </Grid>

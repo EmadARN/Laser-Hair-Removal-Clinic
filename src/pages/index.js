@@ -1,4 +1,5 @@
 import Experienced_years from "@/Components/5years-with-you";
+import AdminTable from "@/Components/AdminTable/AdminTable";
 import FaQs from "@/Components/faqs/wigets/FaQs";
 import Main_get_turn from "@/Components/get-turn-section";
 import CaptionSlider from "@/Components/slider/CaptionSlider";

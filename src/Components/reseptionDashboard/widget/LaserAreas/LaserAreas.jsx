@@ -3,6 +3,15 @@ import { Box, Grid, Text, Button } from "@chakra-ui/react";
 import { FaArrowRight } from "react-icons/fa6";
 import { Select } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
+import {
+  firstGrid,
+  firstBox,
+  secBox,
+  thirdBox,
+  fourthBox,
+  fifthBox,
+  sisxthBox,
+} from "./style";
 
 const LaserAreas = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -25,29 +34,9 @@ const LaserAreas = () => {
   ];
 
   return (
-    <Grid
-      width={"100%"}
-      height="100vh"
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
-      <Box
-        width={"70%"}
-        boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-        p={3}
-        h={"90%"}
-        display={"flex"}
-        flexDirection={"column"}
-      >
-        <Box
-          borderBottom={"2px solid #ddd"}
-          mb={4}
-          width={"100%"}
-          display={"flex"}
-          justifyContent={"flex-start"}
-          p={3}
-        >
+    <Grid sx={firstGrid}>
+      <Box sx={firstBox}>
+        <Box sx={secBox}>
           <FaArrowRight />
           <Text fontWeight={"bold"}> انتخاب نواحی</Text>
         </Box>
@@ -77,19 +66,12 @@ const LaserAreas = () => {
           ))}
         </Select>
 
-        <Box width={"100%"} mt={"2"} display={"flex"} flexDirection={"column"}>
+        <Box sx={thirdBox}>
           <Text color={"#555"}>نواحی انتخاب شده</Text>
 
           <Box mt={3} display={"flex"} justifyContent={"flex-start"}>
             {selectedOptions.map((option) => (
-              <Box
-                ml={2}
-                py={2}
-                px={1}
-                width={"auto"}
-                border={"1px solid #ddd"}
-                key={option.id}
-              >
+              <Box sx={fourthBox} key={option.id}>
                 <Box display={"flex"} alignItems={"center"} gap={2}>
                   <MdCancel
                     cursor={"pointer"}
@@ -101,20 +83,8 @@ const LaserAreas = () => {
             ))}
           </Box>
         </Box>
-        <Box
-          height={"100%"}
-          flexDirection={"column"}
-          width={"100%"}
-          mt={20}
-          display={"flex"}
-          justifyContent={"flex-end"}
-        >
-          <Box
-            display={"flex"}
-            width={"100%"}
-            alignItems={"center"}
-            justifyContent={"space-between"}
-          >
+        <Box sx={fifthBox}>
+          <Box sx={sisxthBox}>
             <Button bgColor={"#3854c4"} color={"#fff"} width={"30%"}>
               تایید نواحی{" "}
             </Button>

@@ -8,6 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { FlexResgister, entryBox } from "./Resgister";
 
 const RegisterLogin = () => {
   return (
@@ -22,18 +23,8 @@ const RegisterLogin = () => {
           ورود به عنوان منشی
         </Text>
       </Box>
-      <Flex
-        flexDirection={"column"}
-        justifyContent="center"
-        alignItems="center"
-        h={"100vh"}
-        mx={"auto"}
-        mt={5}
-        bgColor={"white"}
-      >
-        <Box
-          sx={{ rounded: "8px", border: "1px solid #1111", width: "40%", p: 8 }}
-        >
+      <Flex sx={FlexResgister}>
+        <Box sx={entryBox}>
           <Box>
             <Text sx={{ fontWeight: "bold" }}>
               نام کاربری و رمز ورود خود را وارد کنید

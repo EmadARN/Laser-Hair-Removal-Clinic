@@ -1,24 +1,15 @@
 import { Button } from "@chakra-ui/react";
 import React from "react";
+import { ButtonStyle } from "./Style";
 
 const BtnReservation = ({ onClose, text, px, py ,width,rounded}) => {
   return (
     <Button
-    width={width}
-      px={px}
-      py={py}
-      rounded={rounded}
-      variant="solid"
-      bgColor="#7563DC"
-      color="purple.50"
-      _hover={{
-        bgColor: "purple.100",
-        color: "purple.500",
-      }}
-      transition=".5s"
-      mr={3}
+    sx={ButtonStyle( px, py ,width,rounded)}
+
+     
       onClick={onClose}
-      fontWeight="500"
+      
     >
       {text}
     </Button>

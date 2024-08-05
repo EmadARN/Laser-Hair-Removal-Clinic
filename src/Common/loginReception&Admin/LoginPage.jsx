@@ -1,86 +1,38 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import backgroundImage from "../../../public//images/Curve Line (1).svg";
+import {
+  firstBox,
+  seccondBox,
+  TextStyle,
+  flexStyle,
+  Button2Style,
+} from "./LoginStyle";
 const LoginPage = ({ setLoginStepper, loginStepper }) => {
   const handle = () => {
     setLoginStepper(loginStepper + 1);
   };
   return (
     <Flex justifyContent="space-between">
-      <Box
-        sx={{
-          display: { base: "none", md: "flex" },
-          boxShadow: "1px 0px  20px pink",
-          h: "100%",
-          w: "100%",
-        }}
-      >
+      <Box sx={firstBox}>
         <img
           style={{ width: "100%", height: "100vh" }}
           src="/images/Curve Line.svg"
           alt=""
         />
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: { base: "center", md: "start" },
-          flexDirection: "column",
-          width: "100%",
-          h: "100vh",
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: "cover",
-
-          pr: { base: 0, md: 6 },
-        }}
-      >
+      <Box sx={seccondBox(backgroundImage)}>
         <Box>
-          <Box
-            sx={{
-              w: "100%",
-            }}
-          >
-            <Text
-              sx={{ fontSize: { base: "18px", md: "30px" } }}
-              as="h1"
-              fontWeight="bold"
-            >
+          <Box w={"100%"}>
+            <Text sx={TextStyle} as="h1">
               به سامانه مدیریت کلینیک لیزر <Text>اسیندا خوش آمدید</Text>
             </Text>
           </Box>
-          <Flex
-            mt={8}
-            sx={{
-              gap: { base: "20px", md: "80px" },
-              flexDirection: { base: "column", md: "row" },
-            }}
-            justifyContent="space-between"
-          >
-            <Button
-              colorScheme="gray"
-              size="lg"
-              sx={{
-                color: "blue",
-                fontSize: "14px",
-                width: "100%",
-                minWidth: "250px",
-              }}
-              onClick={handle}
-            >
+          <Flex sx={flexStyle}>
+            <Button sx={Button2Style} onClick={handle}>
               ورود به عنوان مدیر
             </Button>
-            <Button
-              colorScheme="gray"
-              size="lg"
-              sx={{
-                color: "blue",
-                fontSize: "14px",
-                width: "100%",
-                minWidth: "250px",
-              }}
-              onClick={handle}
-            >
+            <Button sx={Button2Style} onClick={handle}>
               ورود به عنوان منشی
             </Button>
           </Flex>

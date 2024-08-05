@@ -3,16 +3,11 @@ import { get_turn_data } from "./data";
 import Main_Layout from "./widgets/main-layout/Main_Layout";
 import Section_title from "@/common/section-title";
 import BtnReservation from "@/Common/btnReservation/BtnReservation";
+import { GridMain } from "./style";
 const Main_get_turn = () => {
   return (
     <Grid
-      display="flex"
-      flexDirection="column"
-      px={{ base: 10, md: 28 }}
-      py={10}
-      mx={2}
-      bgColor={"#ffffff"}
-      rounded={"25px"}
+     sx={{GridMain}}
     >
       <Section_title section_title="نحوه ی دریافت نوبت"></Section_title>
 

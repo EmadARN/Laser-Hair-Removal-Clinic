@@ -1,13 +1,11 @@
 import React from "react";
 import { Grid, Box, Text } from "@chakra-ui/react";
 import BtnReservation from "@/Common/btnReservation/BtnReservation";
+import { firstGrid } from "./style";
 const Experienced_years = () => {
   return (
     <Grid
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
+      sx={firstGrid}
     >
       <Box mb={3} pt={10}>
         <Text fontWeight="bold" sx={{ fontSize: { base: "md", sm: "xl" } }}>
