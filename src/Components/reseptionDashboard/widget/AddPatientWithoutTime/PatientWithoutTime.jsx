@@ -1,32 +1,19 @@
 import React from "react";
 import { Grid, Box, Text, Input,Button } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
+import { firstGrid,firstBox,seccondBox } from "./style";
 const PatientWithoutTime = () => {
   return (
     <Grid
-    width={"100%"}
-    height="100vh"
-    display={"flex"}
-    justifyContent={"center"}
-    alignItems={"center"}
+    sx={firstGrid}
   >
     <Box
-   
-      width={"70%"}
-      boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-      p={3}
-      h={"auto"}
-      display={"flex"}
-      flexDirection={"column"}
+   sx={firstBox}
+     
      
     >
       <Box
-       borderBottom={'2px solid #ddd'}
-        mb={4}
-        width={"100%"}
-        display={"flex"}
-        justifyContent={"space-between"}
-        p={3}
+       sx={seccondBox}
       >
         <Text fontWeight={"bold"}>مراجع جدید</Text>
         <MdCancel />

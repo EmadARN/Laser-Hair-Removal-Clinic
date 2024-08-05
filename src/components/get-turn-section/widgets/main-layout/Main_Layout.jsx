@@ -1,18 +1,13 @@
 import React from "react";
 import { Grid, Box, Text, Flex } from "@chakra-ui/react";
+import {firstText, mainBox} from '../../style' 
 const Main_Layout = (props) => {
   return (
     <Grid display="flex" flexDirection="column" gap={3}>
       <Box display="flex" flexDirection="column" gap={1} mb={10}>
         <Flex gap={4} alignItems={"center"}>
           <Box
-            w={10}
-            h={10}
-            border="3px dashed #D1CBF3"
-            borderRadius="50%"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
+            sx={{mainBox}}
           >
             <Box fontSize="20px" p={3}>
               {props.item.icon}
@@ -21,9 +16,7 @@ const Main_Layout = (props) => {
 
           <Box>
             <Text
-              fontWeight="bold"
-              color="#111"
-              sx={{ fontSize: { base: "sm" } }}
+              sx={firstText}
             >
               {props.item.title}
             </Text>
@@ -32,10 +25,7 @@ const Main_Layout = (props) => {
 
         <Box>
           <Text
-            color="#999"
-            textAlign="justify"
-            sx={{ fontSize: { base: "sm" } }}
-            pr={1}
+         sx={secText}
           >
             {props.item.desc}
           </Text>

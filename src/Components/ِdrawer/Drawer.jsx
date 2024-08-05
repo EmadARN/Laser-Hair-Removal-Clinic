@@ -12,6 +12,7 @@ import { Box, IconButton } from "@chakra-ui/react";
 import BodyContent from "./widgets/BodyContent";
 import BtnReservation from "@/Common/btnReservation/BtnReservation";
 import Link from "next/link";
+import { iconButton ,seccondIcon} from "./Style";
 
 const RightBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,14 +22,11 @@ const RightBar = () => {
     <>
       <IconButton
         ref={btnRef}
-        mr={-1}
+        sx={iconButton}
         size={"xs"}
         icon={<Bars3Icon />}
         aria-label={"Open Menu"}
-        bgColor="#ffffff"
-        _hover={{
-          bgColor: "#ffffff",
-        }}
+       
         onClick={onOpen}
       />
       <Drawer
@@ -40,11 +38,7 @@ const RightBar = () => {
         <DrawerOverlay />
         <DrawerContent transition={".05s ease"}>
           <Icon
-            color="gray.500"
-            fontSize={"30px"}
-            cursor={"pointer"}
-            mt={4}
-            mr={4}
+          sx={seccondIcon}
             onClick={onClose}
           >
             <XCircleIcon />
