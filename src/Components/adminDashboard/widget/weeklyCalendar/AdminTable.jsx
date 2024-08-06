@@ -10,6 +10,7 @@ import {
   Button,
   TableContainer,
   useDisclosure,
+  Text,
 } from "@chakra-ui/react";
 import { AdminTableData } from "./TablwData";
 import ModalDefine from "@/Common/moadals/ModalDefine";
@@ -34,24 +35,39 @@ const AdminTable = () => {
       ) : null}
       <TableContainer width={"100%"} display={"flex"} justifyContent={"center"}>
         <Table
+          bgColor={"#efefef"}
           width={"70%"}
           variant="simple"
           sx={{
+            border: "3px solid #efefef",
             td: {
-              border: "1px solid #111",
+              border: "1px solid #ddd",
             },
             th: {
-              border: "1px solid #111",
+              border: "1px solid #ddd",
             },
           }}
         >
           <Thead>
             <Tr>
-              <Th textAlign={"center"}>روز</Th>
-              <Th textAlign={"center"}>شیفت صبح</Th>
-              <Th textAlign={"center"}>شیفت عصر</Th>
-              <Th textAlign={"center"}> ساعت شروع نوبت دهی</Th>
-              <Th textAlign={"center"}>ساعت اتمام نوبت دهی</Th>
+              <Th textAlign={"center"}>
+                <Text fontWeight={"bold"}>روز</Text>
+              </Th>
+              <Th fontWeight={"bold"} textAlign={"center"}>
+                {" "}
+                <Text fontWeight={"bold"}>شیفت صبح</Text>
+              </Th>
+              <Th fontWeight={"bold"} textAlign={"center"}>
+                {" "}
+                <Text fontWeight={"bold"}>شبفت عصر</Text>
+              </Th>
+              <Th fontWeight={"bold"} textAlign={"center"}>
+                {" "}
+                <Text fontWeight={"bold"}> ساعت شروع نوبت دهی</Text>
+              </Th>
+              <Th fontWeight={"bold"} textAlign={"center"}>
+                <Text fontWeight="bold"> ساعت اتمام نوبت دهی</Text>
+              </Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -60,17 +76,29 @@ const AdminTable = () => {
                 <Tr id={data.id} key={data.id}>
                   <Td textAlign={"center"}>{data.day}</Td>
                   <Td textAlign={"center"}>
-                    <Button onClick={onOpen}>
+                    <Button
+                      fontSize={"20px"}
+                      variant={"ghost"}
+                      onClick={onOpen}
+                    >
                       {operatorInfo == data.id ? data.id : "+"}
                     </Button>
                   </Td>
                   <Td textAlign={"center"}>
-                    <Button onClick={onOpen}>
+                    <Button
+                      fontSize={"20px"}
+                      variant={"ghost"}
+                      onClick={onOpen}
+                    >
                       {operatorInfo == data.id ? data.id : "+"}
                     </Button>
                   </Td>
-                  <Td textAlign={"center"}>{data.timefor_turn}</Td>
-                  <Td textAlign={"center"}>{data.finish_time_turn}</Td>
+                  <Td color={"#555"} textAlign={"center"}>
+                    {data.timefor_turn}
+                  </Td>
+                  <Td color={"#555"} textAlign={"center"}>
+                    {data.finish_time_turn}
+                  </Td>
                 </Tr>
               );
             })}
