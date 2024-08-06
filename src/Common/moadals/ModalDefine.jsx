@@ -11,7 +11,7 @@ import {
   useDisclosure,
   Box,
 } from "@chakra-ui/react";
-const ModalDefine = ({ renderContent, displayHeader }) => {
+const ModalDefine = ({ renderContent, displayHeader, headerContent }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -38,7 +38,7 @@ const ModalDefine = ({ renderContent, displayHeader }) => {
                 fontSize: "18px",
               }}
             >
-              افزودن کارمند جدید
+              {headerContent}
             </ModalHeader>
             <ModalCloseButton
               sx={{
