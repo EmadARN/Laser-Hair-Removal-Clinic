@@ -1,12 +1,11 @@
-import PaidTurns from "@/Components/reseptionDashboard/widget/paid-turns/PaidTurns";
-import { ReseptionTable } from "@/Components/reseptionDashboard/widget/ReseptionTable/ReseptionTable";
 import SideBarDashboard from "@/Layout/SideBar/Sidebar";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import React, { useState } from "react";
-import HeaderDetails from "@/Components/adminDashboard/widget/headerDetails/HeaderDetails";
-import ListOfOpratore from "@/Components/adminDashboard/widget/listOfOpratore/ListOfOpratore";
+
 import { admintData } from "@/Components/adminDashboard/data";
-import FinancialReports from "@/Components/adminDashboard/widget/financialReports/financialReports";
+
+import Empolyees from "@/Components/adminDashboard/widget/employees";
+import AdminTable from "@/Components/adminDashboard/widget/weeklyCalendar/AdminTable";
 
 const AdminDashboard = () => {
   return (
@@ -22,14 +21,10 @@ const AdminDashboard = () => {
         </GridItem>
         <GridItem colSpan={11}>
           <Box sx={{ pt: 6, pr: { base: 12, md: 0 } }}>
-            <HeaderDetails />
+            <Empolyees />
           </Box>
-          <Box>
-            <ListOfOpratore />
-          </Box>
-          <Box>
-            <FinancialReports />
-          </Box>
+          <Box>{/* <ListOfOpratore /> */}</Box>
+          <Box>{/* <FinancialReports /> */}</Box>
           {/* <ReseptionTable />
           <PaidTurns /> */}
         </GridItem>

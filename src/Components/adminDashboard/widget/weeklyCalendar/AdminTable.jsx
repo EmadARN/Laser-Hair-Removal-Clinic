@@ -12,19 +12,24 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { AdminTableData } from "./TablwData";
-import ModalAdmin from "./Modal";
+import ModalDefine from "@/Common/moadals/ModalDefine";
+import ModalBodyContent from "./widget/modalDefineDetails/ModalBodyContent";
+import ModalFooterContent from "./widget/modalDefineDetails/ModalFooterContent";
+
 const AdminTable = () => {
   const [operatorInfo, setOperatorInfo] = useState();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen } = useDisclosure();
   console.log("dataAll:", operatorInfo);
   return (
     <>
       {isOpen ? (
-        <ModalAdmin
+        <ModalDefine
+          displayHeader="none"
+          renderContent={() => ({
+            body: <ModalBodyContent setOperatorInfo={setOperatorInfo} />,
+            footer: <ModalFooterContent />,
+          })}
           setOperatorInfo={setOperatorInfo}
-          onOpen={onOpen}
-          onClose={onClose}
-          isOpen={isOpen}
         />
       ) : null}
       <TableContainer width={"100%"} display={"flex"} justifyContent={"center"}>
@@ -52,7 +57,7 @@ const AdminTable = () => {
           <Tbody>
             {AdminTableData.map((data) => {
               return (
-                <Tr id={data.id}>
+                <Tr id={data.id} key={data.id}>
                   <Td textAlign={"center"}>{data.day}</Td>
                   <Td textAlign={"center"}>
                     <Button onClick={onOpen}>

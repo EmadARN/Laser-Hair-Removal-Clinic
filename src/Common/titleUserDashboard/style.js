@@ -6,7 +6,8 @@ export const firstStyle = {
 
 export const textStyle = { display: "flex", alignItems: "center", gap: "5px" };
 
-
 export const secText = {
-    display: "flex", alignItems: "center", position: "relative" 
-}
+  display: "flex",
+  alignItems: "center",
+  position: "relative",
+};
