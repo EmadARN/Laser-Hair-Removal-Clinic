@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Box, Text, Button } from "@chakra-ui/react";
+import { Grid, Box, Text } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
 import InformationBox from "./widget/InformationBox";
 import PaymentMethodSection from "./widget/PaymentMethodSection";
@@ -30,7 +30,7 @@ const PaymentDialog = () => {
           justifyContent={"space-between"}
           p={3}
         >
-          <Text fontWeight={'bold'}>پرداخت</Text>
+          <Text fontWeight={"bold"}>پرداخت</Text>
           <MdCancel />
         </Box>
 

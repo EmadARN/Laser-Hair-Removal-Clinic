@@ -6,9 +6,7 @@ import BtnReservation from "@/Common/btnReservation/BtnReservation";
 import { GridMain } from "./style";
 const Main_get_turn = () => {
   return (
-    <Grid
-     sx={{GridMain}}
-    >
+    <Grid sx={GridMain}>
       <Section_title section_title="نحوه ی دریافت نوبت"></Section_title>
 
       {get_turn_data.map((item) => {
