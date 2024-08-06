@@ -61,10 +61,7 @@ const AdminTable = () => {
                 <Text fontWeight={"bold"}> ساعت شروع نوبت دهی</Text>
               </Th>
               <Th fontWeight={"bold"} textAlign={"center"}>
-                <Text  fontWeight='bold'>
-                  {" "}
-                  ساعت اتمام نوبت دهی
-                </Text>
+                <Text fontWeight="bold"> ساعت اتمام نوبت دهی</Text>
               </Th>
             </Tr>
           </Thead>
