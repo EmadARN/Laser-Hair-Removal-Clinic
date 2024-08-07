@@ -22,10 +22,13 @@ export const seccondBox = (bgcolor2) => {
     p: 2,
     bgColor: { bgcolor2 },
   };
+  return S3;
 };
-
-export const TextStyle = {
-  color: { textColor },
-  fontWeight: "bold",
-  fontSize: { sm: "14px", md: "25px" },
+export const TextStyle = (textColor) => {
+  const S4 = {
+    color: { textColor },
+    fontWeight: "bold",
+    fontSize: { sm: "14px", md: "25px" },
+  };
+  return S4;
 };

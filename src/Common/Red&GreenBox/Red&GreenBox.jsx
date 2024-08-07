@@ -12,12 +12,11 @@ const RedGreenBox = ({ bgColor, bgColor2, iconColor, textColor }) => {
       </Box>
 
       <Box mt={2}>
-        <Text sx={TextStyle}>7:40 - 8.30</Text>
+        <Text sx={TextStyle(textColor)}>7:40 - 8.30</Text>
       </Box>
 
       <Box>
         <Text fontSize={{ sm: "13px", md: "15px" }} color={"#555"}>
-          {" "}
           درصورتی که از حساب شما مبلغی کم شده باشد،
           <br />
           طی ۷۲ ساعت به حساب شما بازگردانده میشود{" "}

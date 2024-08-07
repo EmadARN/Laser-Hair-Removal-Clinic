@@ -29,7 +29,7 @@ const AreaLazer = () => {
         firstArea="فول بادی"
         secondArea="450,000 تومان"
         thirdArea="35 دقیقه"
-        imgDisplay="none"
+        style={style.imgDisplay}
       />
     </>
   );

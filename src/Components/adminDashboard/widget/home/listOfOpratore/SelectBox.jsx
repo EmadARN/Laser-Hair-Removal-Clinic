@@ -3,10 +3,10 @@ import React from "react";
 
 const SelectBox = ({ oprators, shiftsName }) => {
   return (
-    <ButtonGroup size="sm" isAttached variant="outline">
+    <ButtonGroup size="sm" isAttached variant="outline" sx={{ w: "100%" }}>
       <Button
         sx={{
-          width: "clamp(250px,100px,300px)",
+          width: "100%",
           borderRadius: "0 3px 3px 0",
           fontSize: { base: "12px", md: "14px" },
           cursor: "default",
@@ -21,11 +21,8 @@ const SelectBox = ({ oprators, shiftsName }) => {
       <Select
         placeholder="-"
         sx={{
+          width: "100%",
           borderRadius: "3px 0px 0px 3px",
-          width: {
-            base: "clamp(50px,100%,300px)",
-            md: "clamp(300px,100%,300px)",
-          },
           cursor: "pointer",
         }}
       >

@@ -1,27 +1,22 @@
-import { Flex } from "@chakra-ui/react";
+import { Box, Grid, GridItem, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 import SelectBox from "./SelectBox";
 import { oprators } from "@/Components/adminDashboard/data";
 
 const ListOfOpratore = () => {
   return (
-    <Flex
-      sx={{
-        flexDirection: { base: "column", md: "row" },
-        justifyContent: "space-between",
-        alignItems: { base: "start", md: "center" },
-        p: 4,
-        w: "100%",
-      }}
+    <Grid
+      templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(4, 1fr)" }}
+      gap={6}
+      px={2}
     >
-      <Flex sx={{ w: "50%", alignItems: "center" }}>
+      <GridItem w="100%" colSpan={2}>
         <SelectBox oprators={oprators[0]} shiftsName="شیفت صبح" />
-      </Flex>
-
-      <Flex sx={{ w: "50%", alignItems: "center" }}>
+      </GridItem>
+      <GridItem w="100%" colSpan={2}>
         <SelectBox oprators={oprators[1]} shiftsName="شیفت بعد از ظهر" />
-      </Flex>
-    </Flex>
+      </GridItem>
+    </Grid>
   );
 };
 

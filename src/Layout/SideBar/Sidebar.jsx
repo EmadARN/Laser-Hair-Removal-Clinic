@@ -1,4 +1,4 @@
-import { Box, Button, IconButton } from "@chakra-ui/react";
+import { Box, Button, Flex, IconButton, useMediaQuery } from "@chakra-ui/react";
 import { useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import Header from "./widgets/Header";
@@ -15,10 +15,10 @@ const SideBarDashboard = ({
   h,
   textHead,
   active,
-
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
   return (
     <Box
       sx={{
@@ -37,7 +37,7 @@ const SideBarDashboard = ({
         },
       }}
     >
-      <Sidebar collapsed={isCollapsed}>
+      <Sidebar collapsed={isCollapsed} width={isSmallScreen ? "110%" : "250px"}>
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
@@ -53,7 +53,6 @@ const SideBarDashboard = ({
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                ml="15px"
               >
                 <img
                   alt="profile-user"
@@ -62,7 +61,10 @@ const SideBarDashboard = ({
                   src={`/images/logo.png`}
                   style={{ cursor: "pointer", borderRadius: "10%" }}
                 />
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                <IconButton
+                  sx={{}}
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                >
                   <IoIosArrowForward />
                 </IconButton>
               </Box>
@@ -75,6 +77,7 @@ const SideBarDashboard = ({
               setSelected={setSelected}
               admintDatas={admintDatas}
               receptionDatas={receptionDatas}
+              isCollapsed={isCollapsed}
             />
           </Box>
           {!isCollapsed && <Bottom active={active} />}
@@ -90,13 +93,14 @@ const SideBarDashboard = ({
             }}
           >
             <Item
-              colorHover={"red"}
-              color={"red"}
+              colorHover={"#ff0014"}
+              color={"#f13f4d"}
               title="خروج از حساب کاربری"
               to="/team"
               icon={<MdExitToApp />}
               selected={selected}
               setSelected={setSelected}
+              isCollapsed={isCollapsed}
             />
           </Button>
         </Menu>

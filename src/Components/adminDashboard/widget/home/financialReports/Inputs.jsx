@@ -3,10 +3,10 @@ import React from "react";
 
 const Inputs = ({ shiftsName }) => {
   return (
-    <ButtonGroup size="sm" isAttached variant="outline" w="85%">
+    <ButtonGroup size="sm" isAttached variant="outline" sx={{ w: "100%" }}>
       <Button
         sx={{
-          width: "clamp(160px,100px,200px)",
+          width: "100%",
           borderRadius: "0 3px 3px 0",
           fontSize: { base: "12px", md: "14px" },
           cursor: "default",
@@ -20,18 +20,20 @@ const Inputs = ({ shiftsName }) => {
       </Button>
       <Box
         sx={{
-          border: "1px solid gray",
-          borderRadius: "3px 0px 0px 3px",
-          width: {
-            base: "clamp(100px,100%,300px)",
-            md: "clamp(300px,100%,300px)",
-          },
-          display: "flex",
-          justifyContent: "end",
-          alignItems: "center",
+          width: "100%",
+          border: "1px solid #1111",
         }}
       >
-        <Text> تومان 0,00</Text>
+        <Text
+          sx={{
+            display: "flex",
+            justifyContent: "end",
+            p: 2,
+            fontSize: { base: "12px", md: "14px" },
+          }}
+        >
+          تومان 0,00
+        </Text>
       </Box>
     </ButtonGroup>
   );

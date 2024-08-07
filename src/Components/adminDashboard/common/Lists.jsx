@@ -9,15 +9,21 @@ const Lists = ({
   thirdArea,
   imgDisplay,
   displayThirdArea,
+  editDeleteDisplay,
+  bgColor,
+  color,
+  rounded,
+  fontSize,
 }) => {
   return (
     <Flex
       sx={{
         justifyContent: "space-between",
         alignItems: "center",
-        bgColor: "#1111",
+        bgColor: bgColor || "#1111",
         width: "95%",
-        rounded: "8px",
+        rounded: rounded || "8px",
+        color,
         p: 5,
       }}
     >
@@ -27,11 +33,13 @@ const Lists = ({
           src=""
           alt="yes"
         />
-        <Text>{firstArea}</Text>
+        <Text fontSize={fontSize}>{firstArea}</Text>
       </Stack>
-      <Box>{secondArea}</Box>
-      <Box sx={{ display: displayThirdArea }}>{thirdArea}</Box>
-      <Stack direction="row" gap={1}>
+      <Box fontSize={fontSize}>{secondArea}</Box>
+      <Box fontSize={fontSize} sx={{ display: displayThirdArea }}>
+        {thirdArea}
+      </Box>
+      <Stack direction="row" gap={1} display={editDeleteDisplay}>
         <IconButton
           aria-label="Add to friends"
           icon={<CiEdit size={20} color="blue" />}
