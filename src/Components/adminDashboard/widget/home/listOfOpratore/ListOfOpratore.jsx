@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import React from "react";
 import SelectBox from "./SelectBox";
-import { oprators } from "../../data";
+import { oprators } from "@/Components/adminDashboard/data";
 
 const ListOfOpratore = () => {
   return (

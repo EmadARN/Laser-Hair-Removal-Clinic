@@ -1,11 +1,9 @@
+import { admintData } from "@/Components/adminDashboard/data";
+import FinancialReports from "@/Components/adminDashboard/widget/home/financialReports/FinancialReports";
+import ListOfOpratore from "@/Components/adminDashboard/widget/home/listOfOpratore/ListOfOpratore";
+import HeaderDetails from "@/Components/reseptionDashboard/widget/headerDetails/HeaderDetails";
 import SideBarDashboard from "@/Layout/SideBar/Sidebar";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import React, { useState } from "react";
-
-import { admintData } from "@/Components/adminDashboard/data";
-
-import Empolyees from "@/Components/adminDashboard/widget/employees";
-import AdminTable from "@/Components/adminDashboard/widget/weeklyCalendar/AdminTable";
 
 const AdminDashboard = () => {
   return (
@@ -21,10 +19,14 @@ const AdminDashboard = () => {
         </GridItem>
         <GridItem colSpan={11}>
           <Box sx={{ pt: 6, pr: { base: 12, md: 0 } }}>
-            <Empolyees />
+            <HeaderDetails />
           </Box>
-          <Box>{/* <ListOfOpratore /> */}</Box>
-          <Box>{/* <FinancialReports /> */}</Box>
+          <Box>
+            <ListOfOpratore />
+          </Box>
+          <Box>
+            <FinancialReports />
+          </Box>
           {/* <ReseptionTable />
           <PaidTurns /> */}
         </GridItem>
