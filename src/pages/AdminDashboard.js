@@ -1,12 +1,10 @@
-import PaidTurns from "@/Components/reseptionDashboard/widget/paid-turns/PaidTurns";
-import { ReseptionTable } from "@/Components/reseptionDashboard/widget/ReseptionTable/ReseptionTable";
+import { admintData } from "@/Components/adminDashboard/data";
+import FinancialReports from "@/Components/adminDashboard/widget/home/financialReports/FinancialReports";
+import HeaderDetails from "@/Components/adminDashboard/widget/home/headerDetails/HeaderDetails";
+import ListOfOpratore from "@/Components/adminDashboard/widget/home/listOfOpratore/ListOfOpratore";
+import TodayClients from "@/Components/adminDashboard/widget/home/TodayClients";
 import SideBarDashboard from "@/Layout/SideBar/Sidebar";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import React, { useState } from "react";
-import HeaderDetails from "@/Components/adminDashboard/widget/headerDetails/HeaderDetails";
-import ListOfOpratore from "@/Components/adminDashboard/widget/listOfOpratore/ListOfOpratore";
-import { admintData } from "@/Components/adminDashboard/data";
-import FinancialReports from "@/Components/adminDashboard/widget/financialReports/financialReports";
 
 const AdminDashboard = () => {
   return (
@@ -20,18 +18,19 @@ const AdminDashboard = () => {
             active={false}
           />
         </GridItem>
-        <GridItem colSpan={11}>
-          <Box sx={{ pt: 6, pr: { base: 12, md: 0 } }}>
+        <GridItem colSpan={11} px={6}>
+          <Box sx={{ py: 6 }}>
             <HeaderDetails />
           </Box>
-          <Box>
+          <Box sx={{ bgColor: "#f2f2f27a", p: 4, rounded: "8px" }}>
             <ListOfOpratore />
           </Box>
-          <Box>
+          <Box sx={{ mt: 8, bgColor: "#f2f2f27a", p: 4, rounded: "8px" }}>
             <FinancialReports />
           </Box>
-          {/* <ReseptionTable />
-          <PaidTurns /> */}
+          <Box sx={{ mt: 8, bgColor: "#f2f2f27a", p: 4, rounded: "8px" }}>
+            <TodayClients />
+          </Box>
         </GridItem>
       </Grid>
     </>

@@ -1,3 +1,5 @@
+import RightBar from "@/Components/home/drawer/Drawer";
+import MainModal from "@/Components/home/modal/main";
 import {
   Box,
   Flex,
@@ -7,12 +9,7 @@ import {
   Menu,
   MenuButton,
   useDisclosure,
-  useColorModeValue,
-  Stack,
 } from "@chakra-ui/react";
-import RightBar from "@/Components/ِdrawer/Drawer";
-import Profile_Modal from "@/Components/modal/profile-modal/Profile_Modal";
-import MainModal from "@/Components/modal/main";
 
 export default function NavBar({ bgColor }) {
   const { isOpen, onOpen, onClose } = useDisclosure();

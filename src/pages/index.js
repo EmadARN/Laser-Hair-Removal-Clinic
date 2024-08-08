@@ -1,9 +1,8 @@
-import Experienced_years from "@/Components/5years-with-you";
-import AdminTable from "@/Components/AdminTable/AdminTable";
-import FaQs from "@/Components/faqs/wigets/FaQs";
-import Main_get_turn from "@/Components/get-turn-section";
-import CaptionSlider from "@/Components/slider/CaptionSlider";
-import Suggstion from "@/Components/suggestion/Suggstion";
+import Experienced_years from "@/Components/home/5years-with-you";
+import FaQs from "@/Components/home/faqs/wigets/FaQs";
+import Main_get_turn from "@/Components/home/get-turn-section";
+import CaptionSlider from "@/Components/home/slider/CaptionSlider";
+import Suggstion from "@/Components/home/suggestion/Suggstion";
 import Layout from "@/Container";
 import { Box } from "@chakra-ui/react";
 import React from "react";
