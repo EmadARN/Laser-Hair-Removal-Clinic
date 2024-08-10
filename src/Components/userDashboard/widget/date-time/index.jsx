@@ -1,8 +1,8 @@
-import StepperPrototype from "@/Common/stepper/Stepper";
 import TitleUserDashboard from "@/Common/titleUserDashboard/TitleUserDashboard";
 import React from "react";
 import Date from "./Date";
-import { AcceptBtn } from "@/Common/acceptBtn/AcceptBtn";
+import StepperPrototype from "../stepper/Stepper";
+import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 
 const Date_Time = ({ page, setPage }) => {
   return (
@@ -10,7 +10,7 @@ const Date_Time = ({ page, setPage }) => {
       <StepperPrototype />
       <TitleUserDashboard page={page} setPage={setPage} />
       <Date />
-      <AcceptBtn page={page} setPage={setPage} text="ادامه" bgColor={"white"}/>
+      <AcceptBtn page={page} setPage={setPage} text="ادامه" bgColor={"white"} />
     </>
   );
 };

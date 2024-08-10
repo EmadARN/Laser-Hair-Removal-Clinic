@@ -1,4 +1,3 @@
-import CardProductView from "@/Common/CardProductView/CardProductView";
 import React from "react";
 import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import {
@@ -9,8 +8,9 @@ import {
   AccordionIcon,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import AccordionMenu from "@/Common/accordionMenu/AccordionMenu";
-import { day, shift, time } from "@/Common/CardProductView/data";
+import CardProductView from "../CardProductView/CardProductView";
+import AccordionMenu from "../accordionMenu/AccordionMenu";
+import { day, shift, time } from "../CardProductView/data";
 
 const Date = () => {
   const PurpleSquare = styled.div`

@@ -1,8 +1,8 @@
-import StepperPrototype from "@/Common/stepper/Stepper";
 import TitleUserDashboard from "@/Common/titleUserDashboard/TitleUserDashboard";
 import React from "react";
 import AreaChoice from "./AreaChoice";
-import { AcceptBtn } from "@/Common/acceptBtn/AcceptBtn";
+import StepperPrototype from "../stepper/Stepper";
+import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 
 const ChoosingArea = ({ page, setPage }) => {
   return (

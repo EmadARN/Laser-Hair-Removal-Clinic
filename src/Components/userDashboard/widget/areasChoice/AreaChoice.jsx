@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Checkbox, Flex, Stack, Text } from "@chakra-ui/react";
-import AccordionMenu from "@/Common/accordionMenu/AccordionMenu";
+import AccordionMenu from "../accordionMenu/AccordionMenu";
 const AreaChoice = () => {
   const [checkedItems, setCheckedItems] = React.useState(
     new Array(10).fill(false)

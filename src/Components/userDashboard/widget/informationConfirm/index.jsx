@@ -2,9 +2,9 @@ import React from "react";
 import { Box, Grid } from "@chakra-ui/react";
 import TurnInfo from "./TurnInfo";
 import OutputInformation from "./OutputInformation";
-import StepperPrototype from "@/Common/stepper/Stepper";
 import TitleUserDashboard from "@/Common/titleUserDashboard/TitleUserDashboard";
-import { AcceptBtn } from "@/Common/acceptBtn/AcceptBtn";
+import StepperPrototype from "../stepper/Stepper";
+import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 
 const ConfirmInfo = ({ page, setPage }) => {
   return (

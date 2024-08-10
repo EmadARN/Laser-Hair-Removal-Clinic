@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Box, Text } from "@chakra-ui/react";
-import { Checkbox, Button } from "@chakra-ui/react";
-import { AcceptBtn } from "@/Common/acceptBtn/AcceptBtn";
+import { Checkbox } from "@chakra-ui/react";
+import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 
 const ChoosingPayAmount = ({ page, setPage }) => {
   const [checkboxColor, setCheckboxColor] = useState(false);

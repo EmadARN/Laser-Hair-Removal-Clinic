@@ -1,4 +1,3 @@
-import AccordionMenu from "@/Common/accordionMenu/AccordionMenu";
 import {
   Box,
   Flex,
