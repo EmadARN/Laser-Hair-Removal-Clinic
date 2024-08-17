@@ -126,12 +126,12 @@ const ReservationDone = () => {
           <Button
             onClick={() => (location.href = "/UserDashboard")}
             fontSize={{ base: "13px", md: "14px" }}
-            color={"purple"}
+            color={"brand.400"}
           >
             صفحه ی پروفایل
           </Button>
 
-          <Button onClick={()=>location.href="/"} fontSize={{ base: "13px", md: "14px" }} color={"purple"}>
+          <Button onClick={()=>location.href="/"} fontSize={{ base: "13px", md: "14px" }} color={"brand.400"}>
             بازگشت به خانه
           </Button>
         </Box>

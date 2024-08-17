@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/react";
+import { Alert, AlertIcon } from "@chakra-ui/react";
 const Alertcomponent = () => {
   return (
     <Alert dir="rtl" status="success" variant="subtle">

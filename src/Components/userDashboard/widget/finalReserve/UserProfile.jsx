@@ -143,11 +143,11 @@ const FinalReserve = () => {
             justifyContent={"flex-start"}
           >
             {!viewMore ? (
-              <Button onClick={() => setViewMore(true)} color={"purple"}>
+              <Button onClick={() => setViewMore(true)} color={"brand.400"}>
                 مشاهده ی بیشتر
               </Button>
             ) : (
-              <Button color="purple" onClick={() => setViewMore(false)}>
+              <Button color="brand.400" onClick={() => setViewMore(false)}>
                 مشاهده ی کمتر
               </Button>
             )}

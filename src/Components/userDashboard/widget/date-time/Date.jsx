@@ -16,7 +16,7 @@ const Date = () => {
   const PurpleSquare = styled.div`
     width: 20px;
     height: 20px;
-    background-color: purple;
+    background-color: brand.400;
     border-radius: 2px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   `;

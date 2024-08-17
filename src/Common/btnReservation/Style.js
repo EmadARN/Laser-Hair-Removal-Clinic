@@ -5,7 +5,7 @@ export const ButtonStyle = (px, py, width, rounded) => {
     py,
     rounded,
     variant: "solid",
-    bgColor: "#7563DC",
+    bgColor: "brand.400",
     color: "purple.50",
     "&:hover": {
       bgColor: "purple.100",

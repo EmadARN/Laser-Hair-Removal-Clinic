@@ -18,7 +18,10 @@ const ListHeader = ({ children }) => {
 };
 export default function Footer() {
   return (
-    <Box bg={useColorModeValue("#7563DC")} color={useColorModeValue("gray.50")}>
+    <Box
+      bg={useColorModeValue("brand.400")}
+      color={useColorModeValue("gray.50")}
+    >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 2 }} spacing={8}>
           <Stack align={"flex-start"} fontWeight="bold" fontSize="16px">

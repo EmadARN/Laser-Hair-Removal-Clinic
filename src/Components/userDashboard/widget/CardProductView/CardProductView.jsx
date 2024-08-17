@@ -12,7 +12,7 @@ function CardProductView({ displayxsHome, data }) {
     return ct;
   };
   const bgColor = (item) => {
-    const br = activeTab !== item.id ? "#f9f9f9" : "#7563DC";
+    const br = activeTab !== item.id ? "#f9f9f9" : "brand.400";
     return br;
   };
   return (
