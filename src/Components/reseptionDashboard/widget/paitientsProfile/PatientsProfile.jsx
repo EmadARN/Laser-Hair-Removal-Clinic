@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Box, Text, Input, Button } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
-import { FirstGrid, FirstBox } from "./style";
+import { FirstGrid } from "./style";
 const PatientsProfile = () => {
   return (
     <Grid sx={FirstGrid}>

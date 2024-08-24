@@ -87,7 +87,7 @@ const MainDashboard = ({ page, setPage, setSteperState, steperState }) => {
               width="90%"
               rounded="20px"
               variant="solid"
-              bgColor="#7563DC"
+              bgColor="brand.400"
               color="purple.50"
               _hover={{
                 bgColor: "purple.100",

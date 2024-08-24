@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Grid, Box, Text, Button, useDisclosure } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
-import { UserData } from "./DataForProfile";
-
 import Session_Records from "../widgetForRecords/session-records/Session-Records";
 import CancelTurnModal from "../cancelTurn/cancel turn modal/CancelTurnModal";
 import SessionRecordSection from "@/Common/session_Record_section/SessionRecordSection";
+import { UserData } from "@/constants";
 const FinalReserve = () => {
   const [viewMore, setViewMore] = useState(false);
   const [steperState, setSteperState] = useState(0);
@@ -143,11 +142,11 @@ const FinalReserve = () => {
             justifyContent={"flex-start"}
           >
             {!viewMore ? (
-              <Button onClick={() => setViewMore(true)} color={"purple"}>
+              <Button onClick={() => setViewMore(true)} color={"brand.400"}>
                 مشاهده ی بیشتر
               </Button>
             ) : (
-              <Button color="purple" onClick={() => setViewMore(false)}>
+              <Button color="brand.400" onClick={() => setViewMore(false)}>
                 مشاهده ی کمتر
               </Button>
             )}

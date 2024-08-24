@@ -13,9 +13,9 @@ const Body = ({
     setPathname(window.location.pathname);
   }, []);
   const adminOrRecption =
-    pathname === "/AdminDashboard"
+    pathname === "/adminDashboard"
       ? admintDatas
-      : pathname === "/ReseptionDashboard"
+      : pathname === "/reseptionDashboard"
       ? receptionDatas
       : [];
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
-import { dataForMap } from "./dataForMap";
+import { dataForMap } from "@/constants";
 const OutputInformation = () => {
   return (
     <Box

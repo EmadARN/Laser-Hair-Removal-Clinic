@@ -1,9 +1,9 @@
 import { Flex, Grid } from "@chakra-ui/react";
-import { get_turn_data } from "./data";
 import Main_Layout from "./widgets/main-layout/Main_Layout";
 import Section_title from "@/common/section-title";
 import BtnReservation from "@/Common/btnReservation/BtnReservation";
 import { GridMain } from "./style";
+import { get_turn_data } from "@/constants";
 const Main_get_turn = () => {
   return (
     <Grid sx={GridMain}>

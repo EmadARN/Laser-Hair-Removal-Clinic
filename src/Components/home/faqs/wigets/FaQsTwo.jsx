@@ -1,8 +1,8 @@
 import { Text } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
-import { DataFaQsTwo } from "../DataFaQs";
 import { TwoBoxSx } from "../Style";
 import Section_title from "@/Common/section-title";
+import { DataFaQsTwo } from "@/constants";
 
 function FaQsTwo() {
   return (

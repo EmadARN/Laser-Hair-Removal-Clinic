@@ -64,7 +64,7 @@ const ChoosingPayAmount = ({ page, setPage }) => {
                 <Checkbox
                   name="checkboxGroup"
                   onChange={handleChanged}
-                  colorScheme="purple"
+                  colorScheme="brand.400"
                 >
                   ودیعه
                 </Checkbox>

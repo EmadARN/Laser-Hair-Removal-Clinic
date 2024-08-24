@@ -9,7 +9,7 @@ import {
   Button,
   Box,
 } from "@chakra-ui/react";
-import { TableData } from "./Data";
+import { TableData } from "@/constants";
 
 export const ReseptionTable = () => {
   return (

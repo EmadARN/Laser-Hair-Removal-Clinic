@@ -73,7 +73,7 @@ const CancelTurnConfirmed = () => {
         >
           <Button color={"#7563DC"}>صفحه ی پروفایل</Button>
 
-          <Button color={"#7563DC"}> بازگشت به خانه</Button>
+          <Button color={"brand.400"}> بازگشت به خانه</Button>
         </Box>
       </Box>
     </Grid>

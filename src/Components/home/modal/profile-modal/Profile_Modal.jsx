@@ -53,7 +53,7 @@ export default function Profile_Modal({ onClose, isOpen, setPage, page }) {
           <ModalFooter display="flex" justifyContent="center" width="100%">
             <Button
               onClick={() => setPage(page + 1)}
-              bgColor="#9c91e0"
+              bgColor="brand.400"
               width="100%"
               color="white"
               _hover={{

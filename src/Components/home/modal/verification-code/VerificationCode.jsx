@@ -109,7 +109,7 @@ const VerificationCode = ({ setPage, page }) => {
             w="90%"
             borderRadius="10px"
             textAlign="center"
-            bgColor="#7563DC"
+            bgColor="brand.400"
             color="purple.50"
             _hover={{
               bgColor: "purple.100",
