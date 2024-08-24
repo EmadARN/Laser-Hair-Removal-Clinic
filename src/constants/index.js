@@ -1,3 +1,29 @@
+import { BiHome, BiTargetLock } from "react-icons/bi";
+import { SlCalender } from "react-icons/sl";
+import { IoIosPerson, IoMdPeople } from "react-icons/io";
+import { GrDocumentText } from "react-icons/gr";
+import { TbSettings2 } from "react-icons/tb";
+import { IoMdPerson } from "react-icons/io";
+import { FaWallet } from "react-icons/fa";
+import { FaSun } from "react-icons/fa";
+import { IoCloudyNightOutline } from "react-icons/io5";
+import {
+  ChatBubbleBottomCenterIcon,
+  HomeIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
+
+//Home
+export const data = [
+  { id: 0, title: "خانه", icon: <HomeIcon />, src: "/" },
+  { id: 1, title: "حساب کاربری", icon: <UserIcon />, src: "/UserDashboard" },
+  {
+    id: 2,
+    title: "درباره لیزر و سوالات متداول",
+    icon: <ChatBubbleBottomCenterIcon />,
+    src: "/",
+  },
+];
 export const DataFaQsOne = [
   {
     id: 1,
@@ -175,4 +201,210 @@ export const DataFaQsFour = [
     textColor: "gray",
     size: "",
   },
+];
+
+export const get_turn_data = [
+  {
+    id: 1,
+    icon: <BiTargetLock color="#865ea3"></BiTargetLock>,
+    title: "ورود و ثبت نام",
+    desc: "درصورتی که برای اولین بار بصورت آنلاین اقدام به دریافت نوبت می کنید، ابتدا باید ثبت نام کرده و یا وارد حساب کاربری خود شوید. برای اینکار شماره تلفن خود را وارد کرده و سپس کد تایید ارسال شده وارد کنید.",
+  },
+
+  {
+    id: 2,
+    icon: <SlCalender color="#865ea3"></SlCalender>,
+    title: "انتخاب روز و ساعت",
+    desc: "با استفاده از خدمات رزرو انلاین کلینیک لیانا روز و بازه ساعتی که برایتان مناسب است را انتخاب کنید و سپس در زمان تعیین شده در کلینیک حضور پیدا کنید",
+  },
+
+  {
+    id: 3,
+    icon: <IoMdPerson color="#865ea3" />,
+    title: "اطلاعات پزشکی",
+    desc: "در صورتی که اولین جلسه خود را رزرو میکنید نیاز است که اطلاعات پزشکی و شخصی خود را وارد کرده تا در صورت نیاز به راهنمایی پزشک از ان مطلع شویذ",
+  },
+  {
+    id: 4,
+    icon: <FaWallet color="#865ea3" />,
+    title: "تایید و پرداخت",
+    desc: "جهت نهایی سازی نوبت خود، مراجعین عزیز می بایست مبلغ در نظر گرفته شده به عنوان ویعه را پرداخت کنند.",
+  },
+];
+
+//AdminDashboard
+export const admintData = [
+  { id: 0, name: "home", amount: "خانه", icon: <BiHome /> },
+  { id: 1, name: "calender", amount: "برنامه هفتکی", icon: <SlCalender /> },
+  { id: 2, name: "employee", amount: "کارمندان", icon: <IoIosPerson /> },
+  { id: 3, name: "clientArea", amount: "نواحی لیزر", icon: <BiTargetLock /> },
+  { id: 4, name: "clients", amount: "مراجعین", icon: <IoMdPeople /> },
+  { id: 5, name: "reports", amount: "گزارشات", icon: <GrDocumentText /> },
+  { id: 6, name: "setting", amount: "تنظیمات", icon: <TbSettings2 /> },
+];
+export const oprators = [
+  [
+    { id: 1, name: "علی احمدی", status: "فعال" },
+    { id: 2, name: "زهرا حسینی", status: "غیرفعال" },
+    { id: 3, name: "حسن رضایی", status: "فعال" },
+  ],
+  [
+    { id: 1, name: "مریم کاظمی", status: "فعال" },
+    { id: 2, name: "امین نوری", status: "غیرفعال" },
+    { id: 3, name: "فاطمه زمانی", status: "فعال" },
+  ],
+];
+
+//ReceptionDashboard
+export const receptionData = [
+  {
+    id: 0,
+    name: "dailyShifts",
+    amount: "نوبت های روز",
+    icon: <SlCalender />,
+  },
+  {
+    id: 1,
+    name: "listOfClients",
+    amount: "لیست مراجعین",
+    icon: <IoMdPeople />,
+  },
+];
+export const TableData = [
+  {
+    id: 1,
+    customerName: "علی احمدی",
+    rezervationTime: "8.30",
+    laserarea: "فول بادی",
+  },
+  {
+    id: 1,
+    customerName: "جنیفر رضایی",
+    rezervationTime: "8.30",
+    laserarea: " بیکینی",
+  },
+  {
+    id: 1,
+    customerName: "زهرا محمدی",
+    rezervationTime: "8.30",
+    laserarea: " زیربغل",
+  },
+  {
+    id: 1,
+    customerName: "زیبا منتظری",
+    rezervationTime: "8.30",
+    laserarea: "فول بادی",
+  },
+  {
+    id: 1,
+    customerName: "فاطمه احمدی",
+    rezervationTime: "8.30",
+    laserarea: "پا ",
+  },
+  {
+    id: 1,
+    customerName: "فاطمه احمدی",
+    rezervationTime: "8.30",
+    laserarea: "پا ",
+  },
+  {
+    id: 1,
+    customerName: "فاطمه احمدی",
+    rezervationTime: "8.30",
+    laserarea: "پا ",
+  },
+  {
+    id: 1,
+    customerName: "فاطمه احمدی",
+    rezervationTime: "8.30",
+    laserarea: "پا ",
+  },
+];
+
+//UserDashboard
+export const day = [
+  {
+    id: 1,
+    h1: "18 اسفند",
+    h2: "سهشنبه",
+    name: " بازه 3",
+  },
+  {
+    id: 2,
+    h1: "18 اسفند",
+    h2: "سهشنبه",
+    name: " بازه 3",
+  },
+  {
+    id: 3,
+    h1: "18 اسفند",
+    h2: "سهشنبه",
+    name: " بازه 3",
+  },
+
+  {
+    id: 4,
+    h1: "18 اسفند",
+    h2: "سهشنبه",
+    name: " بازه 3",
+  },
+  {
+    id: 5,
+    h1: "18 اسفند",
+    h2: "سهشنبه",
+    name: " بازه 3",
+  },
+  {
+    id: 6,
+    h1: "18 اسفند",
+    h2: "سهشنبه",
+    name: " بازه 3",
+  },
+];
+export const shift = [
+  {
+    id: 1,
+    icon: <FaSun />,
+    text: "َشیفت صبح",
+  },
+
+  {
+    id: 2,
+    icon: <IoCloudyNightOutline />,
+    text: "َشیفت عصر",
+  },
+];
+export const time = [
+  {
+    id: 1,
+
+    time: "9 تا 11",
+  },
+  {
+    id: 2,
+
+    time: "4 تا 8",
+  },
+];
+export const UserData = [
+  { id: 1, title: "تاریخ", value: "دوشنبه" },
+  { id: 2, title: "زمان", value: "7.30-8.40" },
+  { id: 3, title: "اپراتور", value: "نام اوپراتور" },
+  { id: 3, title: "مبلغ کل", value: "230.000تومان " },
+  { id: 3, title: "مبلغ پرداخت شده", value: "50.000تومان " },
+  { id: 3, title: "مبلغ قابل پرداخت", value: "200.000تومان " },
+];
+export const dataForMap = [
+  { id: 1, title: "نام", value: "نام مرجع" },
+  { id: 2, title: "نام خانوادگی", value: "نام خانوادگی" },
+  { id: 3, title: "شماره موبایل", value: "09190978042" },
+  { id: 4, title: "تلفن ثابت", value: "024123455" },
+  { id: 5, title: "کدملی", value: "0312028156" },
+  { id: 6, title: "دارو مصرفی", value: "" },
+  { id: 7, title: "سابقه بیماری", value: "" },
+];
+export const TurnData = [
+  { id: 1, title: "روز و تاریخ", value: "سه شنبه ۲۶/۱۲/۱۴۰۲" },
+  { id: 2, title: "بازه زمانی", value: "9-11.30" },
+  { id: 3, title: "اپراتور", value: "نام اپراتور" },
 ];

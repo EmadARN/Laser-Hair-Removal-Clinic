@@ -1,9 +1,9 @@
 import { Text } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
-import { DataFaQsOne } from "../DataFaQs";
 import Section_title from "@/Common/section-title";
 import { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { DataFaQsOne } from "@/constants";
 
 function FaQs() {
   const [show, setShow] = useState(false);

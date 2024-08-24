@@ -10,7 +10,7 @@ import {
 import styled from "@emotion/styled";
 import CardProductView from "../CardProductView/CardProductView";
 import AccordionMenu from "../accordionMenu/AccordionMenu";
-import { day, shift, time } from "../CardProductView/data";
+import { day, shift, time } from "@/constants";
 
 const Date = () => {
   const PurpleSquare = styled.div`

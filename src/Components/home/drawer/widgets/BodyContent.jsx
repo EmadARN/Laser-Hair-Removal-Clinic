@@ -1,7 +1,7 @@
 import { Box, Icon, Text } from "@chakra-ui/react";
 import React from "react";
-import { data } from "../data";
 import Link from "next/link";
+import { data } from "@/constants";
 
 const BodyContent = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
-import { TurnData } from "./dataForMap";
 import Section_title from "@/Common/section-title";
+import { TurnData } from "@/constants";
 const TurnInfo = () => {
   return (
     <Box

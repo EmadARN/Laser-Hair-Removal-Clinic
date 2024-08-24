@@ -1,8 +1,8 @@
 import SearchInput from "@/Common/searchInput/SearchInput";
-import { receptionData } from "@/Components/reseptionDashboard/data";
 import HeaderDetails from "@/Components/reseptionDashboard/widget/headerDetails/HeaderDetails";
 import PaidTurns from "@/Components/reseptionDashboard/widget/paid-turns/PaidTurns";
 import { ReseptionTable } from "@/Components/reseptionDashboard/widget/ReseptionTable/ReseptionTable";
+import { receptionData } from "@/constants";
 import SideBarDashboard from "@/Layout/SideBar/Sidebar";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
@@ -17,7 +17,6 @@ const ReseptionDashboard = () => {
             h={"100vh"}
             textHead="منشی"
             active={true}
-          
           />
         </GridItem>
         <GridItem colSpan={11}>
