@@ -12,7 +12,14 @@ import {
   HomeIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-
+import Dashboard from "@/Components/userDashboard";
+import ChoosingArea from "@/Components/userDashboard/widget/areasChoice";
+import ChoosingPayAmount from "@/Components/userDashboard/widget/choosingPayAmount/ChoosingPayAmount";
+import Date_Time from "@/Components/userDashboard/widget/date-time";
+import ConfirmInfo from "@/Components/userDashboard/widget/informationConfirm";
+import UserInformation from "@/Components/userDashboard/widget/registerForm";
+import ReservationDone from "@/Components/userDashboard/widget/reservationDone/ReservationDone";
+import Unsucces_Transaction from "@/Components/userDashboard/widget/unsuccessfull-transaction/Unsucces_Transaction";
 //Home
 export const data = [
   { id: 0, title: "خانه", icon: <HomeIcon />, src: "/" },
@@ -322,6 +329,28 @@ export const TableData = [
 ];
 
 //UserDashboard
+export const ComponentData = [
+  { slug: "choosingArea", component: <ChoosingArea slug={"dateTime"} /> },
+  { slug: "dateTime", component: <Date_Time slug={"confirmInfo"} /> },
+  { slug: "confirmInfo", component: <ConfirmInfo slug={"userInformation"} /> },
+  {
+    slug: "userInformation",
+    component: <UserInformation slug={"choosingPayAmount"} />,
+  },
+  {
+    slug: "choosingPayAmount",
+    component: <ChoosingPayAmount slug={"reservationDone"} />,
+  },
+  {
+    slug: "reservationDone",
+    component: <ReservationDone slug={"unsuccesTransaction"} />,
+  },
+  {
+    slug: "unsuccesTransaction",
+    component: <Unsucces_Transaction slug={"unsuccesTransaction"} />,
+  },
+];
+
 export const day = [
   {
     id: 1,

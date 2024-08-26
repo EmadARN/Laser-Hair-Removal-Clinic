@@ -45,7 +45,7 @@ const VerificationCode = ({ setPage, page }) => {
 
   // کد هدایت شدن به صفحه ی داشبورد پس  از کلیک روی دکمه ی ادامه
   const functionClick = () => {
-    router.push("/UserDashboard");
+    router.push("/userDashboard");
   };
 
   if (page === 1) {

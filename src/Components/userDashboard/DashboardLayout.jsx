@@ -4,8 +4,16 @@ import Section_title from "@/Common/section-title";
 import Image from "next/image";
 import NavBar from "@/Container/navbar/NavBar";
 import SessionRecordSection from "@/Common/session_Record_section/SessionRecordSection";
+import { useRouter } from "next/router";
 
-const MainDashboard = ({ page, setPage, setSteperState, steperState }) => {
+const DashboardLayout = ({
+  page,
+  setPage,
+  setSteperState,
+  steperState,
+  slug,
+}) => {
+  const router = useRouter();
   return (
     <>
       <NavBar bgColor="#ffffff" />
@@ -96,7 +104,7 @@ const MainDashboard = ({ page, setPage, setSteperState, steperState }) => {
               transition=".5s"
               mr={3}
               fontWeight="500"
-              onClick={() => setPage(page + 1)}
+              onClick={() => router.push("userDashboard/choosingArea")}
             >
               رزرو نوبت
             </Button>
@@ -112,4 +120,4 @@ const MainDashboard = ({ page, setPage, setSteperState, steperState }) => {
   );
 };
 
-export default MainDashboard;
+export default DashboardLayout;
