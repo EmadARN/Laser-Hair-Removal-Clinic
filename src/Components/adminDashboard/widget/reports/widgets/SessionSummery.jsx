@@ -9,21 +9,21 @@ const SessionSummery = () => {
       width={"100%"}
       display={"flex"}
       justifyContent={"space-between"}
-      flexDirection={{base:"column",sm:"row"}}
+      flexDirection={{ base: "column", sm: "row" }}
       alignItems={"center"}
-      gap={{base:4,sm:"0"}}
+      gap={{ base: 4, sm: "0" }}
     >
-      <Box width={{base:"100%",sm:"40%",md:"35%"}}>
+      <Box width={{ base: "100%", sm: "40%", md: "35%" }}>
         <SessionSummeryBox
-        number={0}
+          number={0}
           icon={<HiMiniUserGroup size={"20px"} color="blue" />}
           title="تعداد جلسات لیزر"
         />
       </Box>
 
-      <Box width={{base:"100%",sm:"40%",md:"35%"}}>
+      <Box width={{ base: "100%", sm: "40%", md: "35%" }}>
         <SessionSummeryBox
-        number={0}
+          number={0}
           icon={<FaWallet size={"20px"} color="blue" />}
           title=" درامد"
         />
