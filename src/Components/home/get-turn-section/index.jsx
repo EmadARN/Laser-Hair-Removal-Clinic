@@ -1,4 +1,4 @@
-import { Flex, Grid } from "@chakra-ui/react";
+import { Box, Flex, Grid } from "@chakra-ui/react";
 import Main_Layout from "./widgets/main-layout/Main_Layout";
 import Section_title from "@/common/section-title";
 import BtnReservation from "@/Common/btnReservation/BtnReservation";
@@ -11,9 +11,9 @@ const Main_get_turn = () => {
 
       {get_turn_data.map((item) => {
         return (
-          <>
+          <Box key={item.id}>
             <Main_Layout item={item}></Main_Layout>
-          </>
+          </Box>
         );
       })}
 

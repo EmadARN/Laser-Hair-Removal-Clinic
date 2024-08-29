@@ -1,4 +1,4 @@
-import { Box, Text,Button } from "@chakra-ui/react";
+import { Box, Text, Button } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 
 const BodyModal = () => {
@@ -30,7 +30,7 @@ const BodyModal = () => {
           ارسال مجدد کد تایید در {secconds}
         </Text>
       </Box>
-      <Button ref={box2} className="display-none" mb={6} as="button" maxW={'35%'}variant='ghost' >
+      <Button ref={box2} mb={6} as="button" maxW={"35%"} variant="ghost">
         <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "sm" }}>
           ارسال مجدد کد؟
         </Text>

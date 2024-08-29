@@ -1,5 +1,5 @@
 import RightBar from "@/Components/home/drawer/Drawer";
-import MainModal from "@/Components/home/modal/main";
+import MainModal from "@/Components/home/signinModal/main";
 import {
   Box,
   Flex,
