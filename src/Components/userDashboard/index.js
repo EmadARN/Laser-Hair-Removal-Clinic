@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import NavBar from "@/Container/navbar/NavBar";
 import Session_Records from "./widget/widgetForRecords/session-records/Session-Records";
 import SessionRecordDetails from "./widget/widgetForRecords/sessionRecordDetails/SessionRecordDetails";
-import MainDashboard from "./MainDashboard";
+import DashboardLayout from "./DashboardLayout";
 import { useDashboardContext } from "@/context/DashboardContext";
 
 const Dashboard = ({ page, setPage }) => {
@@ -10,7 +10,7 @@ const Dashboard = ({ page, setPage }) => {
 
   if (steperState === 0) {
     return (
-      <MainDashboard
+      <DashboardLayout
         page={page}
         setPage={setPage}
         steperState={steperState}

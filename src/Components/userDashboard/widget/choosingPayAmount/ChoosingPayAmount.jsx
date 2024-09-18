@@ -3,7 +3,7 @@ import { Grid, Box, Text } from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 
-const ChoosingPayAmount = ({ page, setPage }) => {
+const ChoosingPayAmount = ({ page, setPage, slug }) => {
   const [checkboxColor, setCheckboxColor] = useState(false);
   const [checkboxColor2, setCheckboxColor2] = useState(false);
   const handleChanged = (event) => {
@@ -106,6 +106,7 @@ const ChoosingPayAmount = ({ page, setPage }) => {
             page={page}
             setPage={setPage}
             bgColor={"transparent"}
+            slug={slug}
           />
         </Box>
       </Box>

@@ -6,7 +6,7 @@ import TitleUserDashboard from "@/Common/titleUserDashboard/TitleUserDashboard";
 import StepperPrototype from "../stepper/Stepper";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 
-const ConfirmInfo = ({ page, setPage }) => {
+const ConfirmInfo = ({ page, setPage, slug }) => {
   return (
     <Grid
       bgColor={"#F7F7F7"}
@@ -26,6 +26,7 @@ const ConfirmInfo = ({ page, setPage }) => {
         page={page}
         setPage={setPage}
         bgColor={"white"}
+        slug={slug}
       />
     </Grid>
   );

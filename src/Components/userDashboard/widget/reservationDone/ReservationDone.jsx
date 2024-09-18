@@ -3,7 +3,7 @@ import { Grid, Box, Text, Button } from "@chakra-ui/react";
 import { IoMdCheckmark } from "react-icons/io";
 import RedGreenBox from "@/Common/Red&GreenBox/Red&GreenBox";
 
-const ReservationDone = () => {
+const ReservationDone = ({ slug }) => {
   return (
     <Grid
       w={"100%"}
@@ -21,7 +21,12 @@ const ReservationDone = () => {
         display="flex"
         gap={3}
       >
-     <RedGreenBox bgColor="lightgreen" bgColor2="green" iconColor="green" textColor="#15a523"/>
+        <RedGreenBox
+          bgColor="lightgreen"
+          bgColor2="green"
+          iconColor="green"
+          textColor="#15a523"
+        />
 
         <Box display={"flex"} flexDirection={"column"} gap={3} w={"100%"}>
           <Box
@@ -124,14 +129,18 @@ const ReservationDone = () => {
           alignItems={"center"}
         >
           <Button
-            onClick={() => (location.href = "/UserDashboard")}
+            onClick={() => (location.href = "/userDashboard")}
             fontSize={{ base: "13px", md: "14px" }}
             color={"brand.400"}
           >
             صفحه ی پروفایل
           </Button>
 
-          <Button onClick={()=>location.href="/"} fontSize={{ base: "13px", md: "14px" }} color={"brand.400"}>
+          <Button
+            onClick={() => (location.href = "/")}
+            fontSize={{ base: "13px", md: "14px" }}
+            color={"brand.400"}
+          >
             بازگشت به خانه
           </Button>
         </Box>
@@ -141,5 +150,3 @@ const ReservationDone = () => {
 };
 
 export default ReservationDone;
-
-

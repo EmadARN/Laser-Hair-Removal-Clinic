@@ -4,13 +4,19 @@ import Date from "./Date";
 import StepperPrototype from "../stepper/Stepper";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 
-const Date_Time = ({ page, setPage }) => {
+const Date_Time = ({ page, setPage, slug }) => {
   return (
     <>
       <StepperPrototype />
       <TitleUserDashboard page={page} setPage={setPage} />
       <Date />
-      <AcceptBtn page={page} setPage={setPage} text="ادامه" bgColor={"white"} />
+      <AcceptBtn
+        page={page}
+        setPage={setPage}
+        slug={slug}
+        text="ادامه"
+        bgColor={"white"}
+      />
     </>
   );
 };
