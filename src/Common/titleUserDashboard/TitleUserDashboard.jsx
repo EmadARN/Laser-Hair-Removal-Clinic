@@ -1,9 +1,13 @@
 import { Flex, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { RiHome5Line } from "react-icons/ri";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { firstStyle, secText, textStyle } from "./style";
 const TitleUserDashboard = ({ page, setPage }) => {
+  useEffect(() => {
+    history.pushState(null, null, location.href);
+  }, []);
+
   return (
     <Flex sx={firstStyle}>
       <Text as="button" sx={textStyle} onClick={() => (location.href = "/")}>

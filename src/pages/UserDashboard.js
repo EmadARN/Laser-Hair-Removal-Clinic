@@ -7,11 +7,17 @@ import UserInformation from "@/Components/userDashboard/widget/registerForm";
 import ReservationDone from "@/Components/userDashboard/widget/reservationDone/ReservationDone";
 import Unsucces_Transaction from "@/Components/userDashboard/widget/unsuccessfull-transaction/Unsucces_Transaction";
 import { Box } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 
 const UserDashboard = () => {
   const [page, setPage] = React.useState(0);
   const success = true;
+
+ 
+
+  
+
+
   return (
     <Box bg={"#1111"}>
       {page === 0 ? <Dashboard page={page} setPage={setPage} /> : null}
