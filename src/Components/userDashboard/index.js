@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "@/Container/navbar/NavBar";
 import Session_Records from "./widget/widgetForRecords/session-records/Session-Records";
 import SessionRecordDetails from "./widget/widgetForRecords/sessionRecordDetails/SessionRecordDetails";
