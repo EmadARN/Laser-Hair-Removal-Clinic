@@ -4,6 +4,7 @@ import AreaChoice from "./AreaChoice";
 import StepperPrototype from "../stepper/Stepper";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 
+
 const ChoosingArea = ({ page, setPage, slug }) => {
   return (
     <>

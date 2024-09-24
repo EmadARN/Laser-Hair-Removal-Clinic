@@ -1,5 +1,3 @@
-import { ComponentData } from "@/constants";
-
-export function findSlug(dashboardSlug) {
-  return ComponentData.find((item) => item.slug === dashboardSlug);
+export function findSlug(dashboardSlug, componentData) {
+  return componentData.find((item) => item.slug === dashboardSlug);
 }

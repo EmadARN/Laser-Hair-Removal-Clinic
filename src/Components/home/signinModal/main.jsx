@@ -15,7 +15,7 @@ const MainModal = ({ onClose, onOpen, isOpen }) => {
         isOpen={isOpen}
       />
 
-      <Flex justifyContent="center" >
+      <Flex justifyContent="center">
         <VerificationCode
           page={page}
           setPage={setPage}

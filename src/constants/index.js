@@ -12,7 +12,6 @@ import {
   HomeIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import Dashboard from "@/Components/userDashboard";
 import ChoosingArea from "@/Components/userDashboard/widget/areasChoice";
 import ChoosingPayAmount from "@/Components/userDashboard/widget/choosingPayAmount/ChoosingPayAmount";
 import Date_Time from "@/Components/userDashboard/widget/date-time";
@@ -20,6 +19,14 @@ import ConfirmInfo from "@/Components/userDashboard/widget/informationConfirm";
 import UserInformation from "@/Components/userDashboard/widget/registerForm";
 import ReservationDone from "@/Components/userDashboard/widget/reservationDone/ReservationDone";
 import Unsucces_Transaction from "@/Components/userDashboard/widget/unsuccessfull-transaction/Unsucces_Transaction";
+// import { Home } from "@/Components/adminDashboard/widget/home";
+import WeeklyCalendar from "@/Components/adminDashboard/widget/weeklyCalendar";
+import Empolyees from "@/Components/adminDashboard/widget/employees";
+import Clients from "@/Components/adminDashboard/widget/clients";
+import Reports from "@/Components/adminDashboard/widget/reports";
+import Setting from "@/Components/adminDashboard/widget/setting";
+import AreaLazer from "@/Components/adminDashboard/widget/areaLazer";
+import Home from "@/Components/adminDashboard/widget/home";
 //Home
 export const data = [
   { id: 0, title: "خانه", icon: <HomeIcon />, src: "/" },
@@ -240,14 +247,57 @@ export const get_turn_data = [
 ];
 
 //AdminDashboard
+
 export const admintData = [
-  { id: 0, name: "home", amount: "خانه", icon: <BiHome /> },
-  { id: 1, name: "calender", amount: "برنامه هفتکی", icon: <SlCalender /> },
-  { id: 2, name: "employee", amount: "کارمندان", icon: <IoIosPerson /> },
-  { id: 3, name: "clientArea", amount: "نواحی لیزر", icon: <BiTargetLock /> },
-  { id: 4, name: "clients", amount: "مراجعین", icon: <IoMdPeople /> },
-  { id: 5, name: "reports", amount: "گزارشات", icon: <GrDocumentText /> },
-  { id: 6, name: "setting", amount: "تنظیمات", icon: <TbSettings2 /> },
+  {
+    id: 0,
+    slug: "home",
+    component: <Home />,
+    amount: "خانه",
+    icon: <BiHome />,
+  },
+  {
+    id: 1,
+    slug: "weeklyCalendar",
+    component: <WeeklyCalendar />,
+    amount: "برنامه هفتکی",
+    icon: <SlCalender />,
+  },
+  {
+    id: 2,
+    slug: "employee",
+    component: <Empolyees />,
+    amount: "کارمندان",
+    icon: <IoIosPerson />,
+  },
+  {
+    id: 3,
+    slug: "areaLazer",
+    component: <AreaLazer />,
+    amount: "نواحی لیزر",
+    icon: <BiTargetLock />,
+  },
+  {
+    id: 4,
+    slug: "clients",
+    component: <Clients />,
+    amount: "مراجعین",
+    icon: <IoMdPeople />,
+  },
+  {
+    id: 5,
+    slug: "reports",
+    component: <Reports />,
+    amount: "گزارشات",
+    icon: <GrDocumentText />,
+  },
+  {
+    id: 6,
+    slug: "setting",
+    component: <Setting />,
+    amount: "تنظیمات",
+    icon: <TbSettings2 />,
+  },
 ];
 export const oprators = [
   [
@@ -329,7 +379,7 @@ export const TableData = [
 ];
 
 //UserDashboard
-export const ComponentData = [
+export const userData = [
   { slug: "choosingArea", component: <ChoosingArea slug={"dateTime"} /> },
   { slug: "dateTime", component: <Date_Time slug={"confirmInfo"} /> },
   { slug: "confirmInfo", component: <ConfirmInfo slug={"userInformation"} /> },

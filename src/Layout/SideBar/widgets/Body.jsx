@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Item } from "./Items";
+import { useRouter } from "next/router";
 
 const Body = ({
   selected,
@@ -8,23 +9,25 @@ const Body = ({
   receptionDatas,
   isCollapsed,
 }) => {
-  const [pathname, setPathname] = useState(null);
-  useEffect(() => {
-    setPathname(window.location.pathname);
-  }, []);
+  const router = useRouter();
+  const pathname = router.pathname;
+
   const adminOrRecption =
-    pathname === "/adminDashboard"
+    pathname === "/adminDashboard" || "/adminDashboard/"
       ? admintDatas
-      : pathname === "/reseptionDashboard"
+      : pathname === "/receptionDashboard"
       ? receptionDatas
       : [];
+
   return (
     <>
       {adminOrRecption.map((item) => (
         <React.Fragment key={item.key}>
           <Item
             title={item.amount}
-            to="/"
+            slug={item.slug}
+            component={item.component}
+            to={item.slug}
             icon={item.icon}
             selected={selected}
             setSelected={setSelected}

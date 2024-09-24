@@ -1,4 +1,4 @@
-import { Box, Button, Flex, IconButton, useMediaQuery } from "@chakra-ui/react";
+import { Box, Button, IconButton, useMediaQuery } from "@chakra-ui/react";
 import { useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import Header from "./widgets/Header";

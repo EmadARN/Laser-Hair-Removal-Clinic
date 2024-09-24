@@ -1,8 +1,8 @@
 import React from "react";
-import PaginationDate from "./PaginationDate";
 import { Button, Flex, Text, Grid, GridItem, Box } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
 import SearchInput from "@/Common/searchInput/SearchInput";
+import DataSlider from "@/Common/dataSlider/DataSlider";
 
 const HeaderDetails = () => {
   return (
@@ -33,7 +33,7 @@ const HeaderDetails = () => {
             >
               نوبت های روز
             </Text>
-            <PaginationDate />
+            <DataSlider />
             <Text sx={{ color: "blue" }}>امروز</Text>
           </Flex>
         </Flex>

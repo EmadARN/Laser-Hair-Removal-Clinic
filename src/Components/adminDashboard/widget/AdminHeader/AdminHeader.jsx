@@ -8,8 +8,8 @@ const AdminHeader = (props) => {
         <Text fontSize={"20px"} fontWeight={"bold"}>
           {props.headerTitle}
         </Text>
+        <Box pr={4}>{props.dataSlider}</Box>
       </Box>
-
       <Box m={5}>
         <Button colorScheme={"blue"} py={6}>
           {props.btnValue}

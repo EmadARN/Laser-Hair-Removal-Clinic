@@ -12,7 +12,7 @@ const UserInfoBox = () => {
       alignItems={"center"}
       justifyContent={"center"}
     >
-      <Box width={"80%"}>
+      <Box width={"100%"}>
         <Text fontWeight={"bold"} textAlign={"right"} color={"#111"}>
           اطلاعات کاربری
         </Text>
@@ -20,7 +20,7 @@ const UserInfoBox = () => {
       <Box
         boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
         bgColor={"#ededed"}
-        width={"80%"}
+        width={"100%"}
         height={"auto"}
         p={6}
         display={"flex"}
@@ -32,14 +32,13 @@ const UserInfoBox = () => {
             <Text mb={2} color={"#555"}>
               نام کاربری
             </Text>
-            <Text fontSize={{base:"15px",md:"20px"}} fontWeight={"bold"}>
+            <Text fontSize={{ base: "15px", md: "20px" }} fontWeight={"bold"}>
               foroghh ahmadi
             </Text>
           </Box>
 
           <Box>
             <Text mb={2} color={"#555"}>
-              {" "}
               رمز عبور
             </Text>
             <Text fontSize={"20px"} fontWeight={"bold"}>
@@ -49,7 +48,11 @@ const UserInfoBox = () => {
         </Box>
 
         <Box>
-          <Button value={'ghost'} fontWeight={"bold"} leftIcon={<CiEdit size={'25px'} />}>
+          <Button
+            value={"ghost"}
+            fontWeight={"bold"}
+            leftIcon={<CiEdit size={"25px"} />}
+          >
             ویرایش
           </Button>
         </Box>
