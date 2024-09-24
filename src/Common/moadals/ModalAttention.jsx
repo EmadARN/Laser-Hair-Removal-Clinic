@@ -1,6 +1,6 @@
 import {
   Box,
-  Button,
+  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -12,13 +12,13 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const ModalAttention = ({ renderContent }) => {
+const ModalAttention = ({ renderContent, btn }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const renderContents = renderContent();
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <IconButton onClick={onOpen} icon={btn} />
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

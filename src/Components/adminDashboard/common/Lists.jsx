@@ -1,4 +1,6 @@
-import { Box, Flex, IconButton, Stack, Text } from "@chakra-ui/react";
+import ModalAttention from "@/Common/moadals/ModalAttention";
+import ModalDefine from "@/Common/moadals/ModalDefine";
+import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -15,6 +17,13 @@ const Lists = ({
   color,
   rounded,
   fontSize,
+  ModalBodyContent,
+  ModalFooterContent,
+  HeaderContent,
+  headerContentValue,
+  BodyContent,
+  FooterContent,
+  iconBtnDisply,
 }) => {
   return (
     <Flex
@@ -41,13 +50,22 @@ const Lists = ({
         {thirdArea}
       </Box>
       <Stack direction="row" gap={1} display={editDeleteDisplay}>
-        <IconButton
-          aria-label="Add to friends"
-          icon={<CiEdit size={20} color="blue" />}
+        <ModalDefine
+          headerContent={headerContentValue}
+          renderContent={() => ({
+            body: <ModalBodyContent />,
+            footer: <ModalFooterContent />,
+          })}
+          btn={<CiEdit size={20} color="blue" />}
+          BtnDisply={iconBtnDisply}
         />
-        <IconButton
-          aria-label="Add to friends"
-          icon={<RiDeleteBinLine size={18} color="red" />}
+        <ModalAttention
+          renderContent={() => ({
+            header: <HeaderContent />,
+            body: <BodyContent />,
+            footer: <FooterContent />,
+          })}
+          btn={<RiDeleteBinLine size={18} color="red" />}
         />
       </Stack>
     </Flex>

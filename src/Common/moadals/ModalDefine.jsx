@@ -10,8 +10,16 @@ import {
   Button,
   useDisclosure,
   Box,
+  IconButton,
 } from "@chakra-ui/react";
-const ModalDefine = ({ renderContent, displayHeader, headerContent }) => {
+const ModalDefine = ({
+  renderContent,
+  displayHeader,
+  headerContent,
+  btn,
+  iconBtnDisply,
+  BtnDisply,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -19,7 +27,10 @@ const ModalDefine = ({ renderContent, displayHeader, headerContent }) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <IconButton onClick={onOpen} icon={btn} display={iconBtnDisply} />
+      <Button onClick={onOpen} display={BtnDisply}>
+        {headerContent}
+      </Button>
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
