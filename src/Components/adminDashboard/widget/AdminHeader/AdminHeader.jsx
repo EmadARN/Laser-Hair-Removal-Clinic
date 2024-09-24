@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Text, Button } from "@chakra-ui/react";
+import ModalDefine from "@/Common/moadals/ModalDefine";
 const AdminHeader = (props) => {
   return (
     <Box width={"100%"} display={"flex"} justifyContent={"space-between"}>
@@ -11,9 +12,17 @@ const AdminHeader = (props) => {
         <Box pr={4}>{props.dataSlider}</Box>
       </Box>
       <Box m={5}>
-        <Button colorScheme={"blue"} py={6}>
+        {/* <Button colorScheme={"blue"} py={6}>
           {props.btnValue}
-        </Button>
+        </Button> */}
+        <ModalDefine
+          headerContent={props.btnValue}
+          renderContent={() => ({
+            body: <props.ModalBodyContent />,
+            footer: <props.ModalFooterContent />,
+          })}
+          iconBtnDisply={props.iconBtnDisply}
+        />
       </Box>
     </Box>
   );
