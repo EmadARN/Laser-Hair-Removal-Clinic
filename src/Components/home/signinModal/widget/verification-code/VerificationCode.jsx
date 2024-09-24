@@ -32,11 +32,6 @@ const VerificationCode = ({ setPage, page }) => {
         code: codeValue,
       })
     );
-<<<<<<< HEAD
-    document.body.style.overflow = "scroll";
-    setCodeValue("");
-    router.push("/userDashboard");
-=======
 
     if (result.meta.requestStatus === "fulfilled") {
       const receivedToken = result.payload.token;
@@ -48,9 +43,9 @@ const VerificationCode = ({ setPage, page }) => {
         });
         router.push("/userDashboard");
       }
+      document.body.style.overflow = "scroll";
       setCodeValue("");
     }
->>>>>>> 99a241aa9bb545548a84e057922342b688555852
   };
 
   return (
