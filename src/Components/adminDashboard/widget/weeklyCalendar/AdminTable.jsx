@@ -20,7 +20,6 @@ import ModalFooterContent from "./widget/modalDefineDetails/ModalFooterContent";
 const AdminTable = () => {
   const [operatorInfo, setOperatorInfo] = useState();
   const { isOpen, onOpen } = useDisclosure();
-  console.log("dataAll:", operatorInfo);
   return (
     <>
       {isOpen ? (
@@ -36,9 +35,10 @@ const AdminTable = () => {
       <TableContainer width={"100%"} display={"flex"} justifyContent={"center"}>
         <Table
           bgColor={"#efefef"}
-          width={"70%"}
+          width={"100%"}
           variant="simple"
           sx={{
+            mx: 6,
             border: "3px solid #efefef",
             td: {
               border: "1px solid #ddd",

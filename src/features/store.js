@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import signinReducer from "./signin/signinSlice";
+import signinReducer from "./signin/authSlice";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 const combinedReducer = combineReducers({
   signin: signinReducer,

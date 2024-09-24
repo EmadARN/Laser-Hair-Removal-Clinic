@@ -13,15 +13,11 @@ import {
 } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { postAsyncNumber } from "@/features/signin/signinSlice";
 import ButtonAccept from "../ButtonAccept";
 import * as Yup from "yup";
 import { useFormik } from "formik/dist";
+import { postAsyncNumber } from "@/features/signin/authSlice";
 
-//  initial values
-const initialValues = {
-  phone_number: "",
-};
 //  validation schema
 const validationSchema = Yup.object({
   phone_number: Yup.string()
@@ -29,18 +25,25 @@ const validationSchema = Yup.object({
     .matches(/^[0-9]{11}$/, "شماره موبایل باید 11 رقم باشد")
     .nullable(),
 });
+//  initial values
+const initialValues = {
+  phone_number: "",
+};
 export default function Profile_Modal({ onClose, isOpen, setPage, page }) {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.signin);
 
-  const onSubmit = (values) => {
-    
+  const onSubmit = async (values) => {
     const { phone_number } = values;
-    dispatch(postAsyncNumber({ phone_number }));
-    setPage(page + 1);
+    const result = await dispatch(postAsyncNumber({ phone_number }));
+
+    if (result.meta.requestStatus === "fulfilled") {
+      setPage(page + 1);
+    }
   };
+
   const formik = useFormik({
     initialValues,
     onSubmit,

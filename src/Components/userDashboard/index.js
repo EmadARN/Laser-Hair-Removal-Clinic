@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import NavBar from "@/Container/navbar/NavBar";
 import Session_Records from "./widget/widgetForRecords/session-records/Session-Records";
 import SessionRecordDetails from "./widget/widgetForRecords/sessionRecordDetails/SessionRecordDetails";
@@ -28,7 +28,6 @@ const Dashboard = ({ page, setPage }) => {
     return (
       <>
         <NavBar bgColor="#ffffff" />
-
         <SessionRecordDetails
           steperState={steperState}
           setSteperState={setSteperState}

@@ -8,6 +8,7 @@ const Lists = ({
   secondArea,
   thirdArea,
   imgDisplay,
+  display,
   displayThirdArea,
   editDeleteDisplay,
   bgColor,
@@ -29,7 +30,7 @@ const Lists = ({
     >
       <Stack direction="row" gap={4}>
         <img
-          style={{ borderRadius: "50%", display: imgDisplay }}
+          style={{ borderRadius: "50%", display: imgDisplay || display }}
           src=""
           alt="yes"
         />

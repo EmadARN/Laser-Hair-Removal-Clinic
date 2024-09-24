@@ -1,12 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Box, Text, Input, Button } from "@chakra-ui/react";
 import BodyModal from "./BodyModal";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { postAsyncCode } from "@/features/signin/signinSlice";
 import { handleCodeChange, handleKeyDown } from "@/utils/confirmPsswordHandler";
 import ButtonAccept from "../ButtonAccept";
+import { useCookies } from "react-cookie";
+import { postAsyncCode } from "@/features/signin/authSlice";
+
 const VerificationCode = ({ setPage, page }) => {
   const [inputCode, setInputCode] = useState(["", "", "", "", "", ""]);
   const [codeValue, setCodeValue] = useState("");
@@ -15,23 +17,40 @@ const VerificationCode = ({ setPage, page }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { phone_number, loading } = useSelector((state) => state.signin);
+  const [cookies, setCookie] = useCookies(["auth_token"]);
 
-  // کد برگشتن به مرحه ی عقب برای عوش کردن شماره هممراه
   const handleClick = () => {
     setPage(page - 1);
   };
-  const onSubmit = () => {
+
+  const onSubmit = async () => {
     setCodeValue(inputCode.toString().split(",").join(""));
     if (!codeValue) return;
-    dispatch(
+    const result = await dispatch(
       postAsyncCode({
-        phone_number: phone_number.toString(),
+        phone_number: phone_number,
         code: codeValue,
       })
     );
+<<<<<<< HEAD
     document.body.style.overflow = "scroll";
     setCodeValue("");
     router.push("/userDashboard");
+=======
+
+    if (result.meta.requestStatus === "fulfilled") {
+      const receivedToken = result.payload.token;
+      if (receivedToken) {
+        setCookie("auth_token", receivedToken, {
+          path: "/",
+          // maxAge: 604800,
+          // secure: true,
+        });
+        router.push("/userDashboard");
+      }
+      setCodeValue("");
+    }
+>>>>>>> 99a241aa9bb545548a84e057922342b688555852
   };
 
   return (

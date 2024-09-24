@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Checkbox, Flex, Stack, Text } from "@chakra-ui/react";
 import AccordionMenu from "../accordionMenu/AccordionMenu";
+import api from "@/services/apiService";
+import { useCookies } from "react-cookie";
 const AreaChoice = () => {
   const [checkedItems, setCheckedItems] = React.useState(
     new Array(10).fill(false)
   );
+  const [cookies] = useCookies(["auth_token"]);
+  useEffect(() => {
+    if (cookies.auth_token) {
+      api
+        .get("/Laser/laser/area/list/", {
+          headers: {
+            Authorization: `Bearer ${cookies.auth_token}`,
+          },
+        })
+        .then((res) => {
+          // Handle the response
+          console.log("Data received:", res.data);
+        })
+        .catch((err) => {
+          // Handle the error
+          console.error("Error fetching data:", err);
+        });
+    }
+  }, [cookies.auth_token]);
 
   const allChecked = checkedItems.every(Boolean);
 

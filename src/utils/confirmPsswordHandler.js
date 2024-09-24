@@ -11,7 +11,7 @@ export const handleCodeChange = (
   newcode[index] = event.target.value;
   setInputCode(newcode);
 
-  if (index < 3) {
+  if (index < 5) {
     nextInput.current[index + 1].focus();
   } else {
     buttonFocus.current.focus();
