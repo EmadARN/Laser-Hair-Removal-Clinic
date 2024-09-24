@@ -5,8 +5,11 @@ import VerificationCode from "./widget/verification-code/VerificationCode";
 const MainModal = ({ onClose, onOpen, isOpen }) => {
   const [page, setPage] = useState(0);
 
-  return (
-    <Box>
+
+  
+
+  if (page === 0) {
+    return (
       <Profile_Modal
         page={page}
         setPage={setPage}
@@ -14,8 +17,16 @@ const MainModal = ({ onClose, onOpen, isOpen }) => {
         onClose={onClose}
         isOpen={isOpen}
       />
-
-      <Flex justifyContent="center" >
+    );
+  } else if (page === 1) {
+    document.body.style.overflow = "hidden";
+    return (
+      <Box
+        display={"flex"}
+        height={"100vh"}
+        justifyContent="center"
+        alignItems={"flex-start"}
+      >
         <VerificationCode
           page={page}
           setPage={setPage}
@@ -23,9 +34,10 @@ const MainModal = ({ onClose, onOpen, isOpen }) => {
           onClose={onClose}
           isOpen={isOpen}
         />
-      </Flex>
-    </Box>
-  );
+      </Box>
+    );
+  }
+ 
 };
 
 export default MainModal;

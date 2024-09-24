@@ -8,7 +8,7 @@ import { postAsyncCode } from "@/features/signin/signinSlice";
 import { handleCodeChange, handleKeyDown } from "@/utils/confirmPsswordHandler";
 import ButtonAccept from "../ButtonAccept";
 const VerificationCode = ({ setPage, page }) => {
-  const [inputCode, setInputCode] = useState(["", "", "", ""]);
+  const [inputCode, setInputCode] = useState(["", "", "", "", "", ""]);
   const [codeValue, setCodeValue] = useState("");
   const nextInput = useRef([]);
   const buttonFocus = useRef();
@@ -29,90 +29,88 @@ const VerificationCode = ({ setPage, page }) => {
         code: codeValue,
       })
     );
+    document.body.style.overflow = "scroll";
     setCodeValue("");
     router.push("/userDashboard");
   };
 
-  if (page === 1) {
-    return (
+  return (
+    <Box
+      sx={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px" }}
+      width={{ base: "100%", sm: "60%", md: "50%", lg: "30%" }}
+      h="auto"
+      bgColor="#fff"
+      borderRadius="10px"
+      p={6}
+      display="flex"
+      flexDirection="column"
+    >
       <Box
-        sx={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px" }}
-        width={{ base: "auto", sm: "60%", md: "30%" }}
-        h="auto"
-        bgColor="#fff"
-        borderRadius="10px"
-        p={6}
+        mb={4}
         display="flex"
-        flexDirection="column"
+        w="100%"
+        justifyContent="space-between"
+        alignItems="center"
       >
-        <Box
-          mb={4}
-          display="flex"
-          w="100%"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Box>
-            <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "sm" }}>
-              کد تایید
-            </Text>
-          </Box>
-
-          <Button
-            onClick={handleClick}
-            rightIcon={<IoIosArrowBack size={"13px"} />}
-          >
-            <Text fontSize={{ base: "xs", md: "xs" }}>بازگشت</Text>
-          </Button>
-        </Box>
-        <BodyModal />
-        <Box
-          display="flex"
-          flexDirection="row-reverse"
-          mb={6}
-          width="100%"
-          justifyContent="space-around"
-        >
-          {inputCode.map((value, index) => (
-            <>
-              <Input
-                textAlign="center"
-                width="15%"
-                key={index}
-                type="number"
-                maxLength={1}
-                value={value}
-                ref={(el) => (nextInput.current[index] = el)}
-                onChange={(event) =>
-                  handleCodeChange(
-                    event,
-                    index,
-                    nextInput,
-                    inputCode,
-                    setInputCode,
-                    buttonFocus
-                  )
-                }
-                onKeyDown={(event) => handleKeyDown(event, index, nextInput)}
-                onFocus={(event) => event.target.select()}
-              ></Input>
-            </>
-          ))}
+        <Box>
+          <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "sm" }}>
+            کد تایید
+          </Text>
         </Box>
 
-        <Box w="100%" display="flex" justifyContent="center">
-          <ButtonAccept
-            value={codeValue}
-            onSubmit={onSubmit}
-            loading={loading}
-            ref={buttonFocus}
-          />
-        </Box>
+        <Button
+          onClick={handleClick}
+          rightIcon={<IoIosArrowBack size={"13px"} />}
+        >
+          <Text fontSize={{ base: "xs", md: "xs" }}>بازگشت</Text>
+        </Button>
       </Box>
-    );
-  } else {
-    null;
-  }
+      <BodyModal />
+      <Box
+        display="flex"
+        flexDirection="row-reverse"
+        mb={6}
+        width="100%"
+        justifyContent="space-around"
+      >
+        {inputCode.map((value, index) => (
+          <>
+            <Input
+              m={2}
+              textAlign="center"
+              width="auto"
+              key={index}
+              type="number"
+              maxLength={1}
+              value={value}
+              ref={(el) => (nextInput.current[index] = el)}
+              onChange={(event) =>
+                handleCodeChange(
+                  event,
+                  index,
+                  nextInput,
+                  inputCode,
+                  setInputCode,
+                  buttonFocus
+                )
+              }
+              onKeyDown={(event) => handleKeyDown(event, index, nextInput)}
+              onFocus={(event) => event.target.select()}
+            ></Input>
+          </>
+        ))}
+      </Box>
+
+      <Box w="100%" display="flex" justifyContent="center">
+        <ButtonAccept
+          value={codeValue}
+          onSubmit={onSubmit}
+          loading={loading}
+          ref={buttonFocus}
+        />
+      </Box>
+    </Box>
+  );
 };
 
 export default VerificationCode;

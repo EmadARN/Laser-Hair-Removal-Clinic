@@ -36,7 +36,7 @@ export default function Profile_Modal({ onClose, isOpen, setPage, page }) {
   const { loading } = useSelector((state) => state.signin);
 
   const onSubmit = (values) => {
-    console.log(values);
+    
     const { phone_number } = values;
     dispatch(postAsyncNumber({ phone_number }));
     setPage(page + 1);
@@ -47,7 +47,9 @@ export default function Profile_Modal({ onClose, isOpen, setPage, page }) {
     validationSchema,
     validateOnMount: true,
   });
-  return page === 0 ? (
+
+  return(
+
     <Modal
       initialFocusRef={initialRef}
       finalFocusRef={finalRef}
@@ -92,5 +94,6 @@ export default function Profile_Modal({ onClose, isOpen, setPage, page }) {
         </ModalFooter>
       </ModalContent>
     </Modal>
-  ) : null;
+  )
+
 }
