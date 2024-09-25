@@ -71,6 +71,7 @@ const ModalBodyContent = () => {
             </Radio>
           </Stack>
         </RadioGroup>
+       
         <FormControl mt={8}>
           <FormLabel>نام کاربری منشی (به انگلیسی)</FormLabel>
           <Input size="lg" placeholder="نام کاربری" />
@@ -99,6 +100,57 @@ const ModalBodyContent = () => {
               </Button>
             </InputLeftElement>
           </InputGroup>
+        </FormControl>
+
+        <FormControl mt={4}>
+          <FormLabel>کد ملی</FormLabel>
+          <Input size="lg" placeholder=" کد ملی" />
+        </FormControl>
+
+        <FormControl mt={4}>
+          <FormLabel> آدرس محل زندگی</FormLabel>
+          <Input size="lg" placeholder="  آِدرس" />
+        </FormControl>
+
+        <FormControl mt={4}>
+          <FormLabel> شماره تماس منزل</FormLabel>
+          <Input size="lg" placeholder="  شماره تماس" />
+        </FormControl>
+
+
+        <Box my={7}>
+          <Text pb={4} fontWeight="bold">
+            بیماری خاص
+          </Text>
+          <RadioGroup defaultValue="2">
+            <Stack spacing={20} direction="row">
+              <Radio colorScheme="blue" value="1">
+                دارم
+              </Radio>
+              <Radio colorScheme="blue" value="2">
+                ندارم
+              </Radio>
+            </Stack>
+          </RadioGroup>
+        </Box>
+
+        <Text pb={4} fontWeight="bold">
+          مصرف دارو
+        </Text>
+        <RadioGroup defaultValue="2">
+          <Stack spacing={20} direction="row">
+            <Radio colorScheme="blue" value="1">
+              دارم
+            </Radio>
+            <Radio colorScheme="blue" value="2">
+              ندارم
+            </Radio>
+          </Stack>
+        </RadioGroup>
+
+        <FormControl mt={4}>
+          <FormLabel> دکتر</FormLabel>
+          <Input size="lg" placeholder=" دکتر" />
         </FormControl>
       </Box>
     </>

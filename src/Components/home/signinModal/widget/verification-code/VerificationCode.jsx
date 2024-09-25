@@ -24,6 +24,8 @@ const VerificationCode = ({ setPage, page }) => {
   };
 
   const onSubmit = async () => {
+    
+    document.body.style.overflow = "scroll";
     setCodeValue(inputCode.toString().split(",").join(""));
     if (!codeValue) return;
     const result = await dispatch(
