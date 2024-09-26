@@ -21,6 +21,7 @@ const AdminHeader = (props) => {
             body: <props.ModalBodyContent />,
             footer: <props.ModalFooterContent />,
           })}
+          addDisplay={props.addDisplay}
           iconBtnDisply={props.iconBtnDisply}
         />
       </Box>

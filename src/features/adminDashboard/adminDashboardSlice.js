@@ -28,10 +28,9 @@ export const addAsyncUsers = createAsyncThunk(
   "user/addAsyncUsers",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data } = await api.post("/Core/signup/admin/", payload, {
-        headers: { "Content-Type": "application/json" },
-      });
-      showAlert("User Created Successfully");
+      const { data } = await api.post("/Core/signup/admin/", payload);
+      alert("User Created Successfully");
+
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.message || error.message);
@@ -42,22 +41,7 @@ export const addAsyncUsers = createAsyncThunk(
 const initialState = {
   loading: false,
   error: "",
-  user: {
-    username: "",
-    last_date: "",
-    password: "",
-    name: "",
-    last_name: "",
-    phone_number: "",
-    national_code: "",
-    address: "",
-    house_number: "",
-    user_type: "",
-    drug_hist: false,
-    decease_hist: false,
-    doctor: "",
-    offline_number: 0,
-  },
+  users: [],
 };
 const adminDashboardSlice = createSlice({
   name: "userCrud",
@@ -65,22 +49,13 @@ const adminDashboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getAsyncUsers.pending, (state) =>
-        handleAsyncState(state, {}, "pending")
-      )
-      .addCase(getAsyncUsers.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled");
-        state.user = action.payload;
-      })
-      .addCase(getAsyncUsers.rejected, (state, action) =>
-        handleAsyncState(state, action, "rejected")
-      )
+
       .addCase(addAsyncUsers.pending, (state) =>
         handleAsyncState(state, {}, "pending")
       )
       .addCase(addAsyncUsers.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        state.user.push(action.payload);
+        state.users.push(action.payload);
       })
       .addCase(addAsyncUsers.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")

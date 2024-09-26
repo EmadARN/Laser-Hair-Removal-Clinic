@@ -24,7 +24,6 @@ const VerificationCode = ({ setPage, page }) => {
   };
 
   const onSubmit = async () => {
-    
     document.body.style.overflow = "scroll";
     setCodeValue(inputCode.toString().split(",").join(""));
     if (!codeValue) return;
@@ -34,6 +33,7 @@ const VerificationCode = ({ setPage, page }) => {
         code: codeValue,
       })
     );
+
 
     if (result.meta.requestStatus === "fulfilled") {
       const receivedToken = result.payload.token;
@@ -45,6 +45,7 @@ const VerificationCode = ({ setPage, page }) => {
         });
         router.push("/userDashboard");
       }
+
       document.body.style.overflow = "scroll";
       setCodeValue("");
     }

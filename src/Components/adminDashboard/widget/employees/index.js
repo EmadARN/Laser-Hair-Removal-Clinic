@@ -18,11 +18,11 @@ const Empolyees = () => {
           btnValue="افزودن کارمند جدید"
           icon={<RiShieldUserFill />}
           ModalBodyContent={ModalBodyContent}
+          addDisplay="none"
           ModalFooterContent={ModalFooterContent}
           iconBtnDisply="none"
         />
       </Box>
-      <Box></Box>
       <Box sx={{ mt: 8 }}>
         <Lists
           firstArea="علی مظفری"

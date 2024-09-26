@@ -8,6 +8,7 @@ export const postAsyncNumber = createAsyncThunk(
       const response = await api.post("/Core/login/customer/", {
         phone_number: payload.phone_number,
       });
+
       return { phone_number: payload.phone_number, ...response.data };
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -31,7 +32,7 @@ export const postAsyncCode = createAsyncThunk(
           },
         }
       );
-
+      console.log(response);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);

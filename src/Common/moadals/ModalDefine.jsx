@@ -19,6 +19,7 @@ const ModalDefine = ({
   btn,
   iconBtnDisply,
   BtnDisply,
+  addDisplay,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
@@ -64,8 +65,9 @@ const ModalDefine = ({
             />
           </Box>
           <ModalBody py={6}>{renderContents.body}</ModalBody>
-
-          <ModalFooter pt={10}>{renderContents.footer}</ModalFooter>
+          <ModalFooter sx={{ display: addDisplay }} pt={10}>
+            {renderContents.footer}
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

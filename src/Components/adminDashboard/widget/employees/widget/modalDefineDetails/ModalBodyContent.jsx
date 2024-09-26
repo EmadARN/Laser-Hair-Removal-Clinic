@@ -1,160 +1,122 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FormControl,
-  FormLabel,
-  Input,
-  RadioGroup,
+  Box,
+  Flex,
+  Button,
   Stack,
   Radio,
-  Box,
+  RadioGroup,
   Text,
-  Flex,
-  InputGroup,
-  Button,
-  InputLeftElement,
 } from "@chakra-ui/react";
-import { LuImagePlus } from "react-icons/lu";
-import { IoEyeOutline } from "react-icons/io5";
-import { FaRegEyeSlash } from "react-icons/fa6";
+import InputField from "./widget/InputField";
+import RadioButtonGroup from "./widget/RadioButtonGroup";
+import { addAsyncUsers } from "@/features/adminDashboard/adminDashboardSlice";
+import { inputDataEmployee, radioOptions } from "@/constants";
+import { useDispatch } from "react-redux";
+
 const ModalBodyContent = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  const [usersForm, setUsersForm] = useState({
+    last_date: "",
+    drug_hist: false,
+    decease_hist: false,
+    doctor: "",
+    offline_number: 0,
+  });
+  const dispatch = useDispatch();
+
+  const addChangeHandler = (e) => {
+    const { name, value, type } = e.target;
+
+    setUsersForm((prevForm) => ({
+      ...prevForm,
+      [name]: type === "radio" ? value : value,
+    }));
+  };
+
+  const inputFields = inputDataEmployee(usersForm, show, handleClick);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("usersForm before submitting:", usersForm);
+    dispatch(addAsyncUsers({ ...usersForm }));
+  };
+
   return (
-    <>
-      <FormControl>
-        <Flex alignItems={"center"} gap={6}>
-          <Box
-            sx={{
-              w: "85px",
-              h: "75px",
-              bgColor: "#1111",
-              borderRadius: "4px",
-            }}
-          >
-            <Flex
-              sx={{
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-                h: "100%",
-              }}
-            >
-              <LuImagePlus />
-              <Text sx={{ fontSize: { base: "8px", md: "10px" } }}>
-                آپلود تصویر
-              </Text>
-            </Flex>
+    <form action="" onSubmit={handleSubmit}>
+      <Flex alignItems="center" gap={6}>
+        {inputFields.slice(0, 2).map((field) => (
+          <Box w="100%" key={field.name}>
+            <InputField {...field} onChange={addChangeHandler} />
           </Box>
-          <Box w={"100%"}>
-            <FormLabel>نام و نام خانوادگی</FormLabel>
-            <Input size="lg" placeholder="نام و نام خانوادگی" />
-            {/* ref={initialRef} */}
-          </Box>
-        </Flex>
-      </FormControl>
+        ))}
+      </Flex>
+      <Text pb={4} fontWeight="bold">
+        نقش
+      </Text>
+      <RadioGroup
+        onChange={(value) =>
+          addChangeHandler({
+            target: { name: "user_type", value, type: "radio" },
+          })
+        }
+        name="user_type"
+        defaultValue="منشی"
+      >
+        <Stack spacing={20} direction="row">
+          <Radio colorScheme="blue" value="اوپراتور">
+            اوپراتور
+          </Radio>
+          <Radio colorScheme="blue" value="منشی">
+            منشی
+          </Radio>
+        </Stack>
+      </RadioGroup>
 
-      <FormControl mt={4}>
-        <FormLabel>شماره موبایل</FormLabel>
-        <Input size="lg" placeholder="شماره موبایل" />
-      </FormControl>
-      <Box pt={6}>
-        <Text pb={4} fontWeight="bold">
-          نقش
-        </Text>
-        <RadioGroup defaultValue="2">
-          <Stack spacing={20} direction="row">
-            <Radio colorScheme="blue" value="1">
-              اوپراتور
-            </Radio>
-            <Radio colorScheme="blue" value="2">
-              منشی
-            </Radio>
-          </Stack>
-        </RadioGroup>
-       
-        <FormControl mt={8}>
-          <FormLabel>نام کاربری منشی (به انگلیسی)</FormLabel>
-          <Input size="lg" placeholder="نام کاربری" />
-        </FormControl>
-        <FormControl mt={4}>
-          <FormLabel>رمز ورود منشی</FormLabel>
-          <InputGroup size="lg">
-            <Input
-              type={show ? "text" : "password"}
-              placeholder="رمز ورود منشی"
-              sx={{ px: 4 }}
-            />
+      {inputFields.slice(2, 8).map((field) => (
+        <InputField key={field.name} {...field} onChange={addChangeHandler} />
+      ))}
 
-            <InputLeftElement>
-              <Button
-                h="1.75rem"
-                size="sm"
-                onClick={handleClick}
-                variant={"text"}
-              >
-                {!show ? (
-                  <FaRegEyeSlash size={18} />
-                ) : (
-                  <IoEyeOutline size={18} />
-                )}
-              </Button>
-            </InputLeftElement>
-          </InputGroup>
-        </FormControl>
+      <RadioButtonGroup
+        label="بیماری خاص"
+        name="decease_hist"
+        options={radioOptions.decease_hist}
+        onChange={addChangeHandler}
+        defaultValue="false"
+      />
 
-        <FormControl mt={4}>
-          <FormLabel>کد ملی</FormLabel>
-          <Input size="lg" placeholder=" کد ملی" />
-        </FormControl>
-
-        <FormControl mt={4}>
-          <FormLabel> آدرس محل زندگی</FormLabel>
-          <Input size="lg" placeholder="  آِدرس" />
-        </FormControl>
-
-        <FormControl mt={4}>
-          <FormLabel> شماره تماس منزل</FormLabel>
-          <Input size="lg" placeholder="  شماره تماس" />
-        </FormControl>
-
-
-        <Box my={7}>
-          <Text pb={4} fontWeight="bold">
-            بیماری خاص
-          </Text>
-          <RadioGroup defaultValue="2">
-            <Stack spacing={20} direction="row">
-              <Radio colorScheme="blue" value="1">
-                دارم
-              </Radio>
-              <Radio colorScheme="blue" value="2">
-                ندارم
-              </Radio>
-            </Stack>
-          </RadioGroup>
-        </Box>
-
-        <Text pb={4} fontWeight="bold">
-          مصرف دارو
-        </Text>
-        <RadioGroup defaultValue="2">
-          <Stack spacing={20} direction="row">
-            <Radio colorScheme="blue" value="1">
-              دارم
-            </Radio>
-            <Radio colorScheme="blue" value="2">
-              ندارم
-            </Radio>
-          </Stack>
-        </RadioGroup>
-
-        <FormControl mt={4}>
-          <FormLabel> دکتر</FormLabel>
-          <Input size="lg" placeholder=" دکتر" />
-        </FormControl>
-      </Box>
-    </>
+      <RadioButtonGroup
+        label="مصرف دارو"
+        name="drug_hist"
+        options={radioOptions.drug_hist}
+        onChange={addChangeHandler}
+        defaultValue="false"
+      />
+      {inputFields.slice(8).map((field) => (
+        <InputField key={field.name} {...field} onChange={addChangeHandler} />
+      ))}
+      <Button sx={{ w: "100%", mt: 8 }} colorScheme="blue" type="submit">
+        افزودن
+      </Button>
+    </form>
   );
 };
 
 export default ModalBodyContent;
+//{
+//   name: "",
+//   last_name: "",
+//   phone_number: "",
+//   user_type: "2",
+//   username: "",
+//   password: "",
+//   national_code: "",
+//   address: "",
+//   house_number: "",
+//   decease_hist: false,
+//   drug_hist: false,
+//   doctor: "",
+//   last_date: "",
+//   offline_number: 0,
+// },

@@ -1,42 +1,75 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
-import backgroundImage from "../../../public//images/Curve Line (1).svg";
-import {
-  firstBox,
-  seccondBox,
-  TextStyle,
-  flexStyle,
-  Button2Style,
-} from "./LoginStyle";
-const LoginPage = ({ setLoginStepper, loginStepper }) => {
-  const handle = () => {
-    setLoginStepper(loginStepper + 1);
+import AnimationSide from "./widget/AnimationSide";
+import Inputs from "./widget/Inputs";
+import { BgAnimate } from "./widget/BgAnimate";
+
+const LoginPage = () => {
+  const [btnClick, setBtnClick] = React.useState(false);
+
+  const clicHandler = () => {
+    setBtnClick(!btnClick);
   };
+
   return (
-    <Flex justifyContent="space-between">
-      <Box sx={firstBox}>
-        <img
-          style={{ width: "100%", height: "100vh" }}
-          src="/images/Curve Line.svg"
-          alt=""
-        />
-      </Box>
-      <Box sx={seccondBox(backgroundImage)}>
-        <Box>
-          <Box w={"100%"}>
-            <Text sx={TextStyle} as="h1">
-              به سامانه مدیریت کلینیک لیزر <Text>اسیندا خوش آمدید</Text>
-            </Text>
+    <Flex
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+        w: "100%",
+        h: "100vh",
+        position: "relative",
+      }}
+    >
+      <Box sx={{ position: "absolute", w: "50%", right: 0 }}>
+        <BgAnimate />
+        <Box sx={{ position: "relative", h: "300px" }}>
+          <Box
+            sx={{
+              bgColor: "#1111",
+              w: "100%",
+              h: "100%",
+              zIndex: btnClick ? 10 : 0,
+              opacity: btnClick ? 1 : 0,
+              p: 6,
+              position: "absolute",
+              transition: "opacity 1s ease 0.75s",
+            }}
+          >
+            <Inputs label="ورود به عنوان مدیر" />
           </Box>
-          <Flex sx={flexStyle}>
-            <Button sx={Button2Style} onClick={handle}>
-              ورود به عنوان مدیر
-            </Button>
-            <Button sx={Button2Style} onClick={handle}>
-              ورود به عنوان منشی
-            </Button>
-          </Flex>
+          <Box
+            sx={{
+              bgColor: "brand.400",
+              w: "100%",
+              h: "100%",
+              p: 6,
+              boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
+              zIndex: btnClick ? 10 : 0,
+              position: "absolute",
+              right: btnClick ? "100%" : 0,
+              transition: "all 1s ease",
+            }}
+          >
+            <AnimationSide clicHandler={clicHandler} btnClick={btnClick} />
+          </Box>
         </Box>
+      </Box>
+
+      <Box
+        sx={{
+          bgColor: "#1111",
+          p: 6,
+          h: "300px",
+          w: "50%",
+          zIndex: btnClick ? 0 : 10,
+          opacity: btnClick ? 0 : 1,
+          transition: "opacity 1s ease 0.75s",
+          position: "absolute",
+          left: 0,
+        }}
+      >
+        <Inputs label="ورود به عنوان کارمند" />
       </Box>
     </Flex>
   );

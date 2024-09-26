@@ -311,7 +311,76 @@ export const oprators = [
     { id: 3, name: "فاطمه زمانی", status: "فعال" },
   ],
 ];
+export const radioOptions = {
+  user_type: [
+    { value: "اوپراتور", label: "اوپراتور" },
+    { value: "منشی", label: "منشی" },
+  ],
+  decease_hist: [
+    { value: "true", label: "دارم" },
+    { value: "false", label: "ندارم" },
+  ],
+  drug_hist: [
+    { value: "true", label: "دارم" },
+    { value: "false", label: "ندارم" },
+  ],
+};
 
+export const inputDataEmployee = (usersForm, show, handleClick) => {
+  return [
+    { label: "نام", name: "name", placeholder: "نام", value: usersForm.name },
+    {
+      label: "نام خانوادگی",
+      name: "last_name",
+      placeholder: "نام خانوادگی",
+      value: usersForm.last_name,
+    },
+    {
+      label: "شماره موبایل",
+      name: "phone_number",
+      placeholder: "شماره موبایل",
+      value: usersForm.phone_number,
+    },
+    {
+      label: "نام کاربری منشی (به انگلیسی)",
+      name: "username",
+      placeholder: "نام کاربری",
+      value: usersForm.username,
+    },
+    {
+      label: "رمز ورود منشی",
+      name: "password",
+      placeholder: "رمز ورود منشی",
+      value: usersForm.password,
+      type: show ? "text" : "password",
+      showPassword: { show, onClick: handleClick },
+    },
+    {
+      label: "کد ملی",
+      name: "national_code",
+      placeholder: "کد ملی",
+      value: usersForm.national_code,
+    },
+    {
+      label: "آدرس محل زندگی",
+      name: "address",
+      placeholder: "آدرس",
+      value: usersForm.address,
+    },
+    {
+      label: "شماره تماس منزل",
+      name: "house_number",
+      placeholder: "شماره تماس",
+      value: usersForm.house_number,
+    },
+    {
+      label: "دکتر",
+      name: "doctor",
+      placeholder: "دکتر",
+      value: usersForm.doctor,
+    },
+  ];
+};
 //ReceptionDashboard
 export const receptionData = [
   {
