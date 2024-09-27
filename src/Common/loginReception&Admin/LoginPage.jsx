@@ -66,7 +66,7 @@ const LoginPage = () => {
           opacity: btnClick ? 0 : 1,
           transition: "opacity 1s ease 0.75s",
           position: "absolute",
-          left: 0,
+          left: btnClick ? "100%" : 0,
         }}
       >
         <Inputs label="ورود به عنوان کارمند" />

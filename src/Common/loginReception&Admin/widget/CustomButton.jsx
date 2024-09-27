@@ -5,9 +5,9 @@ const CustomButton = ({ clicHandler, btnClick }) => {
     <Button
       onClick={clicHandler}
       sx={{
-        w: "50%",
+        w: { base: "65%", md: "40%" },
         m: "auto",
-        mt: 10,
+        mt: { base: 12, md: 10 },
         alignItems: "center",
         backgroundColor: "#FCFCFD",
         borderRadius: "4px",
@@ -21,7 +21,7 @@ const CustomButton = ({ clicHandler, btnClick }) => {
         justifyContent: "center",
         transition: "box-shadow .15s, transform .15s",
         whiteSpace: "nowrap",
-        fontSize: "16px",
+        fontSize: { base: "14px", md: "18px" },
         _hover: {
           boxShadow:
             "rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset",

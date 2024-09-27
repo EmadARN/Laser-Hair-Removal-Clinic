@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import CustomButton from "./CustomButton";
 
@@ -8,13 +8,13 @@ const AnimationSide = ({ clicHandler, btnClick }) => {
       <Box w={"100%"}>
         <Text
           sx={{
-            fontSize: { base: "18px", md: "30px" },
+            fontSize: { base: "16px", md: "30px" },
             fontWeight: "bold",
             color: "#fff",
           }}
           as="h1"
         >
-          به سامانه مدیریت کلینیک لیزر <Text>اسیندا خوش آمدید</Text>
+          به سامانه مدیریت کلینیک لیزر <Text>عماد خوش آمدید</Text>
         </Text>
       </Box>
       <Flex sx={{ w: "100%", justifyContent: "center" }}>

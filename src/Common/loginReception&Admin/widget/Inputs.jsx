@@ -1,9 +1,11 @@
-import { Box, FormLabel, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
 import React from "react";
+import CustomButton from "./CustomButton";
 
 const style = {
   "::placeholder": {
     color: "#ccc",
+    fontSize: { base: "12px", md: "16px" },
   },
   _focus: {
     borderColor: "brand.400",
@@ -20,16 +22,31 @@ const Inputs = ({ label }) => {
           color: "#fff",
         }}
       >
-        <Text sx={{ fontWeight: "bold", fontSize: "24px" }}>{label}</Text>
+        <Text
+          sx={{ fontWeight: "bold", fontSize: { base: "14px", md: "24px" } }}
+        >
+          {label}
+        </Text>
       </Box>
-      <Box>
-        <FormLabel sx={{ color: "#fff" }}>نام کاربری</FormLabel>
+      <Box mt={{ base: 6, md: 0 }}>
+        <FormLabel
+          sx={{ color: "#fff", fontSize: { base: "12px", md: "16px" } }}
+        >
+          نام کاربری
+        </FormLabel>
         <Input sx={style} type="text" placeholder="نام کاربری" />
       </Box>
-      <Box>
-        <FormLabel sx={{ color: "#fff" }}>رمز ورود</FormLabel>
+      <Box mt={{ base: 3, md: 0 }}>
+        <FormLabel
+          sx={{ color: "#fff", fontSize: { base: "12px", md: "16px" } }}
+        >
+          رمز ورود
+        </FormLabel>
         <Input sx={style} type="password" placeholder="رمز ورود" />
       </Box>
+      <Flex justifyContent={"center"} alignItems={"center"} mt={4}>
+        <Button sx={{ w: "30%" }}>تایید</Button>
+      </Flex>
     </>
   );
 };
