@@ -1,4 +1,11 @@
-import { Box, Button, IconButton, useMediaQuery } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  IconButton,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import Header from "./widgets/Header";
@@ -6,8 +13,9 @@ import Body from "./widgets/Body";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import Bottom from "./widgets/Bottom";
-import { Item } from "./widgets/Items";
 import { MdExitToApp } from "react-icons/md";
+import { useRouter } from "next/router";
+import { useCookies } from "react-cookie";
 
 const SideBarDashboard = ({
   admintDatas,
@@ -19,6 +27,13 @@ const SideBarDashboard = ({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
+  const [cookies, , removeCookie] = useCookies(["auth_AdminReception_token"]);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    removeCookie("auth_token", { path: "/" });
+    router.push("/");
+  };
   return (
     <Box
       sx={{
@@ -85,23 +100,34 @@ const SideBarDashboard = ({
             sx={{
               all: "unset",
               w: "100%",
+              color: "#f13f4d",
+              cursor: "pointer",
               "&:hover": {
-                bgColor: "transparent",
+                bgColor: "#ff0014",
+                color: "#fff",
               },
+              transition: "all 0.5s ease",
               position: "absolute",
               bottom: 0,
             }}
+            onClick={handleLogout}
           >
-            <Item
+            <Flex alignItems={"center"} mr={""} mb={2} gap={2}>
+              <MdExitToApp />
+              <Text display={isCollapsed ? "none" : "flex"}>
+                خروج از حساب کاربری
+              </Text>
+            </Flex>
+            {/* <Item
               colorHover={"#ff0014"}
               color={"#f13f4d"}
-              title="خروج از حساب کاربری"
+              title=              
               to="/team"
               icon={<MdExitToApp />}
               selected={selected}
               setSelected={setSelected}
               isCollapsed={isCollapsed}
-            />
+            /> */}
           </Button>
         </Menu>
       </Sidebar>

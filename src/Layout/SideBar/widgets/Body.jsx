@@ -12,16 +12,17 @@ const Body = ({
   const router = useRouter();
   const pathname = router.pathname;
 
-  const adminOrRecption =
-    pathname === "/adminDashboard" || "/adminDashboard/"
-      ? admintDatas
-      : pathname === "/receptionDashboard"
-      ? receptionDatas
-      : [];
+  const adminOrRecption = () => {
+    if (pathname === `/adminDashboard/[adminDashboardSlug]`) {
+      return admintDatas;
+    } else if (pathname === "/reseptionDashboard") {
+      return receptionDatas;
+    }
+  };
 
   return (
     <>
-      {adminOrRecption.map((item) => (
+      {adminOrRecption().map((item) => (
         <React.Fragment key={item.key}>
           <Item
             title={item.amount}
