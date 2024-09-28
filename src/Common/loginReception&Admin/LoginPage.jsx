@@ -1,11 +1,53 @@
 import { Box, Flex } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import AnimationSide from "./widget/AnimationSide";
 import Inputs from "./widget/Inputs";
 import { BgAnimate } from "./widget/BgAnimate";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { useCookies } from "react-cookie";
+import { postAsyncLogin } from "@/features/adminDashboard/adminDashboardSlice";
 
 const LoginPage = () => {
   const [btnClick, setBtnClick] = React.useState(false);
+  const [adminInput, setAdminInput] = useState({ username: "", password: "" });
+  const [employeeInput, setEmployeeInput] = useState({
+    username: "",
+    password: "",
+  });
+  const [cookies, setCookie] = useCookies(["auth_AdminReception_token"]);
+
+  const router = useRouter();
+  const adminInputHandler = (e) => {
+    const { name, value } = e.target;
+    setAdminInput({ ...adminInput, [name]: value });
+  };
+
+  const employeeInputHandler = (e) => {
+    const { name, value } = e.target;
+    setEmployeeInput({ ...employeeInput, [name]: value });
+  };
+
+  const dispatch = useDispatch();
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const payload = btnClick ? adminInput : employeeInput;
+    const result = await dispatch(postAsyncLogin(payload));
+
+    if (result.meta.requestStatus === "fulfilled") {
+      const receivedToken = result.payload.token;
+      if (receivedToken) {
+        setCookie("auth_AdminReception_token", receivedToken, {
+          path: "/",
+        });
+        router.push("/adminDashboard/home");
+      }
+
+      setAdminInput({});
+      setEmployeeInput({});
+    }
+  };
 
   const clicHandler = () => {
     setBtnClick(!btnClick);
@@ -37,7 +79,12 @@ const LoginPage = () => {
               transition: "opacity 1s ease 0.75s",
             }}
           >
-            <Inputs label="ورود به عنوان مدیر" />
+            <Inputs
+              label="ورود به عنوان مدیر"
+              submitHandler={submitHandler}
+              inputHandler={adminInputHandler}
+              formInput={adminInput}
+            />
           </Box>
           <Box
             sx={{
@@ -70,7 +117,12 @@ const LoginPage = () => {
           left: btnClick ? "100%" : 0,
         }}
       >
-        <Inputs label="ورود به عنوان کارمند" />
+        <Inputs
+          label="ورود به عنوان کارمند"
+          submitHandler={submitHandler}
+          inputHandler={employeeInputHandler}
+          formInput={employeeInput}
+        />
       </Box>
     </Flex>
   );

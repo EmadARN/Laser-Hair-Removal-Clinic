@@ -1,6 +1,5 @@
 import { Box, Button, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
 import React from "react";
-import CustomButton from "./CustomButton";
 
 const style = {
   "::placeholder": {
@@ -12,9 +11,9 @@ const style = {
     boxShadow: "0 0 0 2px #ab9dfa",
   },
 };
-const Inputs = ({ label }) => {
+const Inputs = ({ label, submitHandler, inputHandler, formInput }) => {
   return (
-    <>
+    <form onSubmit={submitHandler}>
       <Box
         sx={{
           mr: { base: 0, md: 20 },
@@ -34,7 +33,14 @@ const Inputs = ({ label }) => {
         >
           نام کاربری
         </FormLabel>
-        <Input sx={style} type="text" placeholder="نام کاربری" />
+        <Input
+          sx={style}
+          type="text"
+          placeholder="نام کاربری"
+          onChange={inputHandler}
+          name="username"
+          value={formInput.userName}
+        />
       </Box>
       <Box mt={{ base: 3, md: 0 }}>
         <FormLabel
@@ -42,12 +48,21 @@ const Inputs = ({ label }) => {
         >
           رمز ورود
         </FormLabel>
-        <Input sx={style} type="password" placeholder="رمز ورود" />
+        <Input
+          sx={style}
+          type="password"
+          placeholder="رمز ورود"
+          onChange={inputHandler}
+          name="password"
+          value={formInput.password}
+        />
       </Box>
       <Flex justifyContent={"center"} alignItems={"center"} mt={4}>
-        <Button sx={{ w: "30%" }}>تایید</Button>
+        <Button sx={{ w: "30%" }} type="submit">
+          تایید
+        </Button>
       </Flex>
-    </>
+    </form>
   );
 };
 
