@@ -1,13 +1,12 @@
-import SearchInput from "@/Common/searchInput/SearchInput";
-import HeaderDetails from "@/Components/reseptionDashboard/widget/headerDetails/HeaderDetails";
-import PaidTurns from "@/Components/reseptionDashboard/widget/paid-turns/PaidTurns";
-import { ReseptionTable } from "@/Components/reseptionDashboard/widget/ReseptionTable/ReseptionTable";
-import { receptionData } from "@/constants";
 import SideBarDashboard from "@/Layout/SideBar/Sidebar";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
+import HeaderDetails from "./widget/headerDetails/HeaderDetails";
+import SearchInput from "@/Common/searchInput/SearchInput";
+import { ReseptionTable } from "./widget/ReseptionTable/ReseptionTable";
+import PaidTurns from "./widget/paid-turns/PaidTurns";
 
-const ReseptionDashboard = () => {
+const DailyShift = () => {
   return (
     <>
       <Grid templateColumns={"repeat(12, 1fr)"}>
@@ -35,4 +34,4 @@ const ReseptionDashboard = () => {
   );
 };
 
-export default ReseptionDashboard;
+export default DailyShift;
