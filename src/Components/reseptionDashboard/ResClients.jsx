@@ -4,8 +4,7 @@ import HeaderDetails from "./widget/headerDetails/HeaderDetails";
 import SearchInput from "@/Common/searchInput/SearchInput";
 import { ReseptionTable } from "./widget/ReseptionTable/ReseptionTable";
 import PaidTurns from "./widget/paid-turns/PaidTurns";
-
-const DailyShift = () => {
+const ResClients = () => {
   return (
     <>
       <Box sx={{ pt: 6, pr: { base: 12, md: 0 } }}>
@@ -15,10 +14,10 @@ const DailyShift = () => {
         <SearchInput size={"lg"} placeholder="جستجو در نوبت های روز" />
       </Box>
 
-      <ReseptionTable  isDisabled={false}  ButtonValue={"پرداخت"} />
-      <PaidTurns   /> 
+      
+      <PaidTurns display="none" />
     </>
   );
 };
 
-export default DailyShift;
+export default ResClients;

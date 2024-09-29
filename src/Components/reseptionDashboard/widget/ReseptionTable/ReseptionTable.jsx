@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { TableData } from "@/constants";
 
-export const ReseptionTable = () => {
+export const ReseptionTable = ({isDisabled,ButtonValue,display}) => {
   return (
     <Box sx={{ w: { base: "100vw", md: "100%" }, px: 4 }}>
       <TableContainer>
@@ -35,15 +35,15 @@ export const ReseptionTable = () => {
                     {item.customerName}
                   </Td>
 
-                  <Td>{item.rezervationTime}</Td>
-                  <Td>{item.laserarea} </Td>
+                  <Td display={display}>{item.rezervationTime}</Td>
+                  <Td display={display}>{item.laserarea} </Td>
                   <Td>
                     <Button sx={{ bgColor: "transparent", color: "blue" }}>
-                      پرداخت
+                     {ButtonValue}
                     </Button>
                   </Td>
                   <Td>
-                    <Button sx={{ bgColor: "transparent", color: "red" }}>
+                    <Button display={display} isDisabled={isDisabled} sx={{ bgColor: "transparent", color: "red" }}>
                       لغو نوبت
                     </Button>
                   </Td>
