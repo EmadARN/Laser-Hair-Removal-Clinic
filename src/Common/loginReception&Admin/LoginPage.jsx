@@ -61,6 +61,7 @@ const LoginPage = () => {
         w: "100%",
         h: "100vh",
         position: "relative",
+    
       }}
     >
       <Box sx={{ position: "absolute", w: "50%", right: 0 }}>
