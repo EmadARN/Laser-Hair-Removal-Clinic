@@ -41,7 +41,12 @@ const LoginPage = () => {
         setCookie("auth_AdminReception_token", receivedToken, {
           path: "/",
         });
-        router.push("/adminDashboard/home");
+
+        if (btnClick) {
+          router.push("/adminDashboard/home");
+        } else {
+          router.push("/reseptionDashboard/dailyShifts");
+        }
       }
 
       setAdminInput({});
@@ -61,7 +66,6 @@ const LoginPage = () => {
         w: "100%",
         h: "100vh",
         position: "relative",
-    
       }}
     >
       <Box sx={{ position: "absolute", w: "50%", right: 0 }}>
