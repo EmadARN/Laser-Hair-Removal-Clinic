@@ -8,7 +8,9 @@ import {
   AccordionIcon,
 } from "@chakra-ui/react";
 import { ReseptionTable } from "../ReseptionTable/ReseptionTable";
-const PaidTurns = () => {
+const PaidTurns = ({display}) => {
+ 
+  
   return (
     <Accordion
       defaultIndex={[0]}
@@ -26,7 +28,7 @@ const PaidTurns = () => {
 
         <AccordionPanel pb={4} px={0}>
           <Stack>
-            <ReseptionTable display="none" ButtonValue="ورود به شارژ" />
+            <ReseptionTable  display={display} isDisabled={true}  ButtonValue="ورود به شارژ" />
           </Stack>
         </AccordionPanel>
       </AccordionItem>

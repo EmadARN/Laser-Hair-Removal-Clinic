@@ -8,10 +8,10 @@ const Dashboard = ({ children }) => {
     <Grid templateColumns={"repeat(12, 1fr)"}>
       <GridItem colSpan={1}>
         <SideBarDashboard
-          admintDatas={receptionData}
+          receptionDatas={receptionData}
           h={"100vh"}
           textHead="کارمند"
-          active={false}
+          active={true}
         />
       </GridItem>
       <GridItem colSpan={11} px={6}>
