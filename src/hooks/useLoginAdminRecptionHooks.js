@@ -2,7 +2,7 @@ import { postAsyncLogin } from "@/features/adminDashboard/adminDashboardSlice";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 
-const LoginAdminRecptionHooks = () => {
+const useLoginAdminRecptionHooks = () => {
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies([
     "auth_Admin_token",
@@ -29,4 +29,4 @@ const LoginAdminRecptionHooks = () => {
 
   return login;
 };
-export default LoginAdminRecptionHooks;
+export default useLoginAdminRecptionHooks;

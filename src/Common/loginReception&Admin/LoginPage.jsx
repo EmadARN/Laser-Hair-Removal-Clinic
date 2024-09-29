@@ -4,13 +4,13 @@ import AnimationSide from "./widget/AnimationSide";
 import Inputs from "./widget/Inputs";
 import { BgAnimate } from "./widget/BgAnimate";
 import { useRouter } from "next/router";
-import LoginAdminRecptionHooks from "@/hooks/LoginAdminRecptionHooks";
+import useLoginAdminRecptionHooks from "@/hooks/useLoginAdminRecptionHooks";
 import { useCustomToast } from "@/utils/useCustomToast ";
 
 const LoginPage = () => {
   const [btnClick, setBtnClick] = useState(false);
   const [input, setInput] = useState({ username: "", password: "" });
-  const login = LoginAdminRecptionHooks();
+  const login = useLoginAdminRecptionHooks();
   const router = useRouter();
   const { showToast } = useCustomToast();
 
