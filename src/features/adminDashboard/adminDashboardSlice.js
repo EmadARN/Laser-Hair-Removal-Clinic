@@ -15,10 +15,12 @@ const handleAsyncState = (state, action, status) => {
 export const postAsyncLogin = createAsyncThunk(
   "user/postAsyncLogin",
   async (payload, { rejectWithValue }) => {
-
-
     try {
-      const { data } = await api.post("/Core/login/", payload);
+      const { data } = await api.post("/Core/login/", payload, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
