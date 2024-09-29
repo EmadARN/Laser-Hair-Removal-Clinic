@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  FormControl,
   Box,
   Flex,
   Button,
@@ -17,7 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ModalBodyContent = () => {
   const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
   const [usersForm, setUsersForm] = useState({
     last_date: 0,
     drug_hist: false,
@@ -27,30 +25,33 @@ const ModalBodyContent = () => {
   });
   const dispatch = useDispatch();
   const { token } = useSelector((store) => store.adminDashboard);
+
   const addChangeHandler = (e) => {
     const { name, value, type } = e.target;
-
     setUsersForm((prevForm) => ({
       ...prevForm,
       [name]: type === "radio" ? value : value,
     }));
   };
 
-  const inputFields = inputDataEmployee(usersForm, show, handleClick);
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(addAsyncUsers({ ...usersForm, token }));
   };
 
+  const renderInputFields = (fields) =>
+    fields.map((field) => (
+      <Box w="100%" key={field.name}>
+        <InputField {...field} onChange={addChangeHandler} />
+      </Box>
+    ));
+
   return (
-    <form action="" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Flex alignItems="center" gap={6}>
-        {inputFields.slice(0, 2).map((field) => (
-          <Box w="100%" key={field.name}>
-            <InputField {...field} onChange={addChangeHandler} />
-          </Box>
-        ))}
+        {renderInputFields(inputDataEmployee(usersForm, show))}
       </Flex>
+
       <Text pb={4} fontWeight="bold">
         نقش
       </Text>
@@ -73,10 +74,9 @@ const ModalBodyContent = () => {
         </Stack>
       </RadioGroup>
 
-      {inputFields.slice(2, 8).map((field) => (
-        <InputField key={field.name} {...field} onChange={addChangeHandler} />
-      ))}
-
+      <Text pb={4} fontWeight="bold">
+        تاریخ و اطلاعات پزشکی
+      </Text>
       <RadioButtonGroup
         label="بیماری خاص"
         name="decease_hist"
@@ -84,7 +84,6 @@ const ModalBodyContent = () => {
         onChange={addChangeHandler}
         defaultValue="false"
       />
-
       <RadioButtonGroup
         label="مصرف دارو"
         name="drug_hist"
@@ -92,9 +91,7 @@ const ModalBodyContent = () => {
         onChange={addChangeHandler}
         defaultValue="false"
       />
-      {inputFields.slice(8).map((field) => (
-        <InputField key={field.name} {...field} onChange={addChangeHandler} />
-      ))}
+
       <Button sx={{ w: "100%", mt: 8 }} colorScheme="blue" type="submit">
         افزودن
       </Button>
@@ -103,19 +100,3 @@ const ModalBodyContent = () => {
 };
 
 export default ModalBodyContent;
-//{
-//   name: "",
-//   last_name: "",
-//   phone_number: "",
-//   user_type: "2",
-//   username: "",
-//   password: "",
-//   national_code: "",
-//   address: "",
-//   house_number: "",
-//   decease_hist: false,
-//   drug_hist: false,
-//   doctor: "",
-//   last_date: "",
-//   offline_number: 0,
-// },
