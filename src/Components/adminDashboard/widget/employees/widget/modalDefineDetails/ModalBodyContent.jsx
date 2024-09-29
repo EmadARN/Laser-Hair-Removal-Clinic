@@ -14,6 +14,7 @@ import RadioButtonGroup from "./widget/RadioButtonGroup";
 import { addAsyncUsers } from "@/features/adminDashboard/adminDashboardSlice";
 import { inputDataEmployee, radioOptions } from "@/constants";
 import { useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
 
 const ModalBodyContent = () => {
   const [show, setShow] = useState(false);
@@ -22,9 +23,10 @@ const ModalBodyContent = () => {
     last_date: 0,
     drug_hist: false,
     decease_hist: false,
-    doctor: "",
+    doctor: "-",
     offline_number: 0,
   });
+  const [cookies, setCookie] = useCookies(["auth_Admin_token"]);
   const dispatch = useDispatch();
 
   const addChangeHandler = (e) => {
@@ -37,12 +39,22 @@ const ModalBodyContent = () => {
   };
 
   const inputFields = inputDataEmployee(usersForm, show, handleClick);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(addAsyncUsers({ ...usersForm }));
+    const result = await dispatch(addAsyncUsers({ ...usersForm }));
+
+    if (result.meta.requestStatus === "fulfilled") {
+      const receivedToken = result.payload.token;
+      console.log("receivedToken::", receivedToken);
+
+      if (receivedToken) {
+        setCookie("auth_Admin_token", receivedToken, {
+          path: "/",
+        });
+      }
+    }
   };
-  console.log("usersForm::", usersForm);
 
   return (
     <form action="" onSubmit={handleSubmit}>

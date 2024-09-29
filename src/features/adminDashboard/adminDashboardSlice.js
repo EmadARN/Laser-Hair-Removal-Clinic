@@ -28,10 +28,16 @@ export const addAsyncUsers = createAsyncThunk(
   "user/addAsyncUsers",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data } = await api.post("/Core/signup/admin/", payload);
+      const { data } = await api.post("/Core/signup/admin/", payload, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
       alert("User Created Successfully");
+
       return data;
     } catch (error) {
+      console.log(error);
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -43,7 +49,7 @@ const initialState = {
   error: "",
   users: [],
   token: null,
-  userType: null, 
+  userType: null,
 };
 
 const adminDashboardSlice = createSlice({

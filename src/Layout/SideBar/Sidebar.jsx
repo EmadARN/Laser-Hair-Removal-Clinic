@@ -27,7 +27,7 @@ const SideBarDashboard = ({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
-  const [cookies, , removeCookie] = useCookies(["auth_AdminReception_token"]);
+  const [cookies, , removeCookie] = useCookies(["auth_Admin_token"]);
   const router = useRouter();
 
   const handleLogout = () => {

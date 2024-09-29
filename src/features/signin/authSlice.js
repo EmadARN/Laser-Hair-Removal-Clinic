@@ -32,7 +32,6 @@ export const postAsyncCode = createAsyncThunk(
           },
         }
       );
-      console.log(response);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
