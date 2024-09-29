@@ -16,36 +16,34 @@ export const postAsyncLogin = createAsyncThunk(
   "user/postAsyncLogin",
   async (payload, { rejectWithValue }) => {
     try {
-      const { data } = await api.post("/Core/login/", payload, {
-        headers: {
-          Authorization: `Bearer ${payload.token}`,
-        },
-      });
+      const { data } = await api.post("/Core/login/", payload);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
+
 export const addAsyncUsers = createAsyncThunk(
   "user/addAsyncUsers",
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.post("/Core/signup/admin/", payload);
       alert("User Created Successfully");
-
       return data;
     } catch (error) {
-      return rejectWithValue(error.response.data.message || error.message);
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
+
 // Initial State
 const initialState = {
   loading: false,
   error: "",
   users: [],
   token: null,
+  userType: null, 
 };
 
 const adminDashboardSlice = createSlice({
@@ -61,6 +59,7 @@ const adminDashboardSlice = createSlice({
         handleAsyncState(state, action, "fulfilled");
         state.users.push(action.payload);
         state.token = action.payload.token;
+        state.userType = action.payload.user_type;
       })
       .addCase(postAsyncLogin.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
@@ -71,7 +70,6 @@ const adminDashboardSlice = createSlice({
       .addCase(addAsyncUsers.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.users.push(action.payload);
-        state.token = action.payload.token;
       })
       .addCase(addAsyncUsers.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")

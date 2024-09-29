@@ -9,13 +9,16 @@ import { useCookies } from "react-cookie";
 import { postAsyncLogin } from "@/features/adminDashboard/adminDashboardSlice";
 
 const LoginPage = () => {
-  const [btnClick, setBtnClick] = React.useState(false);
+  const [btnClick, setBtnClick] = useState(false);
   const [adminInput, setAdminInput] = useState({ username: "", password: "" });
   const [employeeInput, setEmployeeInput] = useState({
     username: "",
     password: "",
   });
-  const [cookies, setCookie] = useCookies(["auth_AdminReception_token"]);
+  const [cookies, setCookie] = useCookies([
+    "auth_Admin_token",
+    "auth_Employee_token",
+  ]);
 
   const router = useRouter();
   const adminInputHandler = (e) => {
@@ -38,10 +41,15 @@ const LoginPage = () => {
     if (result.meta.requestStatus === "fulfilled") {
       const receivedToken = result.payload.token;
       if (receivedToken) {
-        setCookie("auth_AdminReception_token", receivedToken, {
+        // تعیین نام کوکی بر اساس نوع کاربر
+        const cookieName = btnClick
+          ? "auth_Admin_token"
+          : "auth_Employee_token";
+        setCookie(cookieName, receivedToken, {
           path: "/",
         });
 
+        // هدایت به داشبورد مناسب
         if (btnClick) {
           router.push("/adminDashboard/home");
         } else {
@@ -49,8 +57,9 @@ const LoginPage = () => {
         }
       }
 
-      setAdminInput({});
-      setEmployeeInput({});
+      // Reset the input fields
+      setAdminInput({ username: "", password: "" });
+      setEmployeeInput({ username: "", password: "" });
     }
   };
 

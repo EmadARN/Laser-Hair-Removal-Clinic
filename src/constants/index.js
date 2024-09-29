@@ -374,12 +374,6 @@ export const inputDataEmployee = (usersForm, show, handleClick) => {
       placeholder: "شماره تماس",
       value: usersForm.house_number,
     },
-    {
-      label: "دکتر",
-      name: "doctor",
-      placeholder: "دکتر",
-      value: usersForm.doctor,
-    },
   ];
 };
 //ReceptionDashboard

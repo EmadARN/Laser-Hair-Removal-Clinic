@@ -19,7 +19,7 @@ const ModalBodyContent = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const [usersForm, setUsersForm] = useState({
-    last_date: "",
+    last_date: 0,
     drug_hist: false,
     decease_hist: false,
     doctor: "",
@@ -39,9 +39,10 @@ const ModalBodyContent = () => {
   const inputFields = inputDataEmployee(usersForm, show, handleClick);
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     dispatch(addAsyncUsers({ ...usersForm }));
   };
+  console.log("usersForm::", usersForm);
 
   return (
     <form action="" onSubmit={handleSubmit}>
@@ -65,10 +66,10 @@ const ModalBodyContent = () => {
         defaultValue="منشی"
       >
         <Stack spacing={20} direction="row">
-          <Radio colorScheme="blue" value="اوپراتور">
+          <Radio colorScheme="blue" value="o">
             اوپراتور
           </Radio>
-          <Radio colorScheme="blue" value="منشی">
+          <Radio colorScheme="blue" value="r">
             منشی
           </Radio>
         </Stack>
