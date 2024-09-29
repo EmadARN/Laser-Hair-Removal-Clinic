@@ -3,72 +3,60 @@ import React, { useState } from "react";
 import AnimationSide from "./widget/AnimationSide";
 import Inputs from "./widget/Inputs";
 import { BgAnimate } from "./widget/BgAnimate";
-import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { useCookies } from "react-cookie";
-import { postAsyncLogin } from "@/features/adminDashboard/adminDashboardSlice";
+import LoginAdminRecptionHooks from "@/hooks/LoginAdminRecptionHooks";
+import { useCustomToast } from "@/utils/useCustomToast ";
 
 const LoginPage = () => {
   const [btnClick, setBtnClick] = useState(false);
-  const [adminInput, setAdminInput] = useState({ username: "", password: "" });
-  const [employeeInput, setEmployeeInput] = useState({
-    username: "",
-    password: "",
-  });
-  const [cookies, setCookie] = useCookies([
-    "auth_Admin_token",
-    "auth_Employee_token",
-  ]);
-  const dispatch = useDispatch();
+  const [input, setInput] = useState({ username: "", password: "" });
+  const login = LoginAdminRecptionHooks();
   const router = useRouter();
+  const { showToast } = useCustomToast();
 
-  const handleInputChange = (setter) => (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setter((prev) => ({ ...prev, [name]: value }));
+    setInput((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const input = btnClick ? adminInput : employeeInput;
-    const tokenName = btnClick ? "auth_Admin_token" : "auth_Employee_token";
-
     if (!input.username || !input.password) {
-      alert(
-        `لطفا نام کاربری و رمز عبور ${
-          btnClick ? "مدیر" : "کارمند"
-        } را وارد کنید.`
-      );
+      showToast({
+        title: "خطا",
+        description: "لطفا نام کاربری و رمز عبور را وارد کنید.",
+        status: "error",
+      });
       return;
     }
 
-    const result = await dispatch(postAsyncLogin(input));
-
-    if (result.meta.requestStatus === "fulfilled") {
-      const receivedToken = result.payload.token;
-      const userType = result.payload.user_type;
-
-      if (
-        receivedToken &&
-        (btnClick ? userType === "a" : ["o", "r"].includes(userType))
-      ) {
-        setCookie(tokenName, receivedToken, { path: "/" });
-        router.push(
-          btnClick ? "/adminDashboard/home" : "/reseptionDashboard/dailyShifts"
-        );
-      } else {
-        alert(
-          `شما نمی‌توانید به عنوان ${btnClick ? "مدیر" : "کارمند"} وارد شوید.`
-        );
-      }
+    const { success } = await login(input, btnClick);
+    if (success) {
+      showToast({
+        title: "ورود موفقیت‌آمیز",
+        description: "به داشبورد هدایت شدید.",
+        status: "success",
+      });
+      router.push(
+        btnClick ? "/adminDashboard/home" : "/reseptionDashboard/dailyShifts"
+      );
+    } else {
+      showToast({
+        title: "خطا",
+        description: `شما نمی‌توانید به عنوان ${
+          btnClick ? "مدیر" : "کارمند"
+        } وارد شوید.`,
+        status: "error",
+      });
     }
 
     // Reset input fields
-    setAdminInput({ username: "", password: "" });
-    setEmployeeInput({ username: "", password: "" });
+    setInput({ username: "", password: "" });
   };
 
   const toggleForm = () => {
     setBtnClick((prev) => !prev);
+    setInput({ username: "", password: "" });
   };
 
   return (
@@ -99,8 +87,8 @@ const LoginPage = () => {
             <Inputs
               label="ورود به عنوان مدیر"
               submitHandler={handleSubmit}
-              inputHandler={handleInputChange(setAdminInput)}
-              formInput={adminInput}
+              inputHandler={handleInputChange}
+              formInput={input}
             />
           </Box>
           <Box
@@ -137,8 +125,8 @@ const LoginPage = () => {
         <Inputs
           label="ورود به عنوان کارمند"
           submitHandler={handleSubmit}
-          inputHandler={handleInputChange(setEmployeeInput)}
-          formInput={employeeInput}
+          inputHandler={handleInputChange}
+          formInput={input}
         />
       </Box>
     </Flex>
