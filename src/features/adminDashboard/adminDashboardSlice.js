@@ -25,7 +25,19 @@ export const postAsyncLogin = createAsyncThunk(
     }
   }
 );
+export const addAsyncUsers = createAsyncThunk(
+  "user/addAsyncUsers",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/Core/signup/admin/", payload);
+      alert("User Created Successfully");
 
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message || error.message);
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
@@ -49,6 +61,17 @@ const adminDashboardSlice = createSlice({
         state.token = action.payload.token;
       })
       .addCase(postAsyncLogin.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(addAsyncUsers.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(addAsyncUsers.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.users.push(action.payload);
+        state.token = action.payload.token;
+      })
+      .addCase(addAsyncUsers.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       );
   },
