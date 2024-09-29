@@ -39,7 +39,7 @@ const ModalBodyContent = () => {
   const inputFields = inputDataEmployee(usersForm, show, handleClick);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("usersForm before submitting:", usersForm);
+  
     dispatch(addAsyncUsers({ ...usersForm }));
   };
 
