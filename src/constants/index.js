@@ -27,6 +27,8 @@ import Reports from "@/Components/adminDashboard/widget/reports";
 import Setting from "@/Components/adminDashboard/widget/setting";
 import AreaLazer from "@/Components/adminDashboard/widget/areaLazer";
 import Home from "@/Components/adminDashboard/widget/home";
+import DailyShift from "@/Components/reseptionDashboard/DailyShift";
+import ResClients from "@/Components/reseptionDashboard/ResClients";
 //Home
 export const data = [
   { id: 0, title: "خانه", icon: <HomeIcon />, src: "/" },
@@ -247,7 +249,6 @@ export const get_turn_data = [
 ];
 
 //AdminDashboard
-
 export const admintData = [
   {
     id: 0,
@@ -385,13 +386,15 @@ export const inputDataEmployee = (usersForm, show, handleClick) => {
 export const receptionData = [
   {
     id: 0,
-    name: "dailyShifts",
+    slug: "dailyShifts",
+    component: <DailyShift />,
     amount: "نوبت های روز",
     icon: <SlCalender />,
   },
   {
     id: 1,
-    name: "listOfClients",
+    slug: "resClients",
+    component: <ResClients />,
     amount: "لیست مراجعین",
     icon: <IoMdPeople />,
   },

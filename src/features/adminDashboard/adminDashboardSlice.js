@@ -15,7 +15,7 @@ const handleAsyncState = (state, action, status) => {
 export const postAsyncLogin = createAsyncThunk(
   "user/postAsyncLogin",
   async (payload, { rejectWithValue }) => {
-    console.log("payload::", payload);
+
 
     try {
       const { data } = await api.post("/Core/login/", payload);

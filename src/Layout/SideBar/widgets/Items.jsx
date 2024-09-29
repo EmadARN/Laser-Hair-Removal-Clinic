@@ -25,10 +25,12 @@ export const Item = ({
   const router = useRouter();
   // تابع برای ساختن مسیر درست
   const routers = () => {
-    const basePath = "adminDashboard";
+    const basePath = router.pathname;
     const currentPath = router.pathname;
     return currentPath.includes(basePath) ? slug : `${basePath}/${slug}`;
   };
+
+  
 
   return (
     <Box sx={style}>

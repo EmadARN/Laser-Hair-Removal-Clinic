@@ -15,7 +15,7 @@ const Body = ({
   const adminOrRecption = () => {
     if (pathname === `/adminDashboard/[adminDashboardSlug]`) {
       return admintDatas;
-    } else if (pathname === "/reseptionDashboard") {
+    } else if (pathname === `/reseptionDashboard/[reseptionDashboardSlug]`) {
       return receptionDatas;
     }
   };
