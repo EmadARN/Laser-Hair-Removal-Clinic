@@ -19,52 +19,56 @@ const LoginPage = () => {
     "auth_Admin_token",
     "auth_Employee_token",
   ]);
-
-  const router = useRouter();
-  const adminInputHandler = (e) => {
-    const { name, value } = e.target;
-    setAdminInput({ ...adminInput, [name]: value });
-  };
-
-  const employeeInputHandler = (e) => {
-    const { name, value } = e.target;
-    setEmployeeInput({ ...employeeInput, [name]: value });
-  };
-
   const dispatch = useDispatch();
+  const router = useRouter();
 
-  const submitHandler = async (e) => {
+  const handleInputChange = (setter) => (e) => {
+    const { name, value } = e.target;
+    setter((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = btnClick ? adminInput : employeeInput;
-    const result = await dispatch(postAsyncLogin(payload));
+    const input = btnClick ? adminInput : employeeInput;
+    const tokenName = btnClick ? "auth_Admin_token" : "auth_Employee_token";
+
+    if (!input.username || !input.password) {
+      alert(
+        `لطفا نام کاربری و رمز عبور ${
+          btnClick ? "مدیر" : "کارمند"
+        } را وارد کنید.`
+      );
+      return;
+    }
+
+    const result = await dispatch(postAsyncLogin(input));
 
     if (result.meta.requestStatus === "fulfilled") {
       const receivedToken = result.payload.token;
-      if (receivedToken) {
-        // تعیین نام کوکی بر اساس نوع کاربر
-        const cookieName = btnClick
-          ? "auth_Admin_token"
-          : "auth_Employee_token";
-        setCookie(cookieName, receivedToken, {
-          path: "/",
-        });
+      const userType = result.payload.user_type;
 
-        // هدایت به داشبورد مناسب
-        if (btnClick) {
-          router.push("/adminDashboard/home");
-        } else {
-          router.push("/reseptionDashboard/dailyShifts");
-        }
+      if (
+        receivedToken &&
+        (btnClick ? userType === "a" : ["o", "r"].includes(userType))
+      ) {
+        setCookie(tokenName, receivedToken, { path: "/" });
+        router.push(
+          btnClick ? "/adminDashboard/home" : "/reseptionDashboard/dailyShifts"
+        );
+      } else {
+        alert(
+          `شما نمی‌توانید به عنوان ${btnClick ? "مدیر" : "کارمند"} وارد شوید.`
+        );
       }
-
-      // Reset the input fields
-      setAdminInput({ username: "", password: "" });
-      setEmployeeInput({ username: "", password: "" });
     }
+
+    // Reset input fields
+    setAdminInput({ username: "", password: "" });
+    setEmployeeInput({ username: "", password: "" });
   };
 
-  const clicHandler = () => {
-    setBtnClick(!btnClick);
+  const toggleForm = () => {
+    setBtnClick((prev) => !prev);
   };
 
   return (
@@ -94,8 +98,8 @@ const LoginPage = () => {
           >
             <Inputs
               label="ورود به عنوان مدیر"
-              submitHandler={submitHandler}
-              inputHandler={adminInputHandler}
+              submitHandler={handleSubmit}
+              inputHandler={handleInputChange(setAdminInput)}
               formInput={adminInput}
             />
           </Box>
@@ -112,7 +116,7 @@ const LoginPage = () => {
               transition: "all 1s ease",
             }}
           >
-            <AnimationSide clicHandler={clicHandler} btnClick={btnClick} />
+            <AnimationSide clicHandler={toggleForm} btnClick={btnClick} />
           </Box>
         </Box>
       </Box>
@@ -132,8 +136,8 @@ const LoginPage = () => {
       >
         <Inputs
           label="ورود به عنوان کارمند"
-          submitHandler={submitHandler}
-          inputHandler={employeeInputHandler}
+          submitHandler={handleSubmit}
+          inputHandler={handleInputChange(setEmployeeInput)}
           formInput={employeeInput}
         />
       </Box>

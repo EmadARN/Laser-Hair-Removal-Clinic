@@ -27,11 +27,11 @@ const SideBarDashboard = ({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
-  const [cookies, , removeCookie] = useCookies(["auth_Admin_token"]);
+  const [cookies, , removeCookie] = useCookies(["remove-auth_token"]);
   const router = useRouter();
 
   const handleLogout = () => {
-    removeCookie("auth_token", { path: "/" });
+    removeCookie("remove-auth_token", { path: "/" });
     router.push("/");
   };
   return (

@@ -14,7 +14,6 @@ import RadioButtonGroup from "./widget/RadioButtonGroup";
 import { addAsyncUsers } from "@/features/adminDashboard/adminDashboardSlice";
 import { inputDataEmployee, radioOptions } from "@/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { useCookies } from "react-cookie";
 
 const ModalBodyContent = () => {
   const [show, setShow] = useState(false);
@@ -26,9 +25,8 @@ const ModalBodyContent = () => {
     doctor: "-",
     offline_number: 0,
   });
-  const [cookies, setCookie] = useCookies(["auth_Admin_token"]);
   const dispatch = useDispatch();
-const {token} = useSelector((store)=>store.adminDashboard)
+  const { token } = useSelector((store) => store.adminDashboard);
   const addChangeHandler = (e) => {
     const { name, value, type } = e.target;
 
@@ -41,19 +39,7 @@ const {token} = useSelector((store)=>store.adminDashboard)
   const inputFields = inputDataEmployee(usersForm, show, handleClick);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const result = await dispatch(addAsyncUsers({ ...usersForm ,token}));
-
-    if (result.meta.requestStatus === "fulfilled") {
-      const receivedToken = result.payload.token;
-      console.log("receivedToken::", receivedToken);
-
-      if (receivedToken) {
-        setCookie("auth_Admin_token", receivedToken, {
-          path: "/",
-        });
-      }
-    }
+    await dispatch(addAsyncUsers({ ...usersForm, token }));
   };
 
   return (
