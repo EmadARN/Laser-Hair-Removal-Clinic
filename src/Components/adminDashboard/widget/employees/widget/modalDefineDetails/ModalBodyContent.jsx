@@ -13,7 +13,7 @@ import InputField from "./widget/InputField";
 import RadioButtonGroup from "./widget/RadioButtonGroup";
 import { addAsyncUsers } from "@/features/adminDashboard/adminDashboardSlice";
 import { inputDataEmployee, radioOptions } from "@/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 
 const ModalBodyContent = () => {
@@ -28,7 +28,7 @@ const ModalBodyContent = () => {
   });
   const [cookies, setCookie] = useCookies(["auth_Admin_token"]);
   const dispatch = useDispatch();
-
+const {token} = useSelector((store)=>store.adminDashboard)
   const addChangeHandler = (e) => {
     const { name, value, type } = e.target;
 
@@ -42,7 +42,7 @@ const ModalBodyContent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await dispatch(addAsyncUsers({ ...usersForm }));
+    const result = await dispatch(addAsyncUsers({ ...usersForm ,token}));
 
     if (result.meta.requestStatus === "fulfilled") {
       const receivedToken = result.payload.token;

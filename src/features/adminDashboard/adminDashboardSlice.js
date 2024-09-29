@@ -48,7 +48,7 @@ const initialState = {
   loading: false,
   error: "",
   users: [],
-  token: null,
+  token: '',
   userType: null,
 };
 
