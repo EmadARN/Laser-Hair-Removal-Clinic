@@ -25,8 +25,6 @@ const ModalBodyContent = () => {
   });
   const dispatch = useDispatch();
   const { token } = useSelector((store) => store.adminDashboard);
-  console.log("token;;;", token);
-
   const addChangeHandler = (e) => {
     const { name, value, type } = e.target;
     setUsersForm((prevForm) => ({
