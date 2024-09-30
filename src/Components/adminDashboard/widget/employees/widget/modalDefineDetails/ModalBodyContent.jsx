@@ -25,6 +25,7 @@ const ModalBodyContent = () => {
   });
   const dispatch = useDispatch();
   const { token } = useSelector((store) => store.adminDashboard);
+  console.log("token;;;", token);
 
   const addChangeHandler = (e) => {
     const { name, value, type } = e.target;
@@ -40,19 +41,30 @@ const ModalBodyContent = () => {
   };
 
   const renderInputFields = (fields) =>
-    fields.map((field) => (
+    fields.slice(0, 2).map((field) => (
       <Box w="100%" key={field.name}>
         <InputField {...field} onChange={addChangeHandler} />
       </Box>
     ));
-
+  const renderInputFields2 = (fields) =>
+    fields.slice(2, 5).map((field) => (
+      <Box w="100%" key={field.name}>
+        <InputField {...field} onChange={addChangeHandler} />
+      </Box>
+    ));
+  const renderInputFields3 = (fields) =>
+    fields.slice(5).map((field) => (
+      <Box w="100%" key={field.name}>
+        <InputField {...field} onChange={addChangeHandler} />
+      </Box>
+    ));
   return (
     <form onSubmit={handleSubmit}>
       <Flex alignItems="center" gap={6}>
         {renderInputFields(inputDataEmployee(usersForm, show))}
       </Flex>
 
-      <Text pb={4} fontWeight="bold">
+      <Text pb={4} pt={4} fontWeight="bold">
         نقش
       </Text>
       <RadioGroup
@@ -74,9 +86,9 @@ const ModalBodyContent = () => {
         </Stack>
       </RadioGroup>
 
-      <Text pb={4} fontWeight="bold">
-        تاریخ و اطلاعات پزشکی
-      </Text>
+      <Flex flexDirection={"column"} alignItems="center" gap={6}>
+        {renderInputFields2(inputDataEmployee(usersForm, show))}
+      </Flex>
       <RadioButtonGroup
         label="بیماری خاص"
         name="decease_hist"
@@ -91,7 +103,9 @@ const ModalBodyContent = () => {
         onChange={addChangeHandler}
         defaultValue="false"
       />
-
+      <Flex flexDirection={"column"} alignItems="center" gap={6}>
+        {renderInputFields3(inputDataEmployee(usersForm, show))}
+      </Flex>
       <Button sx={{ w: "100%", mt: 8 }} colorScheme="blue" type="submit">
         افزودن
       </Button>

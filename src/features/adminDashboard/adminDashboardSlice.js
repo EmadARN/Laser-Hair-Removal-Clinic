@@ -12,12 +12,31 @@ const handleAsyncState = (state, action, status) => {
 };
 
 // Async Thunks
+export const getAsyncOpratorList = createAsyncThunk(
+  "user/getAsyncOpratorList",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload::", payload);
+
+    try {
+      const { data } = await api.get("/Core/operator/list/", {
+        headers: {
+          Authorization: `Bearer ${payload.cookies}`,
+        },
+      });
+      console.log("Login operator list:", data);
+      return data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const postAsyncLogin = createAsyncThunk(
   "user/postAsyncLogin",
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.post("/Core/login/", payload);
-      console.log("Login response data:", data);
       return data;
     } catch (error) {
       console.log(error);
@@ -81,6 +100,16 @@ const adminDashboardSlice = createSlice({
         state.users.push(action.payload);
       })
       .addCase(addAsyncUsers.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getAsyncOpratorList.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(getAsyncOpratorList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.users.push(action.payload);
+      })
+      .addCase(getAsyncOpratorList.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       );
   },
