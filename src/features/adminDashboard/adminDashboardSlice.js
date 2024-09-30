@@ -17,8 +17,11 @@ export const postAsyncLogin = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.post("/Core/login/", payload);
+      console.log("Login response data:", data);
       return data;
     } catch (error) {
+      console.log(error);
+
       return rejectWithValue(error.message);
     }
   }
@@ -48,7 +51,7 @@ const initialState = {
   loading: false,
   error: "",
   users: [],
-  token: '',
+  token: "",
   userType: null,
 };
 

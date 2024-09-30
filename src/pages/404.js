@@ -1,14 +1,36 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import { Box, Text, Button, Heading, Flex } from "@chakra-ui/react";
+import { Link } from "next/link";
+import { useRouter } from "next/router";
 
 export default function Custom404() {
+  const router = useRouter();
+
   return (
-    <div align="center">
-      <h1>404 - Page Not Found</h1>
-      <p>It seems we can't find what you're looking for. Perhaps searching can help.</p>
-      <Link href="/">
-      Go back home
+    <Flex
+      direction="column"
+      align="center"
+      justify="center"
+      height="100vh"
+      bg="gray.100"
+      p={5}
+    >
+      <Box>
+        <Heading as="h1" size="4xl" color="blue.500">
+          404
+        </Heading>
+        <Text fontSize="2xl" mt={4}>
+          صفحه مورد نظر یافت نشد
+        </Text>
+        <Text fontSize="lg" color="gray.600" mt={2}>
+          به نظر می‌رسد که نمی‌توانیم آنچه را که به دنبالش هستید پیدا کنیم.
+        </Text>
+      </Box>
+      <Link href="/" passHref>
+        <Button mt={6} colorScheme="blue">
+          برگشت به خانه
+        </Button>
       </Link>
-    </div>
+    </Flex>
   );
 }

@@ -3,68 +3,60 @@ import React, { useState } from "react";
 import AnimationSide from "./widget/AnimationSide";
 import Inputs from "./widget/Inputs";
 import { BgAnimate } from "./widget/BgAnimate";
-import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { useCookies } from "react-cookie";
-import { postAsyncLogin } from "@/features/adminDashboard/adminDashboardSlice";
+import useLoginAdminRecptionHooks from "@/hooks/useLoginAdminRecptionHooks";
+import { useCustomToast } from "@/utils/useCustomToast ";
 
 const LoginPage = () => {
   const [btnClick, setBtnClick] = useState(false);
-  const [adminInput, setAdminInput] = useState({ username: "", password: "" });
-  const [employeeInput, setEmployeeInput] = useState({
-    username: "",
-    password: "",
-  });
-  const [cookies, setCookie] = useCookies([
-    "auth_Admin_token",
-    "auth_Employee_token",
-  ]);
-
+  const [input, setInput] = useState({ username: "", password: "" });
+  const login = useLoginAdminRecptionHooks();
   const router = useRouter();
-  const adminInputHandler = (e) => {
+  const { showToast } = useCustomToast();
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setAdminInput({ ...adminInput, [name]: value });
+    setInput((prev) => ({ ...prev, [name]: value }));
   };
 
-  const employeeInputHandler = (e) => {
-    const { name, value } = e.target;
-    setEmployeeInput({ ...employeeInput, [name]: value });
-  };
-
-  const dispatch = useDispatch();
-
-  const submitHandler = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = btnClick ? adminInput : employeeInput;
-    const result = await dispatch(postAsyncLogin(payload));
-
-    if (result.meta.requestStatus === "fulfilled") {
-      const receivedToken = result.payload.token;
-      if (receivedToken) {
-        // تعیین نام کوکی بر اساس نوع کاربر
-        const cookieName = btnClick
-          ? "auth_Admin_token"
-          : "auth_Employee_token";
-        setCookie(cookieName, receivedToken, {
-          path: "/",
-        });
-
-        // هدایت به داشبورد مناسب
-        if (btnClick) {
-          router.push("/adminDashboard/home");
-        } else {
-          router.push("/reseptionDashboard/dailyShifts");
-        }
-      }
-
-      // Reset the input fields
-      setAdminInput({ username: "", password: "" });
-      setEmployeeInput({ username: "", password: "" });
+    if (!input.username || !input.password) {
+      showToast({
+        title: "خطا",
+        description: "لطفا نام کاربری و رمز عبور را وارد کنید.",
+        status: "error",
+      });
+      return;
     }
+
+    const { success } = await login(input, btnClick);
+    if (success) {
+      showToast({
+        title: "ورود موفقیت‌آمیز",
+        description: "به داشبورد هدایت شدید.",
+        status: "success",
+      });
+      router.push(
+        btnClick ? "/adminDashboard/home" : "/reseptionDashboard/dailyShifts"
+      );
+    } else {
+      showToast({
+        title: "خطا",
+        description: `شما نمی‌توانید به عنوان ${
+          btnClick ? "مدیر" : "کارمند"
+        } وارد شوید.`,
+        status: "error",
+      });
+    }
+
+    // Reset input fields
+    setInput({ username: "", password: "" });
   };
 
-  const clicHandler = () => {
-    setBtnClick(!btnClick);
+  const toggleForm = () => {
+    setBtnClick((prev) => !prev);
+    setInput({ username: "", password: "" });
   };
 
   return (
@@ -94,9 +86,9 @@ const LoginPage = () => {
           >
             <Inputs
               label="ورود به عنوان مدیر"
-              submitHandler={submitHandler}
-              inputHandler={adminInputHandler}
-              formInput={adminInput}
+              submitHandler={handleSubmit}
+              inputHandler={handleInputChange}
+              formInput={input}
             />
           </Box>
           <Box
@@ -112,7 +104,7 @@ const LoginPage = () => {
               transition: "all 1s ease",
             }}
           >
-            <AnimationSide clicHandler={clicHandler} btnClick={btnClick} />
+            <AnimationSide clicHandler={toggleForm} btnClick={btnClick} />
           </Box>
         </Box>
       </Box>
@@ -132,9 +124,9 @@ const LoginPage = () => {
       >
         <Inputs
           label="ورود به عنوان کارمند"
-          submitHandler={submitHandler}
-          inputHandler={employeeInputHandler}
-          formInput={employeeInput}
+          submitHandler={handleSubmit}
+          inputHandler={handleInputChange}
+          formInput={input}
         />
       </Box>
     </Flex>
