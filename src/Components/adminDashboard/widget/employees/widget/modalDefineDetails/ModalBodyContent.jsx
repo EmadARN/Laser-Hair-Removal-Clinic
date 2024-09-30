@@ -24,7 +24,7 @@ const ModalBodyContent = () => {
     offline_number: 0,
   });
   const dispatch = useDispatch();
-const {token} = useSelector((store)=>store.adminDashboard)
+  const { token } = useSelector((store) => store.adminDashboard);
   const addChangeHandler = (e) => {
     const { name, value, type } = e.target;
     setUsersForm((prevForm) => ({
@@ -35,20 +35,15 @@ const {token} = useSelector((store)=>store.adminDashboard)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const result = await dispatch(addAsyncUsers({ ...usersForm ,token}));
-
-    if (result.meta.requestStatus === "fulfilled") {
-      const receivedToken = result.payload.token;
-      console.log("receivedToken::", receivedToken);
-
-      if (receivedToken) {
-        setCookie("auth_Admin_token", receivedToken, {
-          path: "/",
-        });
-      }
-    }
+    await dispatch(addAsyncUsers({ ...usersForm, token }));
   };
+
+  const renderInputFields = (fields) =>
+    fields.map((field) => (
+      <Box w="100%" key={field.name}>
+        <InputField {...field} onChange={addChangeHandler} />
+      </Box>
+    ));
 
   return (
     <form onSubmit={handleSubmit}>
