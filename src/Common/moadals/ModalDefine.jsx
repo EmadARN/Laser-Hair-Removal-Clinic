@@ -25,7 +25,18 @@ const ModalDefine = ({
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const renderContents = renderContent();
-
+  const modalBodyStyle = {
+    maxHeight: "420px",
+    overflowY: "auto",
+    py: 6,
+    "&::-webkit-scrollbar": {
+      width: "0.4em",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "gray.500",
+      borderRadius: "3px",
+    },
+  };
   return (
     <>
       <IconButton onClick={onOpen} icon={btn} display={iconBtnDisply} />
@@ -64,7 +75,7 @@ const ModalDefine = ({
               }}
             />
           </Box>
-          <ModalBody py={6}>{renderContents.body}</ModalBody>
+          <ModalBody sx={modalBodyStyle}>{renderContents.body}</ModalBody>
           <ModalFooter sx={{ display: addDisplay }} pt={10}>
             {renderContents.footer}
           </ModalFooter>
