@@ -28,7 +28,7 @@ const ModalBodyContent = () => {
   });
   const [cookies, setCookie] = useCookies(["auth_Admin_token"]);
   const dispatch = useDispatch();
-const {token} = useSelector((store)=>store.adminDashboard)
+  const { token } = useSelector((store) => store.adminDashboard);
   const addChangeHandler = (e) => {
     const { name, value, type } = e.target;
 
@@ -42,7 +42,7 @@ const {token} = useSelector((store)=>store.adminDashboard)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await dispatch(addAsyncUsers({ ...usersForm ,token}));
+    const result = await dispatch(addAsyncUsers({ ...usersForm, token }));
 
     if (result.meta.requestStatus === "fulfilled") {
       const receivedToken = result.payload.token;
