@@ -5,23 +5,43 @@ import BodyContent from "./widget/modalAttentionDetails/BodyContent";
 import FooterContent from "./widget/modalAttentionDetails/FooterContent";
 import HeaderContent from "./widget/modalAttentionDetails/HeaderContent";
 import Lists from "../../common/Lists";
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner, Text } from "@chakra-ui/react";
 import AdminHeader from "../AdminHeader/AdminHeader";
 import { RiShieldUserFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { getAsyncOpratorList } from "@/features/adminDashboard/adminDashboardSlice";
-import { useCookies } from "react-cookie";
 
 const Empolyees = () => {
   const dispatch = useDispatch();
-  const [cookies, setCookie] = useCookies(["auth_Admin_token"]);
 
-  const { users, token } = useSelector((store) => store.adminDashboard);
+  // Selector برای دریافت وضعیت بارگذاری، داده‌ها و توکن
+  const { loading, error, users, token } = useSelector(
+    (state) => state.adminDashboard
+  );
+
   useEffect(() => {
-    dispatch(getAsyncOpratorList({ cookies }));
-  }, [dispatch]);
-  console.log("users::", users);
-  console.log("token::", token);
+    // اگر توکن وجود دارد، اکشن برای بارگذاری لیست کاربران را فراخوانی کنید
+    if (token) {
+      dispatch(getAsyncOpratorList(token));
+    }
+  }, [dispatch, token]);
+
+  // مدیریت وضعیت بارگذاری و خطا
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <Text color="red.500">خطا در بارگذاری داده‌ها: {error}</Text>;
+  }
+  const type = (user) => {
+    return user.user_type === "o"
+      ? "اوپراتور"
+      : user.user_type === "r"
+      ? "منشی"
+      : "نامشخص";
+  };
+  console.log(users);
 
   return (
     <>
@@ -37,18 +57,30 @@ const Empolyees = () => {
         />
       </Box>
       <Box sx={{ mt: 8 }}>
-        <Lists
-          firstArea="علی مظفری"
-          secondArea="منشی"
-          displayThirdArea="none"
-          ModalBodyContent={ModalBodyContent}
-          ModalFooterContent={ModalFooterContent}
-          HeaderContent={HeaderContent}
-          headerContentValue="ویرایش کارمند"
-          BodyContent={BodyContent}
-          FooterContent={FooterContent}
-          iconBtnDisply="none"
-        />
+        {users.operator_list && users.operator_list.length > 0 ? (
+          users.operator_list.map((user) => {
+            const userType = type(user);
+            return (
+              <Lists
+                key={user.id}
+                firstArea={user.username}
+                secondArea={user.name + " " + user.last_name}
+                thirdArea={userType}
+                ModalBodyContent={ModalBodyContent}
+                ModalFooterContent={ModalFooterContent}
+                HeaderContent={HeaderContent}
+                headerContentValue="ویرایش کارمند"
+                BodyContent={BodyContent}
+                FooterContent={FooterContent}
+                iconBtnDisply="none"
+                addDisplay="none"
+
+              />
+            );
+          })
+        ) : (
+          <Text>هیچ کارمندی وجود ندارد.</Text>
+        )}
       </Box>
     </>
   );

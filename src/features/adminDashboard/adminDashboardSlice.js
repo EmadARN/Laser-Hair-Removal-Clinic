@@ -13,20 +13,18 @@ const handleAsyncState = (state, action, status) => {
 
 // Async Thunks
 export const getAsyncOpratorList = createAsyncThunk(
-  "user/getAsyncOpratorList",
-  async (payload, { rejectWithValue }) => {
-    console.log("payload::", payload);
-
+  "admin/getAsyncOpratorList",
+  async (_, { getState, rejectWithValue }) => {
+    const { token } = getState().adminDashboard; // دریافت توکن از وضعیت
     try {
       const { data } = await api.get("/Core/operator/list/", {
         headers: {
-          Authorization: `Bearer ${payload.cookies}`,
+          Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Login operator list:", data);
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
@@ -53,7 +51,6 @@ export const addAsyncUsers = createAsyncThunk(
         },
       });
       alert("User Created Successfully");
-
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
@@ -105,7 +102,7 @@ const initialState = {
   loading: false,
   error: "",
   users: [],
-  token: "",
+  token: typeof window !== "undefined" ? localStorage.getItem("token") : null, // توکن برای ذخیره در حالت
   userType: null,
   AreaLaser: [],
 };
@@ -122,7 +119,10 @@ const adminDashboardSlice = createSlice({
       .addCase(postAsyncLogin.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.users.push(action.payload);
-        state.token = action.payload.token;
+        state.token = action.payload.token; // ذخیره توکن
+
+        // Save token to localStorage if needed
+        localStorage.setItem("token", action.payload.token);
         state.userType = action.payload.user_type;
       })
       .addCase(postAsyncLogin.rejected, (state, action) =>
@@ -138,12 +138,9 @@ const adminDashboardSlice = createSlice({
       .addCase(addAsyncUsers.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
-      .addCase(getAsyncOpratorList.pending, (state) =>
-        handleAsyncState(state, {}, "pending")
-      )
-      .addCase(getAsyncOpratorList.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled");
-        state.users.push(action.payload);
+      .addCase(getAsyncOpratorList.pending, (state) => {
+        state.loading = true;
+        state.error = "";
       })
       .addCase(getAsyncOpratorList.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")

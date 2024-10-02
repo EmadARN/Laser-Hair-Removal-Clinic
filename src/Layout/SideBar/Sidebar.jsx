@@ -32,6 +32,7 @@ const SideBarDashboard = ({
 
   const handleLogout = () => {
     removeCookie("auth_Admin_token", { path: "/" });
+    localStorage.removeItem("token");
     router.push("/");
   };
   return (
@@ -85,7 +86,7 @@ const SideBarDashboard = ({
               </Box>
             )}
           </MenuItem>
-          {!isCollapsed && <Header textHead={textHead} />}
+          {/* {!isCollapsed && <Header textHead={textHead} />} */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Body
               selected={selected}
@@ -103,31 +104,26 @@ const SideBarDashboard = ({
               color: "#f13f4d",
               cursor: "pointer",
               "&:hover": {
-                bgColor: "#ff0014",
-                color: "#fff",
+                bgColor: "transparent",
               },
               transition: "all 0.5s ease",
               position: "absolute",
-              bottom: 0,
+              bottom: 2,
             }}
             onClick={handleLogout}
           >
-            <Flex alignItems={"center"} mr={""} mb={2} gap={2}>
+            <Flex
+              alignItems={"center"}
+              h={"100%"}
+              sx={{ mr: isCollapsed ? "40px" : "25px" }}
+              mb={2}
+              gap={2}
+            >
               <MdExitToApp />
               <Text display={isCollapsed ? "none" : "flex"}>
                 خروج از حساب کاربری
               </Text>
             </Flex>
-            {/* <Item
-              colorHover={"#ff0014"}
-              color={"#f13f4d"}
-              title=              
-              to="/team"
-              icon={<MdExitToApp />}
-              selected={selected}
-              setSelected={setSelected}
-              isCollapsed={isCollapsed}
-            /> */}
           </Button>
         </Menu>
       </Sidebar>
