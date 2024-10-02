@@ -26,7 +26,6 @@ export const getAsyncOpratorList = createAsyncThunk(
       console.log("Login operator list:", data);
       return data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.message);
     }
   }
@@ -39,8 +38,6 @@ export const postAsyncLogin = createAsyncThunk(
       const { data } = await api.post("/Core/login/", payload);
       return data;
     } catch (error) {
-      console.log(error);
-
       return rejectWithValue(error.message);
     }
   }
@@ -59,7 +56,45 @@ export const addAsyncUsers = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const addLazerArea = createAsyncThunk(
+  "user/addLazerArea",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/Laser/add/new/laser/area/", payload, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      alert("arealazer Created Successfully");
+      console.log(data);
+
+      return data;
+    } catch (error) {
+      console.log("addlzerarea error", error);
+
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const getLazerAreas = createAsyncThunk(
+  "user/getLazerArea",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Laser/laser/area/list/", {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      console.log("getLazerAreA", data);
+      return data;
+    } catch (error) {
+      console.log("get lazer area error", error);
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -72,6 +107,7 @@ const initialState = {
   users: [],
   token: "",
   userType: null,
+  AreaLaser: [],
 };
 
 const adminDashboardSlice = createSlice({
@@ -111,7 +147,23 @@ const adminDashboardSlice = createSlice({
       })
       .addCase(getAsyncOpratorList.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
-      );
+      )
+      .addCase(addLazerArea.fulfilled, (state, action) => {
+        state.AreaLaser.push(action.payload);
+      })
+      .addCase(addLazerArea.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
+      .addCase(getLazerAreas.pending, (state) => {
+        handleAsyncState, (state, {}, "pending");
+      })
+      .addCase(getLazerAreas.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.AreaLaser.push(action.payload);
+      })
+      .addCase(getLazerAreas.rejected, (state) => {
+        handleAsyncState(state, {}, "rejected");
+      });
   },
 });
 
