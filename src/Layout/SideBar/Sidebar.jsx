@@ -41,9 +41,10 @@ const SideBarDashboard = ({
         position: "sticky",
         top: 1,
         "& .ps-sidebar-container": {
-          backgroundColor: "rgba(255,255,255,0.1) !important",
-          border: "1px solid lightgray!important",
+          backgroundColor: "#fafafa!important",
+          boxShadow: " rgba(0, 0, 0, 0.2) 0px 18px 50px -10px",
           h,
+          borderRadius: "20px",
           position: "relative",
         },
         "& .ps-menu-button": {
