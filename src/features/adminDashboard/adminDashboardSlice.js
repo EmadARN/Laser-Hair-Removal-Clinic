@@ -28,7 +28,22 @@ export const getAsyncOpratorList = createAsyncThunk(
     }
   }
 );
-
+export const getLazerAreas = createAsyncThunk(
+  "user/getLazerArea",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Laser/laser/area/list/", {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      console.log("getLazerAreA", data);
+      return data;
+    } catch (error) {
+      console.log("get lazer area error", error);
+    }
+  }
+);
 export const postAsyncLogin = createAsyncThunk(
   "user/postAsyncLogin",
   async (payload, { rejectWithValue }) => {
@@ -71,14 +86,17 @@ export const addLazerArea = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log("addlzerarea error", error)}})
+      console.log("addlzerarea error", error);
+    }
+  }
+);
 
 export const editAsyncUser = createAsyncThunk(
   "user/editAsyncUser",
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.post(
-        `/Core/change/user/information/`,
+        `/Core/change/user/information/${payload.id}`,
         payload,
         {
           headers: {
@@ -92,21 +110,6 @@ export const editAsyncUser = createAsyncThunk(
     }
   }
 );
-
-export const getLazerAreas = createAsyncThunk(
-  "user/getLazerArea",
-  async (payload, { rejectWithValue }) => {
-    try {
-      const { data } = await api.get("/Laser/laser/area/list/", {
-        headers: {
-          Authorization: `Bearer ${payload.token}`,
-        },
-      });
-      console.log("getLazerAreA", data);
-      return data;
-    } catch (error) {
-      console.log("get lazer area error", error)}})
-// New Async Thunk for deleting a user
 
 export const deleteAsyncUser = createAsyncThunk(
   "user/deleteAsyncUser",
@@ -141,6 +144,27 @@ const adminDashboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getAsyncOpratorList.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getAsyncOpratorList.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
+      .addCase(getAsyncOpratorList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.users = action.payload;
+      })
+      .addCase(getLazerAreas.pending, (state) => {
+        handleAsyncState, (state, {}, "pending");
+      })
+      .addCase(getLazerAreas.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.AreaLaser.push(action.payload);
+      })
+      .addCase(getLazerAreas.rejected, (state) => {
+        handleAsyncState(state, {}, "rejected");
+      })
       .addCase(postAsyncLogin.pending, (state) =>
         handleAsyncState(state, {}, "pending")
       )
@@ -168,37 +192,14 @@ const adminDashboardSlice = createSlice({
       .addCase(addAsyncUsers.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
-      .addCase(getAsyncOpratorList.pending, (state) => {
-        state.loading = true;
-        state.error = "";
-      })
-      .addCase(getAsyncOpratorList.rejected, (state, action) =>
-        handleAsyncState(state, action, "rejected")
-      )
+
       .addCase(addLazerArea.fulfilled, (state, action) => {
         state.AreaLaser.push(action.payload);
       })
       .addCase(addLazerArea.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
       })
-      .addCase(getLazerAreas.pending, (state) => {
-        handleAsyncState, (state, {}, "pending");
-      })
-      .addCase(getLazerAreas.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled");
-        state.AreaLaser.push(action.payload);
-      })
-      .addCase(getLazerAreas.rejected, (state) => {
-        handleAsyncState(state, {}, "rejected");
-      })
-      .addCase(getAsyncOpratorList.fulfilled, (state, action) => {
-        state.loading = false;
-        state.users = action.payload;
-      })
-      .addCase(getAsyncOpratorList.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
+
       .addCase(editAsyncUser.pending, (state) =>
         handleAsyncState(state, {}, "pending")
       )
