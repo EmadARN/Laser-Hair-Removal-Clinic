@@ -41,6 +41,7 @@ export const getLazerAreas = createAsyncThunk(
       return data;
     } catch (error) {
       console.log("get lazer area error", error);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -192,7 +193,7 @@ const adminDashboardSlice = createSlice({
       })
       .addCase(getLazerAreas.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        state.AreaLaser.push(action.payload);
+        state.AreaLaser=action.payload;
       })
       .addCase(getLazerAreas.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
@@ -232,7 +233,7 @@ const adminDashboardSlice = createSlice({
       })
       .addCase(addLazerArea.fulfilled, (state, action) => {
         state.loading = false;
-        state.AreaLaser.push(action.payload);
+        state.AreaLaser = action.payload;
       })
       .addCase(addLazerArea.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
