@@ -7,11 +7,14 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { addLazerArea } from "@/features/adminDashboard/adminDashboardSlice";
+import { addLazerArea, getLazerAreas } from "@/features/adminDashboard/adminDashboardSlice";
 
 const ModalBodyContent = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((store) => store.adminDashboard);
+
+
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const [lazerArea, setLazerArea] = useState({
     deadline_reset: 0,
@@ -26,15 +29,20 @@ const ModalBodyContent = () => {
   };
 
   const handleButtonClick = (value) => {
+    setSelectedItem(value); 
     setLazerArea((prevForm) => ({
       ...prevForm,
       operate_time: value,
     }));
+
+  
+   
   };
 
   const handleChange = async (e) => {
     e.preventDefault();
     await dispatch(addLazerArea({ ...lazerArea, token }));
+    dispatch(getLazerAreas({token}))
   };
 
   return (
@@ -63,6 +71,7 @@ const ModalBodyContent = () => {
         <FormLabel>مدت زمان</FormLabel>
         <SimpleGrid minChildWidth="60px" spacing="10px" pt={2}>
           {[5, 10, 15, 20, 25, 30, 35].map((item, index) => {
+             const isSelected = selectedItem === item; // بررسی انتخاب
             return (
               <Button
                 name="operate_time"
@@ -72,7 +81,7 @@ const ModalBodyContent = () => {
                 width="50px"
                 rounded={4}
                 color="blue"
-                bgColor="transparent"
+                bgColor={isSelected ? '#999':"transparent"}
                 variant="outline"
               >
                 {item}

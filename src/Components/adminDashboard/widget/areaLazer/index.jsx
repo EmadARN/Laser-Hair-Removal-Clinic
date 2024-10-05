@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Lists from "../../common/Lists";
-import ModalBodyContent from "./widget/modalDefineDetails/ModalBodyContent";
+
 import HeaderContent from "./widget/modalAttentionDetails/HeaderContent";
 import BodyContent from "./widget/modalAttentionDetails/BodyContent";
 import FooterContent from "./widget/modalAttentionDetails/FooterContent";
@@ -10,16 +10,20 @@ import { BiTargetLock } from "react-icons/bi";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { getLazerAreas } from "@/features/adminDashboard/adminDashboardSlice";
+import ModalBodyContent from "./widget/modalDefineDetails/ModalBodyContent";
 
 const AreaLazer = () => {
-const {token,AreaLaser,loading,error} = useSelector((store)=>store.adminDashboard)
+
+  const { token, AreaLaser, loading, error } = useSelector(
+    (store) => store.adminDashboard
+  );
   const dispatch = useDispatch();
-    useEffect(() => {
-    // اگر توکن وجود دارد، اکشن برای بارگذاری لیست کاربران را فراخوانی کنید
+  useEffect(() => {
+    if (token) {
+      dispatch(getLazerAreas({ token }));
    
-      dispatch(getLazerAreas({token}));
-  
-  }, [dispatch]);
+    }
+  }, [dispatch, token]);
 
   // مدیریت وضعیت بارگذاری و خطا
   if (loading) {
@@ -33,7 +37,7 @@ const {token,AreaLaser,loading,error} = useSelector((store)=>store.adminDashboar
 
 
 
-  
+
   return (
     <>
       <Box sx={{ py: 6 }}>
@@ -47,29 +51,33 @@ const {token,AreaLaser,loading,error} = useSelector((store)=>store.adminDashboar
       </Box>
       <Box></Box>
       <Box sx={{ mt: 8 }}>
-        {AreaLaser.length > 0 &&
-          AreaLaser.map((item) => {
-            const laserAreas = item.all_laser_area_object;
-            return laserAreas && laserAreas.second_type
-              ? laserAreas.second_type.map((areaItem, index) => (
-                  <Lists
-                    key={index}
-                    firstArea={areaItem.value}
-                    secondArea={areaItem.price}
-                    thirdArea={areaItem.operate_time}
-                    display="none"
-                    ModalBodyContent={{
-                      body: <ModalBodyContent isEdit={true} />,
-                    }}
-                    HeaderContent={HeaderContent}
-                    headerContentValue="ویرایش ناحیه "
-                    BodyContent={BodyContent}
-                    FooterContent={FooterContent}
-                    iconBtnDisply="none"
-                  />
-                ))
-              : null;
-          })}
+        {AreaLaser.all_laser_area_object &&
+        AreaLaser.all_laser_area_object.first_type.length > 0 ? (
+          AreaLaser.all_laser_area_object.first_type.map((item, index) => {
+           
+            
+         return(
+         
+            <Lists
+              key={index}
+              firstArea={item.label}
+              secondArea={item.price}
+              thirdArea={item.operate_time}
+              display="none"
+              ModalBodyContent={{
+                body: <ModalBodyContent isEdit={true} />,
+              }}
+              HeaderContent={HeaderContent}
+              headerContentValue="ویرایش ناحیه "
+              BodyContent={BodyContent}
+              FooterContent={FooterContent}
+              iconBtnDisply="none"
+            />
+         )
+          })
+        ) : (
+          <Text>هیج ناحیه ای اضافه نشده</Text>
+        )}
       </Box>
     </>
   );
