@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Lists from "../../common/Lists";
 import ModalBodyContent from "./widget/modalDefineDetails/ModalBodyContent";
-import ModalFooterContent from "./widget/modalDefineDetails/ModalFooterContent";
 import HeaderContent from "./widget/modalAttentionDetails/HeaderContent";
 import BodyContent from "./widget/modalAttentionDetails/BodyContent";
 import FooterContent from "./widget/modalAttentionDetails/FooterContent";
@@ -42,35 +41,35 @@ const {token,AreaLaser,loading,error} = useSelector((store)=>store.adminDashboar
           headerTitle="نواحی لیزر"
           btnValue="افزودن ناحیه جدید"
           icon={<BiTargetLock />}
-          ModalBodyContent={ModalBodyContent}
-          ModalFooterContent={ModalFooterContent}
+          ModalBodyContent={{ body: <ModalBodyContent isEdit={false} /> }}
           iconBtnDisply="none"
         />
       </Box>
       <Box></Box>
       <Box sx={{ mt: 8 }}>
-      {AreaLaser.length > 0 && AreaLaser.map((item) => {
-          const laserAreas = item.all_laser_area_object;
-          return laserAreas && laserAreas.second_type ? (
-            laserAreas.second_type.map((areaItem, index) => (
-              <Lists
-                key={index}
-                firstArea={areaItem.value}
-                secondArea={areaItem.price}
-                thirdArea={areaItem.operate_time}
-                display="none"
-                ModalBodyContent={ModalBodyContent}
-                ModalFooterContent={ModalFooterContent}
-                HeaderContent={HeaderContent}
-                headerContentValue="افزودن ناحیه جدید"
-                BodyContent={BodyContent}
-                FooterContent={FooterContent}
-                iconBtnDisply="none"
-              />
-            ))
-          ) : <Text>هیچ ناحیه ای   انتخاب نشده است.</Text>; 
-        })}
-        
+        {AreaLaser.length > 0 &&
+          AreaLaser.map((item) => {
+            const laserAreas = item.all_laser_area_object;
+            return laserAreas && laserAreas.second_type
+              ? laserAreas.second_type.map((areaItem, index) => (
+                  <Lists
+                    key={index}
+                    firstArea={areaItem.value}
+                    secondArea={areaItem.price}
+                    thirdArea={areaItem.operate_time}
+                    display="none"
+                    ModalBodyContent={{
+                      body: <ModalBodyContent isEdit={true} />,
+                    }}
+                    HeaderContent={HeaderContent}
+                    headerContentValue="ویرایش ناحیه "
+                    BodyContent={BodyContent}
+                    FooterContent={FooterContent}
+                    iconBtnDisply="none"
+                  />
+                ))
+              : null;
+          })}
       </Box>
     </>
   );

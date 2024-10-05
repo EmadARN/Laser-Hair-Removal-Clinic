@@ -327,52 +327,33 @@ export const radioOptions = {
   ],
 };
 
-export const inputDataEmployee = (usersForm, show, handleClick) => {
+export const addDataEmployee = (usersAddForm, show, handleClick) => {
   return [
-    { label: "نام", name: "name", placeholder: "نام", value: usersForm.name },
+    { label: "نام", name: "name", placeholder: "نام", isBeforeRadio: true },
     {
       label: "نام خانوادگی",
       name: "last_name",
       placeholder: "نام خانوادگی",
-      value: usersForm.last_name,
+      isBeforeRadio: true,
     },
     {
       label: "شماره موبایل",
       name: "phone_number",
       placeholder: "شماره موبایل",
-      value: usersForm.phone_number,
+      isBeforeRadio: true,
     },
     {
-      label: "نام کاربری منشی (به انگلیسی)",
+      label: "نام کاربری",
       name: "username",
       placeholder: "نام کاربری",
-      value: usersForm.username,
+      isBeforeRadio: false,
     },
     {
-      label: "رمز ورود منشی",
+      label: "رمز ورود",
       name: "password",
-      placeholder: "رمز ورود منشی",
-      value: usersForm.password,
-      type: show ? "text" : "password",
-      showPassword: { show, onClick: handleClick },
-    },
-    {
-      label: "کد ملی",
-      name: "national_code",
-      placeholder: "کد ملی",
-      value: usersForm.national_code,
-    },
-    {
-      label: "آدرس محل زندگی",
-      name: "address",
-      placeholder: "آدرس",
-      value: usersForm.address,
-    },
-    {
-      label: "شماره تماس منزل",
-      name: "house_number",
-      placeholder: "شماره تماس",
-      value: usersForm.house_number,
+      placeholder: "رمز ورود",
+      isBeforeRadio: false,
+      isPassword: true,
     },
   ];
 };
@@ -553,3 +534,103 @@ export const TurnData = [
   { id: 2, title: "بازه زمانی", value: "9-11.30" },
   { id: 3, title: "اپراتور", value: "نام اپراتور" },
 ];
+// export const addDataEmployee = (usersAddForm, show, handleClick) => {
+//   return [
+//     {
+//       label: "نام",
+//       name: "name",
+//       placeholder: "نام",
+//       value: usersAddForm.name,
+//     },
+//     {
+//       label: "نام خانوادگی",
+//       name: "last_name",
+//       placeholder: "نام خانوادگی",
+//       value: usersAddForm.last_name,
+//     },
+//     {
+//       label: "شماره موبایل",
+//       name: "phone_number",
+//       placeholder: "شماره موبایل",
+//       value: usersAddForm.phone_number,
+//     },
+//     {
+//       label: "نام کاربری منشی (به انگلیسی)",
+//       name: "username",
+//       placeholder: "نام کاربری",
+//       value: usersAddForm.username,
+//     },
+//     {
+//       label: "رمز ورود منشی",
+//       name: "password",
+//       placeholder: "رمز ورود منشی",
+//       value: usersAddForm.password,
+//       type: show ? "text" : "password",
+//       showPassword: { show, onClick: handleClick },
+//     },
+//     {
+//       label: "کد ملی",
+//       name: "national_code",
+//       placeholder: "کد ملی",
+//       value: usersAddForm.national_code,
+//     },
+//     {
+//       label: "آدرس محل زندگی",
+//       name: "address",
+//       placeholder: "آدرس",
+//       value: usersAddForm.address,
+//     },
+//     {
+//       label: "شماره تماس منزل",
+//       name: "house_number",
+//       placeholder: "شماره تماس",
+//       value: usersAddForm.house_number,
+//     },
+//   ];
+// };
+{
+  /* <RadioButtonGroup
+label="بیماری خاص"
+name="decease_hist"
+options={radioOptions.decease_hist}
+onChange={isEdit ? editChangeHandler : addChangeHandler}
+defaultValue={isEdit ? usersEditForm.decease_hist : "false"}
+/>
+<RadioButtonGroup
+label="مصرف دارو"
+name="drug_hist"
+options={radioOptions.drug_hist}
+onChange={isEdit ? editChangeHandler : addChangeHandler}
+defaultValue={isEdit ? usersEditForm.drug_hist : "false"}
+/> */
+}
+// import { RadioGroup, Stack, Radio, Box, Text } from "@chakra-ui/react";
+
+// const RadioButtonGroup = ({ label, name, options, onChange, defaultValue }) => (
+//   <Box my={7}>
+//     <Text pb={4} fontWeight="bold">
+//       {label}
+//     </Text>
+//     <RadioGroup
+//       onChange={(value) =>
+//         onChange({ target: { name, value: value === "true", type: "radio" } })
+//       } // تبدیل به Boolean
+//       defaultValue={defaultValue} // تبدیل به رشته
+//     >
+//       <Stack spacing={20} direction="row">
+//         {options.map((option) => (
+//           <Radio
+//             key={option.value}
+//             colorScheme="blue"
+//             value={option.value.toString()}
+//           >
+//             {/* تبدیل به رشته */}
+//             {option.label}
+//           </Radio>
+//         ))}
+//       </Stack>
+//     </RadioGroup>
+//   </Box>
+// );
+
+// export default RadioButtonGroup;

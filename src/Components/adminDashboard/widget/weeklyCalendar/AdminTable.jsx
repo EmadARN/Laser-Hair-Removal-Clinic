@@ -15,7 +15,6 @@ import {
 import { AdminTableData } from "./TablwData";
 import ModalDefine from "@/Common/moadals/ModalDefine";
 import ModalBodyContent from "./widget/modalDefineDetails/ModalBodyContent";
-import ModalFooterContent from "./widget/modalDefineDetails/ModalFooterContent";
 
 const AdminTable = () => {
   const [operatorInfo, setOperatorInfo] = useState();
@@ -25,10 +24,9 @@ const AdminTable = () => {
       {isOpen ? (
         <ModalDefine
           displayHeader="none"
-          renderContent={() => ({
+          bodyContent={{
             body: <ModalBodyContent setOperatorInfo={setOperatorInfo} />,
-            footer: <ModalFooterContent />,
-          })}
+          }}
           setOperatorInfo={setOperatorInfo}
         />
       ) : null}
