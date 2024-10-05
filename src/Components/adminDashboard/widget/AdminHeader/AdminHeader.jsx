@@ -12,15 +12,12 @@ const AdminHeader = (props) => {
         <Box pr={4}>{props.dataSlider}</Box>
       </Box>
       <Box m={5}>
-        {/* <Button colorScheme={"blue"} py={6}>
-          {props.btnValue}
-        </Button> */}
         <ModalDefine
           headerContent={props.btnValue}
-          renderContent={() => ({
-            body: <props.ModalBodyContent />,
-            footer: <props.ModalFooterContent />,
-          })}
+          bodyContent={props.ModalBodyContent}
+          // renderContent={() => ({
+          //   body: <props.ModalBodyContent />,
+          // })}
           addDisplay={props.addDisplay}
           iconBtnDisply={props.iconBtnDisply}
         />

@@ -12,9 +12,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const ModalAttention = ({ renderContent, btn }) => {
+const ModalAttention = ({ btn, HeaderContent, BodyContent, FooterContent }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const renderContents = renderContent();
 
   return (
     <>
@@ -33,7 +32,7 @@ const ModalAttention = ({ renderContent, btn }) => {
                 fontSize: "18px",
               }}
             >
-              {renderContents.header}
+              {HeaderContent}
             </ModalHeader>
             <ModalCloseButton
               sx={{
@@ -47,9 +46,9 @@ const ModalAttention = ({ renderContent, btn }) => {
               }}
             />
           </Box>
-          <ModalBody py={6}>{renderContents.body}</ModalBody>
+          <ModalBody py={6}>{BodyContent}</ModalBody>
 
-          <ModalFooter pt={10}>{renderContents.footer}</ModalFooter>
+          <ModalFooter pt={10}>{FooterContent}</ModalFooter>
         </ModalContent>
       </Modal>
     </>

@@ -18,7 +18,6 @@ const Lists = ({
   rounded,
   fontSize,
   ModalBodyContent,
-  ModalFooterContent,
   HeaderContent,
   headerContentValue,
   BodyContent,
@@ -53,20 +52,18 @@ const Lists = ({
       <Stack direction="row" gap={1} display={editDeleteDisplay}>
         <ModalDefine
           headerContent={headerContentValue}
-          renderContent={() => ({
-            body: <ModalBodyContent />,
-            footer: <ModalFooterContent />,
-          })}
+          bodyContent={ModalBodyContent}
+          // renderContent={() => ({
+          //   body: <ModalBodyContent  />,
+          // })}
           btn={<CiEdit size={20} color="blue" />}
           BtnDisply={iconBtnDisply}
           addDisplay={addDisplay}
         />
         <ModalAttention
-          renderContent={() => ({
-            header: <HeaderContent />,
-            body: <BodyContent />,
-            footer: <FooterContent />,
-          })}
+          HeaderContent={HeaderContent}
+          BodyContent={BodyContent}
+          FooterContent={FooterContent}
           btn={<RiDeleteBinLine size={18} color="red" />}
         />
       </Stack>
