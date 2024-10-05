@@ -142,23 +142,30 @@ const adminDashboardSlice = createSlice({
         state.loading = true;
         state.error = "";
       })
+      .addCase(getAsyncOpratorList.fulfilled, (state) => {
+        state.loading = false;
+        state.error = "";
+      })
       .addCase(getAsyncOpratorList.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
       .addCase(addLazerArea.fulfilled, (state, action) => {
-        state.AreaLaser.push(action.payload);
+        state.loading = false;
       })
       .addCase(addLazerArea.rejected, (state, action) => {
-        handleAsyncState(state, action, "rejected");
+        (state.loading = false), (state.error = action.payload);
+      })
+      .addCase(addLazerArea.pending, (state, action) => {
+        (state.loading = true), (state.error = false);
       })
       .addCase(getLazerAreas.pending, (state) => {
-        handleAsyncState, (state, {}, "pending");
+        (state.loading = true), (state.error = "");
       })
       .addCase(getLazerAreas.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.AreaLaser.push(action.payload);
       })
-      .addCase(getLazerAreas.rejected, (state) => {
+      .addCase(getLazerAreas.rejected, (state, action) => {
         handleAsyncState(state, {}, "rejected");
       });
   },
