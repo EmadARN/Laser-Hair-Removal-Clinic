@@ -5,7 +5,7 @@ import ModalFooterContent from "./widget/modalDefineDetails/ModalFooterContent";
 import HeaderContent from "./widget/modalAttentionDetails/HeaderContent";
 import BodyContent from "./widget/modalAttentionDetails/BodyContent";
 import FooterContent from "./widget/modalAttentionDetails/FooterContent";
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner, Text } from "@chakra-ui/react";
 import AdminHeader from "../AdminHeader/AdminHeader";
 import { BiTargetLock } from "react-icons/bi";
 import { useCookies } from "react-cookie";
@@ -13,11 +13,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { getLazerAreas } from "@/features/adminDashboard/adminDashboardSlice";
 
 const AreaLazer = () => {
-const {token,AreaLaser} = useSelector((store)=>store.adminDashboard)
+const {token,AreaLaser,loading,error} = useSelector((store)=>store.adminDashboard)
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getLazerAreas({ token }));
+    useEffect(() => {
+    // اگر توکن وجود دارد، اکشن برای بارگذاری لیست کاربران را فراخوانی کنید
+   
+      dispatch(getLazerAreas({token}));
+  
   }, [dispatch]);
+
+  // مدیریت وضعیت بارگذاری و خطا
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <Text color="red.500">خطا در بارگذاری داده‌ها: {error}</Text>;
+  }
 
 
 
@@ -56,7 +68,7 @@ const {token,AreaLaser} = useSelector((store)=>store.adminDashboard)
                 iconBtnDisply="none"
               />
             ))
-          ) : null; 
+          ) : <Text>هیچ ناحیه ای   انتخاب نشده است.</Text>; 
         })}
         
       </Box>
