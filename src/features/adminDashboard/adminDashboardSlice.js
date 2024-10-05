@@ -137,6 +137,24 @@ export const deleteAsyncUser = createAsyncThunk(
     }
   }
 );
+export const settingAsyncChanging = createAsyncThunk(
+  "user/settingAsyncChanging",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/Setting/change/setting/", payload, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      console.log("data::", data);
+
+      return data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
 
 // Initial State
 const initialState = {
@@ -248,6 +266,17 @@ const adminDashboardSlice = createSlice({
         );
       })
       .addCase(deleteAsyncUser.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+
+      // settingAsyncChanging
+      .addCase(settingAsyncChanging.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(settingAsyncChanging.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+      .addCase(settingAsyncChanging.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       );
   },
