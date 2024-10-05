@@ -227,17 +227,9 @@ const adminDashboardSlice = createSlice({
       .addCase(editAsyncUser.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         if (Array.isArray(state.users)) {
-          const updatedUserIndex = state.users.findIndex(
+          state.users.findIndex(
             (user) => user.username === action.payload.username
           );
-          if (updatedUserIndex !== -1) {
-            state.users[updatedUserIndex] = {
-              ...state.users[updatedUserIndex],
-              ...action.payload,
-            };
-          }
-        } else {
-          console.error("state.users is not an array:", state.users);
         }
       })
       .addCase(editAsyncUser.rejected, (state, action) =>
