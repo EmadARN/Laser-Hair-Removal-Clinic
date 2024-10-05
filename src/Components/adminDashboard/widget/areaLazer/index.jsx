@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Lists from "../../common/Lists";
-
-import HeaderContent from "./widget/modalAttentionDetails/HeaderContent";
-import BodyContent from "./widget/modalAttentionDetails/BodyContent";
-import FooterContent from "./widget/modalAttentionDetails/FooterContent";
 import { Box, Spinner, Text } from "@chakra-ui/react";
 import AdminHeader from "../AdminHeader/AdminHeader";
 import { BiTargetLock } from "react-icons/bi";
-import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { getLazerAreas } from "@/features/adminDashboard/adminDashboardSlice";
-import ModalBodyContent from "./widget/modalDefineDetails/ModalBodyContent";
+import HeaderContent from "./widget/modalAttentionDetails/HeaderContent";
+import BodyContent from "./widget/modalAttentionDetails/BodyContent";
+import FooterContent from "./widget/modalAttentionDetails/FooterContent";
+import ReusableSession from "../../common/ReussableSession";
+import AreaLazerForm from "./widget/modalDefineDetails/AreaLazerForm";
 
 const AreaLazer = () => {
-
   const { token, AreaLaser, loading, error } = useSelector(
     (store) => store.adminDashboard
   );
@@ -21,7 +19,6 @@ const AreaLazer = () => {
   useEffect(() => {
     if (token) {
       dispatch(getLazerAreas({ token }));
-   
     }
   }, [dispatch, token]);
 
@@ -33,10 +30,7 @@ const AreaLazer = () => {
   if (error) {
     return <Text color="red.500">خطا در بارگذاری داده‌ها: {error}</Text>;
   }
-
-
-
-
+  console.log("AreaLaser::", AreaLaser);
 
   return (
     <>
@@ -45,7 +39,16 @@ const AreaLazer = () => {
           headerTitle="نواحی لیزر"
           btnValue="افزودن ناحیه جدید"
           icon={<BiTargetLock />}
-          ModalBodyContent={{ body: <ModalBodyContent isEdit={false} /> }}
+          ModalBodyContent={{
+            body: (
+              <AreaLazerForm
+                areaToEdit={null}
+                isEdit={false}
+                AreaLaser={AreaLaser}
+                token={token}
+              />
+            ),
+          }}
           iconBtnDisply="none"
         />
       </Box>
@@ -54,29 +57,33 @@ const AreaLazer = () => {
         {AreaLaser.all_laser_area_object &&
         AreaLaser.all_laser_area_object.first_type.length > 0 ? (
           AreaLaser.all_laser_area_object.first_type.map((item, index) => {
-           
-            
-         return(
-         
-            <Lists
-              key={index}
-              firstArea={item.label}
-              secondArea={item.price}
-              thirdArea={item.operate_time}
-              display="none"
-              ModalBodyContent={{
-                body: <ModalBodyContent isEdit={true} />,
-              }}
-              HeaderContent={HeaderContent}
-              headerContentValue="ویرایش ناحیه "
-              BodyContent={BodyContent}
-              FooterContent={FooterContent}
-              iconBtnDisply="none"
-            />
-         )
+            return (
+              <Lists
+                key={index}
+                firstArea={item.label}
+                secondArea={item.price}
+                thirdArea={item.operate_time}
+                display="none"
+                ModalBodyContent={{
+                  body: (
+                    <AreaLazerForm
+                      isEdit={true}
+                      areaToEdit={item}
+                      AreaLaser={AreaLaser}
+                      token={token}
+                    />
+                  ),
+                }}
+                headerContentValue="ویرایش ناحیه "
+                HeaderContent={<HeaderContent />}
+                BodyContent={<BodyContent />}
+                FooterContent={<FooterContent item={item} token={token} />}
+                iconBtnDisply="none"
+              />
+            );
           })
         ) : (
-          <Text>هیج ناحیه ای اضافه نشده</Text>
+          <ReusableSession text="ناحیه ای وجود ندارد" icon={<BiTargetLock />} />
         )}
       </Box>
     </>

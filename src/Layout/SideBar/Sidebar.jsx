@@ -123,7 +123,10 @@ const SideBarDashboard = ({
               gap={2}
             >
               <MdExitToApp />
-              <Text display={isCollapsed ? "none" : "flex"}>
+              <Text
+                sx={{ fontSize: { base: "12px", md: "16px" } }}
+                display={isCollapsed ? "none" : "flex"}
+              >
                 خروج از حساب کاربری
               </Text>
             </Flex>
