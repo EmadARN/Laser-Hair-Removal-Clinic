@@ -1,7 +1,6 @@
 import React from "react";
 import Lists from "../../common/Lists";
 import ModalBodyContent from "./widget/modalDefineDetails/ModalBodyContent";
-import ModalFooterContent from "./widget/modalDefineDetails/ModalFooterContent";
 import HeaderContent from "./widget/modalAttentionDetails/HeaderContent";
 import BodyContent from "./widget/modalAttentionDetails/BodyContent";
 import FooterContent from "./widget/modalAttentionDetails/FooterContent";
@@ -17,8 +16,7 @@ const AreaLazer = () => {
           headerTitle="نواحی لیزر"
           btnValue="افزودن ناحیه جدید"
           icon={<BiTargetLock />}
-          ModalBodyContent={ModalBodyContent}
-          ModalFooterContent={ModalFooterContent}
+          ModalBodyContent={{ body: <ModalBodyContent isEdit={false} /> }}
           iconBtnDisply="none"
         />
       </Box>
@@ -29,10 +27,9 @@ const AreaLazer = () => {
           secondArea="450,000 تومان"
           thirdArea="35 دقیقه"
           display="none"
-          ModalBodyContent={ModalBodyContent}
-          ModalFooterContent={ModalFooterContent}
+          ModalBodyContent={{ body: <ModalBodyContent isEdit={true} /> }}
           HeaderContent={HeaderContent}
-          headerContentValue="افزودن ناحیه جدید"
+          headerContentValue="ویرایش ناحیه "
           BodyContent={BodyContent}
           FooterContent={FooterContent}
           iconBtnDisply="none"

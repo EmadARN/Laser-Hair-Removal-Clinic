@@ -15,9 +15,9 @@ const handleAsyncState = (state, action, status) => {
 export const getAsyncOpratorList = createAsyncThunk(
   "admin/getAsyncOpratorList",
   async (_, { getState, rejectWithValue }) => {
-    const { token } = getState().adminDashboard; // دریافت توکن از وضعیت
+    const { token } = getState().adminDashboard;
     try {
-      const { data } = await api.get("/Core/operator/list/", {
+      const { data } = await api.get("/Core/user/list/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,8 +50,45 @@ export const addAsyncUsers = createAsyncThunk(
           Authorization: `Bearer ${payload.token}`,
         },
       });
-      alert("User Created Successfully");
       return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const editAsyncUser = createAsyncThunk(
+  "user/editAsyncUser",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post(
+        `/Core/change/user/information/`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+// New Async Thunk for deleting a user
+export const deleteAsyncUser = createAsyncThunk(
+  "user/deleteAsyncUser",
+  async (payload, { getState, rejectWithValue }) => {
+    const { token } = getState().adminDashboard;
+    try {
+      await api.post(`/Core/delete/user/${payload.id}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return userId; // Return the ID of the deleted user
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -63,7 +100,7 @@ const initialState = {
   loading: false,
   error: "",
   users: [],
-  token: typeof window !== "undefined" ? localStorage.getItem("token") : null, // توکن برای ذخیره در حالت
+  token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   userType: null,
 };
 
@@ -78,12 +115,9 @@ const adminDashboardSlice = createSlice({
       )
       .addCase(postAsyncLogin.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        state.users.push(action.payload);
-        state.token = action.payload.token; // ذخیره توکن
-
-        // Save token to localStorage if needed
-        localStorage.setItem("token", action.payload.token);
+        state.token = action.payload.token;
         state.userType = action.payload.user_type;
+        localStorage.setItem("token", action.payload.token);
       })
       .addCase(postAsyncLogin.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
@@ -93,7 +127,12 @@ const adminDashboardSlice = createSlice({
       )
       .addCase(addAsyncUsers.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        state.users.push(action.payload);
+        if (Array.isArray(state.users)) {
+          state.users.push(action.payload);
+        } else {
+          console.error("state.users is not an array:", state.users);
+          state.users = [action.payload];
+        }
       })
       .addCase(addAsyncUsers.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
@@ -104,12 +143,39 @@ const adminDashboardSlice = createSlice({
       })
       .addCase(getAsyncOpratorList.fulfilled, (state, action) => {
         state.loading = false;
-        state.users = action.payload; // داده‌های بارگذاری شده
+        state.users = action.payload;
       })
       .addCase(getAsyncOpratorList.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+      .addCase(editAsyncUser.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(editAsyncUser.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        const updatedUserIndex = state.users.findIndex(
+          (user) => user.username === action.payload.username
+        );
+        if (updatedUserIndex !== -1) {
+          state.users[updatedUserIndex] = action.payload;
+        }
+      })
+      .addCase(editAsyncUser.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(deleteAsyncUser.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(deleteAsyncUser.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.users = state.users.filter(
+          (user) => user.username !== action.payload
+        );
+      })
+      .addCase(deleteAsyncUser.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      );
   },
 });
 
