@@ -53,9 +53,6 @@ const Lists = ({
         <ModalDefine
           headerContent={headerContentValue}
           bodyContent={ModalBodyContent}
-          // renderContent={() => ({
-          //   body: <ModalBodyContent  />,
-          // })}
           btn={<CiEdit size={20} color="blue" />}
           BtnDisply={iconBtnDisply}
           addDisplay={addDisplay}

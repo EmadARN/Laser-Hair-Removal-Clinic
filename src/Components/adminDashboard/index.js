@@ -5,7 +5,7 @@ import { admintData } from "@/constants";
 
 const Dashboard = ({ children }) => {
   return (
-    <Grid templateColumns={"repeat(12, 1fr)"}>
+    <Grid bgColor="#ffffff" templateColumns={"repeat(12, 1fr)"}>
       <GridItem colSpan={1}>
         <SideBarDashboard
           admintDatas={admintData}

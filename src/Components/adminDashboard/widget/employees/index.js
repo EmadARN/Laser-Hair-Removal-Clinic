@@ -9,6 +9,7 @@ import { RiShieldUserFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { getAsyncOpratorList } from "@/features/adminDashboard/adminDashboardSlice";
 import UserForm from "./widget/modalDefineDetails/UserForm";
+import ReusableSession from "../../common/ReussableSession";
 
 const Empolyees = () => {
   const dispatch = useDispatch();
@@ -94,13 +95,16 @@ const Empolyees = () => {
                 headerContentValue="ویرایش کارمند"
                 HeaderContent={<HeaderContent />}
                 BodyContent={<BodyContent />}
-                FooterContent={<FooterContent users={users} />}
+                FooterContent={<FooterContent user={user} token={token} />}
                 iconBtnDisply="none"
               />
             );
           })
         ) : (
-          <Text>هیچ کارمندی وجود ندارد.</Text>
+          <ReusableSession
+            text="کاربری وجود ندارد"
+            icon={<RiShieldUserFill />}
+          />
         )}
       </Box>
     </>
