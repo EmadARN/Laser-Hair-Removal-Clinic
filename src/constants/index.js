@@ -327,36 +327,19 @@ export const radioOptions = {
   ],
 };
 
-export const addDataEmployee = (usersAddForm, show, handleClick) => {
-  return [
-    { label: "نام", name: "name", placeholder: "نام", isBeforeRadio: true },
-    {
-      label: "نام خانوادگی",
-      name: "last_name",
-      placeholder: "نام خانوادگی",
-      isBeforeRadio: true,
-    },
-    {
-      label: "شماره موبایل",
-      name: "phone_number",
-      placeholder: "شماره موبایل",
-      isBeforeRadio: true,
-    },
-    {
-      label: "نام کاربری",
-      name: "username",
-      placeholder: "نام کاربری",
-      isBeforeRadio: false,
-    },
-    {
-      label: "رمز ورود",
-      name: "password",
-      placeholder: "رمز ورود",
-      isBeforeRadio: false,
-      isPassword: true,
-    },
-  ];
-};
+export const userInputs = [
+  { label: "نام", name: "name", placeholder: "نام" },
+  { label: "نام خانوادگی", name: "last_name", placeholder: "نام خانوادگی" },
+  { label: "شماره موبایل", name: "phone_number", placeholder: "شماره موبایل" },
+  { label: "نام کاربری", name: "username", placeholder: "نام کاربری" },
+  {
+    label: "رمز ورود",
+    name: "password",
+    placeholder: "رمز ورود",
+    isPassword: true,
+  },
+];
+
 //ReceptionDashboard
 export const receptionData = [
   {

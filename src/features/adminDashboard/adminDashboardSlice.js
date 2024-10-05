@@ -96,7 +96,7 @@ export const editAsyncUser = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.post(
-        `/Core/change/user/information/${payload.id}`,
+        `/Core/change/user/information/`,
         payload,
         {
           headers: {
@@ -106,6 +106,8 @@ export const editAsyncUser = createAsyncThunk(
       );
       return data;
     } catch (error) {
+      console.log("editAsyncUser error", error);
+
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -116,13 +118,21 @@ export const deleteAsyncUser = createAsyncThunk(
   async (payload, { getState, rejectWithValue }) => {
     const { token } = getState().adminDashboard;
     try {
-      await api.post(`/Core/delete/user/${payload.id}/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      await api.post(
+        `/Core/delete/user/`,
+        {
+          username: payload.id,
         },
-      });
-      return userId; // Return the ID of the deleted user
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return { id: payload.id };
     } catch (error) {
+      console.log("deleteAsyncUser error", error);
+
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -144,29 +154,33 @@ const adminDashboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Fetch operator list
       .addCase(getAsyncOpratorList.pending, (state) => {
         state.loading = true;
         state.error = "";
       })
-
       .addCase(getAsyncOpratorList.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
-
       .addCase(getAsyncOpratorList.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.users = action.payload;
       })
+
+      // Fetch laser areas
       .addCase(getLazerAreas.pending, (state) => {
-        (state.loading = true), (state.error = "");
+        state.loading = true;
+        state.error = "";
       })
       .addCase(getLazerAreas.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.AreaLaser.push(action.payload);
       })
       .addCase(getLazerAreas.rejected, (state, action) => {
-        handleAsyncState(state, {}, "rejected");
+        handleAsyncState(state, action, "rejected");
       })
+
+      // User login
       .addCase(postAsyncLogin.pending, (state) =>
         handleAsyncState(state, {}, "pending")
       )
@@ -179,55 +193,66 @@ const adminDashboardSlice = createSlice({
       .addCase(postAsyncLogin.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
+
+      // Add new user
       .addCase(addAsyncUsers.pending, (state) =>
         handleAsyncState(state, {}, "pending")
       )
       .addCase(addAsyncUsers.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        if (Array.isArray(state.users)) {
-          state.users.push(action.payload);
-        } else {
-          console.error("state.users is not an array:", state.users);
-          state.users = [action.payload];
-        }
+        state.users = Array.isArray(state.users) ? state.users : [];
+        state.users.push(action.payload);
       })
       .addCase(addAsyncUsers.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
 
+      // Add new laser area
+      .addCase(addLazerArea.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
       .addCase(addLazerArea.fulfilled, (state, action) => {
         state.loading = false;
         state.AreaLaser.push(action.payload);
-      })
-      .addCase(addLazerArea.pending, (state, action) => {
-        (state.loading = true), (state.error = false);
       })
       .addCase(addLazerArea.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
       })
 
+      // Edit user information
       .addCase(editAsyncUser.pending, (state) =>
         handleAsyncState(state, {}, "pending")
       )
       .addCase(editAsyncUser.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        const updatedUserIndex = state.users.findIndex(
-          (user) => user.username === action.payload.username
-        );
-        if (updatedUserIndex !== -1) {
-          state.users[updatedUserIndex] = action.payload;
+        if (Array.isArray(state.users)) {
+          const updatedUserIndex = state.users.findIndex(
+            (user) => user.username === action.payload.username
+          );
+          if (updatedUserIndex !== -1) {
+            state.users[updatedUserIndex] = {
+              ...state.users[updatedUserIndex],
+              ...action.payload,
+            };
+          }
+        } else {
+          console.error("state.users is not an array:", state.users);
         }
       })
       .addCase(editAsyncUser.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
+
+      // Delete user
       .addCase(deleteAsyncUser.pending, (state) =>
         handleAsyncState(state, {}, "pending")
       )
       .addCase(deleteAsyncUser.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
+        state.users = Array.isArray(state.users) ? state.users : [];
         state.users = state.users.filter(
-          (user) => user.username !== action.payload
+          (user) => user.username !== action.payload.id
         );
       })
       .addCase(deleteAsyncUser.rejected, (state, action) =>

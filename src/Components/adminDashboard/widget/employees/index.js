@@ -94,7 +94,7 @@ const Empolyees = () => {
                 headerContentValue="ویرایش کارمند"
                 HeaderContent={<HeaderContent />}
                 BodyContent={<BodyContent />}
-                FooterContent={<FooterContent users={users} />}
+                FooterContent={<FooterContent user={user} token={token} />}
                 iconBtnDisply="none"
               />
             );
