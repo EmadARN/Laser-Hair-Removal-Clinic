@@ -38,6 +38,8 @@ const SideBarDashboard = ({
   return (
     <Box
       sx={{
+        position: "sticky",
+        top: 1,
         "& .ps-sidebar-container": {
           backgroundColor: "rgba(255,255,255,0.1) !important",
           border: "1px solid lightgray!important",
