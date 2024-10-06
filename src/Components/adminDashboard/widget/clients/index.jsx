@@ -6,10 +6,11 @@ import { Box } from "@chakra-ui/react";
 const Clients = () => {
   return (
     <>
-      <Box sx={{ py: 6 }}>
+      <Box sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 4 } }}>
         <SearchInput placeholder="جستجو در بین مراجعین" size="lg" />
       </Box>
-      <Box>
+      <Box px={{ base: 2, md: 4 }}>
+        
         <AccordionLists />
       </Box>
     </>

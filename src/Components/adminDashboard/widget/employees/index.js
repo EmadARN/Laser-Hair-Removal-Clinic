@@ -3,11 +3,11 @@ import BodyContent from "./widget/modalAttentionDetails/BodyContent";
 import FooterContent from "./widget/modalAttentionDetails/FooterContent";
 import HeaderContent from "./widget/modalAttentionDetails/HeaderContent";
 import Lists from "../../common/Lists";
-import { Box, Spinner, Text, Skeleton, SkeletonText } from "@chakra-ui/react";
+import { Box, Spinner, Text, Skeleton } from "@chakra-ui/react";
 import AdminHeader from "../AdminHeader/AdminHeader";
 import { RiShieldUserFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import { getAsyncOpratorList } from "@/features/adminDashboard/adminDashboardSlice";
+import { getAsyncUsersList } from "@/features/adminDashboard/adminDashboardSlice";
 import UserForm from "./widget/modalDefineDetails/UserForm";
 import ReusableSession from "../../common/ReussableSession";
 
@@ -22,7 +22,7 @@ const Empolyees = () => {
   useEffect(() => {
     // اگر توکن وجود دارد، اکشن برای بارگذاری لیست کاربران را فراخوانی کنید
     if (token) {
-      dispatch(getAsyncOpratorList(token));
+      dispatch(getAsyncUsersList(token));
     }
   }, [dispatch, token]);
 

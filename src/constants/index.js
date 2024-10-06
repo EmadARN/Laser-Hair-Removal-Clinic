@@ -339,6 +339,22 @@ export const userInputs = [
     isPassword: true,
   },
 ];
+export const headers = [
+  { title: "روز", key: "day" },
+  { title: "شیفت صبح", key: "morning" },
+  { title: "شیفت عصر", key: "evening" },
+  { title: "ساعت شروع نوبت دهی", key: "start" },
+  { title: "ساعت اتمام نوبت دهی", key: "end" },
+];
+export const daysOfWeek = [
+  "شنبه",
+  "یکشنبه",
+  "دوشنبه",
+  "سه‌شنبه",
+  "چهارشنبه",
+  "پنجشنبه",
+  "جمعه",
+];
 
 //ReceptionDashboard
 export const receptionData = [
