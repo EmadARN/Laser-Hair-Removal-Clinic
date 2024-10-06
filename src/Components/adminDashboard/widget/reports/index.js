@@ -7,13 +7,13 @@ import SessionSummeryBox from "./widgets/SessionSummeryBox";
 const Reports = () => {
   return (
     <>
-      <Box sx={{ py: 6 }}>
+      <Box sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 6 } }}>
         <RepoertHeader />
       </Box>
-      <Box>
+      <Box sx={{ px: { base: 2, md: 6 } }}>
         <SessionSummery />
       </Box>
-      <Box sx={{ mt: 8 }}>
+      <Box sx={{ mt: { base: 6, md: 8 }, px: { base: 2, md: 6 } }}>
         <SessionSummeryBox />
       </Box>
     </>

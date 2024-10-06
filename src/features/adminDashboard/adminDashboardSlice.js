@@ -12,8 +12,24 @@ const handleAsyncState = (state, action, status) => {
 };
 
 // Async Thunks
-export const getAsyncOpratorList = createAsyncThunk(
-  "admin/getAsyncOpratorList",
+export const getAsyncOperatorList = createAsyncThunk(
+  "admin/getAsyncOperatorList",
+  async (_, { getState, rejectWithValue }) => {
+    const { token } = getState().adminDashboard;
+    try {
+      const { data } = await api.get("/Core/operator/list/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+export const getAsyncUsersList = createAsyncThunk(
+  "admin/getAsyncUsersList",
   async (_, { getState, rejectWithValue }) => {
     const { token } = getState().adminDashboard;
     try {
@@ -175,10 +191,11 @@ export const settingAsyncChanging = createAsyncThunk(
 const initialState = {
   loading: false,
   error: "",
+  operators: [],
   users: [],
+  AreaLaser: [],
   token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   userType: null,
-  AreaLaser: [],
 };
 
 const adminDashboardSlice = createSlice({
@@ -188,14 +205,26 @@ const adminDashboardSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // Fetch operator list
-      .addCase(getAsyncOpratorList.pending, (state) => {
+      .addCase(getAsyncOperatorList.pending, (state) => {
         state.loading = true;
         state.error = "";
       })
-      .addCase(getAsyncOpratorList.rejected, (state, action) =>
+      .addCase(getAsyncOperatorList.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
-      .addCase(getAsyncOpratorList.fulfilled, (state, action) => {
+      .addCase(getAsyncOperatorList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.operators = action.payload;
+      })
+      // Fetch Users list
+      .addCase(getAsyncUsersList.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getAsyncUsersList.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getAsyncUsersList.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.users = action.payload;
       })

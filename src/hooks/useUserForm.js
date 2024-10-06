@@ -1,7 +1,7 @@
 import {
   addAsyncUsers,
   editAsyncUser,
-  getAsyncOpratorList,
+  getAsyncUsersList,
 } from "@/features/adminDashboard/adminDashboardSlice";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { useEffect, useState } from "react";
@@ -68,7 +68,7 @@ const useUserForm = (userToEdit, isEdit, token) => {
         showToast({ title: "کاربر اضافه شد.", status: "success" });
       }
       //بروز رسانی
-      dispatch(getAsyncOpratorList(token));
+      dispatch(getAsyncUsersList(token));
     } catch (error) {
       showToast({
         title: "خطا در ثبت کاربر.",

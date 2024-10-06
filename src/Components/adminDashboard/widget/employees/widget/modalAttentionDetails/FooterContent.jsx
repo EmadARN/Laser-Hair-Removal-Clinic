@@ -1,9 +1,9 @@
 import {
   deleteAsyncUser,
-  getAsyncOpratorList,
+  getAsyncUsersList,
 } from "@/features/adminDashboard/adminDashboardSlice";
 import { useCustomToast } from "@/utils/useCustomToast ";
-import { Button, ModalCloseButton, Stack } from "@chakra-ui/react";
+import { Button, Stack } from "@chakra-ui/react";
 import React from "react";
 import { useDispatch } from "react-redux";
 
@@ -30,7 +30,7 @@ const FooterContent = ({ user, token }) => {
       });
     }
     // فراخوانی مجدد لیست کاربران
-    dispatch(getAsyncOpratorList(token));
+    dispatch(getAsyncUsersList(token));
   };
 
   return (
