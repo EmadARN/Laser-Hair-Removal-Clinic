@@ -73,25 +73,6 @@ export const addAsyncUsers = createAsyncThunk(
   }
 );
 
-export const addLazerArea = createAsyncThunk(
-  "user/addLazerArea",
-  async (payload, { rejectWithValue }) => {
-    try {
-      const { data } = await api.post("/Laser/add/new/laser/area/", payload, {
-        headers: {
-          Authorization: `Bearer ${payload.token}`,
-        },
-      });
-      alert("arealazer Created Successfully");
-      console.log(data);
-
-      return data;
-    } catch (error) {
-      console.log("addlzerarea error", error);
-    }
-  }
-);
-
 export const editAsyncUser = createAsyncThunk(
   "user/editAsyncUser",
   async (payload, { rejectWithValue }) => {
@@ -138,6 +119,40 @@ export const deleteAsyncUser = createAsyncThunk(
     }
   }
 );
+
+export const addLazerArea = createAsyncThunk(
+  "user/addLazerArea",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/Laser/add/new/laser/area/", payload, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+export const editLazerArea = createAsyncThunk(
+  "user/editLazerArea",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/Laser/edit/laser/area/", payload, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log("editLazerArea error", error);
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
 export const settingAsyncChanging = createAsyncThunk(
   "user/settingAsyncChanging",
   async (payload, { rejectWithValue }) => {
@@ -245,19 +260,6 @@ const adminDashboardSlice = createSlice({
         handleAsyncState(state, action, "rejected")
       )
 
-      // Add new laser area
-      .addCase(addLazerArea.pending, (state) => {
-        state.loading = true;
-        state.error = false;
-      })
-      .addCase(addLazerArea.fulfilled, (state, action) => {
-        state.loading = false;
-        state.AreaLaser = action.payload;
-      })
-      .addCase(addLazerArea.rejected, (state, action) => {
-        handleAsyncState(state, action, "rejected");
-      })
-
       // Edit user information
       .addCase(editAsyncUser.pending, (state) =>
         handleAsyncState(state, {}, "pending")
@@ -286,6 +288,41 @@ const adminDashboardSlice = createSlice({
         );
       })
       .addCase(deleteAsyncUser.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+
+      // Add new laser area
+      .addCase(addLazerArea.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(addLazerArea.fulfilled, (state, action) => {
+        state.loading = false;
+        state.AreaLaser = action.payload;
+      })
+      .addCase(addLazerArea.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
+
+      // Edit new laser area
+      .addCase(editLazerArea.pending, (state) => {
+        handleAsyncState(state, {}, "pending");
+      })
+      .addCase(editLazerArea.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        if (Array.isArray(state.AreaLaser)) {
+          const index = state.AreaLaser.findIndex(
+            (area) => area.name === action.payload.name
+          );
+          if (index !== -1) {
+            state.AreaLaser[index] = action.payload; // به‌روزرسانی ناحیه موجود
+          } else {
+            // اگر ناحیه پیدا نشد، ممکن است بخواهید آن را به آرایه اضافه کنید
+            state.AreaLaser.push(action.payload);
+          }
+        }
+      })
+      .addCase(editLazerArea.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
 

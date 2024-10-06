@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   FormControl,
   FormLabel,
@@ -6,66 +6,41 @@ import {
   SimpleGrid,
   Button,
 } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addLazerArea,
-  getLazerAreas,
-} from "@/features/adminDashboard/adminDashboardSlice";
+import useAreaLazerForm from "@/hooks/useAreaLazerForm";
 
-const ModalBodyContent = ({ isEdit }) => {
-  const dispatch = useDispatch();
-  const { token } = useSelector((store) => store.adminDashboard);
-
-  const [selectedItem, setSelectedItem] = useState(null);
-
-  const [lazerArea, setLazerArea] = useState({
-    deadline_reset: 0,
-  });
-
-  const areaChangeHandler = (e) => {
-    const { value, name } = e.target;
-    setLazerArea((prevForm) => ({
-      ...prevForm,
-      [name]: name === "price" ? Number(value) : value,
-    }));
-  };
-
-  const handleButtonClick = (value) => {
-    setSelectedItem(value);
-    setLazerArea((prevForm) => ({
-      ...prevForm,
-      operate_time: value,
-    }));
-  };
-
-  const handleChange = async (e) => {
-    e.preventDefault();
-    await dispatch(addLazerArea({ ...lazerArea, token }));
-    dispatch(getLazerAreas({ token }));
-  };
+const AreaLazerForm = ({ areaToEdit, isEdit, token }) => {
+  const {
+    lazerArea,
+    selectedItem,
+    areaChangeHandler,
+    handleButtonClick,
+    handleSubmit,
+  } = useAreaLazerForm(isEdit, areaToEdit, token);
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <FormControl>
         <FormLabel>نام ناحیه</FormLabel>
         <Input
-          name="name"
+          name="label"
+          value={lazerArea.label}
           onChange={areaChangeHandler}
           size="lg"
           placeholder="نام ناحیه"
         />
-        {/* ref={initialRef} */}
       </FormControl>
 
       <FormControl mt={8}>
         <FormLabel>مبلغ (تومان)</FormLabel>
         <Input
           name="price"
+          value={lazerArea.price}
           onChange={areaChangeHandler}
           size="lg"
           placeholder="مبلغ (تومان)"
         />
       </FormControl>
+
       <FormControl mt={8}>
         <FormLabel>مدت زمان</FormLabel>
         <SimpleGrid minChildWidth="60px" spacing="10px" pt={2}>
@@ -79,8 +54,8 @@ const ModalBodyContent = ({ isEdit }) => {
                 value={item}
                 width="50px"
                 rounded={4}
-                color="blue"
-                bgColor={isSelected ? "#999" : "transparent"}
+                color={isSelected ? "#fff" : "blue"}
+                bgColor={isSelected ? "brand.400" : "transparent"}
                 variant="outline"
               >
                 {item}
@@ -90,11 +65,11 @@ const ModalBodyContent = ({ isEdit }) => {
         </SimpleGrid>
       </FormControl>
 
-      <Button onClick={handleChange} sx={{ w: "100%" }} colorScheme="blue">
-        افزودن
+      <Button type="submit" sx={{ w: "100%" }} colorScheme="blue">
+        {isEdit ? "ویرایش" : "افزودن"}
       </Button>
-    </>
+    </form>
   );
 };
 
-export default ModalBodyContent;
+export default AreaLazerForm;
