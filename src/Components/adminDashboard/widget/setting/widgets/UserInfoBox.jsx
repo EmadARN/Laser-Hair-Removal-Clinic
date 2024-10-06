@@ -5,12 +5,13 @@ import { CiEdit } from "react-icons/ci";
 const UserInfoBox = () => {
   return (
     <Box
-      width={"100%"}
+      width={{base:"170%",md:"100%"}}
       display={"flex"}
       flexDirection={"column"}
       gap={3}
       alignItems={"center"}
       justifyContent={"center"}
+      
     >
       <Box width={"100%"}>
         <Text fontWeight={"bold"} textAlign={"right"} color={"#111"}>
@@ -29,10 +30,10 @@ const UserInfoBox = () => {
       >
         <Box display={"flex"} flexDirection={"column"} gap={2}>
           <Box mb={3}>
-            <Text mb={2} color={"#555"}>
+            <Text fontSize={{base:"15px",md:"17px"}} mb={2} color={"#555"}>
               نام کاربری
             </Text>
-            <Text fontSize={{ base: "15px", md: "20px" }} fontWeight={"bold"}>
+            <Text fontSize={{ base: "15px", md: "17px" }} fontWeight={"bold"}>
               foroghh ahmadi
             </Text>
           </Box>
@@ -53,7 +54,7 @@ const UserInfoBox = () => {
             fontWeight={"bold"}
             leftIcon={<CiEdit size={"25px"} />}
           >
-            ویرایش
+            <Text fontSize={{base:"15px",md:"17px"}}>ویرایش</Text>
           </Button>
         </Box>
       </Box>

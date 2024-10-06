@@ -6,13 +6,15 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Stack,
 } from "@chakra-ui/react";
+import { MdBorderColor } from "react-icons/md";
 
 const TurnSetting = ({ handleInputs, submitHandler }) => {
   return (
     <form onSubmit={submitHandler}>
       <Box
-        width={"100%"}
+       width={{base:"170%",md:"100%"}}
         display={"flex"}
         flexDirection={"column"}
         gap={3}
@@ -24,7 +26,8 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
             تنظیمات نوبت دهی و ودیعه
           </Text>
         </Box>
-        <Box
+        <Stack
+        spacing={3}
           boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
           bgColor={"#ededed"}
           width={{ sm: "100%", lg: "100%" }}
@@ -38,7 +41,7 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
             <FormControl>
               <FormLabel> شروع نوبت دهی</FormLabel>
               <Input
-                sx={{ borderColor: "red" }}
+          sx={{borderColor:"#777"}}
                 name="morning_time"
                 onChange={handleInputs}
               />
@@ -48,7 +51,7 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
             <FormControl>
               <FormLabel> پایان نوبت دهی</FormLabel>
               <Input
-                sx={{ borderColor: "red" }}
+                 sx={{borderColor:"#777"}}
                 name="afternoon_time"
                 onChange={handleInputs}
               />
@@ -58,13 +61,13 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
             <FormControl>
               <FormLabel> تنظیمات ودیعه </FormLabel>
               <Input
-                sx={{ borderColor: "red" }}
+                sx={{borderColor:"#777"}}
                 onChange={handleInputs}
                 name="trust_price"
               />
             </FormControl>
           </Box>
-          <Box>
+          <Box mt={4}>
             <Button
               sx={{ fontSize: { base: "13px", md: "20px" } }}
               colorScheme={"blue"}
@@ -74,7 +77,7 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
               ثبت تغییرات
             </Button>
           </Box>
-        </Box>
+        </Stack>
       </Box>
     </form>
   );

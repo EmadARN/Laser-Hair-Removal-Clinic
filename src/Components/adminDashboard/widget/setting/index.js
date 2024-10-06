@@ -1,9 +1,12 @@
 import { Box } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserInfoBox from "./widgets/UserInfoBox";
 import TurnSetting from "./widgets/turnSetting";
 import { useDispatch, useSelector } from "react-redux";
-import { settingAsyncChanging } from "@/features/adminDashboard/adminDashboardSlice";
+import {
+  getSettingInformation,
+  settingAsyncChanging,
+} from "@/features/adminDashboard/adminDashboardSlice";
 
 const Setting = () => {
   const [turnSetting, setTurnSetting] = useState({
@@ -22,13 +25,19 @@ const Setting = () => {
     dispatch(settingAsyncChanging({ ...turnSetting, token }));
   };
 
+  useEffect(() => {
+    if (token) {
+      dispatch(getSettingInformation({token}));
+    }
+  }, [dispatch, token]);
+
   return (
     <>
       <Box sx={{ py: 6 }}>تنظیمات</Box>
-      <Box>
+      <Box width={'100%'}>
         <UserInfoBox />
       </Box>
-      <Box sx={{ mt: 8 }}>
+      <Box width={'100%'} sx={{ mt: 8 }}>
         <TurnSetting
           handleInputs={handleInputs}
           setTurnSetting={setTurnSetting}
