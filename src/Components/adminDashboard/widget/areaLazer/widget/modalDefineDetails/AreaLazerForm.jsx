@@ -22,7 +22,7 @@ const AreaLazerForm = ({ areaToEdit, isEdit, token }) => {
       <FormControl>
         <FormLabel>نام ناحیه</FormLabel>
         <Input
-          name="label"
+          name="name"
           value={lazerArea.label}
           onChange={areaChangeHandler}
           size="lg"

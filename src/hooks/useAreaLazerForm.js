@@ -11,8 +11,7 @@ const useAreaLazerForm = (isEdit, areaToEdit, token) => {
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [lazerArea, setLazerArea] = useState({
-    price: 0,
-    name: "",
+    deadline_reset: 0,
   });
 
   // بارگذاری داده‌ها در صورت ویرایش
