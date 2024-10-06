@@ -157,6 +157,24 @@ export const settingAsyncChanging = createAsyncThunk(
   }
 );
 
+export const getSettingInformation = createAsyncThunk(
+  "user/getSettingInformation",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Setting/list/", {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      console.log("setting", data);
+      return data;
+    } catch (error) {
+      console.log("setting error", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // Initial State
 const initialState = {
   loading: false,
@@ -165,6 +183,7 @@ const initialState = {
   token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   userType: null,
   AreaLaser: [],
+  settingInfo: [],
 };
 
 const adminDashboardSlice = createSlice({
@@ -193,7 +212,7 @@ const adminDashboardSlice = createSlice({
       })
       .addCase(getLazerAreas.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        state.AreaLaser=action.payload;
+        state.AreaLaser = action.payload;
       })
       .addCase(getLazerAreas.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
@@ -279,7 +298,17 @@ const adminDashboardSlice = createSlice({
       })
       .addCase(settingAsyncChanging.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
-      );
+      )
+      .addCase(getSettingInformation.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled"),
+          (state.settingInfo = action.payload);
+      })
+      .addCase(getSettingInformation.pending, (state, action) => {
+        handleAsyncState(state, action, "pending");
+      })
+      .addCase(getSettingInformation.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      });
   },
 });
 
