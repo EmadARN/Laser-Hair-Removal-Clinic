@@ -1,22 +1,38 @@
-import Experienced_years from "@/Components/home/5years-with-you";
-import FaQs from "@/Components/home/faqs/wigets/FaQs";
-import Main_get_turn from "@/Components/home/get-turn-section";
-import CaptionSlider from "@/Components/home/slider/CaptionSlider";
+import Banner from "@/Components/home/banner/Banner";
+import AccordionMenu from "@/Components/home/faqs/AccordionMenuFaqs";
+import { GuideSignup } from "@/Components/home/guideSignup/GuideSignup";
+import Header from "@/Components/home/header/Header";
+import { LaserBefore } from "@/Components/home/laserBefore/LaserBefore";
 import Suggstion from "@/Components/home/suggestion/Suggstion";
+import WhyLaser from "@/Components/home/whyLaser/WhyLaser";
 import Layout from "@/Container";
-import { Box } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
 
 const Home = () => {
   return (
     <Layout bgColor={"#F7F7F7"}>
-      <CaptionSlider />
-      <Main_get_turn />
+      <Header />
+      <Grid
+        templateColumns={{ base: "1fr", md: "1fr 1fr" }} // تغییرات برای گرید ری‌سپانسیو
+        gap={6} // فاصله بین آیتم‌ها
+        my={18}
+      >
+        <GridItem colSpan={12} mt={{ base: 24, md: 0 }}>
+          <Banner />
+        </GridItem>
+        <GridItem colSpan={12}>
+          <WhyLaser />
+        </GridItem>
+      </Grid>
+      <Grid>
+        <LaserBefore />
+      </Grid>
+      <GuideSignup />
       <Box my={8}>
-        <FaQs />
+        <AccordionMenu />
       </Box>
       <Suggstion />
-      <Experienced_years />
     </Layout>
   );
 };
