@@ -13,11 +13,7 @@ const Home = () => {
   return (
     <Layout bgColor={"#F7F7F7"}>
       <Header />
-      <Grid
-        templateColumns={{ base: "1fr", md: "1fr 1fr" }} // تغییرات برای گرید ری‌سپانسیو
-        gap={6} // فاصله بین آیتم‌ها
-        my={18}
-      >
+      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6} my={18}>
         <GridItem colSpan={12} mt={{ base: 24, md: 0 }}>
           <Banner />
         </GridItem>
