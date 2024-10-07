@@ -12,18 +12,22 @@ const AreaLazerForm = ({ areaToEdit, isEdit, token }) => {
   const {
     lazerArea,
     selectedItem,
+  
     areaChangeHandler,
     handleButtonClick,
     handleSubmit,
+  
   } = useAreaLazerForm(isEdit, areaToEdit, token);
 
+  console.log("dfdfdd",lazerArea);
+  
   return (
     <form onSubmit={handleSubmit}>
       <FormControl>
         <FormLabel>نام ناحیه</FormLabel>
         <Input
           name="name"
-          value={lazerArea.label}
+          value={lazerArea.name}
           onChange={areaChangeHandler}
           size="lg"
           placeholder="نام ناحیه"
@@ -41,9 +45,9 @@ const AreaLazerForm = ({ areaToEdit, isEdit, token }) => {
         />
       </FormControl>
 
-      <FormControl mt={8}>
+      <FormControl display={isEdit ? 'none' : "block"} mt={8}>
         <FormLabel>مدت زمان</FormLabel>
-        <SimpleGrid minChildWidth="60px" spacing="10px" pt={2}>
+        <SimpleGrid  minChildWidth="60px" spacing="10px" pt={2}>
           {[5, 10, 15, 20, 25, 30, 35].map((item, index) => {
             const isSelected = selectedItem === item; // بررسی انتخاب
             return (
@@ -65,7 +69,7 @@ const AreaLazerForm = ({ areaToEdit, isEdit, token }) => {
         </SimpleGrid>
       </FormControl>
 
-      <Button type="submit" sx={{ w: "100%" }} colorScheme="blue">
+      <Button mt={4} type="submit" sx={{ w: "100%" }} colorScheme="blue">
         {isEdit ? "ویرایش" : "افزودن"}
       </Button>
     </form>

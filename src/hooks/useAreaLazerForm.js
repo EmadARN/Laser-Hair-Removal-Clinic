@@ -10,6 +10,13 @@ const useAreaLazerForm = (isEdit, areaToEdit, token) => {
   const dispatch = useDispatch();
 
   const [selectedItem, setSelectedItem] = useState(null);
+
+  const [editArea,setEditArea] = useState({
+    name:"",
+    price:0
+
+  })
+
   const [lazerArea, setLazerArea] = useState({
     deadline_reset: 0,
   });
@@ -24,11 +31,18 @@ const useAreaLazerForm = (isEdit, areaToEdit, token) => {
 
   const areaChangeHandler = (e) => {
     const { value, name } = e.target;
+    setEditArea((prevForm)=>({
+      ...prevForm,
+      [name]: name === "price" ? Number(value) : value,
+    }))
     setLazerArea((prevForm) => ({
       ...prevForm,
       [name]: name === "price" ? Number(value) : value,
     }));
   };
+
+
+
 
   const handleButtonClick = (value) => {
     setSelectedItem(value);
@@ -42,7 +56,7 @@ const useAreaLazerForm = (isEdit, areaToEdit, token) => {
     e.preventDefault();
 
     if (isEdit) {
-      await dispatch(editLazerArea({ ...lazerArea, token }));
+      await dispatch(editLazerArea({ ...editArea, token }));
     } else {
       await dispatch(addLazerArea({ ...lazerArea, token }));
     }
@@ -51,10 +65,12 @@ const useAreaLazerForm = (isEdit, areaToEdit, token) => {
 
   return {
     lazerArea,
+    editArea,
     selectedItem,
     areaChangeHandler,
     handleButtonClick,
     handleSubmit,
+ 
   };
 };
 
