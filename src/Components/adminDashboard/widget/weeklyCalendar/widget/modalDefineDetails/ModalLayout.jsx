@@ -46,7 +46,7 @@ const ModalLayout = ({
                 </Text>
               </Flex>
             )}
-            <RenderOperators shiftData={shiftData} onSelect={onSelect} />{" "}
+            <RenderOperators shiftData={shiftData} onSelect={onSelect} />
           </VStack>
           {editing && existingName && (
             <Button
