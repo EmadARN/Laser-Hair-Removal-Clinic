@@ -6,20 +6,21 @@ import {
   Tr,
   Th,
   Td,
-  Button,
   TableContainer,
   useDisclosure,
   Text,
 } from "@chakra-ui/react";
 import { daysOfWeek, headers } from "@/constants";
 import ModalLayout from "./ModalLayout";
+import { useDispatch } from "react-redux";
 
-const AdminTable = ({ operator_list }) => {
+const AdminTable = ({ operator_list, token }) => {
   const [shiftData, setShiftData] = useState({ morning: {}, evening: {} });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentShift, setCurrentShift] = useState("");
   const [selectedDay, setSelectedDay] = useState("");
   const [editing, setEditing] = useState(false);
+  const dispatch = useDispatch();
 
   const handleShiftClick = (shift, day) => {
     setCurrentShift(shift);
@@ -34,6 +35,7 @@ const AdminTable = ({ operator_list }) => {
       ...prev,
       [currentShift]: { ...prev[currentShift], [selectedDay]: fullName },
     }));
+    dispatch(operatorProgramList(currentShift, token));
     onClose();
   };
 

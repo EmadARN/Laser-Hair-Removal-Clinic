@@ -1,3 +1,4 @@
+import AreaLazer from "@/Components/adminDashboard/widget/areaLazer";
 import api from "@/services/apiService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -12,22 +13,18 @@ const handleAsyncState = (state, action, status) => {
 };
 
 // Async Thunks
-export const getAsyncOperatorList = createAsyncThunk(
-  "admin/getAsyncOperatorList",
-  async (_, { getState, rejectWithValue }) => {
-    const { token } = getState().adminDashboard;
+export const postAsyncLogin = createAsyncThunk(
+  "user/postAsyncLogin",
+  async (payload, { rejectWithValue }) => {
     try {
-      const { data } = await api.get("/Core/operator/list/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await api.post("/Core/login/", payload);
       return data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
+
 export const getAsyncUsersList = createAsyncThunk(
   "admin/getAsyncUsersList",
   async (_, { getState, rejectWithValue }) => {
@@ -44,35 +41,6 @@ export const getAsyncUsersList = createAsyncThunk(
     }
   }
 );
-export const getLazerAreas = createAsyncThunk(
-  "user/getLazerArea",
-  async (payload, { rejectWithValue }) => {
-    try {
-      const { data } = await api.get("/Laser/laser/area/list/", {
-        headers: {
-          Authorization: `Bearer ${payload.token}`,
-        },
-      });
-      console.log("getLazerAreA", data);
-      return data;
-    } catch (error) {
-      console.log("get lazer area error", error);
-      return rejectWithValue(error.message);
-    }
-  }
-);
-export const postAsyncLogin = createAsyncThunk(
-  "user/postAsyncLogin",
-  async (payload, { rejectWithValue }) => {
-    try {
-      const { data } = await api.post("/Core/login/", payload);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
 export const addAsyncUsers = createAsyncThunk(
   "user/addAsyncUsers",
   async (payload, { rejectWithValue }) => {
@@ -88,7 +56,6 @@ export const addAsyncUsers = createAsyncThunk(
     }
   }
 );
-
 export const editAsyncUser = createAsyncThunk(
   "user/editAsyncUser",
   async (payload, { rejectWithValue }) => {
@@ -104,8 +71,6 @@ export const editAsyncUser = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      console.log("editAsyncUser error", error);
-
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -129,13 +94,28 @@ export const deleteAsyncUser = createAsyncThunk(
       );
       return { id: payload.id };
     } catch (error) {
-      console.log("deleteAsyncUser error", error);
+      console.log("delte Err", error);
 
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
-
+export const getLazerAreas = createAsyncThunk(
+  "user/getLazerArea",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Laser/laser/area/list/", {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log("get lazer area error", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
 export const addLazerArea = createAsyncThunk(
   "user/addLazerArea",
   async (payload, { rejectWithValue }) => {
@@ -161,9 +141,10 @@ export const editLazerArea = createAsyncThunk(
           Authorization: `Bearer ${payload.token}`,
         },
       });
+      console.log("data", data);
+
       return data;
     } catch (error) {
-      console.log("editLazerArea error", error);
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -182,7 +163,6 @@ export const settingAsyncChanging = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -205,7 +185,60 @@ export const getSettingInformation = createAsyncThunk(
     }
   }
 );
+export const getAsyncOperatorList = createAsyncThunk(
+  "admin/getAsyncOperatorList",
+  async (_, { getState, rejectWithValue }) => {
+    const { token } = getState().adminDashboard;
+    try {
+      const { data } = await api.get("/Core/operator/list/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+export const getAsyncListDateOperator = createAsyncThunk(
+  "admin/getAsyncListDateOperator",
+  async (_, { getState, rejectWithValue }) => {
+    const { token } = getState().adminDashboard;
+    try {
+      const { data } = await api.get(
+        `/Admin/operator/program/list/${date_year}/${date_month}/${date_day}/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+export const operatorProgramList = createAsyncThunk(
+  "user/operatorProgramList",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/Admin/set/operator/program/", payload, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      console.log("data::", data);
 
+      return data;
+    } catch (error) {
+      console.log("Error operatorProgramList", error);
+
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
@@ -224,44 +257,6 @@ const adminDashboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Fetch operator list
-      .addCase(getAsyncOperatorList.pending, (state) => {
-        state.loading = true;
-        state.error = "";
-      })
-      .addCase(getAsyncOperatorList.rejected, (state, action) =>
-        handleAsyncState(state, action, "rejected")
-      )
-      .addCase(getAsyncOperatorList.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled");
-        state.operators = action.payload;
-      })
-      // Fetch Users list
-      .addCase(getAsyncUsersList.pending, (state) => {
-        state.loading = true;
-        state.error = "";
-      })
-      .addCase(getAsyncUsersList.rejected, (state, action) =>
-        handleAsyncState(state, action, "rejected")
-      )
-      .addCase(getAsyncUsersList.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled");
-        state.users = action.payload;
-      })
-
-      // Fetch laser areas
-      .addCase(getLazerAreas.pending, (state) => {
-        state.loading = true;
-        state.error = "";
-      })
-      .addCase(getLazerAreas.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled");
-        state.AreaLaser = action.payload;
-      })
-      .addCase(getLazerAreas.rejected, (state, action) => {
-        handleAsyncState(state, action, "rejected");
-      })
-
       // User login
       .addCase(postAsyncLogin.pending, (state) =>
         handleAsyncState(state, {}, "pending")
@@ -275,6 +270,19 @@ const adminDashboardSlice = createSlice({
       .addCase(postAsyncLogin.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
+
+      // Fetch Users list
+      .addCase(getAsyncUsersList.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getAsyncUsersList.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getAsyncUsersList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.users = action.payload;
+      })
 
       // Add new user
       .addCase(addAsyncUsers.pending, (state) =>
@@ -316,9 +324,23 @@ const adminDashboardSlice = createSlice({
           (user) => user.username !== action.payload.id
         );
       })
+
       .addCase(deleteAsyncUser.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
+
+      // Fetch laser areas
+      .addCase(getLazerAreas.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getLazerAreas.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.AreaLaser = action.payload;
+      })
+      .addCase(getLazerAreas.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
 
       // Add new laser area
       .addCase(addLazerArea.pending, (state) => {
@@ -355,6 +377,18 @@ const adminDashboardSlice = createSlice({
         handleAsyncState(state, action, "rejected")
       )
 
+      // getSettingInformation
+      .addCase(getSettingInformation.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled"),
+          (state.settingInfo = action.payload);
+      })
+      .addCase(getSettingInformation.pending, (state, action) => {
+        handleAsyncState(state, action, "pending");
+      })
+      .addCase(getSettingInformation.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
+
       // settingAsyncChanging
       .addCase(settingAsyncChanging.pending, (state) =>
         handleAsyncState(state, {}, "pending")
@@ -365,16 +399,42 @@ const adminDashboardSlice = createSlice({
       .addCase(settingAsyncChanging.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
-      .addCase(getSettingInformation.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled"),
-          (state.settingInfo = action.payload);
+
+      // Fetch operator list
+      .addCase(getAsyncOperatorList.pending, (state) => {
+        state.loading = true;
+        state.error = "";
       })
-      .addCase(getSettingInformation.pending, (state, action) => {
-        handleAsyncState(state, action, "pending");
+      .addCase(getAsyncOperatorList.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getAsyncOperatorList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.operators = action.payload;
       })
-      .addCase(getSettingInformation.rejected, (state, action) => {
-        handleAsyncState(state, action, "rejected");
-      });
+      // Fetch getAsyncListDateOperator
+      .addCase(getAsyncListDateOperator.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getAsyncListDateOperator.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getAsyncListDateOperator.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.operators = action.payload;
+      })
+
+      // operatorProgramList
+      .addCase(operatorProgramList.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(operatorProgramList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+      .addCase(operatorProgramList.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      );
   },
 });
 

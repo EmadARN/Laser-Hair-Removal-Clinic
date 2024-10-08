@@ -13,7 +13,7 @@ const FooterContent = ({ item, token }) => {
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteAsyncUser({ id: item.name }));
+      await dispatch(deleteAsyncUser({ id: item.value, token }));
       showToast({
         title: "ناحیه حذف شد.",
         status: "success",

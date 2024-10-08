@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import useAreaLazerForm from "@/hooks/useAreaLazerForm";
 
-const AreaLazerForm = ({ areaToEdit, isEdit, token }) => {
+const AreaLazerForm = ({ areaToEdit, isEdit }) => {
   const {
     lazerArea,
     selectedItem,
@@ -16,8 +16,7 @@ const AreaLazerForm = ({ areaToEdit, isEdit, token }) => {
     areaChangeHandler,
     handleButtonClick,
     handleSubmit,
-  
-  } = useAreaLazerForm(isEdit, areaToEdit, token);
+  } = useAreaLazerForm(isEdit, areaToEdit);
 
   console.log("dfdfdd",lazerArea);
   
@@ -27,7 +26,7 @@ const AreaLazerForm = ({ areaToEdit, isEdit, token }) => {
         <FormLabel>نام ناحیه</FormLabel>
         <Input
           name="name"
-          value={lazerArea.name}
+          value={lazerArea.name} // مقدار label برای name استفاده شود
           onChange={areaChangeHandler}
           size="lg"
           placeholder="نام ناحیه"
@@ -45,7 +44,7 @@ const AreaLazerForm = ({ areaToEdit, isEdit, token }) => {
         />
       </FormControl>
 
-      <FormControl display={isEdit ? 'none' : "block"} mt={8}>
+      <FormControl mt={8} display={isEdit ? "none" : "block"}>
         <FormLabel>مدت زمان</FormLabel>
         <SimpleGrid  minChildWidth="60px" spacing="10px" pt={2}>
           {[5, 10, 15, 20, 25, 30, 35].map((item, index) => {

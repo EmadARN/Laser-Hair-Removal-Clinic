@@ -31,7 +31,7 @@ const WeeklyCalendar = () => {
         />
       </Box>
       <Box sx={{ w: "100%" }}>
-        <AdminTable operator_list={operators.operator_list} />
+        <AdminTable operator_list={operators.operator_list} token={token} />
       </Box>
     </>
   );
