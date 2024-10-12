@@ -1,64 +1,96 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { fetchWeekData } from "@/features/adminDashboard/adminDashboardSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+const persianMonths = [
+  "فروردین",
+  "اردیبهشت",
+  "خرداد",
+  "تیر",
+  "مرداد",
+  "شهریور",
+  "مهر",
+  "آبان",
+  "آذر",
+  "دی",
+  "بهمن",
+  "اسفند",
+];
 
 const DataSlider = () => {
-  const dates = [
-    { id: 1, date: "2022-01-01" },
-    { id: 2, date: "2022-01-02" },
-    { id: 3, date: "2022-01-03" },
-    { id: 4, date: "2022-01-04" },
-    { id: 5, date: "2022-01-05" },
-  ];
-  const [current, setCurrent] = useState(0);
-  function dateHandler(type) {
-    var index = 0;
-    var counter = 0;
-    dates.map((item) => {
-      if (item.id == dates[current].id) {
-        type == "neg" ? (index = counter - 1) : (index = counter + 1);
-      }
+  const dispatch = useDispatch();
+  const { dateRanges } = useSelector((state) => state.adminDashboard);
+  const [currentRange, setCurrentRange] = React.useState(0); // نگه‌داشتن بازه فعلی
 
-      counter++;
-    });
-    if (index == dates.length) {
-      index--;
-    } else if (index < 0) {
-      index = 0;
+  useEffect(() => {
+    dispatch(fetchWeekData(currentRange)); // بارگذاری داده‌های هفته بر اساس ایندکس فعلی
+  }, [dispatch, currentRange]); // ایندکس فعلی را به عنوان وابستگی اضافه کنید
+
+  const dateHandler = (type) => {
+    let newIndex = currentRange;
+    type === "next" ? newIndex++ : newIndex--;
+
+    if (newIndex >= dateRanges.length) {
+      newIndex = dateRanges.length - 1;
+    } else if (newIndex < 0) {
+      newIndex = 0;
     }
-    setCurrent(index);
-  }
+
+    setCurrentRange(newIndex); // به‌روزرسانی ایندکس فعلی
+  };
+
+  // دسترسی به تاریخ مربوط به ایندکس فعلی
+  const currentDate = dateRanges.date; // بررسی وجود تاریخ
+
+  // تبدیل تاریخ شمسی به میلادی و محاسبه تاریخ‌های شروع و پایان
+  const startDate = new Date(currentDate); // فرض کنید تاریخ در فرمت مناسب است
+  const endDate = new Date(startDate);
+  endDate.setDate(startDate.getDate() + 6); // تاریخ پایان (جمعه)
+
+  const formattedStart = `${startDate.getDate()} ${
+    persianMonths[startDate.getMonth()]
+  }`; // تاریخ شروع
+
+  const formattedEnd = `${endDate.getDate()} ${
+    persianMonths[endDate.getMonth()]
+  }`; // تاریخ پایان
+
   return (
     <Flex
       sx={{
         alignItems: "center",
+        justifyContent: "center",
         gap: 4,
+        fontSize: "18px",
+        color: "blue",
       }}
     >
       <Button
-        onClick={() => dateHandler("neg")}
-        sx={{
-          w: { base: "30px", md: "40px" },
-          h: { base: "30px", md: "40px" },
-          "& .chakra-button": {
-            fontSize: "18px",
-          },
-        }}
+        onClick={() => dateHandler("prev")}
+        isDisabled={currentRange === 0}
       >
         <IoIosArrowForward />
       </Button>
-      <Flex py={6}>
-        <Text sx={{ fontSize: { base: "12px", md: "18px" } }}>امروز -</Text>
-        <Text sx={{ fontSize: { base: "12px", md: "18px" } }}>
-          {dates[current].date}
+
+      <Flex py={6} sx={{ minWidth: "200px", justifyContent: "center" }}>
+        <Text
+          sx={{
+            fontSize: { base: "14px", md: "18px" },
+            fontWeight: "bold",
+            color: "blue",
+          }}
+        >
+          {currentDate
+            ? `${formattedStart} - ${formattedEnd}`
+            : "No data available"}
         </Text>
       </Flex>
+
       <Button
-        sx={{
-          w: { base: "30px", md: "40px" },
-          h: { base: "30px", md: "40px" },
-        }}
-        onClick={() => dateHandler("pus")}
+        onClick={() => dateHandler("next")}
+        isDisabled={currentRange === dateRanges.length - 1}
       >
         <IoIosArrowBack />
       </Button>

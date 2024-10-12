@@ -17,8 +17,6 @@ const WeeklyCalendar = () => {
     }
   }, [dispatch, token]);
 
-  console.log("operators::", operators);
-
   return (
     <>
       <Box sx={{ py: 2 }}>
