@@ -12,26 +12,18 @@ import {
 } from "@chakra-ui/react";
 import { daysOfWeek, headers } from "@/constants";
 import ModalLayout from "./ModalLayout";
-import { useDispatch } from "react-redux";
-import { operatorProgramList } from "@/features/adminDashboard/adminDashboardSlice";
-
 
 const AdminTable = ({
-  setOperatorNameKeeper,
   operator_list,
-  token,
   shiftData,
   setShiftData,
   currentShift,
   setCurrentShift,
   selectedDay,
   setSelectedDay,
-
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const [editing, setEditing] = useState(false);
-  const dispatch = useDispatch();
 
   const handleShiftClick = (shift, day) => {
     setCurrentShift(shift);
@@ -40,29 +32,12 @@ const AdminTable = ({
     onOpen();
   };
 
-  // const handleSelect = (name) => {
-  //   const fullName = `${name.name} ${name.last_name}`;
-  //   setShiftData((prev) => ({
-  //     ...prev,
-  //     [currentShift]: { ...prev[currentShift], [selectedDay]: fullName },
-  //   }));
-  //   dispatch(operatorProgramList(currentShift, token));
-  //   onClose();
-  // };
-  // console.log("shiftt",shiftData);
   const handleSelect = (name) => {
-    setOperatorNameKeeper(name)
     const fullName = `${name.name} ${name.last_name}`;
-
-  
-
-    // به‌روزرسانی وضعیت شیفت
     setShiftData((prev) => ({
       ...prev,
       [currentShift]: { ...prev[currentShift], [selectedDay]: fullName },
     }));
-
-    
 
     onClose();
   };
@@ -95,7 +70,6 @@ const AdminTable = ({
   return (
     <>
       <ModalLayout
-      setOperatorNameKeeper={setOperatorNameKeeper}
         isOpen={isOpen}
         onClose={onClose}
         shiftData={operator_list}

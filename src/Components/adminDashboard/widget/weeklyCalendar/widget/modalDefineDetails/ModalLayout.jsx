@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 import RenderOperators from "./RenderOperators";
 
 const ModalLayout = ({
-  setOperatorNameKeeper,
   isOpen,
   onClose,
   editing,
@@ -21,7 +20,6 @@ const ModalLayout = ({
   onClear,
   shiftData,
   onSelect,
-
 }) => {
   const router = useRouter();
 
@@ -48,7 +46,7 @@ const ModalLayout = ({
                 </Text>
               </Flex>
             )}
-            <RenderOperators  setOperatorNameKeeper={setOperatorNameKeeper} shiftData={shiftData} onSelect={onSelect} />
+            <RenderOperators shiftData={shiftData} onSelect={onSelect} />
           </VStack>
           {editing && existingName && (
             <Button

@@ -14,12 +14,8 @@ const WeeklyCalendar = () => {
   const [shiftData, setShiftData] = useState({ morning: {}, evening: {} });
   const [currentShift, setCurrentShift] = useState("");
   const [selectedDay, setSelectedDay] = useState("");
-  const [operatorNameKeeper, setOperatorNameKeeper] = useState("");
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
   const { operators, token } = useSelector((state) => state.adminDashboard);
-
-  const fullName = `${operatorNameKeeper.name} ${operatorNameKeeper.last_name}`;
 
   useEffect(() => {
     if (token) {
@@ -27,39 +23,36 @@ const WeeklyCalendar = () => {
     }
   }, [dispatch, token]);
 
-  const handleSelect = (operatorNameKeeper) => {
-    // تعریف ID و تاریخ (اینها را با مقادیر واقعی جایگزین کنید)
-    const id = "1402/2/2m"; // شناسه دلخواه شما
-    const dateStr = "1402/2/2"; // تاریخ دلخواه شما
-    const programTurn = currentShift === "morning" ? "m" : "e"; // تعیین برنامه بر اساس شیفت
+  const handleSelect = () => {
+    const id = "1402/2/2";
+    const dateStr = "1402/2/2";
+    const operatorProgramList1 = [];
+    // برای هر روز هفته و هر شیفت (morning و evening) لیست کامل اپراتورها را ایجاد می‌کنیم
+    Object.keys(shiftData).forEach((shift) => {
+      Object.keys(shiftData[shift]).forEach((day) => {
+        const operatorName = shiftData[shift][day];
+        if (operatorName) {
+          // تعیین برنامه بر اساس شیفت
+          const programTurn = shift === "morning" ? "m" : "e";
 
-    // ایجاد آرایه جدید از اپراتور
-    const operatorProgramList1 = [
-      {
-        id,
-        date_str: dateStr,
-        program_turn: programTurn,
-        operator_name: fullName,
-        operator: fullName,
-      },
-    ];
+          // اضافه کردن اپراتور به لیست
+          operatorProgramList1.push({
+            id,
+            date_str: dateStr,
+            program_turn: programTurn,
+            operator_name: operatorName,
+            operator: operatorName,
+          });
+        }
+      });
+    });
 
-    console.log("operator program", operatorProgramList1);
-
-    // به‌روزرسانی وضعیت شیفت
-    // setShiftData((prev) => ({
-    //   ...prev,
-    //   [currentShift]: { ...prev[currentShift], [selectedDay]: fullName },
-    // }));
-
-    // ارسال داده به بک‌انتد با فرمت درست
     dispatch(
       operatorProgramList({
         token,
         operator_program_list: operatorProgramList1,
       })
     );
-    onClose();
   };
 
   return (
@@ -76,10 +69,6 @@ const WeeklyCalendar = () => {
       </Flex>
       <Box sx={{ w: "100%" }}>
         <AdminTable
-          setOperatorNameKeeper={setOperatorNameKeeper}
-          onClose={onClose}
-          isOpen={isOpen}
-          onOpen={onOpen}
           shiftData={shiftData}
           setShiftData={setShiftData}
           currentShift={currentShift}
