@@ -26,7 +26,7 @@ const DataSlider = () => {
 
   useEffect(() => {
     dispatch(fetchWeekData(currentRange)); // بارگذاری داده‌های هفته بر اساس ایندکس فعلی
-  }, [dispatch, currentRange]); // ایندکس فعلی را به عنوان وابستگی اضافه کنید
+  }, [dispatch, currentRange]);
 
   const dateHandler = (type) => {
     let newIndex = currentRange;
