@@ -195,6 +195,7 @@ export const getAsyncOperatorList = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
+  
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
@@ -223,16 +224,20 @@ export const getAsyncListDateOperator = createAsyncThunk(
 export const operatorProgramList = createAsyncThunk(
   "user/operatorProgramList",
   async (payload, { rejectWithValue }) => {
+    console.log('payload success',payload);
+    
     try {
       const { data } = await api.post("/Admin/set/operator/program/", payload, {
         headers: {
           Authorization: `Bearer ${payload.token}`,
         },
       });
-      console.log("data::", data);
+      console.log("operatorProgramlist success::", data);
 
       return data;
     } catch (error) {
+      console.log('payload error',payload);
+      
       console.log("Error operatorProgramList", error);
 
       return rejectWithValue(error.response?.data?.message || error.message);

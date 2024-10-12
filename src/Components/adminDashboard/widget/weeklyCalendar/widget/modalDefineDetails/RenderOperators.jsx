@@ -1,7 +1,11 @@
 import React from "react";
 import { Text, Button } from "@chakra-ui/react";
 
-const RenderOperators = ({ shiftData = [], onSelect }) => {
+const RenderOperators = ({
+  setOperatorNameKeeper,
+  shiftData = [],
+  onSelect,
+}) => {
   return shiftData.length === 0 ? (
     <Text fontSize="lg" color="gray.500" textAlign="center">
       هیچ فردی برای نمایش وجود ندارد.

@@ -23,7 +23,8 @@ const AdminHeader = (props) => {
       <Box mt={{ base: 2, md: 0 }} ml={{ md: 5 }}>
         {/* تنظیم حاشیه برای موبایل */}
         <ModalDefine
-          headerContent={props.btnValue}
+         operator_list={props. operator_list}
+         
           bodyContent={props.ModalBodyContent}
           addDisplay={props.addDisplay}
           iconBtnDisply={props.iconBtnDisply}

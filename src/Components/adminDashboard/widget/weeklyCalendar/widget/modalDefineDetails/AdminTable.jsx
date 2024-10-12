@@ -14,11 +14,21 @@ import { daysOfWeek, headers } from "@/constants";
 import ModalLayout from "./ModalLayout";
 import { useDispatch } from "react-redux";
 
-const AdminTable = ({ operator_list, token }) => {
-  const [shiftData, setShiftData] = useState({ morning: {}, evening: {} });
+
+const AdminTable = ({
+  setOperatorNameKeeper,
+  operator_list,
+  token,
+  shiftData,
+  setShiftData,
+  currentShift,
+  setCurrentShift,
+  selectedDay,
+  setSelectedDay,
+
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [currentShift, setCurrentShift] = useState("");
-  const [selectedDay, setSelectedDay] = useState("");
+
   const [editing, setEditing] = useState(false);
   const dispatch = useDispatch();
 
@@ -29,19 +39,37 @@ const AdminTable = ({ operator_list, token }) => {
     onOpen();
   };
 
+  // const handleSelect = (name) => {
+  //   const fullName = `${name.name} ${name.last_name}`;
+  //   setShiftData((prev) => ({
+  //     ...prev,
+  //     [currentShift]: { ...prev[currentShift], [selectedDay]: fullName },
+  //   }));
+  //   dispatch(operatorProgramList(currentShift, token));
+  //   onClose();
+  // };
+  // console.log("shiftt",shiftData);
   const handleSelect = (name) => {
+    setOperatorNameKeeper(name)
     const fullName = `${name.name} ${name.last_name}`;
+
+  
+
+    // به‌روزرسانی وضعیت شیفت
     setShiftData((prev) => ({
       ...prev,
       [currentShift]: { ...prev[currentShift], [selectedDay]: fullName },
     }));
-    dispatch(operatorProgramList(currentShift, token));
+
+    
+
     onClose();
   };
 
   const handleClear = () => {
     setShiftData((prev) => ({
       ...prev,
+
       [currentShift]: { ...prev[currentShift], [selectedDay]: undefined },
     }));
     onClose();
@@ -66,6 +94,7 @@ const AdminTable = ({ operator_list, token }) => {
   return (
     <>
       <ModalLayout
+      setOperatorNameKeeper={setOperatorNameKeeper}
         isOpen={isOpen}
         onClose={onClose}
         shiftData={operator_list}
