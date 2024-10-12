@@ -53,16 +53,16 @@ export const GuideSignup = ({
               position="relative"
               paddingX={4}
               paddingY={2}
-              bg={active?.id === tab.id ? "purple.100" : "brand.400"}
-              color="white"
-              _hover={{ bg: "purple.500" }}
-              className={tabClassName}
+              bg={active?.id === tab.id ? "purple.100" : "#F7F7F7"}
+              boxShadow=" rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+              color={active?.id === tab.id ? "#F7F7F7" : "#222"}
+              _hover={{ color: "#fff" }}
               borderRadius={0} // حذف فاصله بین تب‌ها و خطوط
             >
               <Flex
                 sx={{
                   position: "relative",
-                  color: active?.id === tab.id ? "gray" : "white",
+                  color: active?.id === tab.id ? "white" : "#666",
                   alignItems: "center",
                 }}
               >
@@ -75,7 +75,7 @@ export const GuideSignup = ({
               <Box
                 height="2px"
                 width="20px" // کوچک کردن عرض خط برای نزدیک‌تر کردن به دکمه‌ها
-                bg="purple.500"
+                bg="purple.200"
               />
             )}
           </Flex>
@@ -116,9 +116,9 @@ export const FadeInDiv = ({ tabs, active }) => {
         >
           <Box
             p={4}
-            bg="purple.100"
+            bg="#F7F7F7"
             borderRadius="md"
-            color="gray.700"
+            color="gray.600"
             shadow="md"
             minH={"130px"}
             transform={active?.id === tab.id ? "scale(1)" : "scale(0.9)"} // تغییر سایز بر اساس تب فعال یا قبلی
