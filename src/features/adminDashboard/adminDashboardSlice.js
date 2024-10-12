@@ -195,7 +195,7 @@ export const getAsyncOperatorList = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
@@ -204,8 +204,8 @@ export const getAsyncOperatorList = createAsyncThunk(
 );
 export const getAsyncListDateOperator = createAsyncThunk(
   "admin/getAsyncListDateOperator",
-  async (_, { getState, rejectWithValue }) => {
-    const { token } = getState().adminDashboard;
+  async ({ token, date_year, date_month, date_day }, { rejectWithValue }) => {
+    console.log("payloads:::", { date_year, date_month, date_day });
     try {
       const { data } = await api.get(
         `/Admin/operator/program/list/${date_year}/${date_month}/${date_day}/`,
@@ -217,6 +217,8 @@ export const getAsyncListDateOperator = createAsyncThunk(
       );
       return data;
     } catch (error) {
+      console.log("getListsError:::", error);
+
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -224,8 +226,8 @@ export const getAsyncListDateOperator = createAsyncThunk(
 export const operatorProgramList = createAsyncThunk(
   "user/operatorProgramList",
   async (payload, { rejectWithValue }) => {
-    console.log('payload success',payload);
-    
+    console.log("payload success", payload);
+
     try {
       const { data } = await api.post("/Admin/set/operator/program/", payload, {
         headers: {
@@ -236,14 +238,28 @@ export const operatorProgramList = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log('payload error',payload);
-      
+      console.log("payload error", payload);
+
       console.log("Error operatorProgramList", error);
+    }
+  }
+);
+export const fetchWeekData = createAsyncThunk(
+  "week/fetchWeekData",
+  async (week, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/Admin/week/time/${week}/`);
+      console.log("fetchWeekData:", response.data);
+
+      return response.data;
+    } catch (error) {
+      console.log("fetchWeekDataError:", error);
 
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
+
 // Initial State
 const initialState = {
   loading: false,
@@ -252,6 +268,7 @@ const initialState = {
   users: [],
   AreaLaser: [],
   settingInfo: [],
+  dateRanges: [],
   token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   userType: null,
 };
@@ -439,7 +456,19 @@ const adminDashboardSlice = createSlice({
       })
       .addCase(operatorProgramList.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
-      );
+      )
+
+      // fetchWeekData
+      .addCase(fetchWeekData.pending, (state) => {
+        handleAsyncState(state, {}, "pending");
+      })
+      .addCase(fetchWeekData.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.dateRanges = action.payload;
+      })
+      .addCase(fetchWeekData.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      });
   },
 });
 

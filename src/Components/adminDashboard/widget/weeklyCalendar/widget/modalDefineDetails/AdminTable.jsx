@@ -13,6 +13,7 @@ import {
 import { daysOfWeek, headers } from "@/constants";
 import ModalLayout from "./ModalLayout";
 import { useDispatch } from "react-redux";
+import { operatorProgramList } from "@/features/adminDashboard/adminDashboardSlice";
 
 
 const AdminTable = ({
