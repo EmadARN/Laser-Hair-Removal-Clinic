@@ -35,13 +35,19 @@ const WhyLaser = () => {
         transition={{ duration: 0.5 }}
         px={{ base: 10, md: 28 }}
         mx={2}
+        py={8}
         rounded={"25px"}
         backgroundColor="#ffff"
         color="black"
         minHeight="600px"
         textAlign="center" // متن را وسط چپ کنیم
       >
-        <Heading as="h2" size="xl" mb={4}>
+        <Heading
+          sx={{ display: "flex", justifyContent: "center" }}
+          as="h2"
+          size="lg"
+          pb={2}
+        >
           چرا باید ساید لیزر را انتخاب کنم؟
         </Heading>
         <Text fontSize="lg" mb={2}>

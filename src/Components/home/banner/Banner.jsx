@@ -52,7 +52,7 @@ const Banner = () => {
           borderRadius="md"
           boxShadow="md"
           p={4}
-          width={{ base: "100%", md: "30%" }}
+          width={index === 1 ? { base: "100%", md: "40%" } : { base: "100%", md: "25%" }} // عریض‌تر کردن باکس وسط
           height="120px"
           mb={{ base: 4, md: 0 }}
           initial={{ opacity: 0, scale: 0.5 }} // انیمیشن شروع

@@ -1,5 +1,5 @@
 import Section_title from "@/Common/section-title";
-import { Box, Button, Flex, Text, Textarea } from "@chakra-ui/react";
+import { Box, Flex, Text, Textarea } from "@chakra-ui/react";
 import React from "react";
 import Btn from "./widgets/Btn";
 
@@ -18,7 +18,7 @@ const Suggstion = ({ logIn }) => {
         همراهی کنید.
       </Text>
       <Flex flexDirection="column" mt={logIn ? 8 : 5}>
-        {!logIn ? (
+        {logIn ? (
           <Text textAlign="justify">
             برای ثبت پیشنهاد و انتقادات، ابتدا وارد حساب کاربری خود شوید
           </Text>

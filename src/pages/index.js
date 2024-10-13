@@ -1,5 +1,5 @@
 import Banner from "@/Components/home/banner/Banner";
-import AccordionMenu from "@/Components/home/faqs/AccordionMenuFaqs";
+import Faqs from "@/Components/home/faqs/Faqs";
 import { GuideSignup } from "@/Components/home/guideSignup/GuideSignup";
 import Header from "@/Components/home/header/Header";
 import { LaserBefore } from "@/Components/home/laserBefore/LaserBefore";
@@ -13,22 +13,26 @@ const Home = () => {
   return (
     <Layout bgColor={"#F7F7F7"}>
       <Header />
-      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6} my={18}>
+      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6} my={8}>
         <GridItem colSpan={12} mt={{ base: 24, md: 0 }}>
           <Banner />
         </GridItem>
-        <GridItem colSpan={12}>
+        <GridItem colSpan={12} my={16}>
           <WhyLaser />
         </GridItem>
       </Grid>
-      <Grid>
+      <Box my={16}>
         <LaserBefore />
-      </Grid>
-      <GuideSignup />
-      <Box my={8}>
-        <AccordionMenu />
       </Box>
-      <Suggstion />
+      <Box my={8}>
+        <GuideSignup />
+      </Box>
+      <Box my={8}>
+        <Faqs />
+      </Box>
+      <Box my={8}>
+        <Suggstion />
+      </Box>
     </Layout>
   );
 };

@@ -28,8 +28,8 @@ const BoxComponent = ({ icon, title, text, index }) => {
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <Text fontSize="3xl">{icon}</Text>
-        <Heading size="md" mt={3}>
+        <Text fontSize="2xl">{icon}</Text>
+        <Heading size="md" mt={3} py={4}>
           {title}
         </Heading>
         <Text mt={2}>{text}</Text>
@@ -47,7 +47,13 @@ export const LaserBefore = () => {
         flexDirection={"column"}
         alignItems={"center"}
       >
-        <Heading>نکات مهم قبل از انجام لیزر موهای زائد</Heading>
+        <Heading
+          sx={{ display: "flex", justifyContent: "center" }}
+          as="h2"
+          size="lg"
+        >
+          نکات مهم قبل از انجام لیزر موهای زائد
+        </Heading>
         <Text pt={4}>
           شما قبل از انجام لیزر موهای زائد باید نکاتی را بدانید که در ادامه به
           صورت خلاصه مواردی را ذکر کرده ایم
@@ -60,7 +66,6 @@ export const LaserBefore = () => {
         align="center"
         overflow="hidden"
       >
-        {" "}
         {/* اضافه کردن overflow: hidden */}
         <Flex wrap={{ base: "wrap", md: "nowrap" }} justify="center" my={5}>
           {boxes.slice(0, 3).map((box, index) => (

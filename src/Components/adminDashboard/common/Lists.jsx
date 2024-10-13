@@ -37,11 +37,12 @@ const Lists = ({
         flexDirection: { base: "column", md: "row" }, // تغییر جهت بر اساس سایز صفحه
         justifyContent: "space-between",
         alignItems: "center",
-        bgColor: bgColor || "#1111",
+        bgColor: bgColor || "graySky.100",
         width: "95%",
         rounded: rounded || "8px",
         color,
         p: 5,
+        my: 2,
       }}
     >
       <Stack direction="row" gap={4} alignItems="center">

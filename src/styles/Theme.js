@@ -5,6 +5,9 @@ const theme = extendTheme({
     brand: {
       400: "#7563DC",
     },
+    graySky: {
+      100: "#F7FAFC",
+    },
   },
   styles: {
     global: {
