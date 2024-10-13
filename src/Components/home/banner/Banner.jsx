@@ -47,12 +47,17 @@ const Banner = () => {
         <MotionFlex
           flexDirection={"column"}
           alignItems={"center"}
+          justify={"center"}
           key={index}
           bg="white"
           borderRadius="md"
           boxShadow="md"
           p={4}
-          width={index === 1 ? { base: "100%", md: "40%" } : { base: "100%", md: "25%" }} // عریض‌تر کردن باکس وسط
+          width={
+            index === 1
+              ? { base: "100%", md: "40%" }
+              : { base: "100%", md: "25%" }
+          } // عریض‌تر کردن باکس وسط
           height="120px"
           mb={{ base: 4, md: 0 }}
           initial={{ opacity: 0, scale: 0.5 }} // انیمیشن شروع
@@ -62,7 +67,7 @@ const Banner = () => {
           exit={{ opacity: 0, scale: 0.5 }} // انیمیشن خروج
           transition={{ duration: 0.5 }} // زمان انیمیشن
         >
-          <Heading size="md" mb={2}>
+          <Heading size="md" mb={3}>
             {item.header}
           </Heading>
           <Text>{item.text}</Text>

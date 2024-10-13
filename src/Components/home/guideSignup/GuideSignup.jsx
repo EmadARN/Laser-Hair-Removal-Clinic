@@ -138,7 +138,7 @@ export const FadeInDiv = ({ tabs, active }) => {
             transform={active?.id === tab.id ? "scale(1)" : "scale(0.9)"} // تغییر سایز بر اساس تب فعال یا قبلی
           >
             <Text fontWeight="bold">{tab.title}</Text>
-            <Text>{tab.desc}</Text>
+            <Text mt={4}>{tab.desc}</Text>
           </Box>
         </motion.div>
       ))}
