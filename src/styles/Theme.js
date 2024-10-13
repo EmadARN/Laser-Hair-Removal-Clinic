@@ -9,12 +9,18 @@ const theme = extendTheme({
       100: "#F7FAFC",
     },
   },
+  fonts: {
+    body: "IRANYekan-Regular, sans-serif",
+    heading: "IRANYekan-Medium, sans-serif",
+    mono: "IRANYekan-Black, monospace",
+  },
   styles: {
     global: {
       body: {
         padding: 0,
         margin: 0,
         boxSizing: "border-box",
+        fontFamily: "IRANYekan-Regular, sans-serif",
         "::-webkit-scrollbar": {
           width: "0.7em",
         },
