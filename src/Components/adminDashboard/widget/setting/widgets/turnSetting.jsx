@@ -8,28 +8,28 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import { MdBorderColor } from "react-icons/md";
 
 const TurnSetting = ({ handleInputs, submitHandler }) => {
   return (
     <form onSubmit={submitHandler}>
       <Box
-       width={{base:"170%",md:"100%"}}
+        width={{ base: "170%", md: "100%" }}
         display={"flex"}
         flexDirection={"column"}
         gap={3}
         alignItems={"center"}
         justifyContent={"center"}
+        mb={8}
       >
-        <Box width={{ sm: "100%", lg: "80%" }}>
+        <Box width="100%">
           <Text fontWeight={"bold"} textAlign={"right"} color={"#111"}>
             تنظیمات نوبت دهی و ودیعه
           </Text>
         </Box>
         <Stack
-        spacing={3}
+          spacing={3}
           boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
-          bgColor={"#ededed"}
+          bgColor={"graySky.100"}
           width={{ sm: "100%", lg: "100%" }}
           height={"auto"}
           p={6}
@@ -41,7 +41,7 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
             <FormControl>
               <FormLabel> شروع نوبت دهی</FormLabel>
               <Input
-          sx={{borderColor:"#777"}}
+                sx={{ borderColor: "#777" }}
                 name="morning_time"
                 onChange={handleInputs}
               />
@@ -51,7 +51,7 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
             <FormControl>
               <FormLabel> پایان نوبت دهی</FormLabel>
               <Input
-                 sx={{borderColor:"#777"}}
+                sx={{ borderColor: "#777" }}
                 name="afternoon_time"
                 onChange={handleInputs}
               />
@@ -61,7 +61,7 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
             <FormControl>
               <FormLabel> تنظیمات ودیعه </FormLabel>
               <Input
-                sx={{borderColor:"#777"}}
+                sx={{ borderColor: "#777" }}
                 onChange={handleInputs}
                 name="trust_price"
               />
@@ -69,7 +69,7 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
           </Box>
           <Box mt={4}>
             <Button
-              sx={{ fontSize: { base: "13px", md: "20px" } }}
+              sx={{ fontSize: { base: "13px", md: "16px" } }}
               colorScheme={"blue"}
               py={4}
               type="submit"
