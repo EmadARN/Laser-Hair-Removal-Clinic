@@ -56,6 +56,7 @@ const Faqs = () => {
         <MotionBox
           position={{ base: "relative", md: "absolute" }}
           left={{ base: 0, md: "100px" }}
+          top={{ base: null, md: 14 }}
           width={{ base: "100%", md: "50%" }}
           height={{ base: "40%", md: "60%" }}
           bgImage="url('images/blur-hospital.jpg')"
