@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Thead,
@@ -21,6 +21,7 @@ const AdminTable = ({
   setCurrentShift,
   selectedDay,
   setSelectedDay,
+  operatorName,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editing, setEditing] = useState(false);
@@ -82,7 +83,7 @@ const AdminTable = ({
       />
       <TableContainer width={"100%"} display={"flex"} justifyContent={"center"}>
         <Table
-          bgColor={"#efefef"}
+          bgColor={"graySky.100"}
           width={"100%"}
           variant="simple"
           sx={tableStyle}
@@ -114,7 +115,7 @@ const AdminTable = ({
                     }}
                   >
                     {shiftData[shift][day] ? (
-                      <Text>{shiftData[shift][day]}</Text>
+                      <Text>{shiftData[shift][day] || operatorName}</Text>
                     ) : (
                       <Text
                         sx={{

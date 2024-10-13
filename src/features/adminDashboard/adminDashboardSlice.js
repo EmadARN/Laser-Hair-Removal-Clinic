@@ -202,22 +202,35 @@ export const getAsyncOperatorList = createAsyncThunk(
     }
   }
 );
+export const fetchWeekData = createAsyncThunk(
+  "week/fetchWeekData",
+  async (week, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/Admin/week/time/${week}/`);
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
 export const getAsyncListDateOperator = createAsyncThunk(
   "admin/getAsyncListDateOperator",
-  async ({ token, date_year, date_month, date_day }, { rejectWithValue }) => {
-    console.log("payloads:::", { date_year, date_month, date_day });
+  async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.get(
-        `/Admin/operator/program/list/${date_year}/${date_month}/${date_day}/`,
+        `/Admin/operator/program/list/${payload.date_year}/${payload.date_month}/${payload.date_day}/`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${payload.token}`,
           },
         }
       );
+      console.log("recive ListDateOperator:", payload);
+
       return data;
     } catch (error) {
-      console.log("getListsError:::", error);
+      console.log("Error recive ListDateOperator:", payload);
 
       return rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -244,31 +257,18 @@ export const operatorProgramList = createAsyncThunk(
     }
   }
 );
-export const fetchWeekData = createAsyncThunk(
-  "week/fetchWeekData",
-  async (week, { rejectWithValue }) => {
-    try {
-      const response = await api.get(`/Admin/week/time/${week}/`);
-      console.log("fetchWeekData:", response.data);
-
-      return response.data;
-    } catch (error) {
-      console.log("fetchWeekDataError:", error);
-
-      return rejectWithValue(error.response?.data?.message || error.message);
-    }
-  }
-);
 
 // Initial State
 const initialState = {
   loading: false,
   error: "",
   operators: [],
+  operatorsDate: [],
   users: [],
   AreaLaser: [],
   settingInfo: [],
   dateRanges: [],
+  dataRangeStatus: false,
   token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   userType: null,
 };
@@ -444,7 +444,7 @@ const adminDashboardSlice = createSlice({
       )
       .addCase(getAsyncListDateOperator.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        state.operators = action.payload;
+        state.operatorsDate = action.payload;
       })
 
       // operatorProgramList
@@ -464,12 +464,15 @@ const adminDashboardSlice = createSlice({
       })
       .addCase(fetchWeekData.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
+
         state.dateRanges = action.payload;
+        state.dataRangeStatus = true;
       })
       .addCase(fetchWeekData.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
       });
   },
 });
+export const { setCurrentRange } = adminDashboardSlice.actions;
 
 export default adminDashboardSlice.reducer;
