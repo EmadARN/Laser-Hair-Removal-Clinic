@@ -8,6 +8,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import FooterSub from "./widgets/FooterSub";
+import SocialMedias from "./widgets/SocialMedias";
 
 const ListHeader = ({ children }) => {
   return (
@@ -23,7 +24,7 @@ export default function Footer() {
       color={useColorModeValue("gray.50")}
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 2 }} spacing={8}>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={8}>
           <Stack align={"flex-start"} fontWeight="bold" fontSize="16px">
             <Link href={"/"}>خانه</Link>
             <Link py={1} href={"#"}>
@@ -44,6 +45,10 @@ export default function Footer() {
             </Text>
             <ListHeader>منشی اصلی:</ListHeader>
             <Text href={"#"}> 09195655654 - 0933656670</Text>
+          </Stack>
+          <Stack>
+            <ListHeader>ساید لیزر در شبکه های اجتماعی:</ListHeader>
+            <SocialMedias />
           </Stack>
         </SimpleGrid>
       </Container>

@@ -39,12 +39,12 @@ const FooterSub = () => {
         }}
       >
         <Flex>
-          <span>لیزر لیانا</span>
+          <span>لیزر ساید</span>
           <Logo />
         </Flex>
       </Flex>
       <Text pt={6} fontSize={"sm"} textAlign={"center"}>
-        تمامی حقوق این سایت متعلق به کلینیک لیزر لیانا می باشد
+        تمامی حقوق این سایت متعلق به کلینیک لیزر ساید می باشد
       </Text>
     </>
   );
