@@ -16,6 +16,7 @@ const WeeklyCalendar = () => {
   const [currentShift, setCurrentShift] = useState("");
   const [selectedDay, setSelectedDay] = useState("");
   const [operatorName, setOperatorName] = useState({});
+  const [operatorDates, setOperatorDates] = useState({});
 
   const dispatch = useDispatch();
   const { operators, operatorsDate, token, dateRanges, dataRangeStatus } =
@@ -27,6 +28,7 @@ const WeeklyCalendar = () => {
   const date_year = splitDate(0, 4);
   const date_month = splitDate(5, 6);
   const date_day = splitDate(7, 10);
+
   useEffect(() => {
     if (token) {
       dispatch(getAsyncOperatorList(token));
@@ -37,29 +39,62 @@ const WeeklyCalendar = () => {
       }
     }
   }, [dateRanges, dispatch, token]);
+
+  //get getAsyncListDateOperator
   useEffect(() => {
     if (Array.isArray(operatorsDate.operator_program)) {
-      operatorsDate.operator_program.map((item) =>
-        setOperatorName(item.operator_name)
-      );
+      operatorsDate.operator_program.forEach((item) => {
+        setOperatorName((prev) => ({
+          ...prev,
+          [item.id]: item.operator_name,
+        }));
+
+        setOperatorDates((prev) => ({
+          ...prev,
+          [item.date_str]: item.date_str,
+        }));
+      });
     }
-  }, []);
-  console.log(operatorName);
+  }, [operatorsDate]);
+
+  const daysOfWeek = [
+    "شنبه",
+    "یکشنبه",
+    "دوشنبه",
+    "سه‌شنبه",
+    "چهارشنبه",
+    "پنجشنبه",
+    "جمعه",
+  ];
 
   const handleSelect = () => {
     const operatorProgramList1 = [];
     Object.keys(shiftData).forEach((shift) => {
       Object.keys(shiftData[shift]).forEach((day) => {
         const operatorName = shiftData[shift][day];
-        if (operatorName) {
-          const programTurn = shift === "morning" ? "m" : "e";
-          operatorProgramList1.push({
-            id: `${date_year}/${date_month}/${date_day}${programTurn}`,
-            date_str: `${date_year}/${date_month}/${date_day}`,
-            program_turn: programTurn,
-            operator_name: operatorName,
-            operator: operatorName,
-          });
+
+        // پیدا کردن ایندکس روز
+        const dayIndex = daysOfWeek.indexOf(day);
+
+        if (dayIndex !== -1) {
+          const dateForDay =
+            operatorDates[Object.keys(operatorDates)[dayIndex]]; // تاریخ معادل از operatorDates
+
+          if (operatorName && dateForDay) {
+            const programTurn = shift === "morning" ? "m" : "a";
+
+            operatorProgramList1.push({
+              id: `${dateForDay}${programTurn}`,
+              date_str: dateForDay,
+              program_turn: programTurn,
+              operator_name: operatorName,
+              operator: operatorName,
+            });
+          } else {
+            // console.error(`No date found for day: ${day}`);
+          }
+        } else {
+          // console.error(`Day not found in daysOfWeek: ${day}`);
         }
       });
     });
@@ -71,7 +106,10 @@ const WeeklyCalendar = () => {
       })
     );
   };
+  // خروجی نهایی
 
+  console.log("operatorName:", operatorName);
+  console.log("operatorsDate:", operatorsDate);
   return (
     <>
       <Flex sx={{ py: 2 }}>

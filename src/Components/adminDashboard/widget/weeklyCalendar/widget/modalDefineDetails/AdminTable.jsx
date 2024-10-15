@@ -35,6 +35,7 @@ const AdminTable = ({
 
   const handleSelect = (name) => {
     const fullName = `${name.name} ${name.last_name}`;
+
     setShiftData((prev) => ({
       ...prev,
       [currentShift]: { ...prev[currentShift], [selectedDay]: fullName },
@@ -49,6 +50,7 @@ const AdminTable = ({
 
       [currentShift]: { ...prev[currentShift], [selectedDay]: undefined },
     }));
+
     onClose();
   };
 

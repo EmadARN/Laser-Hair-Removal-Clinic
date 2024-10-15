@@ -4,8 +4,8 @@ import { CiEdit } from "react-icons/ci";
 import EditUserModal from "./EditUserModal";
 import { useDisclosure } from "@chakra-ui/react";
 
-const UserInfoBox = ({ editUserName }) => {
-  const [username, setUsername] = useState("foroghh ahmadi");
+const UserInfoBox = ({ editUserName, userNames }) => {
+  const [username, setUsername] = useState(userNames.username);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

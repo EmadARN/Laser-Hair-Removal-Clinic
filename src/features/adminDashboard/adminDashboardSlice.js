@@ -240,7 +240,6 @@ export const operatorProgramList = createAsyncThunk(
   "user/operatorProgramList",
   async (payload, { rejectWithValue }) => {
     console.log("payload success", payload);
-
     try {
       const { data } = await api.post("/Admin/set/operator/program/", payload, {
         headers: {
@@ -257,7 +256,37 @@ export const operatorProgramList = createAsyncThunk(
     }
   }
 );
+export const getAsyncUserName = createAsyncThunk(
+  "admin/getAsyncUserName",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Core/get/username/", {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+export const changePassword = createAsyncThunk(
+  "user/changePassword",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/Core/token/change/password/", payload, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
 
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
@@ -268,6 +297,7 @@ const initialState = {
   AreaLaser: [],
   settingInfo: [],
   dateRanges: [],
+  userNames: "",
   dataRangeStatus: false,
   token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   userType: null,
@@ -470,7 +500,29 @@ const adminDashboardSlice = createSlice({
       })
       .addCase(fetchWeekData.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
-      });
+      })
+
+      // getAsyncUserName
+      .addCase(getAsyncUserName.pending, (state) => {
+        handleAsyncState(state, {}, "pending");
+      })
+      .addCase(getAsyncUserName.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.userNames = action.payload;
+      })
+      .addCase(getAsyncUserName.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
+      //changePassword
+      .addCase(changePassword.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(changePassword.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+      .addCase(changePassword.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      );
   },
 });
 export const { setCurrentRange } = adminDashboardSlice.actions;
