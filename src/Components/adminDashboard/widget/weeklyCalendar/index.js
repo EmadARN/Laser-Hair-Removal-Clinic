@@ -119,6 +119,7 @@ const WeeklyCalendar = () => {
           icon={<FaCalendarAlt />}
           dataSlider={<DataSlider />}
           iconBtnDisply="none"
+          BtnDisply="none"
         />
         <Button onClick={handleSelect}>فرستادن برنامه</Button>
       </Flex>

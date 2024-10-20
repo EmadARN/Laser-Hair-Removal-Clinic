@@ -37,11 +37,12 @@ const ModalDefine = ({
     },
   };
 
-
   return (
     <>
       <IconButton onClick={onOpen} icon={btn} display={iconBtnDisply} />
-      
+      <Button onClick={onOpen} display={BtnDisply}>
+        {headerContent}
+      </Button>
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
