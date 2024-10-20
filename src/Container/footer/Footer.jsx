@@ -24,17 +24,14 @@ export default function Footer() {
       color={useColorModeValue("gray.50")}
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={8}>
-          <Stack align={"flex-start"} fontWeight="bold" fontSize="16px">
-            <Link href={"/"}>خانه</Link>
-            <Link py={1} href={"#"}>
-              درباره لیزر و سوالات متداول
-            </Link>
-            <Link href={"#"}>قوانین و مقررات</Link>
-            <Link py={1} href={"#"}>
-              حساب کاربری
-            </Link>
-            <Link href={"#"}>رزرو نوبت</Link>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={24}>
+          <Stack align={"flex-start"}>
+            <ListHeader>ساید لیزر:</ListHeader>
+            <Text mb={3}>
+              مرکز تخصصی لیزر موهای زائد با سابقه ی پنج ساله و استفاده از بهترین
+              دستگاه لیزر موهای زائد با استفاده از مجرب ترین تیم اپراتور لیزر .
+              برای رزرو نوبت لیزر کلیک کنید .{" "}
+            </Text>
           </Stack>
           <Stack>
             <ListHeader>آدرس:</ListHeader>
