@@ -45,7 +45,7 @@ const authSlice = createSlice({
     phone_number: "",
     code: "",
     error: null,
-    token: null,
+    token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -71,6 +71,7 @@ const authSlice = createSlice({
         state.token = action.payload.token; // ذخیره توکن در state
         state.loading = false;
         state.error = null;
+        localStorage.setItem("token", action.payload.token);
       })
       .addCase(postAsyncCode.pending, (state) => {
         state.loading = true;
