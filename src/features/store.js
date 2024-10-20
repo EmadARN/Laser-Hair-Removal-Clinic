@@ -2,10 +2,14 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import signinReducer from "./signin/authSlice";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import adminDashboardReducer from "./adminDashboard/adminDashboardSlice";
+import receptionDashboardReducer from "./receptionDashboard/receptionDashboardSlice";
+import customerDashboardReducer from "./customerDashboard/customerDashboardSlice";
 
 const combinedReducer = combineReducers({
   signin: signinReducer,
   adminDashboard: adminDashboardReducer,
+  receptionDashboardSlice: receptionDashboardReducer,
+  customerDashboard: customerDashboardReducer,
 });
 const masterReducer = (state, action) => {
   if (action.type === HYDRATE) {
