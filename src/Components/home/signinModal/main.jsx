@@ -5,9 +5,6 @@ import VerificationCode from "./widget/verification-code/VerificationCode";
 const MainModal = ({ onClose, onOpen, isOpen }) => {
   const [page, setPage] = useState(0);
 
-
-  
-
   if (page === 0) {
     return (
       <Profile_Modal
@@ -37,7 +34,6 @@ const MainModal = ({ onClose, onOpen, isOpen }) => {
       </Box>
     );
   }
- 
 };
 
 export default MainModal;
