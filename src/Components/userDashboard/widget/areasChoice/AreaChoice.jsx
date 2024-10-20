@@ -1,31 +1,13 @@
 import React, { useEffect } from "react";
-import { Box, Checkbox, Flex, Stack, Text } from "@chakra-ui/react";
+import { Box, Checkbox, Flex, Spinner, Stack, Text } from "@chakra-ui/react";
 import AccordionMenu from "../accordionMenu/AccordionMenu";
-import api from "@/services/apiService";
-import { useCookies } from "react-cookie";
-const AreaChoice = () => {
+import ReusableSession from "@/Components/adminDashboard/common/ReussableSession";
+import { BiTargetLock } from "react-icons/bi";
+
+const AreaChoice = ({ areas }) => {
   const [checkedItems, setCheckedItems] = React.useState(
     new Array(10).fill(false)
   );
-  const [cookies] = useCookies(["auth_token"]);
-  useEffect(() => {
-    if (cookies.auth_token) {
-      api
-        .get("/Laser/laser/area/list/", {
-          headers: {
-            Authorization: `Bearer ${cookies.auth_token}`,
-          },
-        })
-        .then((res) => {
-          // Handle the response
-          console.log("Data received:", res.data);
-        })
-        .catch((err) => {
-          // Handle the error
-          console.error("Error fetching data:", err);
-        });
-    }
-  }, [cookies.auth_token]);
 
   const allChecked = checkedItems.every(Boolean);
 
@@ -52,7 +34,47 @@ const AreaChoice = () => {
               انتخاب همه
             </Checkbox>
             <Stack>
-              {checkboxData.map((checkbox, index) => (
+              {areas.all_laser_area_object &&
+              areas.all_laser_area_object.first_type.length > 0 ? (
+                areas.all_laser_area_object.first_type.map((item, index) => {
+                  return (
+                    <Flex
+                      sx={{
+                        border: "2px solid #1111",
+                        rounded: "8px",
+                        minWidth: { base: "300px", sm: "500px" },
+                        width: "100%",
+                        py: 1,
+                      }}
+                      key={index}
+                      justifyContent="space-between"
+                      gap="50px"
+                    >
+                      <Checkbox
+                        isChecked={checkedItems[index]}
+                        onChange={(e) => {
+                          const newCheckedItems = [...checkedItems];
+                          newCheckedItems[index] = e.target.checked;
+                          setCheckedItems(newCheckedItems);
+                        }}
+                        title={item.label}
+                        kon
+                      >
+                        {item.label}
+                      </Checkbox>
+                      <Box>
+                        <span>قیمت</span> {item.price}
+                      </Box>
+                    </Flex>
+                  );
+                })
+              ) : (
+                <ReusableSession
+                  text="ناحیه ای وجود ندارد"
+                  icon={<BiTargetLock />}
+                />
+              )}
+              {/* {checkboxData.map((checkbox, index) => (
                 <Flex
                   sx={{
                     border: "2px solid #1111",
@@ -80,7 +102,7 @@ const AreaChoice = () => {
                     <span>قیمت</span> 1000 ریال
                   </Box>
                 </Flex>
-              ))}
+              ))} */}
             </Stack>
             <Box pt={8}>
               <AccordionMenu />

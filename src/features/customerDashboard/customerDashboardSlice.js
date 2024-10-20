@@ -12,19 +12,23 @@ const handleAsyncState = (state, action, status) => {
 };
 
 // Async Thunks
-export const getAsyncUsersList = createAsyncThunk(
-  "admin/getAsyncUsersList",
-  async (_, { getState, rejectWithValue }) => {
-    const { token } = getState().adminDashboard;
+export const getLazerAreaList = createAsyncThunk(
+  "customerDashboard/getLazerAreaList",
+  async (payload, { rejectWithValue }) => {
     try {
-      const { data } = await api.get("/Core/user/list/", {
+      const { data } = await api.get("/Laser/laser/area/list/", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${payload.token}`,
         },
       });
+      console.log('data',data);
+      
       return data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || error.message);
+      
+      
+  console.log('error payload',error);
+  
     }
   }
 );
@@ -34,7 +38,7 @@ const initialState = {
   loading: false,
   error: "",
   areas: [],
-  token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+ 
 };
 
 const customerDashboardSlice = createSlice({
@@ -44,17 +48,19 @@ const customerDashboardSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      // Fetch Area list
-      .addCase(getAsyncUsersList.pending, (state) => {
+      // Fetch laser areas
+      .addCase(getLazerAreaList.pending, (state) => {
         state.loading = true;
         state.error = "";
       })
-      .addCase(getAsyncUsersList.rejected, (state, action) =>
-        handleAsyncState(state, action, "rejected")
-      )
-      .addCase(getAsyncUsersList.fulfilled, (state, action) => {
+      .addCase(getLazerAreaList.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        state.users = action.payload;
+        state.areas = action.payload;
+      })
+      .addCase(getLazerAreaList.rejected, (state, action) => {
+        console.log('rejected',action.payload);
+        
+        handleAsyncState(state, action, "rejected");
       });
   },
 });
