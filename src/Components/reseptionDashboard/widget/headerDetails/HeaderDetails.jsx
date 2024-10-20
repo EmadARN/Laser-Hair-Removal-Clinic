@@ -3,6 +3,7 @@ import { Button, Flex, Text, Grid, GridItem, Box } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
 import SearchInput from "@/Common/searchInput/SearchInput";
 import DataSlider from "@/Common/dataSlider/DataSlider";
+import PatientWithoutTime from "../AddPatientWithoutTime/PatientWithoutTime";
 
 const HeaderDetails = () => {
   return (
@@ -47,20 +48,10 @@ const HeaderDetails = () => {
         <Box sx={{ display: { base: "flex", md: "none" }, width: "100%" }}>
           <SearchInput size={"md"} placeholder="جستجو در نوبت های روز" />
         </Box>
-        <Button
-          leftIcon={<FaPlus />}
-          sx={{
-            color: "blue",
-            w: "100%",
-            h: "100%",
-            py: 3,
-            px: 8,
-          }}
-          variant="outline"
-          colorScheme={"blue"}
-        >
-          مراجع بین نوبت
-        </Button>
+
+
+        <PatientWithoutTime/>
+       
       </GridItem>
     </Grid>
   );

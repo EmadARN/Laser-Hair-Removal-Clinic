@@ -7,12 +7,12 @@ export const firstGrid = {
 };
 
 export const firstBox = {
-  width: "70%",
-  boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+  width: "100%",
+mb:4,
   p: 3,
   height: "auto",
   display: "flex",
-  flexDirection: "column",
+  justifyContent:"space-between"
 };
 
 export const seccondBox = {
