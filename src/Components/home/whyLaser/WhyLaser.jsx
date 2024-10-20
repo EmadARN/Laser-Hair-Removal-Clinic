@@ -12,21 +12,24 @@ const WhyLaser = () => {
 
   const handleScroll = () => {
     const scrollY = window.scrollY;
-    // وقتی اسکرول به موقعیت 500px رسید، کامپوننت را نمایش بده
     if (scrollY > 500) {
       setIsVisible(true);
-      controls.start({ opacity: 1, y: 0 });
     } else {
       setIsVisible(false);
-      controls.start({ opacity: 0, y: 50 });
     }
   };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    // زمانی که اسکرول اتفاق افتاد و مقدار isVisible تغییر کرد، انیمیشن را شروع می‌کنیم
+    if (isVisible) {
+      controls.start({ opacity: 1, y: 0 });
+    } else {
+      controls.start({ opacity: 0, y: 50 });
+    }
+    // پاک کردن رویداد اسکرول هنگام unmount شدن کامپوننت
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [controls]);
-
+  }, [isVisible, controls]);
   return (
     <>
       <MotionBox
