@@ -21,24 +21,42 @@ export const getLazerAreaList = createAsyncThunk(
           Authorization: `Bearer ${payload.token}`,
         },
       });
-      console.log('data',data);
-      
+      console.log("data", data);
       return data;
     } catch (error) {
-      
-      
-  console.log('error payload',error);
-  
+      console.log("error payload", error);
     }
   }
 );
+export const postLazerAreaList = createAsyncThunk(
+  "customerDashboard/postLazerAreaList",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload", payload);
 
+    try {
+      const { data } = await api.post(
+        "/Reserve/client/pending/reserve/",
+        {
+          laser_area_list: payload,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`,
+          },
+        }
+      );
+      console.log("data", data);
+      return data;
+    } catch (error) {
+      console.log("error payload", error);
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
   error: "",
   areas: [],
- 
 };
 
 const customerDashboardSlice = createSlice({
@@ -58,8 +76,18 @@ const customerDashboardSlice = createSlice({
         state.areas = action.payload;
       })
       .addCase(getLazerAreaList.rejected, (state, action) => {
-        console.log('rejected',action.payload);
-        
+        handleAsyncState(state, action, "rejected");
+      })
+
+      // Post laser areas
+      .addCase(postLazerAreaList.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(postLazerAreaList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+      .addCase(postLazerAreaList.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
       });
   },
