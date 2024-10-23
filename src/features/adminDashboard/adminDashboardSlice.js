@@ -274,15 +274,21 @@ export const getAsyncUserName = createAsyncThunk(
 export const changePassword = createAsyncThunk(
   "user/changePassword",
   async (payload, { rejectWithValue }) => {
+   
+
     try {
-      const { data } = await api.post("/Core/token/change/password/", payload, {
+      const { data } = await api.post("/Core/token/change/password/", payload.passwordChange
+        , {
         headers: {
           Authorization: `Bearer ${payload.token}`,
         },
       });
+ 
 
       return data;
     } catch (error) {
+
+
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
