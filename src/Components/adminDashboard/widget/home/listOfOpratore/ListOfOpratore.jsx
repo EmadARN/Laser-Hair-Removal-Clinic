@@ -1,7 +1,6 @@
-import { Box, Grid, GridItem, SimpleGrid } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Input, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
-import SelectBox from "./SelectBox";
-import { oprators } from "@/constants";
+
 
 const ListOfOpratore = () => {
   return (
@@ -11,10 +10,10 @@ const ListOfOpratore = () => {
       px={2}
     >
       <GridItem w="100%" colSpan={2}>
-        <SelectBox oprators={oprators[0]} shiftsName="شیفت صبح" />
+      <Input disabled placeholder="شیفت صبح" />
       </GridItem>
       <GridItem w="100%" colSpan={2}>
-        <SelectBox oprators={oprators[1]} shiftsName="شیفت بعد از ظهر" />
+      <Input disabled placeholder="شیفت بعد از ظهر"/>
       </GridItem>
     </Grid>
   );
