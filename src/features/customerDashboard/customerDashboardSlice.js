@@ -37,7 +37,7 @@ export const postLazerAreaList = createAsyncThunk(
       const { data } = await api.post(
         "/Reserve/client/pending/reserve/",
         {
-          laser_area_list: payload,
+          laser_area_list: payload.reserveId,
         },
         {
           headers: {
