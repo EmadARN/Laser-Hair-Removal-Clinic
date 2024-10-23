@@ -18,28 +18,24 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 const EditUserModal = ({
   isOpen,
   onClose,
-  username,
   passwordChange,
-  setPasswordChange,
-  editUserName,
+  changePasswordAsync,
+
+
   handleInputChange,
 }) => {
-  const [password, setPassword] = useState("");
-  const [previousPassword, setPreviousPassword] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleEditUserName = () => {
-    editUserName(username, password, previousPassword);
-  };
+
+  
+
 
   const toggleShowPassword = () => {
-    setPasswordChange((prev) => ({
-      ...prev,
-      showPassword: !prev.showPassword,
-    }));
+    setShowPassword((prev) => !prev);
   };
 
-  const renderPasswordInput = (label, name, value) => (
+  const renderPasswordInput = (label, name) => (
     <Box mb={4}>
       <Text>{label}</Text>
       <InputGroup>
@@ -47,7 +43,7 @@ const EditUserModal = ({
           p={4}
           type={showPassword ? "text" : "password"}
           name={name}
-          value={value}
+          value={passwordChange[name]}
           onChange={handleInputChange} // از پراپس استفاده می‌شود
           placeholder={label}
         />
@@ -66,23 +62,16 @@ const EditUserModal = ({
       <ModalContent>
         <ModalHeader>ویرایش اطلاعات کاربری</ModalHeader>
         <ModalBody>
-          <Box mb={4}>
-            <Text>نام کاربری</Text>
-            <Input
-              value={username}
-              readOnly // نام کاربری را فقط بخوانید
-              placeholder="نام کاربری خود را وارد کنید"
-            />
-          </Box>
-          {renderPasswordInput("رمز عبور جدید", "password", password)}
+        
+          {renderPasswordInput("رمز عبور جدید", "password")}
           {renderPasswordInput(
             "رمز عبور قبلی",
-            "previousPassword",
-            previousPassword
+            "old_password",
+           
           )}
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleEditUserName}>
+          <Button colorScheme="blue" mr={3} onClick={ ()=>changePasswordAsync( passwordChange)}>
             ثبت
           </Button>
           <Button variant="ghost" onClick={onClose}>

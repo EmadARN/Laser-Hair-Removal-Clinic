@@ -7,6 +7,7 @@ import {
   getAsyncUserName,
   getSettingInformation,
   settingAsyncChanging,
+  changePassword,
   editUserNameAsync, // فرض می‌کنیم این اکشن برای ویرایش نام کاربری باشد
 } from "@/features/adminDashboard/adminDashboardSlice";
 
@@ -42,13 +43,17 @@ const Setting = () => {
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+   
+    
     setPasswordChange((prev) => ({ ...prev, [name]: value })); // Update this line
   };
-  const editUserName = (newUserName, newPassword, oldPassword) => {
+  const changePasswordAsync = ( passwordChange) => {
+
+   
     dispatch(
-      editUserNameAsync({ newUserName, newPassword, oldPassword, token })
+      changePassword({ passwordChange, token })
     );
-    onClose();
+ onClose();
   };
 
   return (
@@ -56,7 +61,8 @@ const Setting = () => {
       <Box sx={{ py: 6 }}>تنظیمات</Box>
       <Box width={"100%"}>
         <UserInfoBox
-          editUserName={editUserName}
+        
+        changePasswordAsync={changePasswordAsync}
           isOpen={isOpen}
           onOpen={onOpen}
           onClose={onClose}

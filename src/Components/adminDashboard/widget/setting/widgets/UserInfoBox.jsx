@@ -4,9 +4,9 @@ import { CiEdit } from "react-icons/ci";
 import EditUserModal from "./EditUserModal";
 import { useDisclosure } from "@chakra-ui/react";
 
-const UserInfoBox = ({ editUserName, userNames }) => {
+const UserInfoBox = ({ onClose,isOpen,onOpen,handleInputChange,passwordChange,userNames ,changePasswordAsync,setPasswordChange}) => {
   const [username, setUsername] = useState(userNames.username);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
 
   return (
     <Box
@@ -66,11 +66,15 @@ const UserInfoBox = ({ editUserName, userNames }) => {
 
       {/* استفاده از مودال جدید */}
       <EditUserModal
+handleInputChange={handleInputChange}
+passwordChange={passwordChange}
+      setPasswordChange={setPasswordChange}
+      changePasswordAsync={changePasswordAsync}
         isOpen={isOpen}
         onClose={onClose}
         username={username}
         setUsername={setUsername}
-        editUserName={editUserName}
+       
       />
     </Box>
   );
