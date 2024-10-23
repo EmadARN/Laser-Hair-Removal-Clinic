@@ -47,7 +47,7 @@ const DataSlider = () => {
   // تبدیل تاریخ شمسی به میلادی و محاسبه تاریخ‌های شروع و پایان
   const startDate = new Date(currentDate); // فرض کنید تاریخ در فرمت مناسب است
   const endDate = new Date(startDate);
-  endDate.setDate(startDate.getDate() + 6); // تاریخ پایان (جمعه)
+  endDate.setDate(startDate.getDate() + 7); // تاریخ پایان (جمعه)
 
   const formattedStart = `${startDate.getDate()} ${
     persianMonths[startDate.getMonth()]

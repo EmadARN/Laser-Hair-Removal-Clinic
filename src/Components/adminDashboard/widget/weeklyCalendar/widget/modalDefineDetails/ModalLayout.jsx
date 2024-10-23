@@ -18,7 +18,7 @@ const ModalLayout = ({
   editing,
   existingName,
   onClear,
-  shiftData,
+  operator_list,
   onSelect,
 }) => {
   const router = useRouter();
@@ -46,7 +46,7 @@ const ModalLayout = ({
                 </Text>
               </Flex>
             )}
-            <RenderOperators shiftData={shiftData} onSelect={onSelect} />
+            <RenderOperators operator_list={operator_list} onSelect={onSelect} />
           </VStack>
           {editing && existingName && (
             <Button
