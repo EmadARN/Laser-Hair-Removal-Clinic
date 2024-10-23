@@ -1,34 +1,23 @@
 import TitleUserDashboard from "@/Common/titleUserDashboard/TitleUserDashboard";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import AreaChoice from "./AreaChoice";
 import StepperPrototype from "../stepper/Stepper";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 import { Spinner, Text } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getLazerAreaList,
-  postLazerAreaList,
-} from "@/features/customerDashboard/customerDashboardSlice";
+import { useSelector } from "react-redux";
+import { useFetchLazerAreas } from "@/hooks/userDashboard/useFetchLazerAreaList";
+import { usePostLazerAreas } from "@/hooks/userDashboard/usePostLazerAreaList";
 
 const ChoosingArea = ({ page, setPage, slug }) => {
   const [checkedItems, setCheckedItems] = useState([]);
   const [reserveId, setReserveId] = useState([]);
 
-  const { areas, loading, error } = useSelector(
-    (store) => store.customerDashboard
-  );
-
   const { token } = useSelector((store) => store.signin);
-  const dispatch = useDispatch();
+  const { areas, loading, error } = useFetchLazerAreas(token);
+  const { submitHandler } = usePostLazerAreas(reserveId, token);
 
   useEffect(() => {
-    if (token) {
-      dispatch(getLazerAreaList({ token }));
-    }
-  }, [dispatch, token]);
-
-  useEffect(() => {
-    if (areas.all_laser_area_object?.first_type) {
+    if (areas?.all_laser_area_object?.first_type) {
       setCheckedItems(
         new Array(areas.all_laser_area_object.first_type.length).fill(false)
       );
@@ -39,7 +28,6 @@ const ChoosingArea = ({ page, setPage, slug }) => {
 
   const handleSelectAll = (isChecked) => {
     setCheckedItems(new Array(checkedItems.length).fill(isChecked));
-
     const allIds = isChecked
       ? areas.all_laser_area_object.first_type.map((userId) => userId.value)
       : [];
@@ -52,21 +40,13 @@ const ChoosingArea = ({ page, setPage, slug }) => {
     setCheckedItems(newCheckedItems);
 
     const userIdValue = areas.all_laser_area_object.first_type[index].value;
-
-    setReserveId((prevReserveId) => {
-      if (isChecked) {
-        return [...prevReserveId, userIdValue];
-      } else {
-        return prevReserveId.filter((id) => id !== userIdValue);
-      }
-    });
+    setReserveId((prevReserveId) =>
+      isChecked
+        ? [...prevReserveId, userIdValue]
+        : prevReserveId.filter((id) => id !== userIdValue)
+    );
   };
 
-  const submitHandler = useCallback(() => {
-    dispatch(postLazerAreaList({ reserveId, token }));
-  }, [reserveId, token, dispatch]);
-
-  // مدیریت وضعیت بارگذاری و خطا
   if (loading) {
     return <Spinner />;
   }

@@ -1,13 +1,13 @@
 import React from "react";
 import { Text, Button } from "@chakra-ui/react";
 
-const RenderOperators = ({ shiftData = [], onSelect }) => {
-  return shiftData.length === 0 ? (
+const RenderOperators = ({ operator_list = [], onSelect }) => {
+  return operator_list.length === 0 ? (
     <Text fontSize="lg" color="gray.500" textAlign="center">
       هیچ فردی برای نمایش وجود ندارد.
     </Text>
   ) : (
-    shiftData.map((operator, index) => (
+    operator_list.map((operator, index) => (
       <Button
         key={index}
         onClick={() => onSelect(operator)}
