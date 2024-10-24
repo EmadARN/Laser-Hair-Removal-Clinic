@@ -30,7 +30,7 @@ export const GuideSignup = ({
     <Box
       px={{ base: 10, md: 28 }}
       mx={2}
-      py={4}
+      py={{ base: 4, md: 8 }}
       minH="350px"
       bgColor="#fff"
       rounded="25px"

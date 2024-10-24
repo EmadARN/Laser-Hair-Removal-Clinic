@@ -10,6 +10,7 @@ const Section_title = ({ section_title, size }) => {
         fontSize={{ base: "xs", md: size || "sm" }}
         fontWeight={"bold"}
         mr={2}
+        color={"gray.600"}
       >
         {section_title}
       </Text>
