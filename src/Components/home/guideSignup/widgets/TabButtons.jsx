@@ -26,11 +26,11 @@ const TabButtons = ({ tabs, active, setActive }) => (
           boxShadow="rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px"
           color={active?.id === tab.id ? "#F7F7F7" : "#222"}
           _hover={{ color: "#fff" }}
-          borderRadius={0}
+          borderRadius="md"
         >
           <Flex
             alignItems="center"
-            fontSize={{ base: "10px", lg: "18px" }}
+            fontSize={{ base: "10px", lg: "16px" }}
             color={active?.id === tab.id ? "white" : "#666"}
           >
             <Icon ml={2}>{tab.icon}</Icon>

@@ -57,8 +57,8 @@ export const TextGenerateEffect = ({
     <Box fontWeight="bold">
       <Box mt={4}>
         <Text
-          color="gray.600"
-          fontSize="15px"
+          color="gray.500"
+          fontSize={{ base: "12px", md: "15px" }}
           lineHeight="snug"
           letterSpacing="wide"
         >

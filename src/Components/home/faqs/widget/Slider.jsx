@@ -31,11 +31,20 @@ const Slider = () => {
       position="relative"
       h={{ base: "auto", md: "90%" }}
     >
-      <Heading as="h2" size={{ base: "sm", md: "md" }} mb={4}>
+      <Heading
+        color={"gray.600"}
+        as="h2"
+        fontSize={{ base: "16px", md: "18px" }}
+        mb={4}
+      >
         {DataFaQs[currentSlide].title}
       </Heading>
 
-      <Text fontSize={{ base: "md", md: "lg" }} key={DataFaQs[currentSlide].id}>
+      <Text
+        color={"gray.500"}
+        fontSize={{ base: "14px", md: "16px" }}
+        key={DataFaQs[currentSlide].id}
+      >
         {DataFaQs[currentSlide].content}
       </Text>
 

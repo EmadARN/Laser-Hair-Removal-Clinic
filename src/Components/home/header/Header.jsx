@@ -3,13 +3,14 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import { TextGenerateEffect } from "./widget/TextEffect";
 import { motion } from "framer-motion";
 import HeaderBtn from "./widget/HeaderBtn";
+import { toPersianDigits } from "@/utils/toPersianDigits";
 
 const MotionHeading = motion(Heading);
 const MotionButton = motion(Box);
 const MotionVideo = motion(Box);
 
 const Header = () => {
-  const text = `
+  const text = toPersianDigits(`
     ساید لیزر یکی از مراکز لیزر معتبر می باشد که از دستگاه های به روز
     لیزر مو های زائد استفاده می کند ، مرکز لیانا لیزر از دستگاه های
     الکساندریت نابلکس که جزو دستگاه های به روز لیزر مو در جهان به شما می
@@ -17,7 +18,7 @@ const Header = () => {
     لیزر می باشد که استانداردهای کیفی معتبر جهانی همچون FDA آمریکا و CE
     اروپا و استاندارد بین المللی کیفیت تجهیزات پزشکی ISO 13485 را کسب کرده
     است .
-  `;
+  `);
 
   return (
     <Flex
@@ -35,11 +36,12 @@ const Header = () => {
         position={"relative"}
       >
         <MotionHeading
-          pb={4}
+      
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          color="gray.700"
+          color="gray.600"
+          fontSize={{ base: "18px", md: "28px" }}
         >
           لیزر موهای زائد
         </MotionHeading>

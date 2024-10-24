@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import FooterSub from "./widgets/FooterSub";
 import SocialMedias from "./widgets/SocialMedias";
+import { toPersianDigits } from "@/utils/toPersianDigits";
 
 const ListHeader = ({ children }) => {
   return (
@@ -23,8 +24,8 @@ export default function Footer() {
       bg={useColorModeValue("brand.400")}
       color={useColorModeValue("gray.50")}
     >
-      <Container as={Stack} maxW={"6xl"} py={10}>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={24}>
+      <Container as={Stack} maxW={"6xl"} py={6}>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={22}>
           <Stack align={"flex-start"}>
             <ListHeader>ساید لیزر:</ListHeader>
             <Text mb={3}>
@@ -41,7 +42,9 @@ export default function Footer() {
               ساختمان اداری-پزشکی 99، طبقه 3، واحد 32
             </Text>
             <ListHeader>منشی اصلی:</ListHeader>
-            <Text href={"#"}> 09195655654 - 0933656670</Text>
+            <Text href={"#"}>
+              {toPersianDigits(`09195655654 - 0933656670`)}
+            </Text>
           </Stack>
           <Stack>
             <ListHeader>ساید لیزر در شبکه های اجتماعی:</ListHeader>
@@ -49,7 +52,7 @@ export default function Footer() {
           </Stack>
         </SimpleGrid>
       </Container>
-      <Box py={10}>
+      <Box py={2}>
         <FooterSub />
       </Box>
     </Box>

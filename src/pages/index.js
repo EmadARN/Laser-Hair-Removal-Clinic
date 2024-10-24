@@ -1,3 +1,4 @@
+import BackToUp from "@/Common/backToUp/BackToUp";
 import Banner from "@/Components/home/banner/Banner";
 import Faqs from "@/Components/home/faqs/Faqs";
 import { GuideSignup } from "@/Components/home/guideSignup/GuideSignup";
@@ -21,7 +22,7 @@ const Home = () => {
           <WhyLaser />
         </GridItem>
       </Grid>
-      <Box my={16}>
+      <Box my={8}>
         <LaserBefore />
       </Box>
       <Box my={8}>
@@ -32,6 +33,9 @@ const Home = () => {
       </Box>
       <Box my={8}>
         <Suggstion />
+      </Box>
+      <Box>
+        <BackToUp />
       </Box>
     </Layout>
   );

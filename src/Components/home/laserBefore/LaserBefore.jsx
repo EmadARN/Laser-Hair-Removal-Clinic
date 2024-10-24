@@ -15,7 +15,7 @@ const BoxComponent = ({ icon, title, text, index }) => {
       p={5}
       m={3}
       borderWidth={1}
-      rounded={"25px"}
+      borderRadius="md"
       boxShadow="md"
       bg="gray.100"
       textAlign="center"
@@ -29,10 +29,17 @@ const BoxComponent = ({ icon, title, text, index }) => {
         alignItems={"center"}
       >
         <Text fontSize="2xl">{icon}</Text>
-        <Heading size="md" mt={3} py={4}>
+        <Heading
+          size={{ base: "sm", md: "md" }}
+          mt={3}
+          py={4}
+          color={"gray.600"}
+        >
           {title}
         </Heading>
-        <Text mt={2}>{text}</Text>
+        <Text fontSize={{ base: "14px", md: "16px" }} color={"gray.500"} mt={2}>
+          {text}
+        </Text>
       </Flex>
     </MotionBox>
   );
@@ -46,11 +53,12 @@ export const LaserBefore = () => {
         mx={2}
         flexDirection={"column"}
         alignItems={"center"}
+        color={"gray.600"}
       >
         <Heading
           sx={{ display: "flex", justifyContent: "center" }}
           as="h2"
-          size="lg"
+          size={{ base: "md", md: "lg" }}
         >
           نکات مهم قبل از انجام لیزر موهای زائد
         </Heading>

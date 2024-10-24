@@ -36,7 +36,8 @@ const Faqs = () => {
       <Heading
         sx={{ display: "flex", justifyContent: "center" }}
         as="h2"
-        size="lg"
+        size={{ base: "sm", md: "md" }}
+        color={"gray.600"}
       >
         سوالات متداول لیزر موهای زائد
       </Heading>
