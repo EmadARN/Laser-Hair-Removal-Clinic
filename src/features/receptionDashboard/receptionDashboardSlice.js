@@ -1,6 +1,7 @@
 import api from "@/services/apiService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
 // Helper function to handle state updates
 const handleAsyncState = (state, action, status) => {
   state.loading = status === "pending";
@@ -25,6 +26,23 @@ export const getAsyncUsersList = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const addCustomerWithOutTime = createAsyncThunk(
+  "receptionDashboard/addCustomerWithOutTime",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload success",payload);
+    try {
+      const { data } = await api.post("/Core/add/customer/information/",payload, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      console.log("daata", data);
+    } catch (error) {
+      console.log("error", error);
     }
   }
 );
