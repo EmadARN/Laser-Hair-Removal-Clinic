@@ -21,10 +21,10 @@ export const getLazerAreaList = createAsyncThunk(
           Authorization: `Bearer ${payload.token}`,
         },
       });
-      console.log("data", data);
+      console.log("getLazerAreaList", data);
       return data;
     } catch (error) {
-      console.log("error payload", error);
+      console.log("error payload getLazerAreaList", error);
     }
   }
 );
@@ -45,10 +45,29 @@ export const postLazerAreaList = createAsyncThunk(
           },
         }
       );
-      console.log("data", data);
+      console.log("postLazerAreaList", data);
       return data;
     } catch (error) {
-      console.log("error payload", error);
+      console.log("error payload postLazerAreaList", error);
+    }
+  }
+);
+export const getreserveInformation = createAsyncThunk(
+  "customerDashboard/getreserveInformation",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get(
+        `/Reserve/reserve/information/${payload.reserveId}/`,
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`,
+          },
+        }
+      );
+      console.log("getreserveInformation", data);
+      return data;
+    } catch (error) {
+      console.log("error payload getreserveInformation", error);
     }
   }
 );
@@ -57,6 +76,8 @@ const initialState = {
   loading: false,
   error: "",
   areas: [],
+  userReserveId: "",
+  reserveInformation: [],
 };
 
 const customerDashboardSlice = createSlice({
@@ -86,8 +107,22 @@ const customerDashboardSlice = createSlice({
       })
       .addCase(postLazerAreaList.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
+        state.userReserveId = action.payload.reserve;
       })
       .addCase(postLazerAreaList.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
+
+      // Fetch reserveInformation
+      .addCase(getreserveInformation.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getreserveInformation.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.reserveInformation = action.payload;
+      })
+      .addCase(getreserveInformation.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
       });
   },

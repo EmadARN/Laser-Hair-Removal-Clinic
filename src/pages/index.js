@@ -18,7 +18,7 @@ const Home = () => {
         <GridItem colSpan={12} mt={{ base: 24, md: 0 }}>
           <Banner />
         </GridItem>
-        <GridItem colSpan={12} my={16}>
+        <GridItem colSpan={12} my={12}>
           <WhyLaser />
         </GridItem>
       </Grid>
