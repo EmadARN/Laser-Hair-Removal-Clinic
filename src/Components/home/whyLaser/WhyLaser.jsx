@@ -50,7 +50,7 @@ const WhyLaser = () => {
           sx={{ display: "flex", justifyContent: "center" }}
           as="h2"
           size={{ base: "md", md: "lg" }}
-          pb={2}
+          py={4}
         >
           چرا باید ساید لیزر را انتخاب کنم؟
         </Heading>
