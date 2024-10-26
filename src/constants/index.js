@@ -351,13 +351,17 @@ export const TableData = [
 
 //UserDashboard
 export const userData = [
-  { slug: "choosingArea", component: <ChoosingArea slug={"dateTime"} /> },
-  { slug: "dateTime", component: <Date_Time slug={"confirmInfo"} /> },
-  { slug: "confirmInfo", component: <ConfirmInfo slug={"userInformation"} /> },
   {
     slug: "userInformation",
-    component: <UserInformation slug={"choosingPayAmount"} />,
+    component: <UserInformation slug={"choosingArea"} />,
   },
+  { slug: "choosingArea", component: <ChoosingArea slug={"dateTime"} /> },
+  { slug: "dateTime", component: <Date_Time slug={"confirmInfo"} /> },
+  {
+    slug: "confirmInfo",
+    component: <ConfirmInfo slug={"choosingPayAmount"} />,
+  },
+
   {
     slug: "choosingPayAmount",
     component: <ChoosingPayAmount slug={"reservationDone"} />,

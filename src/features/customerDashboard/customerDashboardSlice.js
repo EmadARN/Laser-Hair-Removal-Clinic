@@ -12,6 +12,30 @@ const handleAsyncState = (state, action, status) => {
 };
 
 // Async Thunks
+export const postCustomerInformation = createAsyncThunk(
+  "customerDashboard/postCustomerInformation",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload", payload);
+
+    try {
+      const { data } = await api.post(
+        "Core/add/customer/information/",
+        payload,
+
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`,
+          },
+        }
+      );
+      console.log("postCustomerInformation", data);
+      return data;
+    } catch (error) {
+      console.log("error payload postCustomerInformation", error);
+    }
+  }
+);
+
 export const getLazerAreaList = createAsyncThunk(
   "customerDashboard/getLazerAreaList",
   async (payload, { rejectWithValue }) => {
@@ -71,6 +95,25 @@ export const getreserveInformation = createAsyncThunk(
     }
   }
 );
+export const getTimeList = createAsyncThunk(
+  "customerDashboard/getTimeList",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get(
+        `Reserve/time/list/${payload.reserveId}/`,
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`,
+          },
+        }
+      );
+      console.log("getreserveInformation", data);
+      return data;
+    } catch (error) {
+      console.log("error payload getreserveInformation", error);
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
@@ -78,6 +121,7 @@ const initialState = {
   areas: [],
   userReserveId: "",
   reserveInformation: [],
+  timeList: [],
 };
 
 const customerDashboardSlice = createSlice({
@@ -86,6 +130,18 @@ const customerDashboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+
+      // Post CustomerInformation
+      .addCase(postCustomerInformation.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(postCustomerInformation.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+      .addCase(postCustomerInformation.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
 
       // Fetch laser areas
       .addCase(getLazerAreaList.pending, (state) => {
@@ -123,6 +179,19 @@ const customerDashboardSlice = createSlice({
         state.reserveInformation = action.payload;
       })
       .addCase(getreserveInformation.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
+
+      // Fetch reserveInformation
+      .addCase(getTimeList.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getTimeList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.timeList = action.payload;
+      })
+      .addCase(getTimeList.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
       });
   },

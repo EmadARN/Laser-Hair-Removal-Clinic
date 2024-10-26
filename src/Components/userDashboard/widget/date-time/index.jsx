@@ -6,16 +6,20 @@ import TitleUserDashboard from "@/Common/titleUserDashboard/TitleUserDashboard";
 import Date from "./Date";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 import { useFetchReserveInformation } from "@/hooks/userDashboard/useFetchReserveInformation";
-import { getreserveInformation } from "@/features/customerDashboard/customerDashboardSlice";
+import {
+  getreserveInformation,
+  getTimeList,
+} from "@/features/customerDashboard/customerDashboardSlice";
 
 const Date_Time = ({ page, setPage, slug }) => {
   const { token } = useSelector((store) => store.signin);
-  const [cookies, setCookie] = useCookies(["reserveId"]); 
+  const [cookies, setCookie] = useCookies(["reserveId"]);
   const dispatch = useDispatch();
-  const { userReserveId, loading, error } = useSelector(
+  const { userReserveId, timeList, loading, error } = useSelector(
     (store) => store.customerDashboard
   );
   console.log("userReserveId:", userReserveId);
+  console.log("timeList:", timeList);
 
   useEffect(() => {
     if (userReserveId) {
@@ -30,7 +34,12 @@ const Date_Time = ({ page, setPage, slug }) => {
 
   // بازیابی reserveId از کوکی
   const reserveId = cookies.reserveId || null;
-  
+  useEffect(() => {
+    if (reserveId) {
+      dispatch(getTimeList({ token, reserveId }));
+    }
+  }, [reserveId, token, dispatch]);
+
   useEffect(() => {
     if (reserveId) {
       dispatch(getreserveInformation({ token, reserveId }));

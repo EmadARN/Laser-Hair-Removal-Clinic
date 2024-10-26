@@ -104,7 +104,7 @@ const DashboardLayout = ({
               transition=".5s"
               mr={3}
               fontWeight="500"
-              onClick={() => router.push("userDashboard/choosingArea")}
+              onClick={() => router.push("userDashboard/userInformation")}
             >
               رزرو نوبت
             </Button>
