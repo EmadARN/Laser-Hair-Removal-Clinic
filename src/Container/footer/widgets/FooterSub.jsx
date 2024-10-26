@@ -28,14 +28,14 @@ const FooterSub = () => {
           borderBottom: "1px solid",
           borderColor: useColorModeValue("gray.200"),
           flexGrow: 1,
-          mr: 8,
+          mr: { base: 0, md: 8 },
         }}
         _after={{
           content: '""',
           borderBottom: "1px solid",
           borderColor: useColorModeValue("gray.200"),
           flexGrow: 1,
-          ml: 8,
+          ml: { base: 0, md: 8 },
         }}
       >
         <Flex>
@@ -43,8 +43,13 @@ const FooterSub = () => {
           <Logo />
         </Flex>
       </Flex>
-      <Text pt={6} fontSize={"sm"} textAlign={"center"}>
-        تمامی حقوق این سایت متعلق به کلینیک لیزر ساید می باشد
+      <Text
+        pl={{ base: 0, md: 8 }}
+        fontSize={{ base: "10px", md: "12px" }}
+        textAlign={{ base: "center", md: "left" }}
+      >
+        تمامی حقوق این سایت متعلق به کلینیک لیزر ساید می باشد طراحی سامانه نوبت
+        دهی لیزر توسط عماد
       </Text>
     </>
   );

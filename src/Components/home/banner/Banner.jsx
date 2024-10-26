@@ -67,10 +67,17 @@ const Banner = () => {
           exit={{ opacity: 0, scale: 0.5 }} // انیمیشن خروج
           transition={{ duration: 0.5 }} // زمان انیمیشن
         >
-          <Heading size="md" mb={3}>
+          <Heading
+            size="md"
+            mb={3}
+            color={"gray.600"}
+            fontSize={{ base: "16px", md: "18px" }}
+          >
             {item.header}
           </Heading>
-          <Text>{item.text}</Text>
+          <Text color={"gray.500"} textAlign="center" fontSize="14px">
+            {item.text}
+          </Text>
         </MotionFlex>
       ))}
     </Flex>

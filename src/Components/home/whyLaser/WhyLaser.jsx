@@ -3,6 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 import React, { useEffect } from "react";
 import { Compare } from "./widget/Compare";
 import { datasWhyLaser } from "@/constants";
+import { toPersianDigits } from "@/utils/toPersianDigits";
 
 const MotionBox = motion(Box);
 
@@ -41,20 +42,24 @@ const WhyLaser = () => {
         py={8}
         rounded={"25px"}
         backgroundColor="#ffff"
-        color="black"
+        color={"gray.600"}
         minHeight="600px"
         textAlign="center" // متن را وسط چپ کنیم
       >
         <Heading
           sx={{ display: "flex", justifyContent: "center" }}
           as="h2"
-          size="lg"
+          size={{ base: "md", md: "lg" }}
           pb={2}
         >
           چرا باید ساید لیزر را انتخاب کنم؟
         </Heading>
-        <Text fontSize="lg" mb={4}>
-          5 سال است که در کنار شما هستیم
+        <Text
+          fontSize={{ base: "14px", md: "18px" }}
+          mb={4}
+          fontWeight={"bold"}
+        >
+          {toPersianDigits(5)} سال است که در کنار شما هستیم
         </Text>
         <Text fontSize="md" mb={6}>
           مرکز ساید لیزر با داشتن بهترین دستگاه لیزر و تیم اپراتور آماده ارائه
@@ -77,9 +82,9 @@ const WhyLaser = () => {
               width={{ base: "100%", md: "30%" }}
             >
               <Heading size="md" mb={2}>
-                {item.header}
+                {toPersianDigits(item.header)}
               </Heading>
-              <Text> {item.text}</Text>
+              <Text>{toPersianDigits(item.text)}</Text>
               <Box>{item.images}</Box>
             </Box>
           ))}
