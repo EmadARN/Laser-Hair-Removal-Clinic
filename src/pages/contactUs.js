@@ -1,5 +1,5 @@
-import HeaderImg from "@/Components/contact_us/HeaderImg";
-import SectionInfo from "@/Components/contact_us/Section_info";
+import HeaderImg from "@/Components/contactUs/HeaderImg";
+import SectionInfo from "@/Components/contactUs/Section_info";
 import Layout from "@/Container";
 import { Box, Grid } from "@chakra-ui/react";
 import React from "react";
@@ -21,7 +21,7 @@ const ContactUs = () => {
         </Box>
 
         {/* contact info box */}
-        <Box m={14} width={"100%"}>
+        <Box p={14} width={"100%"}>
           <SectionInfo />
         </Box>
       </Grid>
