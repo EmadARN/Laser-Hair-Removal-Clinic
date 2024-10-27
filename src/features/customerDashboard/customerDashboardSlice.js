@@ -19,7 +19,7 @@ export const postCustomerInformation = createAsyncThunk(
 
     try {
       const { data } = await api.post(
-        "Core/add/customer/information/",
+        "/Core/add/customer/information/",
         payload,
 
         {
@@ -79,12 +79,14 @@ export const postLazerAreaList = createAsyncThunk(
 export const getreserveInformation = createAsyncThunk(
   "customerDashboard/getreserveInformation",
   async (payload, { rejectWithValue }) => {
+    console.log("payload:", payload);
+
     try {
       const { data } = await api.get(
         `/Reserve/reserve/information/${payload.reserveId}/`,
         {
           headers: {
-            Authorization: `Bearer ${payload.token}`,
+            Authorization: `Bearer ${payload.tokenAuth}`,
           },
         }
       );
@@ -103,7 +105,7 @@ export const getTimeList = createAsyncThunk(
         `Reserve/time/list/${payload.reserveId}/`,
         {
           headers: {
-            Authorization: `Bearer ${payload.token}`,
+            Authorization: `Bearer ${payload.tokenAuth}`,
           },
         }
       );

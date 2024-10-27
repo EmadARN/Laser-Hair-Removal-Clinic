@@ -1,56 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper/Stepper";
 import TitleUserDashboard from "@/Common/titleUserDashboard/TitleUserDashboard";
-import Date from "./Date";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
-import { useFetchReserveInformation } from "@/hooks/userDashboard/useFetchReserveInformation";
 import {
   getreserveInformation,
   getTimeList,
 } from "@/features/customerDashboard/customerDashboardSlice";
+import Date from "./widget/Date";
 
 const Date_Time = ({ page, setPage, slug }) => {
-  const { token } = useSelector((store) => store.signin);
-  const [cookies, setCookie] = useCookies(["reserveId"]);
+  const [cookies, setCookie] = useCookies([
+    "reserveId",
+    "auth_token",
+    "timeList",
+  ]);
+
   const dispatch = useDispatch();
   const { userReserveId, timeList, loading, error } = useSelector(
     (store) => store.customerDashboard
   );
-  console.log("userReserveId:", userReserveId);
-  console.log("timeList:", timeList);
+
+  const tokenAuth = cookies.auth_token;
+
+  // بازیابی reserveId از کوکی
+  const reserveId = cookies.reserveId || null;
 
   useEffect(() => {
     if (userReserveId) {
       setCookie("reserveId", JSON.stringify(userReserveId), {
         path: "/",
-        maxAge: 3600, // زمان انقضا به ثانیه (اینجا یک ساعت)
-        // secure: true,
-        // sameSite: "strict",
+        maxAge: 3600,
       });
     }
   }, [userReserveId, setCookie]);
 
-  // بازیابی reserveId از کوکی
-  const reserveId = cookies.reserveId || null;
   useEffect(() => {
-    if (reserveId) {
-      dispatch(getTimeList({ token, reserveId }));
+    if (timeList) {
+      setCookie("timeList", timeList, {
+        path: "/",
+        maxAge: 3600,
+      });
     }
-  }, [reserveId, token, dispatch]);
+  }, [timeList, setCookie]);
 
   useEffect(() => {
-    if (reserveId) {
-      dispatch(getreserveInformation({ token, reserveId }));
+    if (reserveId && tokenAuth) {
+      dispatch(getTimeList({ tokenAuth, reserveId }));
+      dispatch(getreserveInformation({ tokenAuth, reserveId }));
     }
-  }, [reserveId, token, dispatch]);
+  }, [reserveId, tokenAuth, dispatch]);
 
   return (
     <>
       <StepperPrototype />
       <TitleUserDashboard page={page} setPage={setPage} />
-      <Date />
+      <Date timeList={timeList} />
       <AcceptBtn
         page={page}
         setPage={setPage}

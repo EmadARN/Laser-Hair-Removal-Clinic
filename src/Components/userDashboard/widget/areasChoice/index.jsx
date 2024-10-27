@@ -7,14 +7,15 @@ import { Spinner, Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { useFetchLazerAreas } from "@/hooks/userDashboard/useFetchLazerAreaList";
 import { usePostLazerAreas } from "@/hooks/userDashboard/usePostLazerAreaList";
+import { useCookies } from "react-cookie";
 
 const ChoosingArea = ({ page, setPage, slug }) => {
   const [checkedItems, setCheckedItems] = useState([]);
   const [reserveId, setReserveId] = useState([]);
+  const [{ auth_token } = cookies] = useCookies(["auth_token"]);
 
-  const { token } = useSelector((store) => store.signin);
-  const { areas, loading, error } = useFetchLazerAreas(token);
-  const { submitHandler } = usePostLazerAreas(reserveId, token);
+  const { areas, loading, error } = useFetchLazerAreas(auth_token);
+  const { submitHandler } = usePostLazerAreas(reserveId, auth_token);
 
   useEffect(() => {
     if (areas?.all_laser_area_object?.first_type) {
