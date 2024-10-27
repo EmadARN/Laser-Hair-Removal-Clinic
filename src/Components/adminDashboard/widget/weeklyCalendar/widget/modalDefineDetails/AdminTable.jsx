@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import ModalLayout from "./ModalLayout";
 import { daysOfWeek, headers } from "@/constants";
-import { groupByWeekdays } from "@/utils/getDayOfWeek";
+import { groupByWeekdays } from "@/Components/adminDashboard/util/getDayOfWeek";
 
 const tableStyle = {
   mx: 6,
