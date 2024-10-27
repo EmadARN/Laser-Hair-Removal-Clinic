@@ -1,6 +1,16 @@
 import api from "@/services/apiService";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+// Helper function to handle state updates
+const handleAsyncState = (state, action, status) => {
+  state.loading = status === "pending";
+  if (status === "fulfilled") {
+    state.error = "";
+  } else if (status === "rejected") {
+    state.error = action.payload;
+  }
+};
+
 export const postAsyncNumber = createAsyncThunk(
   "signin/postAsyncNumber",
   async (payload, { rejectWithValue }) => {
@@ -45,48 +55,43 @@ const authSlice = createSlice({
     phone_number: "",
     code: "",
     error: null,
-    token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+    // token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(postAsyncNumber.fulfilled, (state, action) => {
-        state.phone_number = action.payload.phone_number;
-        state.loading = false;
-        state.error = null;
-      })
       .addCase(postAsyncNumber.pending, (state) => {
-        state.loading = true;
+        handleAsyncState(state, {}, "pending");
         state.phone_number = "";
-        state.error = null;
+      })
+      .addCase(postAsyncNumber.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.phone_number = action.payload.phone_number;
       })
       .addCase(postAsyncNumber.rejected, (state, action) => {
-        state.loading = false;
+        handleAsyncState(state, action, "rejected");
         state.phone_number = "";
-        state.error = action.payload || "Failed to send phone number.";
+      })
+
+      //post postAsyncCode
+      .addCase(postAsyncCode.pending, (state) => {
+        handleAsyncState(state, {}, "pending");
+        state.code = "";
+        state.phone_number = "";
       })
       .addCase(postAsyncCode.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
         state.code = action.payload.code;
         state.phone_number = action.payload.phone_number;
-        state.token = action.payload.token; // ذخیره توکن در state
-        state.loading = false;
-        state.error = null;
-        localStorage.setItem("token", action.payload.token);
-      })
-      .addCase(postAsyncCode.pending, (state) => {
-        state.loading = true;
-        state.code = "";
-        state.phone_number = "";
-        state.error = null;
+        // state.token = action.payload.token; // ذخیره توکن در state
+        // localStorage.setItem("token", action.payload.token);
       })
       .addCase(postAsyncCode.rejected, (state, action) => {
-        state.loading = false;
+        handleAsyncState(state, action, "rejected");
         state.code = "";
         state.phone_number = "";
-        state.error = action.payload || "Failed to verify code.";
       });
   },
 });
-export const { setTokenFromStorage } = authSlice.actions;
 export default authSlice.reducer;
 // typeof window !== "undefined" ? localStorage.getItem("auth_token") : null, // بررسی محیط مرورگر

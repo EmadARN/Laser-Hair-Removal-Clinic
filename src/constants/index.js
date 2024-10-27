@@ -13,6 +13,7 @@ import {
   UserIcon,
 } from "@heroicons/react/24/outline";
 import { FaBottleWater } from "react-icons/fa6";
+import { CiSquareInfo } from "react-icons/ci";
 
 import ChoosingArea from "@/Components/userDashboard/widget/areasChoice";
 import ChoosingPayAmount from "@/Components/userDashboard/widget/choosingPayAmount/ChoosingPayAmount";
@@ -32,15 +33,28 @@ import Home from "@/Components/adminDashboard/widget/home";
 import DailyShift from "@/Components/reseptionDashboard/DailyShift";
 import ResClients from "@/Components/reseptionDashboard/ResClients";
 
+//َaboutUs
+export const numberTicker = [
+  { count: 1399, title: "سال تاسیس" },
+  { count: 2849, title: "مشتریان" },
+  { count: 5, title: "تعداد اوپراتور" },
+  { count: 4, title: "تعداد دستگاه" },
+];
 //Home
 export const data = [
   { id: 0, title: "خانه", icon: <HomeIcon />, src: "/" },
-  { id: 1, title: "حساب کاربری", icon: <UserIcon />, src: "/UserDashboard" },
+  { id: 1, title: "حساب کاربری", icon: <UserIcon />, src: "/userDashboard" },
   {
     id: 2,
-    title: "درباره لیزر و سوالات متداول",
+    title: "ارتباط با ما",
     icon: <ChatBubbleBottomCenterIcon />,
-    src: "/",
+    src: "/contactUs",
+  },
+  {
+    id: 3,
+    title: " درباره ما",
+    icon: <CiSquareInfo />,
+    src: "/aboutUs",
   },
 ];
 export const datasWhyLaser = (Compare) => {
@@ -172,7 +186,21 @@ export const get_turn_data = [
     desc: "جهت نهایی سازی نوبت خود، مراجعین عزیز می بایست مبلغ در نظر گرفته شده به عنوان وثیقه را پرداخت کنند.",
   },
 ];
-
+export const contactDetails = [
+  {
+    title: "شماره تماس",
+    content: "09129129129",
+  },
+  {
+    title: "آدرس کلینیک",
+    content: "مهاباد. خیابان فیاضی. کوچه ی بهبهانی. پلاک ۴۲",
+  },
+  {
+    title: "ساعت کاری",
+    content:
+      "همه روزه از ساعت 7:30 صبح تا 2 بعد از ظهر و 3 بعد از ظهر تا 11 شب",
+  },
+];
 //AdminDashboard
 export const admintData = [
   {
@@ -376,69 +404,10 @@ export const userData = [
   },
 ];
 
-export const day = [
-  {
-    id: 1,
-    h1: "18 اسفند",
-    h2: "سهشنبه",
-    name: " بازه 3",
-  },
-  {
-    id: 2,
-    h1: "18 اسفند",
-    h2: "سهشنبه",
-    name: " بازه 3",
-  },
-  {
-    id: 3,
-    h1: "18 اسفند",
-    h2: "سهشنبه",
-    name: " بازه 3",
-  },
-
-  {
-    id: 4,
-    h1: "18 اسفند",
-    h2: "سهشنبه",
-    name: " بازه 3",
-  },
-  {
-    id: 5,
-    h1: "18 اسفند",
-    h2: "سهشنبه",
-    name: " بازه 3",
-  },
-  {
-    id: 6,
-    h1: "18 اسفند",
-    h2: "سهشنبه",
-    name: " بازه 3",
-  },
-];
-export const shift = [
-  {
-    id: 1,
-    icon: <FaSun />,
-    text: "َشیفت صبح",
-  },
-
-  {
-    id: 2,
-    icon: <IoCloudyNightOutline />,
-    text: "َشیفت عصر",
-  },
-];
-export const time = [
-  {
-    id: 1,
-
-    time: "9 تا 11",
-  },
-  {
-    id: 2,
-
-    time: "4 تا 8",
-  },
+export const items = [
+  { text: "انتخاب شما", color: "#7563dc" }, // بنفش
+  { text: "قابل انتخاب", color: "gray.400" }, // طوسی
+  { text: "در انتظار پرداخت سایر مراجعین", color: "gray.400" }, // طوسی
 ];
 export const UserData = [
   { id: 1, title: "تاریخ", value: "دوشنبه" },
