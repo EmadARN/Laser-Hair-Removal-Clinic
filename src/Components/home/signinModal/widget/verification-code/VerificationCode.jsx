@@ -25,7 +25,7 @@ const VerificationCode = ({ setPage, page }) => {
 
   const onSubmit = async () => {
     if (phone_number) {
-      setCookie("phoneNumber", JSON.stringify(phone_number), {
+      setCookie("phoneNumber", phone_number, {
         path: "/",
       });
     }
