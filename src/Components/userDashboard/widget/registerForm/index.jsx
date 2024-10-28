@@ -5,6 +5,7 @@ import StepperPrototype from "../stepper/Stepper";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { postCustomerInformation } from "@/features/customerDashboard/customerDashboardSlice";
+import { useCookies } from "react-cookie";
 
 const UserInformation = ({ page, setPage, slug }) => {
   const [inputsData, setinputsData] = useState({
@@ -21,9 +22,8 @@ const UserInformation = ({ page, setPage, slug }) => {
   });
   const [drugHistory, setDrugHistory] = useState("fasle");
   const [diseaseHistory, setDiseaseHistory] = useState("fasle");
-
+  const [{ auth_token } = cookies] = useCookies(["auth_token"]);
   const dispatch = useDispatch();
-  const { token } = useSelector((store) => store.signin);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +39,7 @@ const UserInformation = ({ page, setPage, slug }) => {
     dispatch(
       postCustomerInformation({
         ...inputsData,
-        token,
+        auth_token,
       })
     );
   };
