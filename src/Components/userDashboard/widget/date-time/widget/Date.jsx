@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import AccordionMenu from "../../accordionMenu/AccordionMenu";
-import CardProductView from "./CardProductView/CardProductView";
 import { items } from "@/constants";
+import SelectTime from "./selectTme/SelectTime";
 
 // ایجاد یک کامپوننت برای مربع‌ها
 const Square = styled.div`
@@ -24,11 +24,23 @@ const Square = styled.div`
   background-color: ${({ color }) => color}; /* رنگ بر اساس prop */
 `;
 
-const Date = ({ timeList }) => {
+const Date = ({
+  timeList,
+  selectedDateId,
+  setSelectedDateId,
+  selectedSlot,
+  setSelectedSlot,
+}) => {
   return (
     <Box>
       <Box mb={2} pr={4} pt={2} pb={12} bgColor={"white"} rounded={"8px"}>
-        <CardProductView timeList={timeList} />
+        <SelectTime
+          timeList={timeList}
+          selectedDateId={selectedDateId}
+          setSelectedDateId={setSelectedDateId}
+          selectedSlot={selectedSlot}
+          setSelectedSlot={setSelectedSlot}
+        />
       </Box>
 
       <Accordion defaultIndex={[0]} allowMultiple bgColor={"white"}>

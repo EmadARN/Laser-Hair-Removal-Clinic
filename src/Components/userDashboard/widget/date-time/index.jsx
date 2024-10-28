@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper/Stepper";
@@ -7,6 +7,7 @@ import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 import {
   getreserveInformation,
   getTimeList,
+  postAddTime,
 } from "@/features/customerDashboard/customerDashboardSlice";
 import Date from "./widget/Date";
 
@@ -16,6 +17,11 @@ const Date_Time = ({ page, setPage, slug }) => {
     "auth_token",
     "timeList",
   ]);
+  const [selectedDateId, setSelectedDateId] = useState(null);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+
+  // console.log("selectedDateId:",  selectedDateId);
+  // console.log("selectedSlot:",  JSON.stringify(selectedSlot));
 
   const dispatch = useDispatch();
   const { userReserveId, timeList, loading, error } = useSelector(
@@ -52,17 +58,27 @@ const Date_Time = ({ page, setPage, slug }) => {
     }
   }, [reserveId, tokenAuth, dispatch]);
 
+  const submitHandler = () => {
+    dispatch(postAddTime({ tokenAuth, selectedDateId, selectedSlot }));
+  };
   return (
     <>
       <StepperPrototype />
       <TitleUserDashboard page={page} setPage={setPage} />
-      <Date timeList={timeList} />
+      <Date
+        timeList={timeList}
+        selectedDateId={selectedDateId}
+        setSelectedDateId={setSelectedDateId}
+        selectedSlot={selectedSlot}
+        setSelectedSlot={setSelectedSlot}
+      />
       <AcceptBtn
         page={page}
         setPage={setPage}
         slug={slug}
         text="ادامه"
         bgColor={"white"}
+        submitHandler={submitHandler}
       />
     </>
   );
