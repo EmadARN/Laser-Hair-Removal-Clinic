@@ -19,12 +19,12 @@ export const postCustomerInformation = createAsyncThunk(
 
     try {
       const { data } = await api.post(
-        "/Core/add/customer/information/",
+        "Core/add/customer/information/",
         payload,
 
         {
           headers: {
-            Authorization: `Bearer ${payload.token}`,
+            Authorization: `Bearer ${payload.auth_token}`,
           },
         }
       );
@@ -116,6 +116,32 @@ export const getTimeList = createAsyncThunk(
     }
   }
 );
+
+export const postAddTime = createAsyncThunk(
+  "customerDashboard/postAddTime",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload", payload);
+
+    try {
+      const { data } = await api.post(
+        "/Reserve/client/add/time/",
+        {
+          date: payload.selectedDateId,
+          time_range: payload.selectedSlot,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.tokenAuth}`,
+          },
+        }
+      );
+      console.log("postAddTime", data);
+      return data;
+    } catch (error) {
+      console.log("error payload postAddTime", error);
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
@@ -194,6 +220,18 @@ const customerDashboardSlice = createSlice({
         state.timeList = action.payload;
       })
       .addCase(getTimeList.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
+
+      // Post postAddTime
+      .addCase(postAddTime.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(postAddTime.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+      .addCase(postAddTime.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
       });
   },

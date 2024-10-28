@@ -4,10 +4,14 @@ import { ShiftSelection } from "./widgets/ShiftButton";
 import TimeSlots from "./widgets/TimeSlots";
 import DateSelection from "./widgets/DateSelection";
 
-export default function CardProductView({ timeList }) {
-  const [selectedDateId, setSelectedDateId] = useState(null);
+export default function SelectTime({
+  timeList,
+  selectedDateId,
+  setSelectedDateId,
+  selectedSlot,
+  setSelectedSlot,
+}) {
   const [selectedShift, setSelectedShift] = useState("morning");
-  const [selectedSlot, setSelectedSlot] = useState(null);
 
   useEffect(() => {
     if (timeList?.time_data?.length) {
