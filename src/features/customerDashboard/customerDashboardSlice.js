@@ -142,6 +142,35 @@ export const postAddTime = createAsyncThunk(
     }
   }
 );
+
+export const confirmInfo = createAsyncThunk(
+  "customerDashboard/confirmInfo",
+  async (payload, { rejectWithValue }) => {
+    console.log("confirminfp", payload);
+    try {
+      const { data } = await api.post(
+        "Core/customer/information/",
+        { username: payload.username },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.tokenAuth}`,
+          },
+        },
+
+      
+        
+
+        
+      );
+
+      console.log('data',data);
+      return data;
+    } catch (error) {
+      console.log("error payload confirm info", error);
+    }
+  }
+);
+
 // Initial State
 const initialState = {
   loading: false,
