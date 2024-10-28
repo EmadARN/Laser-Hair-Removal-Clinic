@@ -43,7 +43,6 @@ const UserInformation = ({ page, setPage, slug }) => {
       })
     );
   };
-  console.log("inputsData:", inputsData);
 
   return (
     <>

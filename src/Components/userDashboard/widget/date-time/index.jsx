@@ -20,9 +20,6 @@ const Date_Time = ({ page, setPage, slug }) => {
   const [selectedDateId, setSelectedDateId] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
 
-  // console.log("selectedDateId:",  selectedDateId);
-  // console.log("selectedSlot:",  JSON.stringify(selectedSlot));
-
   const dispatch = useDispatch();
   const { userReserveId, timeList, loading, error, reserveInformation } =
     useSelector((store) => store.customerDashboard);

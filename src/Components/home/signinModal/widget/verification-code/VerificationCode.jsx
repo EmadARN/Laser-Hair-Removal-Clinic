@@ -17,14 +17,18 @@ const VerificationCode = ({ setPage, page }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { phone_number, loading } = useSelector((state) => state.signin);
-  const [cookies, setCookie] = useCookies(["auth_token"]);
+  const [cookies, setCookie] = useCookies(["auth_token", "phoneNumber"]);
 
   const handleClick = () => {
     setPage(page - 1);
   };
 
   const onSubmit = async () => {
-    document.body.style.overflow = "scroll";
+    if (phone_number) {
+      setCookie("phoneNumber", JSON.stringify(phone_number), {
+        path: "/",
+      });
+    }
     setCodeValue(inputCode.toString().split(",").join(""));
     if (!codeValue) return;
     const result = await dispatch(
@@ -33,7 +37,6 @@ const VerificationCode = ({ setPage, page }) => {
         code: codeValue,
       })
     );
-
 
     if (result.meta.requestStatus === "fulfilled") {
       const receivedToken = result.payload.token;
