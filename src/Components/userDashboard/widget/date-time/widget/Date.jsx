@@ -73,11 +73,11 @@ const Date = ({
         </AccordionItem>
       </Accordion>
       <Box bgColor={"white"} my={2}>
-        <AccordionMenu
+        {/* <AccordionMenu
           error={error}
           loading={loading}
           reserveInformation={reserveInformation}
-        />
+        /> */}
       </Box>
     </Box>
   );

@@ -52,9 +52,9 @@ const AreaChoice = ({
                 </Flex>
               ))}
             </Stack>
-            <Box pt={2}>
+            {/* <Box pt={2}>
               <AccordionMenu />
-            </Box>
+            </Box> */}
           </Stack>
         </Flex>
       </Box>
