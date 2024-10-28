@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ShiftSelection } from "./widgets/ShiftButton";
 import TimeSlots from "./widgets/TimeSlots";
 import DateSelection from "./widgets/DateSelection";
+import { useCookies } from "react-cookie";
 
 export default function SelectTime({
   timeList,
@@ -12,6 +13,7 @@ export default function SelectTime({
   setSelectedSlot,
 }) {
   const [selectedShift, setSelectedShift] = useState("morning");
+  const [setCookie] = useCookies(["date", "name", "slots"]);
 
   useEffect(() => {
     if (timeList?.time_data?.length) {
@@ -22,6 +24,14 @@ export default function SelectTime({
   const handleClickDate = (dateId) => {
     setSelectedDateId(dateId);
     setSelectedSlot(null);
+    setCookie("date", dateId.replace(/\//g, "-")),
+      {
+        path: "/",
+      };
+    setCookie("name", operatorName.replace(/ /g, "-")),
+      {
+        path: "/",
+      };
   };
 
   const handleShiftClick = (shift) => {
@@ -31,6 +41,10 @@ export default function SelectTime({
 
   const handleSlotClick = (slot) => {
     setSelectedSlot(slot);
+    setCookie("slots", slot),
+      {
+        path: "/",
+      };
   };
 
   const selectedDateData = timeList?.time_data?.find(
