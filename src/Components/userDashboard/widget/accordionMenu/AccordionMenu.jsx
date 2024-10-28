@@ -48,8 +48,17 @@ const AccordionMenu = ({reserveInformation,loading,error}) => {
           </AccordionButton>
         </h2>
         <AccordionPanel pb={4}>
-          <Stack>
-        
+          <Stack >
+          {reserveInformation.reserve.map((item, index) => (
+              <Box  display={'flex'} flexDirection={'column'} gap={4} key={index}>
+                {/* فرض کنید item دارای ویژگی‌هایی است که می‌خواهید نمایش دهید */}
+                <Box gap={2} display={'flex'} as="span"><p> مدت زمان جلسه:</p>{item.request_time_int}</Box>
+                 <Box gap={2} display={'flex'} as="span"> <p>نواحی انتخاب شده:</p>{item.laser_area_name}</Box>
+                 <Box gap={2} display={'flex'} as="span"><p>ودیعه جهت رزرو نوبت:</p> {item.total_payment_amount}</Box>
+                
+                <Box gap={2} display={'flex'} as="span"><p> مبلغ کل:</p> {item.total_price_amount}</Box>
+              </Box>
+            ))}
           </Stack>
         </AccordionPanel>
       </AccordionItem>

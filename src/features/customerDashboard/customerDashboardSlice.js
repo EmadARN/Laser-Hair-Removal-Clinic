@@ -109,10 +109,10 @@ export const getTimeList = createAsyncThunk(
           },
         }
       );
-      console.log("getreserveInformation", data);
+      console.log("getTimeList", data);
       return data;
     } catch (error) {
-      console.log("error payload getreserveInformation", error);
+      console.log("error payload getTimeList", error);
     }
   }
 );
