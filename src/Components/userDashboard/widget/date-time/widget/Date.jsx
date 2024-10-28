@@ -24,7 +24,7 @@ const Square = styled.div`
   background-color: ${({ color }) => color}; /* رنگ بر اساس prop */
 `;
 
-const Date = ({ timeList }) => {
+const Date = ({ timeList,reserveInformation ,loading,error}) => {
   return (
     <Box>
       <Box mb={2} pr={4} pt={2} pb={12} bgColor={"white"} rounded={"8px"}>
@@ -58,7 +58,7 @@ const Date = ({ timeList }) => {
         </AccordionItem>
       </Accordion>
       <Box bgColor={"white"} my={2}>
-        <AccordionMenu />
+        <AccordionMenu error={error} loading={loading} reserveInformation={reserveInformation}/>
       </Box>
     </Box>
   );

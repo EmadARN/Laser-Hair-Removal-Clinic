@@ -7,7 +7,35 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-const AccordionMenu = () => {
+const AccordionMenu = ({reserveInformation,loading,error}) => {
+
+
+  if (error) {
+    console.log('log error', error);
+    
+  }
+
+  if (loading) {
+    return <div>در حال بارگذاری...</div>; // یا یک لودینگ اسپینر
+  }
+
+  // بررسی اینکه reserveInformation وجود دارد و آرایه است
+  if (!Array.isArray(reserveInformation)) {
+    console.log('reserveInformation is not an array or is undefined');
+
+  }
+
+
+
+  
+
+
+
+
+
+
+
+
   return (
     <Accordion defaultIndex={[0]} allowMultiple>
       <AccordionItem>
@@ -21,22 +49,7 @@ const AccordionMenu = () => {
         </h2>
         <AccordionPanel pb={4}>
           <Stack>
-            <Box>
-              مدت زمان جلسه :<Box as="span"></Box>
-            </Box>
-            <Box>
-              نواحی انتخاب شده :<Box as="span"></Box>
-            </Box>
-            <Box>
-              ودیعه جهت رزرو نوبت :<Box as="span"></Box>
-            </Box>
-            <Box>
-              موجودی کیف پول :<Box as="span"></Box>
-            </Box>
-            <Box>
-              مبلغ کل:
-              <Box as="span"></Box>
-            </Box>
+        
           </Stack>
         </AccordionPanel>
       </AccordionItem>

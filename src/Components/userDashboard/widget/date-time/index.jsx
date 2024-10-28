@@ -18,14 +18,21 @@ const Date_Time = ({ page, setPage, slug }) => {
   ]);
 
   const dispatch = useDispatch();
-  const { userReserveId, timeList, loading, error } = useSelector(
+  const { userReserveId, timeList, loading, error ,reserveInformation} = useSelector(
     (store) => store.customerDashboard
   );
 
+
+
+  
   const tokenAuth = cookies.auth_token;
+
+  
 
   // بازیابی reserveId از کوکی
   const reserveId = cookies.reserveId || null;
+
+
 
   useEffect(() => {
     if (userReserveId) {
@@ -56,7 +63,7 @@ const Date_Time = ({ page, setPage, slug }) => {
     <>
       <StepperPrototype />
       <TitleUserDashboard page={page} setPage={setPage} />
-      <Date timeList={timeList} />
+      <Date error={error} loading={loading} reserveInformation={reserveInformation} timeList={timeList} />
       <AcceptBtn
         page={page}
         setPage={setPage}
