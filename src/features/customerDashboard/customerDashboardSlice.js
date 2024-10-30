@@ -153,7 +153,7 @@ export const confirmInfo = createAsyncThunk(
         { username: payload.username },
         {
           headers: {
-            Authorization: `Bearer ${payload.tokenAuth}`,
+            Authorization: `Bearer ${payload.token}`,
           },
         },
 
@@ -179,6 +179,7 @@ const initialState = {
   userReserveId: "",
   reserveInformation: [],
   timeList: [],
+  confrimInfoDetail:[]
 };
 
 const customerDashboardSlice = createSlice({
@@ -262,7 +263,18 @@ const customerDashboardSlice = createSlice({
       })
       .addCase(postAddTime.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
-      });
+      })
+      .addCase(confirmInfo.pending,(state)=>{
+        state.loading = true,
+        state.error = "";
+      })
+      .addCase(confirmInfo.fulfilled,(state,action)=>{
+        state.confrimInfoDetail  = action.payload
+        state.loading = false
+      })
+      .addCase(confirmInfo.rejected,(state,action)=>{
+        handleAsyncState(state, action, "rejected");
+      })
   },
 });
 
