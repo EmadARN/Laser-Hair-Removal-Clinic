@@ -23,36 +23,72 @@ const VerificationCode = ({ setPage, page }) => {
     setPage(page - 1);
   };
 
+  // const onSubmit = async () => {
+  //   if (phone_number) {
+  //     setCookie("phoneNumber", phone_number, {
+  //       path: "/",
+  //     });
+  //   }
+  //   setCodeValue(inputCode.toString().split(",").join(""));
+  //   if (!codeValue) return;
+  //   const result = await dispatch(
+  //     postAsyncCode({
+  //       phone_number: phone_number,
+  //       code: codeValue,
+  //     })
+  //   );
+
+  //   if (result.meta.requestStatus === "fulfilled") {
+  //     const receivedToken = result.payload.token;
+  //     if (receivedToken) {
+  //       setCookie("auth_token", receivedToken, {
+  //         path: "/",
+  //         // maxAge: 604800,
+  //         // secure: true,
+  //       });
+  //       router.push("/userDashboard");
+  //     }
+
+  
+  //     setCodeValue("");
+  //   }
+  // };
+
+
+
   const onSubmit = async () => {
     if (phone_number) {
       setCookie("phoneNumber", phone_number, {
         path: "/",
       });
     }
-    setCodeValue(inputCode.toString().split(",").join(""));
-    if (!codeValue) return;
+  
+    // به‌جای این خط، مستقیماً از inputCode استفاده کنید
+    const newCodeValue = inputCode.join("");
+  
+    if (!newCodeValue) return;
+  
     const result = await dispatch(
       postAsyncCode({
         phone_number: phone_number,
-        code: codeValue,
+        code: newCodeValue,
       })
     );
-
+  
     if (result.meta.requestStatus === "fulfilled") {
       const receivedToken = result.payload.token;
       if (receivedToken) {
         setCookie("auth_token", receivedToken, {
           path: "/",
-          // maxAge: 604800,
-          // secure: true,
         });
         router.push("/userDashboard");
       }
-
-      document.body.style.overflow = "scroll";
-      setCodeValue("");
     }
+  
+    // در اینجا می‌توانید inputCode را پاک کنید
+    setInputCode(["", "", "", "", "", ""]);
   };
+  
 
   return (
     <Box
@@ -85,7 +121,7 @@ const VerificationCode = ({ setPage, page }) => {
           <Text fontSize={{ base: "xs", md: "xs" }}>بازگشت</Text>
         </Button>
       </Box>
-      <BodyModal />
+      <BodyModal phone_number={phone_number} />
       <Box
         display="flex"
         flexDirection="row-reverse"
