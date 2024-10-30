@@ -1,7 +1,7 @@
 import { Box, Text, Button } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 
-const BodyModal = () => {
+const BodyModal = ({phone_number}) => {
   const [secconds, setSecconds] = useState(5);
   const box1 = useRef();
   const box2 = useRef();
@@ -21,7 +21,7 @@ const BodyModal = () => {
     <>
       <Box mb={4}>
         <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "md" }}>
-          کد تایید به شماره ی ۰۹۱۹۰۹۷۸۰۴۲ارسال شد
+          کد تایید به شماره ی {phone_number} ارسال شد
         </Text>
       </Box>
 
