@@ -16,7 +16,7 @@ const MainModal = ({ onClose, onOpen, isOpen }) => {
       />
     );
   } else if (page === 1) {
-    document.body.style.overflow = "hidden";
+
     return (
       <Box
         display={"flex"}
