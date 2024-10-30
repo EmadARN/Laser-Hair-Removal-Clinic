@@ -13,7 +13,7 @@ export default function SelectTime({
   setSelectedSlot,
 }) {
   const [selectedShift, setSelectedShift] = useState("morning");
-  const [setCookie] = useCookies(["date", "name", "slots"]);
+  const [cookie, setCookie] = useCookies(["date", "name", "slots"]);
 
   useEffect(() => {
     if (timeList?.time_data?.length) {

@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import { TurnData } from "@/constants";
-const TurnInfo = () => {
+const TurnInfo = ({date,slots,operatorName}) => {
   return (
     <Box
       sx={{
@@ -29,7 +29,7 @@ const TurnInfo = () => {
         <Box pr={2} textAlign="right" w="100%">
           <Section_title section_title="اطلاعات نوبت"></Section_title>
         </Box>
-        {TurnData.map((item) => {
+        {TurnData(date,slots,operatorName).map((item) => {
           return (
             <>
               <Box
