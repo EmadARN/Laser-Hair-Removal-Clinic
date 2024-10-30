@@ -20,7 +20,7 @@ export default function NavBar({ bgColor }) {
   const [cookies] = useCookies(["auth_token"]);
 
   useEffect(() => {
-    const noRedirectRoutes = ["/"];
+    const noRedirectRoutes =  ["/", "/contactUs", "/aboutUs"];;
     if (cookies.auth_token && !noRedirectRoutes.includes(router.pathname)) {
       if (router.pathname !== "/userDashboard") {
         router.push("/userDashboard");
@@ -35,6 +35,7 @@ export default function NavBar({ bgColor }) {
       onOpen();
     }
   };
+  
 
   const Logo = (props) => (
     <svg
