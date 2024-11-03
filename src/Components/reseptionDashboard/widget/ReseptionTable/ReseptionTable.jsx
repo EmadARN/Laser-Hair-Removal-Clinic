@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   Tbody,
@@ -19,8 +19,14 @@ export const ReseptionTable = ({
   display,
   todayReserve,
 }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedReserve, setSelectedReserve] = useState(null);
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const handlePaymentClick = (item) => {
+    setSelectedReserve(item);
+    onOpen();
+  };
+
   return (
     <Box w={{ base: "100vw", md: "100%" }} px={4}>
       <TableContainer>
@@ -68,25 +74,26 @@ export const ReseptionTable = ({
                 </Td>
 
                 {/* دکمه‌ها */}
-                <Td>
+                <Td textAlign="center">
                   <Button
-                     onClick={onOpen}
+                    onClick={() => handlePaymentClick(item)}
                     size={{ base: "xs", md: "sm" }}
                     bg="transparent"
                     color="blue"
+                    px={2} // بهبود فضای داخلی دکمه
                   >
                     {ButtonValue}
                   </Button>
                 </Td>
 
-                <Td>
+                <Td textAlign="center">
                   <Button
-               
                     display={display}
                     isDisabled={isDisabled}
                     size={{ base: "xs", md: "sm" }}
                     bg="transparent"
                     color="red"
+                    px={2} // بهبود فضای داخلی دکمه
                   >
                     لغو نوبت
                   </Button>
@@ -96,8 +103,13 @@ export const ReseptionTable = ({
           </Tbody>
         </Table>
       </TableContainer>
-
-      <PaymentDialog isOpen={isOpen} onClose={onClose}/>
+      {isOpen && (
+        <PaymentDialog
+          isOpen={isOpen}
+          onClose={onClose}
+          reserve={selectedReserve}
+        />
+      )}
     </Box>
   );
 };

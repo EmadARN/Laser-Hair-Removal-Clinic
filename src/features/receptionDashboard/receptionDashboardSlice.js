@@ -18,15 +18,26 @@ export const addCustomerWithOutTime = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     console.log("payload success", payload);
     try {
-      const { data } = await api.post(
-        "/Core/signup/customer/",
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${payload.auth_Employee_token}`,
-          },
-        }
-      );
+      const { data } = await api.post("/Core/signup/customer/", payload, {
+        headers: {
+          Authorization: `Bearer ${payload.auth_Employee_token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
+export const getCutomerList = createAsyncThunk(
+  "receptionDashboard/getCutomerList",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Core/customer/list/", {
+        headers: {
+          Authorization: `Bearer ${payload.auth_Employee_token}`,
+        },
+      });
       return data;
     } catch (error) {
       console.log("error", error);
@@ -62,6 +73,7 @@ const initialState = {
   loading: false,
   error: "",
   todayReserve: null,
+  cutomerList: [],
 };
 
 const receptionDashboardSlice = createSlice({
@@ -81,6 +93,19 @@ const receptionDashboardSlice = createSlice({
       )
       .addCase(addCustomerWithOutTime.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
+      })
+
+      // fetch customerList
+      .addCase(getCutomerList.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getCutomerList.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getCutomerList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.cutomerList = action.payload;
       })
 
       // todayDate

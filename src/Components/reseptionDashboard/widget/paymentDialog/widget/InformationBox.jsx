@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { CiEdit } from "react-icons/ci";
 
 const InformationBox = ({ title, value }) => {
@@ -12,20 +12,39 @@ const InformationBox = ({ title, value }) => {
       p={"10px"}
       textAlign={"right"}
     >
-      <Box display={"flex"} justifyContent={"space-between"} gap={2}>
-        <Box display={"flex"} flexDirection={"column"}>
-          <Text color={"#555"}>{title}</Text>
-          <Text fontWeight={"bold"}>{value}</Text>
-        </Box>
+      <Box
+        display={"flex"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        gap={2}
+        flexDirection={{ base: "column", md: "row" }} // ریسپانسیو
+      >
+        <Box display={"flex"} flexDirection={"column"} width="100%">
+          <Flex justifyContent="space-between" alignItems="center" w="100%">
+            <Text color={"#555"}>{title}</Text>
+            {title === "ناحیه لیزر" && (
+              <Box
+                as="button"
+                display={"flex"}
+                alignItems={"center"}
+                mt={{ base: 2, md: 0 }}
+              >
+                <CiEdit color="blue" />
+                <Text color={"blue"} ml={1}>
+                  تغییر نواحی
+                </Text>
+              </Box>
+            )}
+          </Flex>
 
-        {title === "ناحیه لیزر" ? (
-          <Box as="button" display={"flex"} alignItems={"center"}>
-            <CiEdit color="blue" />
-            <Text color={"blue"} mr="1">
-              تغییر نواحی
-            </Text>
-          </Box>
-        ) : null}
+          <Text
+            fontSize={{ base: "10px", md: "14px" }}
+            pt={2}
+            fontWeight="bold"
+          >
+            {value}
+          </Text>
+        </Box>
       </Box>
     </Box>
   );

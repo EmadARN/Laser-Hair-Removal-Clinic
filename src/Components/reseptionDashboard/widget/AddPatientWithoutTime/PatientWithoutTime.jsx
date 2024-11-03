@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Text,
@@ -18,16 +18,20 @@ import {
 import { MdCancel } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addCustomerWithOutTime } from "@/features/receptionDashboard/receptionDashboardSlice";
+import {
+  addCustomerWithOutTime,
+  getCutomerList,
+} from "@/features/receptionDashboard/receptionDashboardSlice";
 import { useCookies } from "react-cookie";
 
 const PatientWithoutTime = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
+  const { cutomerList } = useSelector((store) => store.receptionDashboardSlice);
   const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
     "auth_Employee_token",
   ]);
-
+  const [listCustomers, setListCustomers] = useState();
   const [inputsData, setInputsData] = useState({
     username: "",
     password: "",
@@ -80,6 +84,10 @@ const PatientWithoutTime = () => {
     }); // Reset input data
     onClose(); // Close the modal
   };
+  // useEffect(() => {
+  //   dispatch(getCutomerList(auth_Employee_token));
+  // }, []);
+  console.log("cutomerList:", cutomerList);
 
   return (
     <>
@@ -96,27 +104,51 @@ const PatientWithoutTime = () => {
         مراجع بین نوبت
       </Button>
 
-      <Modal  isOpen={isOpen} onClose={mdCancelHandler}>
+      <Modal isOpen={isOpen} onClose={mdCancelHandler}>
         <ModalOverlay />
         <ModalContent p={6}>
-          <Box mb={5} display="flex" justifyContent="space-between" alignItems="center">
-            <Text fontWeight="bold">{step === 0 ? "مراجع بین نوبت" : "مراجع جدید"}</Text>
+          <Box
+            mb={5}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Text fontWeight="bold">
+              {step === 0 ? "مراجع بین نوبت" : "مراجع جدید"}
+            </Text>
             <MdCancel cursor="pointer" onClick={mdCancelHandler} />
           </Box>
 
           {step === 0 ? (
-            <Box height={'500px'}>
-            <Input/>
-       
-          
-         <Text as={'button'}   mt={4} onClick={() => setStep(1)} color={'blue'} fontWeight={'bold'}>+مراجع جدید </Text>
-     
-              
-         
+            <Box height={"500px"}>
+              <Input />
+
+              <Text
+                as={"button"}
+                mt={4}
+                onClick={() => setStep(1)}
+                color={"blue"}
+                fontWeight={"bold"}
+              >
+                +مراجع جدید{" "}
+              </Text>
             </Box>
           ) : (
-            <Box mb={4} display="flex" flexDirection="column" gap={4} width="100%">
-              {["name", "last_name", "national_code", "phone_number", "house_number", "address"].map((field, idx) => (
+            <Box
+              mb={4}
+              display="flex"
+              flexDirection="column"
+              gap={4}
+              width="100%"
+            >
+              {[
+                "name",
+                "last_name",
+                "national_code",
+                "phone_number",
+                "house_number",
+                "address",
+              ].map((field, idx) => (
                 <Input
                   key={idx}
                   onChange={handleChange}
@@ -139,8 +171,13 @@ const PatientWithoutTime = () => {
               ))}
 
               <Flex flexWrap="wrap" gap={4}>
-                {[{ label: "مصرف دارو", value: drugHistory, name: "drug_hist" },
-                  { label: "سابقه بیماری", value: diseaseHistory, name: "decease_hist" },
+                {[
+                  { label: "مصرف دارو", value: drugHistory, name: "drug_hist" },
+                  {
+                    label: "سابقه بیماری",
+                    value: diseaseHistory,
+                    name: "decease_hist",
+                  },
                 ].map((radio, idx) => (
                   <FormControl key={idx} as="fieldset" flexBasis="48%">
                     <FormLabel as="legend">{radio.label}</FormLabel>
