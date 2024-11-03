@@ -8,8 +8,10 @@ import {
   TableContainer,
   Button,
   Box,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { extractTime } from "@/utils/extractTime";
+import PaymentDialog from "../paymentDialog/PaymentDialog";
 
 export const ReseptionTable = ({
   isDisabled,
@@ -17,6 +19,8 @@ export const ReseptionTable = ({
   display,
   todayReserve,
 }) => {
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Box w={{ base: "100vw", md: "100%" }} px={4}>
       <TableContainer>
@@ -66,6 +70,7 @@ export const ReseptionTable = ({
                 {/* دکمه‌ها */}
                 <Td>
                   <Button
+                     onClick={onOpen}
                     size={{ base: "xs", md: "sm" }}
                     bg="transparent"
                     color="blue"
@@ -76,6 +81,7 @@ export const ReseptionTable = ({
 
                 <Td>
                   <Button
+               
                     display={display}
                     isDisabled={isDisabled}
                     size={{ base: "xs", md: "sm" }}
@@ -90,6 +96,8 @@ export const ReseptionTable = ({
           </Tbody>
         </Table>
       </TableContainer>
+
+      <PaymentDialog isOpen={isOpen} onClose={onClose}/>
     </Box>
   );
 };
