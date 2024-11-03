@@ -4,8 +4,8 @@ import AnimationSide from "./widget/AnimationSide";
 import Inputs from "./widget/Inputs";
 import { BgAnimate } from "./widget/BgAnimate";
 import { useRouter } from "next/router";
-import useLoginAdminRecptionHooks from "@/hooks/useLoginAdminRecptionHooks";
 import { useCustomToast } from "@/utils/useCustomToast ";
+import useLoginAdminRecptionHooks from "@/hooks/auth/useLoginAdminRecptionHooks";
 
 const LoginPage = () => {
   const [btnClick, setBtnClick] = useState(false);

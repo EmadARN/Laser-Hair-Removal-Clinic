@@ -6,20 +6,20 @@ import {
   SimpleGrid,
   Button,
 } from "@chakra-ui/react";
-import useAreaLazerForm from "@/hooks/useAreaLazerForm";
+import useAreaLazerForm from "@/hooks/adminDashboard/useAreaLazerForm";
 
 const AreaLazerForm = ({ areaToEdit, isEdit }) => {
   const {
     lazerArea,
     selectedItem,
-  
+
     areaChangeHandler,
     handleButtonClick,
     handleSubmit,
   } = useAreaLazerForm(isEdit, areaToEdit);
 
-  console.log("dfdfdd",lazerArea);
-  
+  console.log("dfdfdd", lazerArea);
+
   return (
     <form onSubmit={handleSubmit}>
       <FormControl>
@@ -46,7 +46,7 @@ const AreaLazerForm = ({ areaToEdit, isEdit }) => {
 
       <FormControl mt={8} display={isEdit ? "none" : "block"}>
         <FormLabel>مدت زمان</FormLabel>
-        <SimpleGrid  minChildWidth="60px" spacing="10px" pt={2}>
+        <SimpleGrid minChildWidth="60px" spacing="10px" pt={2}>
           {[5, 10, 15, 20, 25, 30, 35].map((item, index) => {
             const isSelected = selectedItem === item; // بررسی انتخاب
             return (
