@@ -6,8 +6,9 @@ import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { postCustomerInformation } from "@/features/customerDashboard/customerDashboardSlice";
 import { useCookies } from "react-cookie";
-
+import { useCustomToast } from "@/utils/useCustomToast ";
 const UserInformation = ({ page, setPage, slug }) => {
+  const { showToast } = useCustomToast();
   const [inputsData, setinputsData] = useState({
     name: "",
     last_name: "",
@@ -35,13 +36,27 @@ const UserInformation = ({ page, setPage, slug }) => {
     if (name === "drug_hist") setDrugHistory(value);
     if (name === "decease_hist") setDiseaseHistory(value);
   };
-  const submitHandler = () => {
-    dispatch(
+  const submitHandler = async() => {
+   const result = await dispatch(
       postCustomerInformation({
         ...inputsData,
         auth_token,
       })
     );
+
+    if (result.meta.requestStatus === "fulfilled") {
+      showToast({
+        title: " موفقیت‌آمیز",
+        description: " اطلاعات با موفقیت ثبت شد",
+        status: "success",
+      });
+    }else{
+      showToast({
+        title: "خطا ",
+        description: "خطا در ثبت اطلاعات ",
+        status: "error",
+      });
+    }
   };
 
   return (

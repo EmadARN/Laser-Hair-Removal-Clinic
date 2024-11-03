@@ -10,8 +10,10 @@ import {
   postAddTime,
 } from "@/features/customerDashboard/customerDashboardSlice";
 import Date from "./widget/Date";
+import { useCustomToast } from "@/utils/useCustomToast ";
 
 const Date_Time = ({ page, setPage, slug }) => {
+  const { showToast } = useCustomToast();
   const [cookies, setCookie] = useCookies([
     "reserveId",
     "auth_token",
@@ -54,8 +56,22 @@ const Date_Time = ({ page, setPage, slug }) => {
     }
   }, [reserveId, tokenAuth, dispatch]);
 
-  const submitHandler = () => {
-    dispatch(postAddTime({ tokenAuth, selectedDateId, selectedSlot }));
+  const submitHandler = async () => {
+  const result = await dispatch(postAddTime({ tokenAuth, selectedDateId, selectedSlot }));
+
+  if (result.meta.requestStatus === "fulfilled") {
+    showToast({
+      title: " موفقیت‌آمیز",
+      description: " اطلاعات با موفقیت ثبت شد",
+      status: "success",
+    });
+  }else{
+    showToast({
+      title: "خطا ",
+      description: "خطا در ثبت اطلاعات ",
+      status: "error",
+    });
+  }
   };
   return (
     <>

@@ -8,8 +8,10 @@ import { handleCodeChange, handleKeyDown } from "@/utils/confirmPsswordHandler";
 import ButtonAccept from "../ButtonAccept";
 import { useCookies } from "react-cookie";
 import { postAsyncCode } from "@/features/signin/authSlice";
-
+import { useCustomToast } from "@/utils/useCustomToast ";
 const VerificationCode = ({ setPage, page }) => {
+
+  const { showToast } = useCustomToast();
   const [inputCode, setInputCode] = useState(["", "", "", "", "", ""]);
   const [codeValue, setCodeValue] = useState("");
   const nextInput = useRef([]);
@@ -77,15 +79,26 @@ const VerificationCode = ({ setPage, page }) => {
   
     if (result.meta.requestStatus === "fulfilled") {
       const receivedToken = result.payload.token;
+      showToast({
+        title: "ورود موفقیت‌آمیز",
+        description: "به داشبورد هدایت شدید.",
+        status: "success",
+      });
       if (receivedToken) {
         setCookie("auth_token", receivedToken, {
           path: "/",
         });
         router.push("/userDashboard");
       }
+    }else{
+      showToast({
+        title: "خطا ",
+        description: "ورود ناموفق",
+        status: "error",
+      });
     }
   
-    // در اینجا می‌توانید inputCode را پاک کنید
+   
     setInputCode(["", "", "", "", "", ""]);
   };
   
