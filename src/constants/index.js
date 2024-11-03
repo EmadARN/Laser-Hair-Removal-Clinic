@@ -419,31 +419,31 @@ export const UserData = [
 ];
 export const dataForMap = (confrimInfoDetailCustomer, customerInformation) => {
   return [
-    { id: 1, title: "نام", value: confrimInfoDetailCustomer.name || ""},
+    { id: 1, title: "نام", value: confrimInfoDetailCustomer.name || "" },
     {
       id: 2,
       title: "نام خانوادگی",
-      value: confrimInfoDetailCustomer.last_name || ""
+      value: confrimInfoDetailCustomer.last_name || "",
     },
     {
       id: 3,
       title: "شماره تلفن",
-      value: confrimInfoDetailCustomer.phone_number || ""
+      value: confrimInfoDetailCustomer.phone_number || "",
     },
     {
       id: 4,
       title: "کد ملی",
-      value: customerInformation.national_code || ""
+      value: customerInformation.national_code || "",
     },
     {
       id: 5,
       title: "آدرس",
-      value: customerInformation.address || ""
+      value: customerInformation.address || "",
     },
     {
       id: 6,
       title: " تلفن ثابت",
-      value: customerInformation.house_number|| ""
+      value: customerInformation.house_number || "",
     },
     {
       id: 7,
@@ -457,10 +457,10 @@ export const dataForMap = (confrimInfoDetailCustomer, customerInformation) => {
     },
   ];
 };
-export const TurnData = (date,slots,operatorName)=>{
+export const TurnData = (date, slots, operatorName) => {
   return [
     { id: 1, title: "روز و تاریخ", value: date || "" },
     { id: 2, title: "بازه زمانی", value: slots || "" },
     { id: 3, title: "اپراتور", value: operatorName || "" },
   ];
-} 
+};

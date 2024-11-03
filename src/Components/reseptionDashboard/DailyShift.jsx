@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderDetails from "./widget/headerDetails/HeaderDetails";
 import SearchInput from "@/Common/searchInput/SearchInput";
 import { ReseptionTable } from "./widget/ReseptionTable/ReseptionTable";
@@ -17,16 +17,16 @@ const DailyShift = () => {
     (store) => store.receptionDashboardSlice
   );
 
-  const todayDateReserve = () => {
+  useEffect(() => {
     dispatch(todayDate({ auth_Employee_token }));
-  };
+  }, [dispatch]);
   console.log("todayReserve:", todayReserve);
 
   return (
     <>
       {/* HeaderDetails بخش  */}
       <Box pt={6} pr={{ base: 4, md: 0 }}>
-        <HeaderDetails todayDateReserve={todayDateReserve} />
+        <HeaderDetails />
       </Box>
 
       {/* SearchInput بخش */}

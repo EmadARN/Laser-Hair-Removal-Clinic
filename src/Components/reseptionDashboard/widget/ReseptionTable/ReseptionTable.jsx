@@ -9,6 +9,7 @@ import {
   Button,
   Box,
 } from "@chakra-ui/react";
+import { extractTime } from "@/utils/extractTime";
 
 export const ReseptionTable = ({
   isDisabled,
@@ -51,7 +52,7 @@ export const ReseptionTable = ({
                   display={{ base: "none", sm: "table-cell" }}
                   fontSize={{ base: "12px", md: "16px" }}
                 >
-                  {item.rezervationTime}
+                  {extractTime(item.reserve_time_str)}
                 </Td>
 
                 {/* ستون ناحیه لیزر */}
