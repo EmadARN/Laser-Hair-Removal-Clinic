@@ -1,4 +1,4 @@
-import { postAsyncLogin } from "@/features/adminDashboard/adminDashboardSlice";
+import { postAsyncLogin } from "@/features/signin/authSlice";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 

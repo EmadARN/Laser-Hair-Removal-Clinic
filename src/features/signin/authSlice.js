@@ -48,6 +48,20 @@ export const postAsyncCode = createAsyncThunk(
     }
   }
 );
+
+// ADMIN & RECEPTION SIGNIN
+export const postAsyncLogin = createAsyncThunk(
+  "user/postAsyncLogin",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/Core/login/", payload);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "signin",
   initialState: {
@@ -90,7 +104,19 @@ const authSlice = createSlice({
         handleAsyncState(state, action, "rejected");
         state.code = "";
         state.phone_number = "";
-      });
+      })
+
+      // ADMIN & RECEPTION SIGNIN
+      .addCase(postAsyncLogin.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(postAsyncLogin.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.userType = action.payload.user_type;
+      })
+      .addCase(postAsyncLogin.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      );
   },
 });
 export default authSlice.reducer;

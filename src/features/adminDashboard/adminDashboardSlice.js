@@ -12,17 +12,17 @@ const handleAsyncState = (state, action, status) => {
 };
 
 // Async Thunks
-export const postAsyncLogin = createAsyncThunk(
-  "user/postAsyncLogin",
-  async (payload, { rejectWithValue }) => {
-    try {
-      const { data } = await api.post("/Core/login/", payload);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+// export const postAsyncLogin = createAsyncThunk(
+//   "user/postAsyncLogin",
+//   async (payload, { rejectWithValue }) => {
+//     try {
+//       const { data } = await api.post("/Core/login/", payload);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 export const getAsyncUsersList = createAsyncThunk(
   "admin/getAsyncUsersList",
@@ -273,21 +273,19 @@ export const getAsyncUserName = createAsyncThunk(
 export const changePassword = createAsyncThunk(
   "user/changePassword",
   async (payload, { rejectWithValue }) => {
-   
-
     try {
-      const { data } = await api.post("/Core/token/change/password/", payload.passwordChange
-        , {
-        headers: {
-          Authorization: `Bearer ${payload.token}`,
-        },
-      });
- 
+      const { data } = await api.post(
+        "/Core/token/change/password/",
+        payload.passwordChange,
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`,
+          },
+        }
+      );
 
       return data;
     } catch (error) {
-
-
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -315,18 +313,18 @@ const adminDashboardSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // User login
-      .addCase(postAsyncLogin.pending, (state) =>
-        handleAsyncState(state, {}, "pending")
-      )
-      .addCase(postAsyncLogin.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled");
-        state.token = action.payload.token;
-        state.userType = action.payload.user_type;
-        localStorage.setItem("token", action.payload.token);
-      })
-      .addCase(postAsyncLogin.rejected, (state, action) =>
-        handleAsyncState(state, action, "rejected")
-      )
+      // .addCase(postAsyncLogin.pending, (state) =>
+      //   handleAsyncState(state, {}, "pending")
+      // )
+      // .addCase(postAsyncLogin.fulfilled, (state, action) => {
+      //   handleAsyncState(state, action, "fulfilled");
+      //   state.token = action.payload.token;
+      //   state.userType = action.payload.user_type;
+      //   localStorage.setItem("token", action.payload.token);
+      // })
+      // .addCase(postAsyncLogin.rejected, (state, action) =>
+      //   handleAsyncState(state, action, "rejected")
+      // )
 
       // Fetch Users list
       .addCase(getAsyncUsersList.pending, (state) => {

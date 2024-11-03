@@ -12,22 +12,6 @@ const handleAsyncState = (state, action, status) => {
 };
 
 // Async Thunks
-export const getAsyncUsersList = createAsyncThunk(
-  "admin/getAsyncUsersList",
-  async (_, { getState, rejectWithValue }) => {
-    const { token } = getState().adminDashboard;
-    try {
-      const { data } = await api.get("/Core/user/list/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || error.message);
-    }
-  }
-);
 
 export const addCustomerWithOutTime = createAsyncThunk(
   "receptionDashboard/addCustomerWithOutTime",
@@ -87,19 +71,6 @@ const receptionDashboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-
-      // Fetch Area list
-      .addCase(getAsyncUsersList.pending, (state) => {
-        state.loading = true;
-        state.error = "";
-      })
-      .addCase(getAsyncUsersList.rejected, (state, action) =>
-        handleAsyncState(state, action, "rejected")
-      )
-      .addCase(getAsyncUsersList.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled");
-        state.users = action.payload;
-      })
 
       // todayDate
       .addCase(todayDate.pending, (state) => {
