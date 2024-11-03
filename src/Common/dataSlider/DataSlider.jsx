@@ -19,7 +19,7 @@ const persianMonths = [
   "اسفند",
 ];
 
-const DataSlider = () => {
+const DataSlider = ({ btnDisplay }) => {
   const dispatch = useDispatch();
   const { dateRanges } = useSelector((state) => state.adminDashboard);
   const [currentRange, setCurrentRange] = React.useState(0); // نگه‌داشتن بازه فعلی
@@ -69,7 +69,7 @@ const DataSlider = () => {
     >
       <Button
         onClick={() => dateHandler("prev")}
-        isDisabled={currentRange === 0}
+        isDisabled={currentRange === 0 || btnDisplay}
       >
         <IoIosArrowForward />
       </Button>
@@ -90,7 +90,7 @@ const DataSlider = () => {
 
       <Button
         onClick={() => dateHandler("next")}
-        isDisabled={currentRange === dateRanges.length - 1}
+        isDisabled={currentRange === dateRanges.length - 1 || btnDisplay}
       >
         <IoIosArrowBack />
       </Button>

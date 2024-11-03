@@ -11,16 +11,17 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import NavLink from "./NavLink";
 
 export default function NavBar({ bgColor }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const [cookies] = useCookies(["auth_token"]);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const noRedirectRoutes =  ["/", "/contactUs", "/aboutUs"];;
+    const noRedirectRoutes = ["/", "/contactUs", "/aboutUs"];
     if (cookies.auth_token && !noRedirectRoutes.includes(router.pathname)) {
       if (router.pathname !== "/userDashboard") {
         router.push("/userDashboard");
@@ -35,7 +36,15 @@ export default function NavBar({ bgColor }) {
       onOpen();
     }
   };
-  
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const Logo = (props) => (
     <svg
@@ -55,8 +64,17 @@ export default function NavBar({ bgColor }) {
   );
 
   return (
-    <Box w="100%" position="fixed" bg={bgColor} px={4} zIndex={5}>
-      <Flex h={16} alignItems="center">
+    <Box
+      w="100%"
+      position="fixed"
+      bg={bgColor}
+      px={4}
+      zIndex={5}
+      transition="all 0.3s"
+      h={isScrolled ? "12" : "16"}
+      borderBottom={isScrolled ? "1px solid #1113" : "none"}
+    >
+      <Flex h="100%" alignItems="center">
         <Flex w={"30%"} flexGrow={1}>
           <Box display={{ base: "block", md: "none" }}>
             <RightBar />
@@ -65,6 +83,7 @@ export default function NavBar({ bgColor }) {
             display={{ base: "none", md: "flex" }}
             gap={8}
             fontFamily={"IRANYekan-Medium"}
+            color="gray.600"
           >
             <NavLink path="/">ساید لیزر</NavLink>
             <NavLink path="/contactUs">ارتباط با ما</NavLink>

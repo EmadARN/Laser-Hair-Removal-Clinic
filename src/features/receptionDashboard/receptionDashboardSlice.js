@@ -1,7 +1,6 @@
 import api from "@/services/apiService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-
 // Helper function to handle state updates
 const handleAsyncState = (state, action, status) => {
   state.loading = status === "pending";
@@ -13,34 +12,45 @@ const handleAsyncState = (state, action, status) => {
 };
 
 // Async Thunks
-export const getAsyncUsersList = createAsyncThunk(
-  "admin/getAsyncUsersList",
-  async (_, { getState, rejectWithValue }) => {
-    const { token } = getState().adminDashboard;
-    try {
-      const { data } = await api.get("/Core/user/list/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || error.message);
-    }
-  }
-);
 
 export const addCustomerWithOutTime = createAsyncThunk(
   "receptionDashboard/addCustomerWithOutTime",
   async (payload, { rejectWithValue }) => {
-    console.log("payload success",payload);
+    console.log("payload success", payload);
     try {
-      const { data } = await api.post("/Core/add/customer/information/",payload, {
-        headers: {
-          Authorization: `Bearer ${payload.token}`,
+      const { data } = await api.post(
+        "/Core/add/customer/information/",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
+export const todayDate = createAsyncThunk(
+  "receptionDashboard/todayDate",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload success", payload);
+    try {
+      const { data } = await api.post(
+        "/Reserve/reserve/list/",
+        {
+          from_: "",
+          to: "",
         },
-      });
-      console.log("daata", data);
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
+          },
+        }
+      );
+      return data;
     } catch (error) {
       console.log("error", error);
     }
@@ -51,8 +61,7 @@ export const addCustomerWithOutTime = createAsyncThunk(
 const initialState = {
   loading: false,
   error: "",
-  areas: [],
-  token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+  todayReserve: null,
 };
 
 const receptionDashboardSlice = createSlice({
@@ -62,17 +71,29 @@ const receptionDashboardSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      // Fetch Area list
-      .addCase(getAsyncUsersList.pending, (state) => {
+      // addCustomerWithOutTime
+      .addCase(addCustomerWithOutTime.pending, (state) => {
         state.loading = true;
         state.error = "";
       })
-      .addCase(getAsyncUsersList.rejected, (state, action) =>
+      .addCase(addCustomerWithOutTime.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
-      .addCase(getAsyncUsersList.fulfilled, (state, action) => {
+      .addCase(addCustomerWithOutTime.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        state.users = action.payload;
+      })
+
+      // todayDate
+      .addCase(todayDate.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(todayDate.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(todayDate.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.todayReserve = action.payload;
       });
   },
 });

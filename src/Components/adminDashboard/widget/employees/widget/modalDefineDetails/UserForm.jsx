@@ -16,9 +16,9 @@ import {
 } from "@chakra-ui/react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
-import useUserForm from "@/hooks/useUserForm";
 import TextInput from "./Inputs";
 import { userInputs } from "@/constants";
+import useUserForm from "@/hooks/adminDashboard/useUserForm";
 
 const UserForm = ({ userToEdit, isEdit, token }) => {
   const { loading } = useSelector((state) => state.adminDashboard);

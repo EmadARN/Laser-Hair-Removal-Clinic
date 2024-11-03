@@ -5,53 +5,62 @@ import SearchInput from "@/Common/searchInput/SearchInput";
 import DataSlider from "@/Common/dataSlider/DataSlider";
 import PatientWithoutTime from "../AddPatientWithoutTime/PatientWithoutTime";
 
-const HeaderDetails = () => {
+const HeaderDetails = ({ todayDateReserve }) => {
   return (
     <Grid
-      templateColumns={{ base: "repeat(4, 1fr)", md: "repeat(5, 1fr)" }}
+      templateColumns={{ base: "1fr", md: "repeat(5, 1fr)" }}
       gap={4}
       sx={{ alignItems: "center", px: 4, pb: 4 }}
     >
-      <GridItem colSpan={4}>
+      <GridItem colSpan={{ base: 1, md: 4 }}>
         <Flex
           sx={{
-            justifyContent: { base: "start", md: "space-between" },
+            justifyContent: { base: "center", md: "space-between" },
             alignItems: "center",
+            flexDirection: { base: "column", md: "row" },
+            gap: { base: 2, md: 0 },
           }}
         >
           <Flex
             sx={{
               flexDirection: { base: "column", sm: "row" },
               alignItems: "center",
-              gap: { base: 0, sm: 8 },
+              gap: { base: 2, sm: 4, md: 8 },
             }}
           >
             <Text
               sx={{
-                fontSize: { base: "14px", md: "22px" },
+                fontSize: { base: "16px", sm: "18px", md: "22px" },
                 fontWeight: "bold",
               }}
             >
               نوبت های روز
             </Text>
-            <DataSlider />
-            <Text sx={{ color: "blue" }}>امروز</Text>
+            <DataSlider btnDisplay={true} />
+            <Button
+              sx={{ color: "blue", mt: { base: 2, sm: 0 } }}
+              onClick={todayDateReserve}
+            >
+              امروز
+            </Button>
           </Flex>
         </Flex>
       </GridItem>
+
       <GridItem
+        colSpan={{ base: 1, md: 1 }}
         sx={{
           display: "flex",
-          gap: 6,
+          justifyContent: { base: "center", md: "flex-end" },
+          gap: 4,
+          alignItems: "center",
+          flexDirection: { base: "column", sm: "row" },
         }}
       >
         <Box sx={{ display: { base: "flex", md: "none" }, width: "100%" }}>
           <SearchInput size={"md"} placeholder="جستجو در نوبت های روز" />
         </Box>
-
-
-        <PatientWithoutTime/>
-       
+        <PatientWithoutTime />
       </GridItem>
     </Grid>
   );

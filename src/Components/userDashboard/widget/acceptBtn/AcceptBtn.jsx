@@ -5,12 +5,11 @@ import { useRouter } from "next/router";
 export const AcceptBtn = ({ text, bgColor, slug, submitHandler, letPush }) => {
   const router = useRouter();
   const handleNextStep = (step) => {
-    // if (letPush.length === 0) {
-    //   alert("لطفا نواحی را انتخاب کنید.");
-    //   return;
-    // }
-    submitHandler();
-    router.push(`${slug}`);
+    if (submitHandler) {
+      submitHandler();
+    } else {
+      router.push(`${slug}`);
+    }
   };
   return (
     <Box sx={MainBox} bgColor={bgColor}>
