@@ -6,7 +6,7 @@ const InformationBox = ({ title, value }) => {
   return (
     <Box
       borderRadius={"6px"}
-      border={"1px solid #777"}
+      border={"1px solid #ddd"}
       width={"100%"}
       h={"auto"}
       p={"10px"}

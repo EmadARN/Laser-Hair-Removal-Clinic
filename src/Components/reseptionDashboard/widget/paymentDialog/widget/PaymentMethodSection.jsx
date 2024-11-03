@@ -4,7 +4,7 @@ import { CiShare1 } from "react-icons/ci";
 import { Checkbox, CheckboxGroup,Stack } from '@chakra-ui/react'
 const PaymentMethodSection = () => {
   return (
-    <Box p={3} width={"100%"} h={"auto"} border={"1px solid #777"}>
+    <Box p={3} width={"100%"} h={"auto"} border={"1px solid #ddd"}>
       <Box
         display={"flex"}
         width={"100%"}
