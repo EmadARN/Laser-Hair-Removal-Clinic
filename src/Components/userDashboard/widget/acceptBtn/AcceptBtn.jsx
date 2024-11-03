@@ -7,6 +7,7 @@ export const AcceptBtn = ({ text, bgColor, slug, submitHandler, letPush }) => {
   const handleNextStep = (step) => {
     if (submitHandler) {
       submitHandler();
+      router.push(`${slug}`);
     } else {
       router.push(`${slug}`);
     }
