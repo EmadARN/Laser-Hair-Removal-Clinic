@@ -4,6 +4,7 @@ import { FaPlus } from "react-icons/fa";
 import SearchInput from "@/Common/searchInput/SearchInput";
 import DataSlider from "@/Common/dataSlider/DataSlider";
 import PatientWithoutTime from "../AddPatientWithoutTime/PatientWithoutTime";
+import { getTodayDate } from "@/utils/getTodayDate";
 
 const HeaderDetails = ({ todayDateReserve }) => {
   return (
@@ -36,13 +37,14 @@ const HeaderDetails = ({ todayDateReserve }) => {
             >
               نوبت های روز
             </Text>
-            <DataSlider btnDisplay={true} />
+            {/* <DataSlider btnDisplay={true} />
             <Button
               sx={{ color: "blue", mt: { base: 2, sm: 0 } }}
               onClick={todayDateReserve}
             >
               امروز
-            </Button>
+            </Button> */}
+            <Box>{getTodayDate()}</Box>
           </Flex>
         </Flex>
       </GridItem>
