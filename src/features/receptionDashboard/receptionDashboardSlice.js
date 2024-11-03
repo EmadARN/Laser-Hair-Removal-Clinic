@@ -27,6 +27,7 @@ export const addCustomerWithOutTime = createAsyncThunk(
           },
         }
       );
+      return data;
     } catch (error) {
       console.log("error", error);
     }
@@ -60,8 +61,6 @@ export const todayDate = createAsyncThunk(
 const initialState = {
   loading: false,
   error: "",
-  areas: [],
-  token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   todayReserve: null,
 };
 
@@ -71,6 +70,18 @@ const receptionDashboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+
+      // addCustomerWithOutTime
+      .addCase(addCustomerWithOutTime.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(addCustomerWithOutTime.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(addCustomerWithOutTime.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
 
       // todayDate
       .addCase(todayDate.pending, (state) => {
