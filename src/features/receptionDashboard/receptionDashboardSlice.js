@@ -19,11 +19,11 @@ export const addCustomerWithOutTime = createAsyncThunk(
     console.log("payload success", payload);
     try {
       const { data } = await api.post(
-        "/Core/add/customer/information/",
+        "/Core/signup/customer/",
         payload,
         {
           headers: {
-            Authorization: `Bearer ${payload.token}`,
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
           },
         }
       );
