@@ -19,13 +19,18 @@ import { MdCancel } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addCustomerWithOutTime } from "@/features/receptionDashboard/receptionDashboardSlice";
+import { useCookies } from "react-cookie";
 
 const PatientWithoutTime = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
-  const { token } = useSelector((store) => store.adminDashboard);
+  const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
+    "auth_Employee_token",
+  ]);
 
   const [inputsData, setInputsData] = useState({
+    username: "",
+    password: "",
     name: "",
     last_name: "",
     phone_number: "",
@@ -36,6 +41,7 @@ const PatientWithoutTime = () => {
     decease_hist: false,
     doctor: "-",
     offline_number: 0,
+    last_date: "",
   });
 
   const [drugHistory, setDrugHistory] = useState("false");
@@ -54,7 +60,7 @@ const PatientWithoutTime = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(addCustomerWithOutTime({ ...inputsData, token }));
+    dispatch(addCustomerWithOutTime({ ...inputsData, auth_Employee_token }));
     onClose();
   };
 

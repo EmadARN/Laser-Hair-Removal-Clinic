@@ -40,6 +40,7 @@ export const getAsyncUsersList = createAsyncThunk(
     }
   }
 );
+
 export const addAsyncUsers = createAsyncThunk(
   "user/addAsyncUsers",
   async (payload, { rejectWithValue }) => {
@@ -55,6 +56,7 @@ export const addAsyncUsers = createAsyncThunk(
     }
   }
 );
+
 export const editAsyncUser = createAsyncThunk(
   "user/editAsyncUser",
   async (payload, { rejectWithValue }) => {
@@ -99,6 +101,7 @@ export const deleteAsyncUser = createAsyncThunk(
     }
   }
 );
+
 export const getLazerAreas = createAsyncThunk(
   "user/getLazerArea",
   async (payload, { rejectWithValue }) => {
@@ -115,6 +118,7 @@ export const getLazerAreas = createAsyncThunk(
     }
   }
 );
+
 export const addLazerArea = createAsyncThunk(
   "user/addLazerArea",
   async (payload, { rejectWithValue }) => {
@@ -131,6 +135,7 @@ export const addLazerArea = createAsyncThunk(
     }
   }
 );
+
 export const editLazerArea = createAsyncThunk(
   "user/editLazerArea",
   async (payload, { rejectWithValue }) => {
@@ -184,6 +189,7 @@ export const getSettingInformation = createAsyncThunk(
     }
   }
 );
+
 export const getAsyncOperatorList = createAsyncThunk(
   "admin/getAsyncOperatorList",
   async (_, { getState, rejectWithValue }) => {
@@ -201,6 +207,7 @@ export const getAsyncOperatorList = createAsyncThunk(
     }
   }
 );
+
 export const fetchWeekData = createAsyncThunk(
   "week/fetchWeekData",
   async (week, { rejectWithValue }) => {
@@ -213,6 +220,7 @@ export const fetchWeekData = createAsyncThunk(
     }
   }
 );
+
 export const getAsyncListDateOperator = createAsyncThunk(
   "admin/getAsyncListDateOperator",
   async (payload, { rejectWithValue }) => {
@@ -235,6 +243,7 @@ export const getAsyncListDateOperator = createAsyncThunk(
     }
   }
 );
+
 export const operatorProgramList = createAsyncThunk(
   "user/operatorProgramList",
   async (payload, { rejectWithValue }) => {
@@ -255,6 +264,7 @@ export const operatorProgramList = createAsyncThunk(
     }
   }
 );
+
 export const getAsyncUserName = createAsyncThunk(
   "admin/getAsyncUserName",
   async (payload, { rejectWithValue }) => {
@@ -270,6 +280,7 @@ export const getAsyncUserName = createAsyncThunk(
     }
   }
 );
+
 export const changePassword = createAsyncThunk(
   "user/changePassword",
   async (payload, { rejectWithValue }) => {
@@ -290,6 +301,7 @@ export const changePassword = createAsyncThunk(
     }
   }
 );
+
 // Initial State
 const initialState = {
   loading: false,
