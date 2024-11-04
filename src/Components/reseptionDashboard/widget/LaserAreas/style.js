@@ -16,12 +16,12 @@ export const firstBox = {
 };
 
 export const secBox = {
-  borderBottom: "2px solid #ddd",
-  mb: 4,
+  
+
   width: "100%",
   display: "flex",
   justifyContent: "flex-start",
-  p: 3,
+  px: 3,
 };
 
 export const thirdBox = {
