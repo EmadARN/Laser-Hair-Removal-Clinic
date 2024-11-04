@@ -12,19 +12,35 @@ import {
 } from "@chakra-ui/react";
 import { extractTime } from "@/utils/extractTime";
 import PaymentDialog from "../paymentDialog/PaymentDialog";
+import { useDispatch } from "react-redux";
+import { cancelReserve } from "@/features/receptionDashboard/receptionDashboardSlice";
 
 export const ReseptionTable = ({
   isDisabled,
   ButtonValue,
   display,
   todayReserve,
+  auth_Employee_token,
 }) => {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedReserve, setSelectedReserve] = useState(null);
 
   const handlePaymentClick = (item) => {
     setSelectedReserve(item);
     onOpen();
+  };
+
+  const cancelHandler = (item) => {
+    setSelectedReserve(item);
+    dispatch(
+      cancelReserve({
+        reserve: item.id,
+        cancel_type: "sc",
+        sms_status: true,
+        auth_Employee_token,
+      })
+    );
   };
 
   return (
@@ -80,7 +96,7 @@ export const ReseptionTable = ({
                     size={{ base: "xs", md: "sm" }}
                     bg="transparent"
                     color="blue"
-                    px={2} // بهبود فضای داخلی دکمه
+                    px={2}
                   >
                     {ButtonValue}
                   </Button>
@@ -88,12 +104,13 @@ export const ReseptionTable = ({
 
                 <Td textAlign="center">
                   <Button
+                    onClick={() => cancelHandler(item)}
                     display={display}
                     isDisabled={isDisabled}
                     size={{ base: "xs", md: "sm" }}
                     bg="transparent"
                     color="red"
-                    px={2} // بهبود فضای داخلی دکمه
+                    px={2}
                   >
                     لغو نوبت
                   </Button>

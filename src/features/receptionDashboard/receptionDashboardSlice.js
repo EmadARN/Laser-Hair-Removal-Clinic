@@ -12,7 +12,6 @@ const handleAsyncState = (state, action, status) => {
 };
 
 // Async Thunks
-
 export const addCustomerWithOutTime = createAsyncThunk(
   "receptionDashboard/addCustomerWithOutTime",
   async (payload, { rejectWithValue }) => {
@@ -29,6 +28,7 @@ export const addCustomerWithOutTime = createAsyncThunk(
     }
   }
 );
+
 export const getCutomerList = createAsyncThunk(
   "receptionDashboard/getCutomerList",
   async (payload, { rejectWithValue }) => {
@@ -44,6 +44,7 @@ export const getCutomerList = createAsyncThunk(
     }
   }
 );
+
 export const todayDate = createAsyncThunk(
   "receptionDashboard/todayDate",
   async (payload, { rejectWithValue }) => {
@@ -68,12 +69,76 @@ export const todayDate = createAsyncThunk(
   }
 );
 
+export const cancelReserve = createAsyncThunk(
+  "receptionDashboard/cancelReserve",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload success", payload);
+    try {
+      const { data } = await api.post(
+        "/Reserve/cancel/reserve/",
+        {
+          reserve: payload.reserve,
+          cancel_type: payload.cancel_type,
+          sms_status: payload.sms_status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
+
+export const getOperatorSchedule = createAsyncThunk(
+  "receptionDashboard/getOperatorSchedule",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Reception/operator/", {
+        headers: {
+          Authorization: `Bearer ${payload.auth_Employee_token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
+
+export const enterExitedOprators = createAsyncThunk(
+  "receptionDashboard/enterExitedOprators",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload success", payload);
+    try {
+      const { data } = await api.post(
+        "/Core/enter/exit/operator/",
+        {
+          username: payload.username,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
   error: "",
   todayReserve: null,
   cutomerList: [],
+  operatorSchedule: {},
 };
 
 const receptionDashboardSlice = createSlice({
@@ -119,6 +184,43 @@ const receptionDashboardSlice = createSlice({
       .addCase(todayDate.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.todayReserve = action.payload;
+      })
+
+      // cancelReserve
+      .addCase(cancelReserve.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(cancelReserve.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(cancelReserve.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+
+      // fetch getOperatorSchedule
+      .addCase(getOperatorSchedule.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getOperatorSchedule.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getOperatorSchedule.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.operatorSchedule = action.payload;
+      })
+
+      // enterExitedOprators
+      .addCase(enterExitedOprators.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(enterExitedOprators.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(enterExitedOprators.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
       });
   },
 });
