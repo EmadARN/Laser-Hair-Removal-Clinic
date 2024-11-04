@@ -1,66 +1,72 @@
-import React, { useState } from "react";
-import { Box, Text, Button } from "@chakra-ui/react";
-
-import { Select } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Text,
+  Button,
+  Select,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
 import { thirdBox, fourthBox, fifthBox, sisxthBox } from "./style";
+import { useDispatch, useSelector } from "react-redux";
+import { useCookies } from "react-cookie";
+import { getLazerAreas } from "@/features/receptionDashboard/receptionDashboardSlice";
 
 const LaserAreas = ({ setStep, onClose }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [{ auth_Employee_token }] = useCookies(["auth_Employee_token"]);
+  const dispatch = useDispatch();
+  const { LazerAreas } = useSelector((store) => store.receptionDashboardSlice);
 
-  const removeHandle = (b) => {
-    const b_str = b.toString();
+  // Handle fetching laser areas
+  useEffect(() => {
+    dispatch(getLazerAreas({ auth_Employee_token }));
+  }, [dispatch, auth_Employee_token]);
 
-    const FilterItem = selectedOptions.filter((item) => {
-      if (item.id != b_str) {
-        return item;
-      }
-    });
+  // Responsive value for button width
+  const buttonWidth = useBreakpointValue({ base: "100%", md: "30%" });
 
-    setSelectedOptions(FilterItem);
+  const removeHandle = (id) => {
+    setSelectedOptions(selectedOptions.filter((item) => item.id !== id));
   };
-  const options = [
-    { id: 1, value: "فول بادی" },
-    { id: 2, value: "بیکینی " },
-    { id: 3, value: "ناف " },
-  ];
+
+  const handleSelectChange = (e) => {
+    const selectedValue = e.target.value;
+    const selectedId = e.target.selectedOptions[0].getAttribute("data-id");
+
+    if (selectedOptions.some((option) => option.id === selectedId)) return;
+
+    setSelectedOptions([
+      { id: selectedId, value: selectedValue },
+      ...selectedOptions,
+    ]);
+  };
 
   return (
     <>
       <Select
-        value={selectedOptions}
-        onChange={(e) => {
-          const value = e.target.value;
-          const selectedId = Array.from(
-            e.target.selectedOptions,
-            (option) => option.id
-          );
-
-          const data = {
-            id: selectedId[0],
-            value: value,
-          };
-
-          setSelectedOptions([data, ...selectedOptions]);
-        }}
+        placeholder="یک ناحیه را انتخاب کنید"
+        onChange={handleSelectChange}
         p={3}
+        mb={4} // Add spacing below the select box
       >
-        {options.map((item) => (
-          <option key={item.id} id={item.id} value={item.value}>
-            {item.value}
+        {LazerAreas?.all_laser_area_object?.first_type?.map((item) => (
+          <option key={item.value} data-id={item.value} value={item.label}>
+            {item.label}
           </option>
         ))}
       </Select>
 
       <Box sx={thirdBox}>
-        <Text color={"#555"}>نواحی انتخاب شده</Text>
-
-        <Box mt={3} display={"flex"} justifyContent={"flex-start"}>
+        <Text color={"#555"} fontSize="lg" fontWeight="bold">
+          نواحی انتخاب شده
+        </Text>
+        <Box mt={3} display="flex" flexWrap="wrap" gap={2}>
           {selectedOptions.map((option) => (
             <Box sx={fourthBox} key={option.id}>
-              <Box display={"flex"} alignItems={"center"} gap={2}>
+              <Box display="flex" alignItems="center" gap={2}>
                 <MdCancel
-                  cursor={"pointer"}
+                  cursor="pointer"
                   onClick={() => removeHandle(option.id)}
                 />
                 {option.value}
@@ -69,19 +75,26 @@ const LaserAreas = ({ setStep, onClose }) => {
           ))}
         </Box>
       </Box>
+
       <Box sx={fifthBox}>
-        <Box sx={sisxthBox}>
-          <Button bgColor={"#3854c4"} color={"#fff"} width={"30%"}>
-            تایید نواحی{" "}
+        <Box
+          sx={sisxthBox}
+          display="flex"
+          justifyContent="space-between"
+          gap={3}
+          mt={4}
+        >
+          <Button bgColor="#3854c4" color="#fff" width={buttonWidth}>
+            تایید نواحی
           </Button>
           <Button
             onClick={() => {
-              return onClose(), setStep(0);
+              onClose();
+              setStep(0);
             }}
-            width={"30%"}
+            width={buttonWidth}
           >
-            {" "}
-            لغو تغییرات{" "}
+            لغو تغییرات
           </Button>
         </Box>
       </Box>

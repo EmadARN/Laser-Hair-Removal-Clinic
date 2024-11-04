@@ -11,77 +11,58 @@ import {
 import { MdCancel } from "react-icons/md";
 import InformationBox from "./widget/InformationBox";
 import PaymentMethodSection from "./widget/PaymentMethodSection";
-import ConfitmTransaction from "./widget/ConfitmTransaction";
 import { extractTime } from "@/utils/extractTime";
 import { secBox } from "../LaserAreas/style";
-import LazerAreas from "../LaserAreas/LaserAreas";
+import LaserAreas from "../LaserAreas/LaserAreas";
 import { FaArrowRight } from "react-icons/fa";
 import CustomPayment from "../customPayment/CustomPayment";
+import ConfitmTransaction from "./widget/ConfitmTransaction";
 
 const PaymentDialog = ({ isOpen, onClose, reserve }) => {
-  const [discountCode, setDiscountCode] = useState(""); // مدیریت حالت کد تخفیف
+  const [discountCode, setDiscountCode] = useState("");
   const [step, setStep] = useState(0);
 
-  const mdCancelHandler = () => {
+  const handleCancel = () => {
     setStep(0);
-
     onClose();
   };
 
-  return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
-      <ModalOverlay />
-      <ModalContent
-        p={{ base: 3, md: 5 }}
-        maxW={{ base: "90%", md: "500px" }}
-        maxH="100vh" // حداکثر ارتفاع برای مودال
-        overflowY="auto"
-      >
-        {/* Header Section */}
-        <Flex
-          mb={4}
-          p={2}
-          justifyContent="space-between"
-          alignItems="center"
-          width="100%"
-        >
-          <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }}>
-            {step === 0 ? (
-              "پرداخت"
-            ) : step ===1 ? (
-              <Box sx={secBox}>
-                <FaArrowRight
-                  onClick={() => setStep(step - 1)}
-                  cursor={"pointer"}
-                  fontSize={"17px"}
-                />
-                <Text mr={3} fontSize={"17px"} fontWeight={"bold"}>
-                  {" "}
-                  انتخاب نواحی
-                </Text>
-              </Box>
-            ):  <Box sx={secBox}>
+  const renderInformationBox = (title, value, stepControl = null) => {
+    return (
+      <InformationBox
+        title={title}
+        value={value}
+        setStep={stepControl ? setStep : undefined}
+        step={stepControl ? step : undefined}
+      />
+    );
+  };
+
+  const renderHeader = () => {
+    const titles = ["پرداخت", "انتخاب نواحی", "پرداخت به چند روش"];
+
+    return (
+      <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }}>
+        <Box sx={secBox}>
+          {step > 0 && (
             <FaArrowRight
-              onClick={() => setStep(step - 1)}
+              onClick={() => setStep(0)}
               cursor={"pointer"}
               fontSize={"17px"}
             />
-            <Text mr={3} fontSize={"17px"} fontWeight={"bold"}>
-              {" "}
-       پرداخت به چند روش
-            </Text>
-          </Box>}
+          )}
+          <Text mr={3} fontSize={"17px"} fontWeight={"bold"}>
+            {titles[step]}
           </Text>
-          <MdCancel
-            cursor="pointer"
-            onClick={mdCancelHandler}
-            fontSize={{ base: "20px", md: "24px" }}
-          />
-        </Flex>
+        </Box>
+      </Text>
+    );
+  };
 
-        {/* Information Section */}
-
-        {step === 0 ? (
+  const renderContent = () => {
+    switch (step) {
+      case 0:
+        return (
           <>
             <Box
               width="100%"
@@ -90,32 +71,24 @@ const PaymentDialog = ({ isOpen, onClose, reserve }) => {
               flexDirection="column"
               gap={3}
             >
-              <InformationBox
-                title="نام و نام خانوادگی"
-                value={reserve.user || ""}
-              />
-              <InformationBox
-                title="زمان نوبت"
-                value={extractTime(reserve.reserve_time_str) || ""}
-              />
-              <InformationBox
-                setStep={setStep}
-                step={step}
-                title="ناحیه لیزر"
-                value={reserve.laser_area_name || ""}
-              />
+              {renderInformationBox("نام و نام خانوادگی", reserve.user || "")}
+              {renderInformationBox(
+                "زمان نوبت",
+                extractTime(reserve.reserve_time_str) || ""
+              )}
+              {renderInformationBox(
+                "ناحیه لیزر",
+                reserve.laser_area_name || "",
+                true
+              )}
             </Box>
-
-            {/* Payment Method Section */}
             <Box mt={3} width="100%" p={2}>
-              <PaymentMethodSection  setStep={setStep} step={step}/>
+              <PaymentMethodSection setStep={setStep} step={step} />
             </Box>
-
-            {/* Discount Code Section */}
             <Box mt={4} width="100%" p={2}>
               <Flex gap={2}>
                 <Input
-                  placeholder="کد تخفیف "
+                  placeholder="کد تخفیف"
                   value={discountCode}
                   onChange={(e) => setDiscountCode(e.target.value)}
                   size={{ base: "sm", md: "md" }}
@@ -123,15 +96,44 @@ const PaymentDialog = ({ isOpen, onClose, reserve }) => {
                 />
               </Flex>
             </Box>
-
-            {/* Confirm Transaction Section */}
             <Box mt={4} width="100%">
               <ConfitmTransaction reserve={reserve} />
             </Box>
           </>
-        ) : step ===1 ? (
-          <LazerAreas onClose={onClose} setStep={setStep} />
-        ) :step ===2 ? <CustomPayment/> :null}
+        );
+      case 1:
+        return <LaserAreas onClose={onClose} setStep={setStep} />;
+      case 2:
+        return <CustomPayment />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <Modal isOpen={isOpen} onClose={handleCancel} isCentered>
+      <ModalOverlay />
+      <ModalContent
+        p={{ base: 3, md: 5 }}
+        maxW={{ base: "90%", md: "500px" }}
+        maxH="100vh"
+        overflowY="auto"
+      >
+        <Flex
+          mb={4}
+          p={2}
+          justifyContent="space-between"
+          alignItems="center"
+          width="100%"
+        >
+          {renderHeader()}
+          <MdCancel
+            cursor="pointer"
+            onClick={handleCancel}
+            fontSize={{ base: "20px", md: "24px" }}
+          />
+        </Flex>
+        {renderContent()}
       </ModalContent>
     </Modal>
   );

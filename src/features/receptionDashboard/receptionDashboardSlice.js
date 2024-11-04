@@ -132,6 +132,24 @@ export const enterExitedOprators = createAsyncThunk(
     }
   }
 );
+
+export const getLazerAreas = createAsyncThunk(
+  "user/getLazerArea",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Laser/laser/area/list/", {
+        headers: {
+          Authorization: `Bearer ${payload.auth_Employee_token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log("get lazer area error", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // Initial State
 const initialState = {
   loading: false,
@@ -139,6 +157,7 @@ const initialState = {
   todayReserve: null,
   cutomerList: [],
   operatorSchedule: {},
+  LazerAreas: [],
 };
 
 const receptionDashboardSlice = createSlice({
@@ -221,6 +240,19 @@ const receptionDashboardSlice = createSlice({
       )
       .addCase(enterExitedOprators.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
+      })
+
+      // fetch getLazerAreas
+      .addCase(getLazerAreas.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getLazerAreas.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getLazerAreas.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.LazerAreas = action.payload;
       });
   },
 });

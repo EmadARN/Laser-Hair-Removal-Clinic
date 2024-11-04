@@ -16,8 +16,6 @@ export const firstBox = {
 };
 
 export const secBox = {
-  
-
   width: "100%",
   display: "flex",
   justifyContent: "flex-start",
