@@ -1,33 +1,63 @@
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Radio, RadioGroup, Stack, Flex } from "@chakra-ui/react";
 import { CiShare1 } from "react-icons/ci";
-import { Checkbox, CheckboxGroup,Stack } from '@chakra-ui/react'
+
 const PaymentMethodSection = () => {
+  const paymentMethods = [
+    { value: "pos", label: "کارتخوان" },
+    { value: "cash", label: "نقدی" },
+    { value: "cardTransfer", label: "کارت به کارت" },
+    { value: "credit", label: "پرداخت به صورت نسیه" },
+  ];
+
   return (
-    <Box p={3} width={"100%"} h={"auto"} border={"1px solid #ddd"}>
+    <Box  width="100%" h="auto" border="1px solid #ddd" borderRadius="md">
+      {/* Header Section */}
       <Box
-        display={"flex"}
-        width={"100%"}
-        justifyContent={"space-between"}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
         p={2}
+        flexDirection={{ base: "column", md: "row" }}
       >
-        <Text color={"#555"}>نحوه ی پرداخت</Text>
-        <Box display={"flex"} alignItems={"center"}>
-        <CiShare1 color="blue"  />
-          <Text mr={1} color="blue">پرداخت به چند روش</Text>
-         
-        </Box>
+        <Flex justifyContent="space-between" alignItems="center" w="100%">
+          <Text color={"#555"}> نحوه ی پرداخت</Text>
+
+          <Box
+            as="button"
+            display={"flex"}
+            alignItems={"center"}
+            mt={{ base: 2, md: 0 }}
+          >
+            <CiShare1 color="blue" />
+            <Text color={"blue"} ml={1}>
+              پرداخت به چند روش
+            </Text>
+          </Box>
+        </Flex>
       </Box>
 
-      <Box mt={2} width={'100%'} p={2}>
-        <CheckboxGroup colorScheme="green" defaultValue={["naruto", "kakashi"]}>
-          <Stack spacing={[1, 5]} direction={["column", "row"]}>
-            <Checkbox rounded={'50%'} value="naruto">کارتخوان</Checkbox>
-            <Checkbox value="sasuke">نقدی</Checkbox>
-            <Checkbox value="kakashi">کارت به کارت</Checkbox>
-            <Checkbox value="kakashi">پرداخت به صورت نسیه</Checkbox>
+      {/* Payment Methods Radio Buttons */}
+      <Box mt={2} width="100%" p={2}>
+        <RadioGroup defaultValue="pos">
+          <Stack
+            spacing={3}
+            direction="row"
+            wrap="wrap"
+            justifyContent="flex-start"
+          >
+            {paymentMethods.map((method) => (
+              <Radio
+                key={method.value}
+                value={method.value}
+                flexBasis={{ base: "100%", md: "48%" }}
+                colorScheme="purple" // تغییر رنگ به بنفش
+              >
+                {method.label}
+              </Radio>
+            ))}
           </Stack>
-        </CheckboxGroup>
+        </RadioGroup>
       </Box>
     </Box>
   );

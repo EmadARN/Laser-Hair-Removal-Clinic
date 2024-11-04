@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Text,
@@ -18,16 +18,20 @@ import {
 import { MdCancel } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addCustomerWithOutTime } from "@/features/receptionDashboard/receptionDashboardSlice";
+import {
+  addCustomerWithOutTime,
+  getCutomerList,
+} from "@/features/receptionDashboard/receptionDashboardSlice";
 import { useCookies } from "react-cookie";
 
 const PatientWithoutTime = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
+  const { cutomerList } = useSelector((store) => store.receptionDashboardSlice);
   const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
     "auth_Employee_token",
   ]);
-
+  const [listCustomers, setListCustomers] = useState();
   const [inputsData, setInputsData] = useState({
     username: "",
     password: "",
@@ -80,6 +84,10 @@ const PatientWithoutTime = () => {
     }); // Reset input data
     onClose(); // Close the modal
   };
+  // useEffect(() => {
+  //   dispatch(getCutomerList(auth_Employee_token));
+  // }, []);
+  console.log("cutomerList:", cutomerList);
 
   return (
     <>

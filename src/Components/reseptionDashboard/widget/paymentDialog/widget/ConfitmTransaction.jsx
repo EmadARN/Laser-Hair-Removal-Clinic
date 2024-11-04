@@ -1,15 +1,42 @@
-import React from 'react'
-import {Button,Box,Text} from '@chakra-ui/react'
-const ConfitmTransaction = () => {
-  return (
-  <Box width={'100%'} display={'flex'} justifyContent={'space-between'} p={2}>
-    <Button bgColor={'#364cc4'} color={'white'} py={6}>پرداخت</Button>
-    <Box display={'flex'} flexDirection={'column'} gap={'2'} justifyContent={'center'} alignItems={'center'}>
-        <Text color={'#555'}>مبلغ قابل پرداخت</Text>
-        <Text color={'blue'}>450000تومان</Text>
-    </Box>
-  </Box>
-  )
-}
+import React from "react";
+import { Button, Box, Text } from "@chakra-ui/react";
 
-export default ConfitmTransaction
+const ConfitmTransaction = ({ reserve }) => {
+  return (
+    <Box
+      width="100%"
+      display="flex"
+      flexDirection={{ base: "column", md: "row" }} // ستونی در سایزهای کوچک‌تر
+      justifyContent="space-between"
+      alignItems="center"
+      p={2}
+      gap={4} // فاصله بین آیتم‌ها در سایز کوچک‌تر
+    >
+      <Button
+        bgColor="brand.400"
+        color="white"
+        _hover={{
+          bgColor: "purple.400",
+        }}
+        py={6}
+        width={{ base: "100%", md: "160px" }} // عرض دکمه ۲۵۰ پیکسل در سایزهای بزرگ‌تر
+        minWidth="200px" // حداقل عرض دکمه
+      >
+        پرداخت
+      </Button>
+      <Box
+        display="flex"
+        flexDirection="column"
+        gap={2}
+        justifyContent="center"
+        alignItems="center"
+        mt={{ base: 4, md: 0 }} // فاصله بالا برای سایزهای کوچک‌تر
+      >
+        <Text color="#555">مبلغ قابل پرداخت</Text>
+        <Text color="blue">{reserve.total_price_amount || ""} تومان</Text>
+      </Box>
+    </Box>
+  );
+};
+
+export default ConfitmTransaction;
