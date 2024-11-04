@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { CiEdit } from "react-icons/ci";
 
-const InformationBox = ({ title, value }) => {
+const InformationBox = ({ title, value,setStep,step }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box
       borderRadius={"6px"}
@@ -30,7 +31,7 @@ const InformationBox = ({ title, value }) => {
                 mt={{ base: 2, md: 0 }}
               >
                 <CiEdit color="blue" />
-                <Text color={"blue"} ml={1}>
+                <Text onClick={()=>setStep(step+1)} as={'button'} color={"blue"} ml={1}>
                   تغییر نواحی
                 </Text>
               </Box>
