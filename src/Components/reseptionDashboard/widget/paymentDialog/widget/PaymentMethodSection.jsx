@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Text, Radio, RadioGroup, Stack, Flex } from "@chakra-ui/react";
 import { CiShare1 } from "react-icons/ci";
 
-const PaymentMethodSection = () => {
+const PaymentMethodSection = ({setStep,step}) => {
   const paymentMethods = [
     { value: "pos", label: "کارتخوان" },
     { value: "cash", label: "نقدی" },
@@ -30,7 +30,7 @@ const PaymentMethodSection = () => {
             mt={{ base: 2, md: 0 }}
           >
             <CiShare1 color="blue" />
-            <Text color={"blue"} ml={1}>
+            <Text as={'button'} onClick={()=>setStep(step +2)} color={"blue"} ml={1}>
               پرداخت به چند روش
             </Text>
           </Box>

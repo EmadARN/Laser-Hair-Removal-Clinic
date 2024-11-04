@@ -16,6 +16,7 @@ import { extractTime } from "@/utils/extractTime";
 import { secBox } from "../LaserAreas/style";
 import LazerAreas from "../LaserAreas/LaserAreas";
 import { FaArrowRight } from "react-icons/fa";
+import CustomPayment from "../customPayment/CustomPayment";
 
 const PaymentDialog = ({ isOpen, onClose, reserve }) => {
   const [discountCode, setDiscountCode] = useState(""); // مدیریت حالت کد تخفیف
@@ -47,7 +48,7 @@ const PaymentDialog = ({ isOpen, onClose, reserve }) => {
           <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }}>
             {step === 0 ? (
               "پرداخت"
-            ) : (
+            ) : step ===1 ? (
               <Box sx={secBox}>
                 <FaArrowRight
                   onClick={() => setStep(step - 1)}
@@ -59,7 +60,17 @@ const PaymentDialog = ({ isOpen, onClose, reserve }) => {
                   انتخاب نواحی
                 </Text>
               </Box>
-            )}
+            ):  <Box sx={secBox}>
+            <FaArrowRight
+              onClick={() => setStep(step - 1)}
+              cursor={"pointer"}
+              fontSize={"17px"}
+            />
+            <Text mr={3} fontSize={"17px"} fontWeight={"bold"}>
+              {" "}
+       پرداخت به چند روش
+            </Text>
+          </Box>}
           </Text>
           <MdCancel
             cursor="pointer"
@@ -97,7 +108,7 @@ const PaymentDialog = ({ isOpen, onClose, reserve }) => {
 
             {/* Payment Method Section */}
             <Box mt={3} width="100%" p={2}>
-              <PaymentMethodSection />
+              <PaymentMethodSection  setStep={setStep} step={step}/>
             </Box>
 
             {/* Discount Code Section */}
@@ -118,9 +129,9 @@ const PaymentDialog = ({ isOpen, onClose, reserve }) => {
               <ConfitmTransaction reserve={reserve} />
             </Box>
           </>
-        ) : (
+        ) : step ===1 ? (
           <LazerAreas onClose={onClose} setStep={setStep} />
-        )}
+        ) :step ===2 ? <CustomPayment/> :null}
       </ModalContent>
     </Modal>
   );
