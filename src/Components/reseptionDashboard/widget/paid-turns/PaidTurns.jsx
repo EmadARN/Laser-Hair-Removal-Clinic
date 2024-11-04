@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Stack, Text } from "@chakra-ui/react";
 import {
   Accordion,
@@ -7,10 +7,23 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import { ReseptionTable } from "../ReseptionTable/ReseptionTable";
-const PaidTurns = ({display}) => {
- 
-  
+import { useDispatch, useSelector } from "react-redux";
+import { todayDate } from "@/features/receptionDashboard/receptionDashboardSlice";
+import { useCookies } from "react-cookie";
+import { ReservationTable } from "../reservationTable/ReservationTable";
+const PaidTurns = ({ display }) => {
+  const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
+    "auth_Employee_token",
+  ]);
+  const dispatch = useDispatch();
+  const { todayReserve } = useSelector(
+    (store) => store.receptionDashboardSlice
+  );
+
+  useEffect(() => {
+    dispatch(todayDate({ auth_Employee_token }));
+  }, [dispatch]);
+
   return (
     <Accordion
       defaultIndex={[0]}
@@ -28,7 +41,13 @@ const PaidTurns = ({display}) => {
 
         <AccordionPanel pb={4} px={0}>
           <Stack>
-            <ReseptionTable  display={display} isDisabled={true}  ButtonValue="ورود به شارژ" />
+            <ReservationTable
+              display={display}
+              isDisabled={true}
+              todayReserve={todayReserve}
+              ButtonValue="ورود به شارژ"
+              isPaymentTable={true}
+            />
           </Stack>
         </AccordionPanel>
       </AccordionItem>

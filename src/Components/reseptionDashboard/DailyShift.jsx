@@ -2,14 +2,11 @@ import { Box } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import HeaderDetails from "./widget/headerDetails/HeaderDetails";
 import SearchInput from "@/Common/searchInput/SearchInput";
-import { ReseptionTable } from "./widget/ReseptionTable/ReseptionTable";
 import PaidTurns from "./widget/paid-turns/PaidTurns";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  cancelReserve,
-  todayDate,
-} from "@/features/receptionDashboard/receptionDashboardSlice";
+import { todayDate } from "@/features/receptionDashboard/receptionDashboardSlice";
+import { ReservationTable } from "./widget/reservationTable/ReservationTable";
 
 const DailyShift = () => {
   const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
@@ -40,7 +37,7 @@ const DailyShift = () => {
 
       {/* ReseptionTable بخش */}
       <Box px={{ base: 2, md: 4 }}>
-        <ReseptionTable
+        <ReservationTable
           isDisabled={false}
           ButtonValue="پرداخت"
           todayReserve={todayReserve}
