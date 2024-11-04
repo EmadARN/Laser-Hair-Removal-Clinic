@@ -67,7 +67,30 @@ export const todayDate = createAsyncThunk(
     }
   }
 );
-
+export const cancelReserve = createAsyncThunk(
+  "receptionDashboard/cancelReserve",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload success", payload);
+    try {
+      const { data } = await api.post(
+        "/Reserve/cancel/reserve/",
+        {
+          reserve: payload.reserve,
+          cancel_type: payload.cancel_type,
+          sms_status: payload.sms_status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
@@ -119,6 +142,18 @@ const receptionDashboardSlice = createSlice({
       .addCase(todayDate.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.todayReserve = action.payload;
+      })
+
+      // cancelReserve
+      .addCase(cancelReserve.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(cancelReserve.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(cancelReserve.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
       });
   },
 });

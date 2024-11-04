@@ -6,7 +6,10 @@ import { ReseptionTable } from "./widget/ReseptionTable/ReseptionTable";
 import PaidTurns from "./widget/paid-turns/PaidTurns";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import { todayDate } from "@/features/receptionDashboard/receptionDashboardSlice";
+import {
+  cancelReserve,
+  todayDate,
+} from "@/features/receptionDashboard/receptionDashboardSlice";
 
 const DailyShift = () => {
   const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
@@ -20,7 +23,8 @@ const DailyShift = () => {
   useEffect(() => {
     dispatch(todayDate({ auth_Employee_token }));
   }, [dispatch]);
-  console.log("todayReserve:", todayReserve);
+
+  console.log(todayReserve);
 
   return (
     <>
@@ -40,6 +44,7 @@ const DailyShift = () => {
           isDisabled={false}
           ButtonValue="پرداخت"
           todayReserve={todayReserve}
+          auth_Employee_token={auth_Employee_token}
         />
       </Box>
 
