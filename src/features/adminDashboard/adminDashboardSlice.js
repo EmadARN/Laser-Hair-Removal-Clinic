@@ -12,17 +12,17 @@ const handleAsyncState = (state, action, status) => {
 };
 
 // Async Thunks
-// export const postAsyncLogin = createAsyncThunk(
-//   "user/postAsyncLogin",
-//   async (payload, { rejectWithValue }) => {
-//     try {
-//       const { data } = await api.post("/Core/login/", payload);
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const postAsyncLogin = createAsyncThunk(
+  "user/postAsyncLogin",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/Core/login/", payload);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 export const getAsyncUsersList = createAsyncThunk(
   "admin/getAsyncUsersList",
@@ -324,19 +324,19 @@ const adminDashboardSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // User login
-      // .addCase(postAsyncLogin.pending, (state) =>
-      //   handleAsyncState(state, {}, "pending")
-      // )
-      // .addCase(postAsyncLogin.fulfilled, (state, action) => {
-      //   handleAsyncState(state, action, "fulfilled");
-      //   state.token = action.payload.token;
-      //   state.userType = action.payload.user_type;
-      //   localStorage.setItem("token", action.payload.token);
-      // })
-      // .addCase(postAsyncLogin.rejected, (state, action) =>
-      //   handleAsyncState(state, action, "rejected")
-      // )
+      //User login
+      .addCase(postAsyncLogin.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(postAsyncLogin.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.token = action.payload.token;
+        state.userType = action.payload.user_type;
+        localStorage.setItem("token", action.payload.token);
+      })
+      .addCase(postAsyncLogin.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
 
       // Fetch Users list
       .addCase(getAsyncUsersList.pending, (state) => {

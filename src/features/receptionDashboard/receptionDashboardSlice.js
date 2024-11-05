@@ -5,7 +5,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const handleAsyncState = (state, action, status) => {
   state.loading = status === "pending";
   if (status === "fulfilled") {
-    state.error = "";
+    state.error = false;
   } else if (status === "rejected") {
     state.error = action.payload;
   }
@@ -126,6 +126,8 @@ export const enterExitedOprators = createAsyncThunk(
           },
         }
       );
+      console.log("enterExitedOprators", data);
+
       return data;
     } catch (error) {
       console.log("error", error);
