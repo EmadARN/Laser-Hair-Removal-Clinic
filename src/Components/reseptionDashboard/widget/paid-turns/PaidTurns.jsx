@@ -20,6 +20,9 @@ const PaidTurns = ({ display }) => {
     (store) => store.receptionDashboardSlice
   );
 
+console.log('today',todayReserve);
+
+
   useEffect(() => {
     dispatch(todayDate({ auth_Employee_token }));
   }, [dispatch]);

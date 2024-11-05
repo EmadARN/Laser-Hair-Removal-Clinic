@@ -1,13 +1,30 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import HeaderDetails from "./widget/headerDetails/HeaderDetails";
 import SearchInput from "@/Common/searchInput/SearchInput";
 import { ReseptionTable } from "./widget/ReseptionTable/ReseptionTable";
 import PaidTurns from "./widget/paid-turns/PaidTurns";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { todayDate } from "@/features/receptionDashboard/receptionDashboardSlice";
+import PatientList from "./widget/patientList/PatientList";
 const ResClients = () => {
+
+  const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
+    "auth_Employee_token",
+  ]);
+  const dispatch = useDispatch();
+  const { todayReserve } = useSelector(
+    (store) => store.receptionDashboardSlice
+  );
+
+
+
+
+  useEffect(() => {
+    dispatch(todayDate({ auth_Employee_token }));
+  }, [dispatch]);
+
 
   return (
     <>
@@ -18,7 +35,7 @@ const ResClients = () => {
         <SearchInput size={"lg"} placeholder="جستجو در نوبت های روز" />
       </Box>
 
-      <PaidTurns display="none" />
+      <PatientList isPaymentTable={true}  todayReserve={todayReserve}/>
     </>
   );
 };
