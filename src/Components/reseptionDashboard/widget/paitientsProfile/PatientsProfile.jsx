@@ -1,21 +1,14 @@
 import React from "react";
-import { Grid, Box, Text, Input, Button, Flex } from "@chakra-ui/react";
+import { Box, Text, Button, Flex } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
-import { FirstGrid } from "./style";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
-const PatientsProfile = ({ isOpen, onClose }) => {
+import { Modal, ModalOverlay, ModalContent } from "@chakra-ui/react";
+import { getCustomerName } from "@/utils/getCustomerName";
+import { ProfileField } from "./ProfileField";
+
+const PatientsProfile = ({ isOpen, onClose, profileInfo, cutomerList }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-
       <ModalContent
         p={{ base: 3, md: 5 }}
         maxW={{ base: "90%", md: "500px" }}
@@ -23,34 +16,48 @@ const PatientsProfile = ({ isOpen, onClose }) => {
         overflowY="auto"
       >
         <Box>
-          <Flex mb={4} justifyContent={"space-between"}>
-            <Text fontWeight={"bold"}> پروفایل مراجع</Text>
-            <MdCancel onClick={onClose} />
+          <Flex mb={4} justifyContent="space-between" alignItems="center">
+            <Text fontWeight="bold" fontSize={{ base: "lg", md: "xl" }}>
+              پروفایل مراجع
+            </Text>
+            <MdCancel onClick={onClose} style={{ cursor: "pointer" }} />
           </Flex>
-
-          <Box display={"flex"} flexDirection={"column"} gap={5} width={"100%"}>
-            <label htmlFor="">نام و نام خانوادگی</label>
-            <Input size="md" defaultValue={"ملیکا عبدالرزاقی"} />
-
-            <label htmlFor=""> شماره همراه </label>
-            <Input
-              placeholder=" شماره همراه"
-              size="md"
-              defaultValue={"09190978042 "}
+          <Box
+            display="flex"
+            flexDirection="column"
+            gap={4}
+            width="100%"
+            py={4}
+          >
+            <ProfileField
+              label="نام و نام خانوادگی"
+              value={
+                profileInfo
+                  ? getCustomerName(profileInfo.user, cutomerList)
+                  : ""
+              }
             />
-            <label htmlFor=""> تعداد جلسات </label>
-            <Input placeholder=" تعداد جلسات" size="md" />
-            <label htmlFor=""> آخرین جلسه</label>
-            <Input placeholder=" اخرین جلسه" size="md" />
-
-            <label htmlFor=""> اپراتور </label>
-            <Input placeholder="  نام اپراتور" size="md" />
+            <ProfileField
+              label="شماره همراه"
+              value={profileInfo ? profileInfo.user : ""}
+            />
+            <ProfileField
+              label="تعداد جلسات"
+              value={profileInfo ? profileInfo.sessionLength : ""}
+            />
+            <ProfileField
+              label="آخرین جلسه"
+              value={profileInfo ? profileInfo.reserve_time_str : ""}
+            />
           </Box>
-
-          <Box width={"100%"} mt={"4"}>
-            <Button width={"100%"} bgColor={"lightblue"}>
-              {" "}
-              ورود به شارژ{" "}
+          <Box width="100%" mt={4}>
+            <Button
+              width="100%"
+              bgColor="brand.400"
+              color="white"
+              _hover={{ bgColor: "purple.400" }}
+            >
+              ورود به شارژ
             </Button>
           </Box>
         </Box>
