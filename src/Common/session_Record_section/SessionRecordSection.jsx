@@ -30,16 +30,21 @@ const SessionRecordSection = ({ setSteperState, steperState }) => {
         </Box>
       </Box>
       <hr />
-      <Box mt={1} w={"100%"} display="flex" justifyContent={"flex-start"}>
-        <Button
-          variant={"ghost"}
-          sx={buttonStyle}
-          leftIcon={<IoExitOutline size={"18px"} />}
-          onClick={handleLogout}
-        >
-          خروج از حساب کاربری
-        </Button>
-      </Box>
+      <Button
+        mt={1}
+        w={"100%"}
+        display="flex"
+        justifyContent={"flex-start"}
+        variant={"ghost"}
+        sx={buttonStyle}
+        leftIcon={<IoExitOutline size={"18px"} />}
+        onClick={handleLogout}
+        _hover={{ bgColor: "transparent" }}
+        _focus={{ bgColor: "transparent" }}
+        _active={{ bgColor: "red.50" }}
+      >
+        خروج از حساب کاربری
+      </Button>
     </Box>
   );
 };

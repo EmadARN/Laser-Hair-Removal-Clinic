@@ -1,18 +1,12 @@
 import React from "react";
-import { Box, Grid, Text, Button } from "@chakra-ui/react";
+import { Box, Grid, Text, Button, Flex } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import Image from "next/image";
 import NavBar from "@/Container/navbar/NavBar";
 import SessionRecordSection from "@/Common/session_Record_section/SessionRecordSection";
 import { useRouter } from "next/router";
 
-const DashboardLayout = ({
-  page,
-  setPage,
-  setSteperState,
-  steperState,
-  slug,
-}) => {
+const DashboardLayout = ({ setSteperState, steperState }) => {
   const router = useRouter();
   return (
     <>
@@ -23,40 +17,23 @@ const DashboardLayout = ({
         flexDirection={"column"}
         alignItems={"center"}
         justifyContent={"center"}
-        pt={16}
+        pt={20}
         pb={8}
         bgColor={"#efefef"}
       >
-        <Box
-          display={"flex"}
-          justifyContent={"flex-start"}
+        <Flex
+          justifyContent="flex-start"
+          flexDirection="column"
           mb={3}
           width={{ base: "100%", md: "45%" }}
         >
-          <Text color="#ddd" fontSize={{ base: "xs", sm: "sm" }}>
+          <Text color="gray.400" fontSize={{ base: "xs", sm: "sm" }}>
             خوش آمدید
           </Text>
-        </Box>
-
-        <Box
-          mb={6}
-          width={{ base: "100%", md: "45%" }}
-          p="4"
-          display="flex"
-          flexDirection={"column"}
-          bgColor={"#fff"}
-          borderRadius="10px"
-        >
-          <Box display={"flex"} justifyContent={"flex-start"}>
-            <Section_title section_title="موجودی کیف پول شما"></Section_title>
-          </Box>
-
-          <Box display="flex" justifyContent="center">
-            <Text fontWeight={"bold"} color={"#888"}>
-              0تومان
-            </Text>
-          </Box>
-        </Box>
+          <Text pr={1} fontWeight={"bold"} color={"gray.500"}>
+            ایسان
+          </Text>
+        </Flex>
 
         <Box
           width={{ base: "100%", md: "45%" }}
@@ -65,7 +42,7 @@ const DashboardLayout = ({
           flexDirection={"column"}
           bgColor={"#fff"}
           borderRadius="10px"
-          mb={6}
+        
         >
           <Box display={"flex"} justifyContent={"flex-start"}>
             <Section_title section_title="نوبت بعدی شما"></Section_title>

@@ -6,7 +6,7 @@ import { firstStyle, secText, textStyle } from "./style";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const TitleUserDashboard = ({ page, setPage }) => {
+const TitleUserDashboard = () => {
   const router = useRouter();
 
   return (
