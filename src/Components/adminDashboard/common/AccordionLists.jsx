@@ -7,9 +7,18 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
+import { MdOutlineArrowRightAlt } from "react-icons/md";
 
-const AccordionLists = () => {
+
+
+const AccordionLists = ({clientData,mdCancelHandler}) => {
   return (
+<>
+<Box display={'flex'} alignItems={'center'} gap={6} mt={6}>
+<MdOutlineArrowRightAlt cursor={'pointer'} onClick={mdCancelHandler} fontSize={'30px'}/>
+<Text fontWeight={'bold'} fontSize={'25px'}>{clientData.name + " " + clientData.last_name}</Text>
+</Box>
+
     <Accordion defaultIndex={[0]} allowMultiple>
       <AccordionItem>
         <Heading as="h2">
@@ -26,33 +35,36 @@ const AccordionLists = () => {
               p: 5,
             }}
           >
-            <Text>شیما شریفی</Text>
-            <Text>تعداد جلسات : 10</Text>
+           
+           
             <AccordionIcon />
           </AccordionButton>
         </Heading>
         <AccordionPanel pb={4}>
           <Stack pt={6}>
-            <Box>
-              نام و نام خانوادگی<Box as="span"></Box>
+            <Box mb={3} display={'flex'} flexDirection={'column'} gap={3}>
+              <Text >نام و نام خانوادگی</Text>
+              <Box fontWeight={'bold'} fontSize = {{ base: "14px", md: "18px" }} as="span">{clientData.name + " " + clientData.last_name}</Box>
             </Box>
-            <Box>
-              کد ملی<Box as="span"></Box>
+            <Box mb={3} display={'flex'} flexDirection={'column'} gap={3}>
+              <Text>کد ملی</Text>
+              <Box fontWeight={'bold'} fontSize = {{ base: "14px", md: "18px" }} as="span">{clientData.national_code}</Box>
             </Box>
-            <Box>
-              شماره تماس<Box as="span"></Box>
+            <Box mb={3} display={'flex'} flexDirection={'column'} gap={3}>
+              <Text> شماره تماس</Text>
+             <Box fontWeight={'bold'} fontSize = {{ base: "14px", md: "18px" }} as="span">{clientData.phone_number}</Box>
             </Box>
-            <Flex gap={20}>
+            <Flex width={'50%'} gap={20} justifyContent={'space-between'}>
               <Stack>
                 <Text>سابقه بیماری</Text>
-                <Button>ندارد</Button>
+                <Text textAlign={'center'} py={2}  bgColor={"#ddd"}>{clientData.decease_hist === true ?"بله":"خیر"}</Text>
               </Stack>
               <Stack>
                 <Text>سابقه بیماری</Text>
-                <Button>ندارد</Button>
+                <Text textAlign={'center'} py={2}  bgColor={"#ddd"}>{clientData.drug_hist === true ?"بله":"خیر"}</Text>
               </Stack>
             </Flex>
-            {/*Start inner Accordion */}
+            {/* Start inner Accordion */}
             <Stack pt={8}>
               <Text>تاریخچه جلسات</Text>
               <Accordion defaultIndex={[0]} allowMultiple>
@@ -104,12 +116,13 @@ const AccordionLists = () => {
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>
-            </Stack>
+            </Stack> 
             {/*End inner Accordion */}
           </Stack>
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
+    </>
   );
 };
 
