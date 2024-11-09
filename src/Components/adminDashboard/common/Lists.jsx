@@ -4,8 +4,11 @@ import { Box, Flex, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { FaChevronLeft } from "react-icons/fa";
+
 
 const Lists = ({
+  leftArrowDisplay,
   firstArea,
   secondArea,
   thirdArea,
@@ -72,6 +75,10 @@ const Lists = ({
           btn={<RiDeleteBinLine size={18} color="red" />}
         />
       </Stack>
+
+<Box display={leftArrowDisplay}>
+      <FaChevronLeft />
+      </Box>
     </Flex>
   );
 };
