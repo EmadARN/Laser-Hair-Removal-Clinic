@@ -4,12 +4,13 @@ import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import adminDashboardReducer from "./adminDashboard/adminDashboardSlice";
 import receptionDashboardReducer from "./receptionDashboard/receptionDashboardSlice";
 import customerDashboardReducer from "./customerDashboard/customerDashboardSlice";
-
+import stepSlice from "./steper/stepSlice";
 const combinedReducer = combineReducers({
   signin: signinReducer,
   adminDashboard: adminDashboardReducer,
   receptionDashboardSlice: receptionDashboardReducer,
   customerDashboard: customerDashboardReducer,
+  steper: stepSlice,
 });
 const masterReducer = (state, action) => {
   if (action.type === HYDRATE) {

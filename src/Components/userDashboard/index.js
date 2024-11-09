@@ -5,14 +5,12 @@ import SessionRecordDetails from "./widget/widgetForRecords/sessionRecordDetails
 import DashboardLayout from "./DashboardLayout";
 import { useDashboardContext } from "@/context/DashboardContext";
 
-const Dashboard = ({ page, setPage }) => {
+const Dashboard = () => {
   const { steperState, setSteperState } = useDashboardContext();
 
   if (steperState === 0) {
     return (
       <DashboardLayout
-        page={page}
-        setPage={setPage}
         steperState={steperState}
         setSteperState={setSteperState}
       />

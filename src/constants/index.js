@@ -14,7 +14,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { FaBottleWater } from "react-icons/fa6";
 import { CiSquareInfo } from "react-icons/ci";
-
+import { FaMapMarkerAlt, FaCalendarAlt, FaUser } from "react-icons/fa";
 import ChoosingArea from "@/Components/userDashboard/widget/areasChoice";
 import ChoosingPayAmount from "@/Components/userDashboard/widget/choosingPayAmount/ChoosingPayAmount";
 import Date_Time from "@/Components/userDashboard/widget/date-time";
@@ -403,7 +403,12 @@ export const userData = [
     component: <Unsucces_Transaction slug={"unsuccesTransaction"} />,
   },
 ];
-
+export const steps = [
+  { description: "اطلاعات مراجع", icon: FaUser },
+  { description: "انتخاب نواحی", icon: FaMapMarkerAlt },
+  { description: "تاریخ و ساعت", icon: FaCalendarAlt },
+  { description: "تایید و پرداخت", icon: FaWallet },
+];
 export const items = [
   { text: "انتخاب شما", color: "#7563dc" }, // بنفش
   { text: "قابل انتخاب", color: "gray.400" }, // طوسی

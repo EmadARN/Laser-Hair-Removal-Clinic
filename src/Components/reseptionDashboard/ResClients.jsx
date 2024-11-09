@@ -9,7 +9,6 @@ import { useCookies } from "react-cookie";
 import { todayDate } from "@/features/receptionDashboard/receptionDashboardSlice";
 import PatientList from "./widget/patientList/PatientList";
 const ResClients = () => {
-
   const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
     "auth_Employee_token",
   ]);
@@ -18,13 +17,9 @@ const ResClients = () => {
     (store) => store.receptionDashboardSlice
   );
 
-
-
-
   useEffect(() => {
     dispatch(todayDate({ auth_Employee_token }));
   }, [dispatch]);
-
 
   return (
     <>
@@ -35,7 +30,7 @@ const ResClients = () => {
         <SearchInput size={"lg"} placeholder="جستجو در نوبت های روز" />
       </Box>
 
-      <PatientList isPaymentTable={true}  todayReserve={todayReserve}/>
+      <PatientList isPaymentTable={true} todayReserve={todayReserve} />
     </>
   );
 };

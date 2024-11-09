@@ -17,12 +17,12 @@ const AreaChoice = ({
         </Box>
         <Flex>
           <Stack mt={1} spacing={1}>
-            <Checkbox
+            {/* <Checkbox
               isChecked={allChecked}
               onChange={(e) => handleSelectAll(e.target.checked)}
             >
               انتخاب همه
-            </Checkbox>
+            </Checkbox> */}
             <Stack>
               {areas.all_laser_area_object?.first_type?.map((item, index) => (
                 <Flex

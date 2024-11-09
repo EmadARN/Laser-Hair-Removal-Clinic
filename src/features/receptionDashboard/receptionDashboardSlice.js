@@ -154,6 +154,53 @@ export const getLazerAreas = createAsyncThunk(
   }
 );
 
+export const reservesListPerson = createAsyncThunk(
+  "user/reservesListPerson",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload success", payload);
+    try {
+      const { data } = await api.post(
+        "/Reserve/user/reserve/list/",
+        { username: payload.username },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
+          },
+        }
+      );
+      console.log("reservesListPerson", data);
+
+      return data;
+    } catch (error) {
+      console.log("reservesListPerson", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const addcharge = createAsyncThunk(
+  "user/addcharge",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload success", payload);
+    try {
+      const { data } = await api.post(
+        "/Core/customer/add/to/charge/",
+        { username: payload.username },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
+          },
+        }
+      );
+      console.log("addcharge", data);
+
+      return data;
+    } catch (error) {
+      console.log("addcharge", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // Initial State
 const initialState = {
   loading: false,
@@ -162,6 +209,7 @@ const initialState = {
   cutomerList: [],
   operatorSchedule: {},
   LazerAreas: [],
+  reservesLists: [],
 };
 
 const receptionDashboardSlice = createSlice({
@@ -257,6 +305,30 @@ const receptionDashboardSlice = createSlice({
       .addCase(getLazerAreas.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.LazerAreas = action.payload;
+      })
+      // fetch reservesListPerson
+      .addCase(reservesListPerson.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(reservesListPerson.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(reservesListPerson.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+
+        state.reservesLists = action.payload;
+      })
+      // fetch reservesListPerson
+      .addCase(addcharge.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(addcharge.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(addcharge.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
       });
   },
 });

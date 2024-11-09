@@ -3,7 +3,7 @@ import { Grid, Box, Text } from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 
-const ChoosingPayAmount = ({ page, setPage, slug }) => {
+const ChoosingPayAmount = ({ slug }) => {
   const [checkboxColor, setCheckboxColor] = useState(false);
   const [checkboxColor2, setCheckboxColor2] = useState(false);
   const handleChanged = (event) => {
@@ -101,13 +101,7 @@ const ChoosingPayAmount = ({ page, setPage, slug }) => {
           </Box>
         </Box>
         <Box width="100%" display="flex" justifyContent="center" p={3}>
-          <AcceptBtn
-            text="پرداخت"
-            page={page}
-            setPage={setPage}
-            bgColor={"transparent"}
-            slug={slug}
-          />
+          <AcceptBtn text="پرداخت" bgColor={"transparent"} slug={slug} />
         </Box>
       </Box>
     </Grid>

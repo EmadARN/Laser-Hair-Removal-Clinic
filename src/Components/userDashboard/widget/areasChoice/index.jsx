@@ -4,16 +4,17 @@ import AreaChoice from "./AreaChoice";
 import StepperPrototype from "../stepper/Stepper";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 import { Spinner, Text } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
 import { useFetchLazerAreas } from "@/hooks/userDashboard/useFetchLazerAreaList";
 import { usePostLazerAreas } from "@/hooks/userDashboard/usePostLazerAreaList";
 import { useCookies } from "react-cookie";
+import useStepper from "@/hooks/userDashboard/useSteper";
 
-const ChoosingArea = ({ page, setPage, slug }) => {
+const ChoosingArea = ({ slug }) => {
   const [checkedItems, setCheckedItems] = useState([]);
   const [reserveId, setReserveId] = useState([]);
   const [{ auth_token } = cookies] = useCookies(["auth_token"]);
 
+  const { handleNextStep } = useStepper();
   const { areas, loading, error } = useFetchLazerAreas(auth_token);
   const { submitHandler } = usePostLazerAreas(reserveId, auth_token);
 
@@ -58,8 +59,8 @@ const ChoosingArea = ({ page, setPage, slug }) => {
 
   return (
     <>
-      <StepperPrototype />
-      <TitleUserDashboard page={page} setPage={setPage} />
+      <StepperPrototype onCompleteStep={handleNextStep} />
+      <TitleUserDashboard />
       <AreaChoice
         areas={areas}
         checkedItems={checkedItems}
@@ -68,13 +69,12 @@ const ChoosingArea = ({ page, setPage, slug }) => {
         handleCheckboxChange={handleCheckboxChange}
       />
       <AcceptBtn
-        page={page}
-        setPage={setPage}
         slug={slug}
         text="ادامه"
         bgColor={"white"}
         submitHandler={submitHandler}
         letPush={reserveId}
+        onNextStep={handleNextStep}
       />
     </>
   );
