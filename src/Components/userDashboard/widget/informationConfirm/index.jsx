@@ -9,6 +9,7 @@ import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmInfo } from "@/features/customerDashboard/customerDashboardSlice";
 import useStepper from "@/hooks/userDashboard/useSteper";
+import { nextStep } from "@/features/steper/stepSlice";
 
 const ConfirmInfo = ({ slug }) => {
   const [cookies, setCookie] = useCookies([
@@ -35,7 +36,10 @@ const ConfirmInfo = ({ slug }) => {
     dispatch(confirmInfo({ username, token }));
   }, [username]);
 
-
+  const handleCompleteStep = () => {
+    dispatch(nextStep());
+    console.log("مرحله کامل شد!");
+  };
   return (
     <Grid
       bgColor={"#F7F7F7"}
@@ -44,7 +48,7 @@ const ConfirmInfo = ({ slug }) => {
       flexDirection="column"
       gap={3}
     >
-      <StepperPrototype page={page} onCompleteStep={handleCompleteStep} />
+      <StepperPrototype onCompleteStep={handleCompleteStep} />
       <TitleUserDashboard />
       <OutputInformation
         loading={loading}

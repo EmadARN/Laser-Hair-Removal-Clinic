@@ -27,7 +27,7 @@ const BackToUp = () => {
   }, []);
 
   const BtnStyle = {
-    backgroundColor: "#ddd",
+    backgroundColor: "gray.100",
     color: "gray.600",
     display: "flex",
     alignItems: "center",
