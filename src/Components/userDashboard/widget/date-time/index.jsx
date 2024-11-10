@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper/Stepper";
 import TitleUserDashboard from "@/Common/titleUserDashboard/TitleUserDashboard";
-import {  nextStep } from "@/features/steper/stepSlice";
+import { nextStep } from "@/features/steper/stepSlice";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 import {
   getreserveInformation,
@@ -12,7 +12,6 @@ import {
 } from "@/features/customerDashboard/customerDashboardSlice";
 import Date from "./widget/Date";
 import { useCustomToast } from "@/utils/useCustomToast ";
-import { nextStep } from "@/features/steper/stepSlice";
 
 const Date_Time = ({ slug }) => {
   const { showToast } = useCustomToast();
