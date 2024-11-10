@@ -52,10 +52,10 @@ const CounterMain = () => {
     <Box ref={ref} p={8} textAlign="center">
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
         <Box>
-          <Text fontSize="2xl" fontWeight="bold" mb={4}>
+          <Text fontSize="2xl" fontWeight="bold" mb={4} color="gray.600">
             لیزر ساید در یک نگاه
           </Text>
-          <Text fontSize="lg">
+          <Text fontSize="lg" color="gray.500">
             اینجا شما می‌توانید به آمارها و اطلاعات مربوط به شرکت ما دسترسی پیدا
             کنید. هدف ما ارائه بهترین خدمات در زمینه لیزر است.
           </Text>
@@ -64,7 +64,7 @@ const CounterMain = () => {
           <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
             {numberTicker.map((item, index) => (
               <Box key={index} p={4} bg="white" borderRadius="md">
-                <Text fontSize="3xl">
+                <Text fontSize="3xl" color="gray.500">
                   <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1, scale: 1.2 }}
@@ -74,7 +74,9 @@ const CounterMain = () => {
                     {counts[index]}
                   </motion.span>
                 </Text>
-                <Text fontSize="xl">{item.title}</Text>
+                <Text fontSize="xl" color="gray.600">
+                  {item.title}
+                </Text>
               </Box>
             ))}
           </SimpleGrid>

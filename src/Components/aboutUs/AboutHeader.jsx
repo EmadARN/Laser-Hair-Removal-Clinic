@@ -26,13 +26,13 @@ const AboutHeader = () => {
         <Text
           mb={3}
           fontSize={{ base: "20px", md: "30px" }}
-          color={"#222"}
+          color="gray.600"
           fontWeight={"bold"}
         >
           درباره ی ما
         </Text>
 
-        <Text fontSize={{ base: "13px", md: "18px" }} color={"#777"}>
+        <Text fontSize={{ base: "13px", md: "18px" }} color="gray.500">
           ما در مرکز ساید لیزر که مرکز تخصصی لیزر موهای زائد می باشد از بهترین
           دستگاه لیزر مو و اپراتور های مجرب بهره می بریم و در ساید لیزر پنج
           اپراتور مجرب و دو دکتر متخصص پوست مشغول ارائه خدمات به مشتریان گرامی
