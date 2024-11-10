@@ -11,6 +11,7 @@ import {
 } from "@/features/customerDashboard/customerDashboardSlice";
 import Date from "./widget/Date";
 import { useCustomToast } from "@/utils/useCustomToast ";
+import { nextStep } from "@/features/steper/stepSlice";
 
 const Date_Time = ({ slug }) => {
   const { showToast } = useCustomToast();
@@ -83,7 +84,7 @@ const Date_Time = ({ slug }) => {
   };
   return (
     <>
-      <StepperPrototype page={page} onCompleteStep={handleCompleteStep} />
+      <StepperPrototype onCompleteStep={handleCompleteStep} />
       <TitleUserDashboard />
 
       <Date
