@@ -15,7 +15,6 @@ const handleAsyncState = (state, action, status) => {
 export const addCustomerWithOutTime = createAsyncThunk(
   "receptionDashboard/addCustomerWithOutTime",
   async (payload, { rejectWithValue }) => {
-
     try {
       const { data } = await api.post("/Core/signup/customer/", payload, {
         headers: {
@@ -39,8 +38,7 @@ export const getCutomerList = createAsyncThunk(
         },
       });
       return data;
-      console.log('customer list',data);
-      
+      console.log("customer list", data);
     } catch (error) {
       console.log("error", error);
     }
@@ -50,7 +48,6 @@ export const getCutomerList = createAsyncThunk(
 export const todayDate = createAsyncThunk(
   "receptionDashboard/todayDate",
   async (payload, { rejectWithValue }) => {
- 
     try {
       const { data } = await api.post(
         "/Reserve/reserve/list/",
@@ -74,7 +71,6 @@ export const todayDate = createAsyncThunk(
 export const cancelReserve = createAsyncThunk(
   "receptionDashboard/cancelReserve",
   async (payload, { rejectWithValue }) => {
-
     try {
       const { data } = await api.post(
         "/Reserve/cancel/reserve/",
@@ -115,7 +111,6 @@ export const getOperatorSchedule = createAsyncThunk(
 export const enterExitedOprators = createAsyncThunk(
   "receptionDashboard/enterExitedOprators",
   async (payload, { rejectWithValue }) => {
-    
     try {
       const { data } = await api.post(
         "/Core/enter/exit/operator/",
@@ -128,7 +123,6 @@ export const enterExitedOprators = createAsyncThunk(
           },
         }
       );
-
 
       return data;
     } catch (error) {
@@ -197,6 +191,31 @@ export const addcharge = createAsyncThunk(
     } catch (error) {
       console.log("addcharge", error);
       return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const multiplePayment = createAsyncThunk(
+  "user/multiplePayment",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post(
+        "/Payment/multiple/payment/",
+        {
+          reserve: payload.reserve,
+          payment_list: [payload.paymentList],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
+          },
+        }
+      );
+
+      console.log("payment success", data);
+      return data;
+    } catch (error) {
+      console.log("payment error", error);
     }
   }
 );
@@ -329,7 +348,19 @@ const receptionDashboardSlice = createSlice({
       )
       .addCase(addcharge.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
+      })
+       //post payment
+      .addCase(multiplePayment.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(multiplePayment.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(multiplePayment.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
       });
+     
   },
 });
 
