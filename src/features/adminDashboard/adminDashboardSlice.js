@@ -302,6 +302,25 @@ export const changePassword = createAsyncThunk(
   }
 );
 
+
+export const getCutomerList = createAsyncThunk(
+  "receptionDashboard/getCutomerList",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Core/customer/list/", {
+        headers: {
+          Authorization: `Bearer ${payload.auth_Admin_token}`,
+        },
+      });
+      return data;
+   
+      
+    } catch (error) {
+      console.log("customer list error", error);
+    }
+  }
+);
+
 // Initial State
 const initialState = {
   loading: false,
@@ -316,6 +335,7 @@ const initialState = {
   dataRangeStatus: false,
   token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   userType: null,
+  customerListAdmin :[]
 };
 
 const adminDashboardSlice = createSlice({
@@ -537,7 +557,19 @@ const adminDashboardSlice = createSlice({
       })
       .addCase(changePassword.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
-      );
+      )
+       // fetch customerList
+       .addCase(getCutomerList.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getCutomerList.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getCutomerList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.customerListAdmin = action.payload;
+      })
   },
 });
 export const { setCurrentRange } = adminDashboardSlice.actions;

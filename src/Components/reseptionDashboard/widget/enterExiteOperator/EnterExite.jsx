@@ -19,7 +19,7 @@ const EnterExite = () => {
     dispatch(getOperatorSchedule({ auth_Employee_token }));
   }, [dispatch]);
 
-  console.log("operatorSchedule:", operatorSchedule);
+
 
   const enterExit = () => {
     const username = operatorSchedule.operator_username;
@@ -39,7 +39,7 @@ const EnterExite = () => {
         </Text>
         <Flex justifyContent="space-between" align="center" w="100%" p={2}>
           <Text color="gray.500" fontSize={{ base: "10px", md: "14px" }}>
-            {operatorSchedule.operator_name}
+            {/* {operatorSchedule.operator_name } */}
           </Text>
           <MdOutlineAccessTime color="gray" size={18} />
         </Flex>
@@ -58,9 +58,9 @@ const EnterExite = () => {
         bgColor="transparent"
         _hover={{ bgColor: "purple.50" }}
       >
-        {!operatorSchedule.entered_operator_username
+        {/* {!operatorSchedule.entered_operator_username
           ? `ثپت ورود اوپراتور`
-          : `خروج اوپراتور`}
+          : `خروج اوپراتور`} */}
       </Button>
     </Box>
   );

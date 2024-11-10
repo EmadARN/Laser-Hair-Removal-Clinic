@@ -82,6 +82,7 @@ const Empolyees = () => {
                 firstArea={user.username}
                 secondArea={user.name + " " + user.last_name}
                 thirdArea={userType}
+                leftArrowDisplay="none"
                 ModalBodyContent={{
                   body: (
                     <UserForm

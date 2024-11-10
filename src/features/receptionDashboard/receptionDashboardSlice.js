@@ -15,7 +15,7 @@ const handleAsyncState = (state, action, status) => {
 export const addCustomerWithOutTime = createAsyncThunk(
   "receptionDashboard/addCustomerWithOutTime",
   async (payload, { rejectWithValue }) => {
-    console.log("payload success", payload);
+
     try {
       const { data } = await api.post("/Core/signup/customer/", payload, {
         headers: {
@@ -39,6 +39,8 @@ export const getCutomerList = createAsyncThunk(
         },
       });
       return data;
+      console.log('customer list',data);
+      
     } catch (error) {
       console.log("error", error);
     }
@@ -48,7 +50,7 @@ export const getCutomerList = createAsyncThunk(
 export const todayDate = createAsyncThunk(
   "receptionDashboard/todayDate",
   async (payload, { rejectWithValue }) => {
-    console.log("payload success", payload);
+ 
     try {
       const { data } = await api.post(
         "/Reserve/reserve/list/",
@@ -72,7 +74,7 @@ export const todayDate = createAsyncThunk(
 export const cancelReserve = createAsyncThunk(
   "receptionDashboard/cancelReserve",
   async (payload, { rejectWithValue }) => {
-    console.log("payload success", payload);
+
     try {
       const { data } = await api.post(
         "/Reserve/cancel/reserve/",
@@ -113,7 +115,7 @@ export const getOperatorSchedule = createAsyncThunk(
 export const enterExitedOprators = createAsyncThunk(
   "receptionDashboard/enterExitedOprators",
   async (payload, { rejectWithValue }) => {
-    console.log("payload success", payload);
+    
     try {
       const { data } = await api.post(
         "/Core/enter/exit/operator/",
@@ -126,7 +128,7 @@ export const enterExitedOprators = createAsyncThunk(
           },
         }
       );
-      console.log("enterExitedOprators", data);
+
 
       return data;
     } catch (error) {

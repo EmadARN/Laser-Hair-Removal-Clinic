@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper/Stepper";
 import TitleUserDashboard from "@/Common/titleUserDashboard/TitleUserDashboard";
+import {  nextStep } from "@/features/steper/stepSlice";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
 import {
   getreserveInformation,
