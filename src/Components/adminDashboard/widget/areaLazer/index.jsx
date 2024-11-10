@@ -30,7 +30,6 @@ const AreaLazer = () => {
   if (error) {
     return <Text color="red.500">خطا در بارگذاری داده‌ها: {error}</Text>;
   }
-  console.log("AreaLaser::", AreaLaser);
 
   return (
     <>
@@ -59,6 +58,7 @@ const AreaLazer = () => {
           AreaLaser.all_laser_area_object.first_type.map((item, index) => {
             return (
               <Lists
+                leftArrowDisplay="none"
                 key={index}
                 firstArea={item.label}
                 secondArea={item.price}
