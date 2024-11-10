@@ -9,7 +9,7 @@ const ReportItem = ({ item, customerListAdmin }) => {
       borderWidth="1px"
       borderRadius="lg"
       boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
-      bg="white"
+      bgColor="#F7FAFC"
     >
       <Flex justifyContent="space-between" alignItems="center">
         {/* نام کاربر */}

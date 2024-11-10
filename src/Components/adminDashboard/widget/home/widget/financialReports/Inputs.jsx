@@ -1,7 +1,12 @@
 import { Box, Button, ButtonGroup, Text } from "@chakra-ui/react";
 import React from "react";
 
-const Inputs = ({ shiftsName }) => {
+const Inputs = ({
+  morningShiftLabel,
+  afternoonShiftLabel,
+  totalPaidAmountThisMonth,
+  totalAmountThisMonth,
+}) => {
   return (
     <ButtonGroup size="sm" isAttached variant="outline" sx={{ w: "100%" }}>
       <Button
@@ -16,7 +21,7 @@ const Inputs = ({ shiftsName }) => {
         }}
         size="md"
       >
-        {shiftsName || shiftsName}
+        {morningShiftLabel || afternoonShiftLabel}
       </Button>
       <Box
         sx={{
@@ -32,7 +37,7 @@ const Inputs = ({ shiftsName }) => {
             fontSize: { base: "12px", md: "14px" },
           }}
         >
-          تومان 0,00
+          {totalPaidAmountThisMonth || totalAmountThisMonth}
         </Text>
       </Box>
     </ButtonGroup>

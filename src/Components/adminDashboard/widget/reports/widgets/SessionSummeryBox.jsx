@@ -5,7 +5,7 @@ const SessionSummeryBox = ({ icon, title, number }) => {
     <Box
       p={2}
       borderRadius="7px"
-      bgColor="graySky"
+      bgColor="#F7FAFC"
       boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
       width="100%"
       display="flex"
