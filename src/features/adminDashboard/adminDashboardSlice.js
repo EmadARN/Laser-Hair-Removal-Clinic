@@ -302,7 +302,6 @@ export const changePassword = createAsyncThunk(
   }
 );
 
-
 export const getCutomerList = createAsyncThunk(
   "receptionDashboard/getCutomerList",
   async (payload, { rejectWithValue }) => {
@@ -313,14 +312,36 @@ export const getCutomerList = createAsyncThunk(
         },
       });
       return data;
-   
-      
     } catch (error) {
       console.log("customer list error", error);
     }
   }
 );
 
+export const getDate = createAsyncThunk(
+  "receptionDashboard/getDate",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post(
+        "/Reserve/reserve/list/",
+        {
+          from_: payload.from,
+          to: payload.to,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Admin_token}`,
+          },
+        }
+      );
+      console.log(data);
+
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
@@ -335,7 +356,8 @@ const initialState = {
   dataRangeStatus: false,
   token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   userType: null,
-  customerListAdmin :[]
+  customerListAdmin: [],
+  dateReserve: null,
 };
 
 const adminDashboardSlice = createSlice({
@@ -558,8 +580,8 @@ const adminDashboardSlice = createSlice({
       .addCase(changePassword.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
-       // fetch customerList
-       .addCase(getCutomerList.pending, (state) => {
+      // fetch customerList
+      .addCase(getCutomerList.pending, (state) => {
         state.loading = true;
         state.error = "";
       })
@@ -570,6 +592,18 @@ const adminDashboardSlice = createSlice({
         handleAsyncState(state, action, "fulfilled");
         state.customerListAdmin = action.payload;
       })
+      // getDate
+      .addCase(getDate.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getDate.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getDate.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.dateReserve = action.payload;
+      });
   },
 });
 export const { setCurrentRange } = adminDashboardSlice.actions;
