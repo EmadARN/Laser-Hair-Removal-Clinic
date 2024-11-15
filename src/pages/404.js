@@ -1,36 +1,53 @@
-import React from "react";
-import { Box, Text, Button, Heading, Flex } from "@chakra-ui/react";
-import { Link } from "next/link";
-import { useRouter } from "next/router";
+import { Box, Text, Button, keyframes } from "@chakra-ui/react";
+import Link from "next/link";
 
-export default function Custom404() {
-  const router = useRouter();
+// انیمیشن برای متن
+const bounce = keyframes`
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-10px); }
+  50% { transform: translateY(0); }
+  75% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+`;
 
+const Custom404 = () => {
   return (
-    <Flex
-      direction="column"
-      align="center"
-      justify="center"
-      height="100vh"
-      bg="gray.100"
-      p={5}
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="100vh"
+      bgGradient="linear(to-r, #7563DC, #9b59b6)"
+      color="white"
+      textAlign="center"
+      p={6}
     >
-      <Box>
-        <Heading as="h1" size="4xl" color="blue.500">
-          404
-        </Heading>
-        <Text fontSize="2xl" mt={4}>
-          صفحه مورد نظر یافت نشد
-        </Text>
-        <Text fontSize="lg" color="gray.600" mt={2}>
-          به نظر می‌رسد که نمی‌توانیم آنچه را که به دنبالش هستید پیدا کنیم.
-        </Text>
-      </Box>
-      <Link href="/" passHref>
-        <Button mt={6} colorScheme="blue">
-          برگشت به خانه
+      <Text
+        fontSize="6xl"
+        fontWeight="bold"
+        mb={6}
+        animation={`${bounce} 2s ease-in-out infinite`}
+      >
+        ۴۰۴
+      </Text>
+      <Text fontSize="xl" mb={6}>
+        صفحه مورد نظر پیدا نشد
+      </Text>
+
+      <Link href="/">
+        <Button
+          colorScheme="purple"
+          size="lg"
+          variant="solid"
+          _hover={{ bg: "#6a0dad" }}
+          transition="all 0.3s ease-in-out"
+        >
+          بازگشت به صفحه اصلی
         </Button>
       </Link>
-    </Flex>
+    </Box>
   );
-}
+};
+
+export default Custom404;

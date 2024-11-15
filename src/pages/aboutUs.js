@@ -21,7 +21,7 @@ const AboutUs = () => {
           </GridItem>
         </Grid>
 
-        <Box my={28}>
+        <Box my={24}>
           <CounterMain />
         </Box>
       </Grid>

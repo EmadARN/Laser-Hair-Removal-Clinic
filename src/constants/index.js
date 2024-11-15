@@ -32,6 +32,7 @@ import AreaLazer from "@/Components/adminDashboard/widget/areaLazer";
 import Home from "@/Components/adminDashboard/widget/home";
 import DailyShift from "@/Components/reseptionDashboard/DailyShift";
 import ResClients from "@/Components/reseptionDashboard/ResClients";
+import { toPersianDigits } from "@/utils/toPersianDigits";
 
 //َaboutUs
 export const numberTicker = [
@@ -163,25 +164,25 @@ export const DataFaQs = [
 export const get_turn_data = [
   {
     id: 1,
-    icon: <BiTargetLock color="#888" size={"24px"} />,
+    icon: <BiTargetLock  size={"24px"} />,
     title: "ورود و ثبت نام",
     desc: "درصورتی که برای اولین بار بصورت آنلاین اقدام به دریافت نوبت می کنید، ابتدا باید ثبت نام کرده و یا وارد حساب کاربری خود شوید. برای اینکار شماره تلفن خود را وارد کرده و سپس کد تایید ارسال شده وارد کنید.",
   },
   {
     id: 2,
-    icon: <SlCalender color="#888" size={"24px"} />,
+    icon: <SlCalender  size={"24px"} />,
     title: "انتخاب روز و ساعت",
     desc: "با استفاده از خدمات رزرو انلاین کلینیک لیانا روز و بازه ساعتی که برایتان مناسب است را انتخاب کنید و سپس در زمان تعیین شده در کلینیک حضور پیدا کنید.",
   },
   {
     id: 3,
-    icon: <IoMdPerson color="#888" size={"24px"} />,
+    icon: <IoMdPerson size={"24px"} />,
     title: "اطلاعات پزشکی",
     desc: "در صورتی که اولین جلسه خود را رزرو میکنید نیاز است که اطلاعات پزشکی و شخصی خود را وارد کرده تا در صورت نیاز به راهنمایی پزشک از آن مطلع شوید.",
   },
   {
     id: 4,
-    icon: <FaWallet color="#888" size={"24px"} />,
+    icon: <FaWallet  size={"24px"} />,
     title: "تایید و پرداخت",
     desc: "جهت نهایی سازی نوبت خود، مراجعین عزیز می بایست مبلغ در نظر گرفته شده به عنوان وثیقه را پرداخت کنند.",
   },
@@ -189,11 +190,12 @@ export const get_turn_data = [
 export const contactDetails = [
   {
     title: "شماره تماس",
-    content: "09129129129",
+    content: `${toPersianDigits(`09194444444 - 09124444444`)}`,
   },
   {
     title: "آدرس کلینیک",
-    content: "مهاباد. خیابان فیاضی. کوچه ی بهبهانی. پلاک ۴۲",
+    content:
+      "تهران، میدان کاج، کوچه جنب بانک ملت، ساختمان اداری-پزشکی، طبقه 1، واحد 12",
   },
   {
     title: "ساعت کاری",

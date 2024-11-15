@@ -1,24 +1,21 @@
 import RightBar from "@/Components/home/drawer/Drawer";
-import MainModal from "@/Components/home/signinModal/main";
-import {
-  Box,
-  Flex,
-  Avatar,
-  Button,
-  Menu,
-  MenuButton,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Flex, Avatar, Button, Menu, MenuButton } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import NavLink from "./NavLink";
+import { FaUser } from "react-icons/fa";
 
 export default function NavBar({ bgColor }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const [cookies] = useCookies(["auth_token"]);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Set to true after the component mounts in the client
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const noRedirectRoutes = ["/", "/contactUs", "/aboutUs"];
@@ -33,7 +30,7 @@ export default function NavBar({ bgColor }) {
     if (cookies.auth_token) {
       router.push("/userDashboard");
     } else {
-      onOpen();
+      router.push("/signInCustomer");
     }
   };
 
@@ -97,23 +94,33 @@ export default function NavBar({ bgColor }) {
         </Flex>
         <Flex alignItems="center">
           <Menu>
-            <MenuButton
+            <Box
               onClick={handleAvatarClick}
-              as={Button}
               rounded="full"
               variant="link"
               cursor="pointer"
               minW={0}
             >
-              <Avatar
-                size="sm"
-                src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-              />
-            </MenuButton>
+              {isClient &&
+                (cookies.auth_token ? (
+                  <FaUser size={20} color="gray" />
+                ) : (
+                  <Button
+                    color="white"
+                    bgColor="brand.400"
+                    _hover={{ bg: "purple.500" }}
+                    w={["100%", "auto"]} // دکمه در صفحه‌های کوچک 100% عرض خواهد داشت
+                    fontSize={["sm", "md"]} // اندازه فونت در صفحه‌های کوچک "sm" و در صفحه‌های بزرگتر "md"
+                    px={6} // فاصله افقی داخلی دکمه
+                    py={3} // فاصله عمودی داخلی دکمه
+                  >
+                    رزرو نوبت
+                  </Button>
+                ))}
+            </Box>
           </Menu>
         </Flex>
       </Flex>
-      <MainModal onOpen={onOpen} onClose={onClose} isOpen={isOpen} />
     </Box>
   );
 }
