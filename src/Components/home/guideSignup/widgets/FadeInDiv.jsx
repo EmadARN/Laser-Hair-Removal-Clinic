@@ -36,8 +36,12 @@ const FadeInDiv = ({ tabs, active }) => (
           overflow="auto"
           transform={active?.id === tab.id ? "scale(1)" : "scale(0.9)"}
         >
-          <Text fontWeight="bold">{tab.title}</Text>
-          <Text mt={4}>{tab.desc}</Text>
+          <Text fontWeight="bold" fontSize={{ base: "10px", md: "16px" }}>
+            {tab.title}
+          </Text>
+          <Text mt={4} fontSize={{ base: "10px", md: "16px" }}>
+            {tab.desc}
+          </Text>
         </Box>
       </motion.div>
     ))}

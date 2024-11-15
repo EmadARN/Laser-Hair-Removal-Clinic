@@ -84,8 +84,8 @@ const WhyLaser = () => {
               <Heading size="md" mb={2}>
                 {toPersianDigits(item.header)}
               </Heading>
-              <Text>{toPersianDigits(item.text)}</Text>
-              <Box>{item.images}</Box>
+              <Text whiteSpace="nowrap">{toPersianDigits(item.text)}</Text>
+              <Box h={"100%"}>{item.images}</Box>
             </Box>
           ))}
         </Flex>

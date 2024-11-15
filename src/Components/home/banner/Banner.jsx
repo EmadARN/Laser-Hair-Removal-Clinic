@@ -57,7 +57,7 @@ const Banner = () => {
             index === 1
               ? { base: "100%", md: "40%" }
               : { base: "100%", md: "25%" }
-          } // عریض‌تر کردن باکس وسط
+          } // عریض‌تر کردن باکس وسط.
           height="120px"
           mb={{ base: 4, md: 0 }}
           initial={{ opacity: 0, scale: 0.5 }} // انیمیشن شروع
@@ -72,10 +72,15 @@ const Banner = () => {
             mb={3}
             color={"gray.600"}
             fontSize={{ base: "16px", md: "18px" }}
+            whiteSpace="nowrap"
           >
             {item.header}
           </Heading>
-          <Text color={"gray.500"} textAlign="center" fontSize="14px">
+          <Text
+            color={"gray.500"}
+            textAlign="center"
+            fontSize="14px"
+          >
             {item.text}
           </Text>
         </MotionFlex>

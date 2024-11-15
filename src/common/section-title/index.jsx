@@ -3,7 +3,7 @@ const Section_title = ({ section_title, size }) => {
   return (
     <Box sx={{ display: "flex", mb: 6 }}>
       <Box
-        sx={{ border: "4px solid brand.400", borderRadius: "10px", py: 2 }}
+        sx={{ border: "4px solid #7563DC", borderRadius: "10px", py: 2 }}
       ></Box>
 
       <Text

@@ -24,7 +24,7 @@ export default function Footer() {
       bg={useColorModeValue("brand.400")}
       color={useColorModeValue("gray.50")}
     >
-      <Container as={Stack} maxW={"6xl"} py={14}>
+      <Container as={Stack} maxW={"85%"} py={14}>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={22}>
           <Stack align={"flex-start"}>
             <ListHeader>ساید لیزر:</ListHeader>

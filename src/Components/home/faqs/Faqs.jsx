@@ -89,6 +89,7 @@ const Faqs = () => {
           initial={{ opacity: 0, y: 50 }} // انیمیشن شروع
           animate={controls} // انیمیشن کنترل شده
           transition={{ duration: 0.5 }} // زمان انیمیشن
+          maxHeight="400px"
         >
           <Slider />
         </MotionBox>

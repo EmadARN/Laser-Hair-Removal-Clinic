@@ -19,7 +19,7 @@ const BoxComponent = ({ icon, title, text, index }) => {
       boxShadow="md"
       bg="gray.100"
       textAlign="center"
-      maxWidth="400px" // از maxWidth استفاده کنید
+      minWidth="250px" // از maxWidth استفاده کنید
       width="100%" // اصلاح عرض به width
       backgroundColor="#fff"
     >
@@ -62,7 +62,7 @@ export const LaserBefore = () => {
         >
           نکات مهم قبل از انجام لیزر موهای زائد
         </Heading>
-        <Text pt={4}>
+        <Text pt={4} textAlign="center">
           شما قبل از انجام لیزر موهای زائد باید نکاتی را بدانید که در ادامه به
           صورت خلاصه مواردی را ذکر کرده ایم
         </Text>

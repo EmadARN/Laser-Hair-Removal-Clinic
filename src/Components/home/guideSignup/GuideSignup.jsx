@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import { get_turn_data } from "@/constants";
 import SectionTitle from "@/Common/section-title";
 import TabButtons from "./widgets/TabButtons";
@@ -29,13 +29,20 @@ export const GuideSignup = ({
   return (
     <Box
       px={{ base: 10, md: 28 }}
-      mx={2}
       py={{ base: 4, md: 8 }}
       minH="350px"
       bgColor="#fff"
       rounded="25px"
     >
-      <SectionTitle section_title="نحوه دریاف نوبت" size="20px" />
+      <Heading
+        sx={{ display: "flex", justifyContent: "center" }}
+        as="h2"
+        size={{ base: "sm", md: "md" }}
+        color={"gray.600"}
+        mb={10}
+      >
+        نحوه دریافت نوبت
+      </Heading>
       <Flex flexDirection={{ base: "row", lg: "column" }}>
         <TabButtons tabs={tabs} active={active} setActive={setActive} />
         <FadeInDiv tabs={tabs} active={active} className={contentClassName} />

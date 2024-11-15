@@ -29,7 +29,7 @@ const Slider = () => {
       flex="1"
       p={{ base: 3, md: 5 }}
       position="relative"
-      h={{ base: "auto", md: "90%" }}
+      h="100%"
     >
       <Heading
         color={"gray.600"}
