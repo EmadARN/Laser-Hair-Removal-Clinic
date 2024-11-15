@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, keyframes } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 const shimmer = keyframes`
   0% {
@@ -11,6 +12,7 @@ const shimmer = keyframes`
 `;
 
 const HeaderBtn = () => {
+  const router = useRouter();
   return (
     <Box
       as="button"
@@ -31,6 +33,7 @@ const HeaderBtn = () => {
       left="50%"
       transform="translate(-50%, -50%)"
       whiteSpace={"nowrap"}
+      onClick={() => router.push("/userDashboard")}
     >
       همین حالا نوبت رزرو کن
     </Box>

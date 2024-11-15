@@ -1,39 +1,63 @@
-import React, { useState } from "react";
-import { Box, Flex } from "@chakra-ui/react";
-import Profile_Modal from "./widget/profile-modal/Profile_Modal";
-import VerificationCode from "./widget/verification-code/VerificationCode";
+import React from "react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  Box,
+} from "@chakra-ui/react";
+import useVerificationNumber from "@/hooks/auth/useVerificationNumber";
+import useVerificationCode from "@/hooks/auth/useVerificationCode";
+import VerificationNumber from "./widget/verificationNumber/VerificationNumber";
+import VerificationCode from "./widget/verificationCode/VerificationCode";
+
 const MainModal = ({ onClose, onOpen, isOpen }) => {
-  const [page, setPage] = useState(0);
+  const { page, setPage, handlePhoneNumberSubmit, loading } =
+    useVerificationNumber();
 
-  if (page === 0) {
-    return (
-      <Profile_Modal
-        page={page}
-        setPage={setPage}
-        onOpen={onOpen}
-        onClose={onClose}
-        isOpen={isOpen}
-      />
-    );
-  } else if (page === 1) {
+  const { inputCode, setInputCode, time, handleCodeSubmit, phoneNumber } =
+    useVerificationCode(page);
 
-    return (
-      <Box
-        display={"flex"}
-        height={"100vh"}
-        justifyContent="center"
-        alignItems={"flex-start"}
-      >
-        <VerificationCode
-          page={page}
-          setPage={setPage}
-          onOpen={onOpen}
-          onClose={onClose}
-          isOpen={isOpen}
-        />
-      </Box>
-    );
-  }
+  const handleBackClick = () => {
+    setPage(page - 1);
+    localStorage.removeItem("phoneNumber");
+  };
+
+  return (
+    <Modal isOpen={isOpen} isCentered>
+      <ModalOverlay /> {/* این قسمت بکدراپ را ایجاد می‌کند */}
+      <ModalContent>
+        <Box display={"flex"} justifyContent="center" alignItems={"center"}>
+          {page === 0 ? (
+            <VerificationNumber
+              page={page}
+              setPage={setPage}
+              onOpen={onOpen}
+              onClose={onClose}
+              isOpen={isOpen}
+              onSubmit={handlePhoneNumberSubmit}
+              loading={loading}
+            />
+          ) : page === 1 ? (
+            <VerificationCode
+              page={page}
+              setPage={setPage}
+              onOpen={onOpen}
+              onClose={onClose}
+              isOpen={isOpen}
+              phoneNumber={phoneNumber}
+              inputCode={inputCode}
+              setInputCode={setInputCode}
+              time={time}
+              handleBackClick={handleBackClick}
+              onSubmit={handleCodeSubmit}
+              loading={loading}
+            />
+          ) : null}
+        </Box>
+      </ModalContent>
+    </Modal>
+  );
 };
 
 export default MainModal;
