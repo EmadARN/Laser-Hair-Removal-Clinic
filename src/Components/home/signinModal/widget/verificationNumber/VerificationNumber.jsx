@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Modal,
   ModalOverlay,
@@ -12,37 +12,31 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
 import ButtonAccept from "../ButtonAccept";
 import * as Yup from "yup";
 import { useFormik } from "formik/dist";
-import { postAsyncNumber } from "@/features/signin/authSlice";
 
-//  validation schema
+// validation schema
 const validationSchema = Yup.object({
   phone_number: Yup.string()
     .required("شماره موبایل را وارد کنید")
     .matches(/^[0-9]{11}$/, "شماره موبایل باید 11 رقم باشد")
     .nullable(),
 });
-//  initial values
+
+// initial values
 const initialValues = {
   phone_number: "",
 };
-export default function Profile_Modal({ onClose, isOpen, setPage, page }) {
+
+export default function VerificationNumber({
+  onClose,
+  isOpen,
+  loading,
+  onSubmit,
+}) {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
-  const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.signin);
-
-  const onSubmit = async (values) => {
-    const { phone_number } = values;
-    const result = await dispatch(postAsyncNumber({ phone_number }));
-
-    if (result.meta.requestStatus === "fulfilled") {
-      setPage(page + 1);
-    }
-  };
 
   const formik = useFormik({
     initialValues,
@@ -51,19 +45,23 @@ export default function Profile_Modal({ onClose, isOpen, setPage, page }) {
     validateOnMount: true,
   });
 
-  return(
-
+  return (
     <Modal
       initialFocusRef={initialRef}
       finalFocusRef={finalRef}
       isOpen={isOpen}
-      onClose={onClose}
+      // onClose={onClose}
+      isCentered // این خط مودال را در وسط صفحه قرار می‌دهد
     >
       <ModalOverlay />
       <ModalContent w={80}>
         <Box p={5} display="flex" justifyContent="space-between" width="100%">
           <Text>ورود/ثبت نام</Text>
-          <MdCancel size={"24px"} cursor={"pointer"} onClick={onClose} />
+          <MdCancel
+            size={"24px"}
+            cursor={"pointer"}
+            // onClick={onClose} // برای بستن مودال
+          />
         </Box>
 
         <ModalBody pb={6}>
@@ -97,6 +95,5 @@ export default function Profile_Modal({ onClose, isOpen, setPage, page }) {
         </ModalFooter>
       </ModalContent>
     </Modal>
-  )
-
+  );
 }

@@ -2,23 +2,52 @@ import React from "react";
 import { Box, Text, Button } from "@chakra-ui/react";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
-import { firstBox, secBox, buttonStyle } from "./Style";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 
+// تابع کمکی برای حذف مقادیر از localStorage
+const clearLocalStorage = () => {
+  const keysToRemove = [
+    "phoneNumber",
+    "date",
+    "name",
+    "reserveId",
+    "slots",
+    "timeList",
+  ];
+
+  keysToRemove.forEach((key) => localStorage.removeItem(key));
+};
 const SessionRecordSection = ({ setSteperState, steperState }) => {
   const [cookies, , removeCookie] = useCookies(["auth_token"]);
   const router = useRouter();
 
   const handleLogout = () => {
     removeCookie("auth_token", { path: "/" });
+    // حذف اطلاعات از localStorage با استفاده از تابع کمکی
+    clearLocalStorage();
+
     router.push("/");
   };
 
   return (
-    <Box sx={firstBox}>
+    <Box
+      sx={{
+        bgColor: "#FFFFFF",
+        mt: 4,
+        width: { base: "100%", md: "45%" },
+        borderRadius: "10px",
+        p: 4,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Box
-        sx={secBox}
+        sx={{
+          w: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
         as="button"
         onClick={() => setSteperState(steperState + 1)}
       >
@@ -33,10 +62,12 @@ const SessionRecordSection = ({ setSteperState, steperState }) => {
       <Button
         mt={1}
         w={"100%"}
+        p={0}
         display="flex"
         justifyContent={"flex-start"}
         variant={"ghost"}
-        sx={buttonStyle}
+        fontSize={{ base: "xs", md: "sm" }}
+        color="red"
         leftIcon={<IoExitOutline size={"18px"} />}
         onClick={handleLogout}
         _hover={{ bgColor: "transparent" }}
