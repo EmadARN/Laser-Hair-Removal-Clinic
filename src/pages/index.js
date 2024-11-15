@@ -4,7 +4,6 @@ import Faqs from "@/Components/home/faqs/Faqs";
 import { GuideSignup } from "@/Components/home/guideSignup/GuideSignup";
 import Header from "@/Components/home/header/Header";
 import { LaserBefore } from "@/Components/home/laserBefore/LaserBefore";
-import Suggstion from "@/Components/home/suggestion/Suggstion";
 import WhyLaser from "@/Components/home/whyLaser/WhyLaser";
 import Layout from "@/Container";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
@@ -30,9 +29,6 @@ const Home = () => {
       </Box>
       <Box my={8}>
         <Faqs />
-      </Box>
-      <Box my={8}>
-        <Suggstion />
       </Box>
       <Box>
         <BackToUp />
