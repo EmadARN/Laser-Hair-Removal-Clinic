@@ -1,20 +1,45 @@
 import { NextResponse } from "next/server";
 
-export function middleware(req) {
+export async function middleware(req) {
+  const url = req.url;
+  const pathname = req.nextUrl.pathname;
   const { cookies } = req;
-  const token = cookies.get("auth_token"); // چک کنید که آیا کوکی auth_token وجود دارد یا خیر
-  //کپی از ادرس فعلی
-  const url = req.nextUrl.clone();
 
-  if (!token && url.pathname === "/userDashboard") {
-    url.pathname = "/"; // مسیر صفحه اصلی یا صفحه ورود
-    return NextResponse.redirect(url);
+  // دریافت کوکی‌ها
+  const token = cookies.get("auth_token");
+  const adminToken = cookies.get("auth_Admin_token");
+  const employeeToken = cookies.get(" auth_Employee_token");
+
+  // userDashboard
+  // بررسی مسیری که در آن قرار داریم
+  if (pathname.startsWith("/userDashboard")) {
+    // اگر توکن موجود نباشد، کاربر را به صفحه ورود هدایت می‌کنیم
+    if (!token) {
+      return NextResponse.redirect(new URL("/signInCustomer", url));
+    }
+  }
+  
+  // adminDashboard
+  if (pathname.startsWith("/adminDashboard")) {
+    if (!adminToken) {
+      return NextResponse.redirect(new URL("/loginManagerReception", url));
+    }
   }
 
-  // اگر توکن وجود داشت، اجازه بدهید درخواست ادامه پیدا کند
+  // reseptionDashboard
+  if (pathname.startsWith("/reseptionDashboard")) {
+    if (!employeeToken) {
+      return NextResponse.redirect(new URL("/loginManagerReception", url));
+    }
+  }
+  // اگر همه چیز صحیح باشد، ادامه درخواست داده می‌شود
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/userDashboard"], // مسیرهایی که باید چک شوند
+  matcher: [
+    "/userDashboard/:path*",
+    "/adminDashboard/:path*",
+    "/reseptionDashboard/:path*",
+  ],
 };
