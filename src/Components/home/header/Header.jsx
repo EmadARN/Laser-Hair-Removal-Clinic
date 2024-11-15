@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <Flex
-      h={{ base: "100%", md: "100vh" }}
+      h={{ base: "100%", md: "60vh", lg: "100vh" }}
       w="100%"
       direction={{ base: "column-reverse", lg: "row" }} // در نمایشگرهای کوچک (base) عمودی و در بزرگ (lg) افقی
     >
