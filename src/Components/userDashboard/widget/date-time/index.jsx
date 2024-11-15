@@ -15,43 +15,29 @@ import { useCustomToast } from "@/utils/useCustomToast ";
 
 const Date_Time = ({ slug }) => {
   const { showToast } = useCustomToast();
-  const [cookies, setCookie] = useCookies([
-    "reserveId",
-    "auth_token",
-    "timeList",
-  ]);
+  const [cookies] = useCookies(["auth_token"]);
   const [selectedDateId, setSelectedDateId] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
+  const [storedTimeList, setStoredTimeList] = useState(null);
 
   const dispatch = useDispatch();
   const { userReserveId, timeList, loading, error, reserveInformation } =
     useSelector((store) => store.customerDashboard);
 
-  const { page } = useSelector((store) => store.steper);
-
   const tokenAuth = cookies.auth_token;
+  const reserveId = localStorage.getItem("reserveId");
 
-  // بازیابی reserveId از کوکی
-  const reserveId = cookies.reserveId || null;
-
-  useEffect(() => {
-    if (userReserveId) {
-      setCookie("reserveId", JSON.stringify(userReserveId), {
-        path: "/",
-        maxAge: 3600,
-      });
-    }
-  }, [userReserveId, setCookie]);
-
+  // ذخیره‌سازی اطلاعات در localStorage هنگام تغییر زمان‌بندی یا reserveId
   useEffect(() => {
     if (timeList) {
-      setCookie("timeList", timeList, {
-        path: "/",
-        maxAge: 3600,
-      });
+      localStorage.setItem("timeList", JSON.stringify(timeList));
     }
-  }, [timeList, setCookie]);
+    if (userReserveId) {
+      localStorage.setItem("reserveId", userReserveId);
+    }
+  }, [timeList, userReserveId]);
 
+  // بازیابی اطلاعات هنگام بارگذاری کامپوننت
   useEffect(() => {
     if (reserveId && tokenAuth) {
       dispatch(getTimeList({ tokenAuth, reserveId }));
@@ -66,32 +52,33 @@ const Date_Time = ({ slug }) => {
 
     if (result.meta.requestStatus === "fulfilled") {
       showToast({
-        title: " موفقیت‌آمیز",
-        description: " اطلاعات با موفقیت ثبت شد",
+        title: "موفقیت‌آمیز",
+        description: "اطلاعات با موفقیت ثبت شد",
         status: "success",
       });
     } else {
       showToast({
-        title: "خطا ",
-        description: "خطا در ثبت اطلاعات ",
+        title: "خطا",
+        description: "خطا در ثبت اطلاعات",
         status: "error",
       });
     }
   };
+
   const handleCompleteStep = () => {
     dispatch(nextStep());
     console.log("مرحله کامل شد!");
   };
+
   return (
     <>
       <StepperPrototype onCompleteStep={handleCompleteStep} />
       <TitleUserDashboard />
-
       <Date
         error={error}
         loading={loading}
         reserveInformation={reserveInformation}
-        timeList={timeList}
+        timeList={timeList || storedTimeList}
         selectedDateId={selectedDateId}
         setSelectedDateId={setSelectedDateId}
         selectedSlot={selectedSlot}

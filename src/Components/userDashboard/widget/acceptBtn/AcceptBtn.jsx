@@ -8,6 +8,7 @@ export const AcceptBtn = ({
   slug,
   submitHandler,
   onNextStep,
+  isDisabled,
 }) => {
   const router = useRouter();
   const handleNextStep = (step) => {
@@ -22,7 +23,11 @@ export const AcceptBtn = ({
   };
   return (
     <Box sx={MainBox} bgColor={bgColor}>
-      <Button sx={ButtonStyle} onClick={() => handleNextStep()}>
+      <Button
+        isDisabled={isDisabled}
+        sx={ButtonStyle}
+        onClick={() => handleNextStep()}
+      >
         {text}
       </Button>
     </Box>

@@ -5,6 +5,7 @@ import adminDashboardReducer from "./adminDashboard/adminDashboardSlice";
 import receptionDashboardReducer from "./receptionDashboard/receptionDashboardSlice";
 import customerDashboardReducer from "./customerDashboard/customerDashboardSlice";
 import stepSlice from "./steper/stepSlice";
+
 const combinedReducer = combineReducers({
   signin: signinReducer,
   adminDashboard: adminDashboardReducer,

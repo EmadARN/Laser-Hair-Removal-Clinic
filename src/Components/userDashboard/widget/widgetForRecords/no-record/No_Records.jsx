@@ -10,14 +10,14 @@ const No_Records = ({ steperState, setSteperState }) => {
       alignItems={"center"}
       display={"flex"}
       justifyContent={"center"}
-      flexDirection={'column'}
+      flexDirection={"column"}
       width={"100%"}
       h={"100vh"}
       bgColor={"#F7F7F7"}
     >
-      <Box mb={4} textAlign={'right'} w={{base:"100%",md:"40%"}}>
+      <Box mb={4} textAlign={"right"} w={{ base: "100%", md: "40%" }}>
         <Button
-        leftIcon={<FaLongArrowAltRight/>}
+          leftIcon={<FaLongArrowAltRight />}
           onClick={() => {
             setSteperState(0);
           }}
@@ -25,7 +25,12 @@ const No_Records = ({ steperState, setSteperState }) => {
           بازگشت
         </Button>
       </Box>
-      <Box w={{base:"100%",md:"40%"}} boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px" h={"auto"} p={3}>
+      <Box
+        w={{ base: "100%", md: "40%" }}
+        boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+        h={"auto"}
+        p={3}
+      >
         <Box textAlign={"right"}>
           <Section_title section_title="گزارش جلسات"></Section_title>
         </Box>

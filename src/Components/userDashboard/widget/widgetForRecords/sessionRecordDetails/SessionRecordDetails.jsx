@@ -37,28 +37,28 @@ const SessionRecordDetails = () => {
         {UserData2.map((item) => {
           return (
             <>
-            <Box
-              key={item.id}
-              display={"flex"}
-              justifyContent={"space-between"}
-              p={4}
-              w={"100%"}
-            >
-              <Box>
-                <Text color={"#999"} fontSize={{ basel: "13px", md: "14px" }}>
-                  {item.title}
-                </Text>
+              <Box
+                key={item.id}
+                display={"flex"}
+                justifyContent={"space-between"}
+                p={4}
+                w={"100%"}
+              >
+                <Box>
+                  <Text color={"#999"} fontSize={{ basel: "13px", md: "14px" }}>
+                    {item.title}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text
+                    fontWeight={"bold"}
+                    fontSize={{ basel: "13px", md: "14px" }}
+                  >
+                    {item.value}
+                  </Text>
+                </Box>
               </Box>
-              <Box>
-                <Text
-                  fontWeight={"bold"}
-                  fontSize={{ basel: "13px", md: "14px" }}
-                >
-                  {item.value}
-                </Text>
-              </Box>
-            </Box>
-            <hr />
+              <hr />
             </>
           );
         })}

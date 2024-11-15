@@ -1,16 +1,16 @@
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
+import { postCustomerInformation } from "@/features/customerDashboard/customerDashboardSlice";
 import TitleUserDashboard from "@/Common/titleUserDashboard/TitleUserDashboard";
-import React, { useState } from "react";
 import RegisterForm from "./RegisterForm";
 import StepperPrototype from "../stepper/Stepper";
 import { AcceptBtn } from "../acceptBtn/AcceptBtn";
-import { useDispatch } from "react-redux";
-import { postCustomerInformation } from "@/features/customerDashboard/customerDashboardSlice";
-import { useCookies } from "react-cookie";
-import { useCustomToast } from "@/utils/useCustomToast ";
 import useStepper from "@/hooks/userDashboard/useSteper";
+import { useCustomToast } from "@/utils/useCustomToast ";
+
 const UserInformation = ({ slug }) => {
   const { showToast } = useCustomToast();
-
   const [inputsData, setinputsData] = useState({
     name: "",
     last_name: "",
@@ -23,12 +23,33 @@ const UserInformation = ({ slug }) => {
     doctor: "-",
     offline_number: 0,
   });
+  const [isDisabled, setIsDisabled] = useState(true);
   const [drugHistory, setDrugHistory] = useState("fasle");
   const [diseaseHistory, setDiseaseHistory] = useState("fasle");
   const [{ auth_token } = cookies] = useCookies(["auth_token"]);
   const dispatch = useDispatch();
-
   const { handleNextStep } = useStepper();
+
+  useEffect(() => {
+    // تابع برای بررسی اینکه آیا تمام فیلدها پر شده‌اند یا نه
+    const isFormValid = () => {
+      const requiredFields = [
+        "name",
+        "last_name",
+        "phone_number",
+        "national_code",
+        "address",
+        "house_number",
+      ];
+      return requiredFields.every(
+        (field) => inputsData[field] && inputsData[field].trim() !== ""
+      );
+    };
+
+    // به‌روزرسانی وضعیت دکمه با توجه به وضعیت فیلدهای ضروری
+    setIsDisabled(!isFormValid());
+  }, [inputsData]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setinputsData((prev) => ({ ...prev, [name]: value }));
@@ -39,6 +60,7 @@ const UserInformation = ({ slug }) => {
     if (name === "drug_hist") setDrugHistory(value);
     if (name === "decease_hist") setDiseaseHistory(value);
   };
+
   const submitHandler = async () => {
     const result = await dispatch(
       postCustomerInformation({
@@ -49,14 +71,14 @@ const UserInformation = ({ slug }) => {
 
     if (result.meta.requestStatus === "fulfilled") {
       showToast({
-        title: " موفقیت‌آمیز",
-        description: " اطلاعات با موفقیت ثبت شد",
+        title: "موفقیت‌آمیز",
+        description: "اطلاعات با موفقیت ثبت شد",
         status: "success",
       });
     } else {
       showToast({
-        title: "خطا ",
-        description: "خطا در ثبت اطلاعات ",
+        title: "خطا",
+        description: "خطا در ثبت اطلاعات",
         status: "error",
       });
     }
@@ -79,6 +101,7 @@ const UserInformation = ({ slug }) => {
         bgColor={"white"}
         submitHandler={submitHandler}
         onNextStep={handleNextStep}
+        isDisabled={isDisabled}
       />
     </>
   );

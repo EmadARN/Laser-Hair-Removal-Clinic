@@ -165,7 +165,37 @@ export const confirmInfo = createAsyncThunk(
     }
   }
 );
+export const getCutomerList = createAsyncThunk(
+  "receptionDashboard/getCutomerList",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Core/customer/list/", {
+        headers: {
+          Authorization: `Bearer ${payload.auth_token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log("customer list error", error);
+    }
+  }
+);
 
+export const getAsyncUserName = createAsyncThunk(
+  "admin/getAsyncUserName",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/Core/get/username/", {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
+        },
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
@@ -175,6 +205,8 @@ const initialState = {
   reserveInformation: [],
   timeList: [],
   confrimInfoDetail: [],
+  userNames: "",
+  customerList: [],
 };
 
 const customerDashboardSlice = createSlice({
@@ -269,6 +301,28 @@ const customerDashboardSlice = createSlice({
         state.loading = false;
       })
       .addCase(confirmInfo.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      }) // fetch customerList
+      .addCase(getCutomerList.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getCutomerList.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(getCutomerList.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.customerList = action.payload;
+      })
+      // getAsyncUserName
+      .addCase(getAsyncUserName.pending, (state) => {
+        handleAsyncState(state, {}, "pending");
+      })
+      .addCase(getAsyncUserName.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.userNames = action.payload;
+      })
+      .addCase(getAsyncUserName.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
       });
   },

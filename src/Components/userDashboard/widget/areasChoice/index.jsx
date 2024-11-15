@@ -49,6 +49,8 @@ const ChoosingArea = ({ slug }) => {
     );
   };
 
+  const isDisabled = reserveId.length === 0;
+
   if (loading) {
     return <Spinner />;
   }
@@ -75,6 +77,7 @@ const ChoosingArea = ({ slug }) => {
         submitHandler={submitHandler}
         letPush={reserveId}
         onNextStep={handleNextStep}
+        isDisabled={isDisabled}
       />
     </>
   );

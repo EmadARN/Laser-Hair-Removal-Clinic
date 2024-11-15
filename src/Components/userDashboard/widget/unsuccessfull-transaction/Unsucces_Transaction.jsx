@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid, Box, Text, Button } from "@chakra-ui/react";
-
 import BtnReservation from "@/Common/btnReservation/BtnReservation";
 import RedGreenBox from "@/Common/Red&GreenBox/Red&GreenBox";
+
 const Unsucces_Transaction = () => {
   return (
     <Grid
@@ -21,7 +21,12 @@ const Unsucces_Transaction = () => {
         display="flex"
         gap={3}
       >
-       <RedGreenBox bgColor='#d38181' bgColor2="#d61515" iconColor="#d61515" textColor="#d61515"/>
+        <RedGreenBox
+          bgColor="#d38181"
+          bgColor2="#d61515"
+          iconColor="#d61515"
+          textColor="#d61515"
+        />
 
         <Box mt={2}>
           <Text
