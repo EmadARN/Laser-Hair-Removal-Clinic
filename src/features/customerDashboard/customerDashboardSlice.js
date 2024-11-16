@@ -196,6 +196,36 @@ export const getAsyncUserName = createAsyncThunk(
     }
   }
 );
+
+export const getSessionRecords = createAsyncThunk(
+  "customer/getSessionRecords",
+  async (payload, { rejectWithValue }) => {
+    console.log('getSession',payload);
+    
+    try {
+      const { data } = await api.post(
+        "/Reserve/user/reserve/list/",
+        {
+          username: payload.phoneNumber,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_token}`,
+          },
+        }
+
+        
+      );
+
+      console.log("session success",data);
+      
+      return data
+    } catch (error) {
+      console.log('session error',error);
+      
+    }
+  }
+);
 // Initial State
 const initialState = {
   loading: false,
@@ -207,6 +237,7 @@ const initialState = {
   confrimInfoDetail: [],
   userNames: "",
   customerList: [],
+  sessionRecords:[]
 };
 
 const customerDashboardSlice = createSlice({
@@ -323,6 +354,17 @@ const customerDashboardSlice = createSlice({
         state.userNames = action.payload;
       })
       .addCase(getAsyncUserName.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+
+        //getSessionRecord
+      }).addCase(getSessionRecords.pending, (state) => {
+        handleAsyncState(state, {}, "pending");
+      })
+      .addCase(getSessionRecords.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.sessionRecords = action.payload;
+      })
+      .addCase(getSessionRecords.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
       });
   },
