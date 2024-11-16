@@ -25,7 +25,7 @@ const theme = extendTheme({
           width: "0.7em",
         },
         "::-webkit-scrollbar-thumb": {
-          backgroundColor: " #999",
+          backgroundColor: " #9999",
           borderRadius: "50px",
         },
       },

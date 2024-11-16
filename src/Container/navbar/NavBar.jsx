@@ -66,9 +66,10 @@ export default function NavBar({ bgColor }) {
       position="fixed"
       bg={bgColor}
       px={4}
+      py={isScrolled ? 8 : 9}
       zIndex={5}
       transition="all 0.3s"
-      h={isScrolled ? "12" : "16"}
+      h={isScrolled ? "8" : "16"}
       borderBottom={isScrolled ? "1px solid #1113" : "none"}
     >
       <Flex h="100%" alignItems="center">
@@ -110,11 +111,11 @@ export default function NavBar({ bgColor }) {
                     bgColor="brand.400"
                     _hover={{ bg: "purple.500" }}
                     w={["100%", "auto"]} // دکمه در صفحه‌های کوچک 100% عرض خواهد داشت
-                    fontSize={["sm", "md"]} // اندازه فونت در صفحه‌های کوچک "sm" و در صفحه‌های بزرگتر "md"
-                    px={6} // فاصله افقی داخلی دکمه
+                    fontSize={["sm"]} // اندازه فونت در صفحه‌های کوچک "sm" و در صفحه‌های بزرگتر "md"
+                    px={4} // فاصله افقی داخلی دکمه
                     py={3} // فاصله عمودی داخلی دکمه
                   >
-                    رزرو نوبت
+                    الان رزرو نوبت
                   </Button>
                 ))}
             </Box>
