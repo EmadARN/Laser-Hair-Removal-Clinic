@@ -66,7 +66,7 @@ export default function NavBar({ bgColor }) {
       position="fixed"
       bg={bgColor}
       px={4}
-      py={isScrolled ? 8 : 9}
+      py={isScrolled ? 6 : 9}
       zIndex={5}
       transition="all 0.3s"
       h={isScrolled ? "8" : "16"}
