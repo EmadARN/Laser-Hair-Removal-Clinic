@@ -18,7 +18,7 @@ const clearLocalStorage = () => {
 
   keysToRemove.forEach((key) => localStorage.removeItem(key));
 };
-const SessionRecordSection = ({ setSteperState, steperState }) => {
+const SessionRecordSection = ({ setSteperState, steperState ,sessionRecordClick}) => {
   const [cookies, , removeCookie] = useCookies(["auth_token"]);
   const router = useRouter();
 
@@ -43,16 +43,17 @@ const SessionRecordSection = ({ setSteperState, steperState }) => {
       }}
     >
       <Box
+      onClick={sessionRecordClick}
         sx={{
           w: "100%",
           display: "flex",
           justifyContent: "space-between",
         }}
         as="button"
-        onClick={() => setSteperState(steperState + 1)}
+        
       >
-        <Box mb={4}>
-          <Text fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
+        <Box   mb={4}>
+          <Text  fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
         </Box>
         <Box>
           <IoIosArrowBack />

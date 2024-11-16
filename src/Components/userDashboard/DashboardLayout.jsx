@@ -13,7 +13,7 @@ import {
 } from "@/features/customerDashboard/customerDashboardSlice";
 import { getCustomerName } from "@/utils/getCustomerName";
 
-const DashboardLayout = ({ setSteperState, steperState }) => {
+const DashboardLayout = ({ setSteperState, steperState,sessionRecordClick }) => {
   const [username, setUsername] = useState(null);
   const [{ auth_token }] = useCookies(["auth_token"]);
   const router = useRouter();
@@ -125,6 +125,7 @@ const DashboardLayout = ({ setSteperState, steperState }) => {
         </Box>
 
         <SessionRecordSection
+        sessionRecordClick={sessionRecordClick}
           steperState={steperState}
           setSteperState={setSteperState}
         />
