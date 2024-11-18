@@ -5,11 +5,10 @@ import TurnSetting from "./widgets/turnSetting";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAsyncUserName,
-  getSettingInformation,
   settingAsyncChanging,
   changePassword,
-  editUserNameAsync, // فرض می‌کنیم این اکشن برای ویرایش نام کاربری باشد
 } from "@/features/adminDashboard/adminDashboardSlice";
+import { useCookies } from "react-cookie";
 
 const Setting = () => {
   const [turnSetting, setTurnSetting] = useState({
@@ -21,16 +20,18 @@ const Setting = () => {
     password: "",
     old_password: "",
   });
+
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { token, userNames } = useSelector((store) => store.adminDashboard);
+  const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
+
+  const { userNames } = useSelector((store) => store.adminDashboard);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (token) {
-      dispatch(getSettingInformation({ token }));
-      dispatch(getAsyncUserName({ token }));
+    if (auth_Admin_token) {
+      dispatch(getAsyncUserName({ token: auth_Admin_token }));
     }
-  }, [dispatch, token]);
+  }, [dispatch, auth_Admin_token]);
 
   const handleInputs = (e) => {
     const { name, value } = e.target;
@@ -39,21 +40,22 @@ const Setting = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(settingAsyncChanging({ ...turnSetting, token }));
+    dispatch(settingAsyncChanging({ ...turnSetting, token: auth_Admin_token }));
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-   
-    
+
     setPasswordChange((prev) => ({ ...prev, [name]: value })); // Update this line
   };
-  const changePasswordAsync = ( passwordChange) => {
-
-   
+  const changePasswordAsync = (passwordChange) => {
     dispatch(
-      changePassword({ passwordChange, token })
+      changePassword({
+        password: passwordChange.password,
+        old_password: passwordChange.old_password,
+        token: auth_Admin_token,
+      })
     );
- onClose();
+    onClose();
   };
 
   return (
@@ -61,8 +63,7 @@ const Setting = () => {
       <Box sx={{ py: 6 }}>تنظیمات</Box>
       <Box width={"100%"}>
         <UserInfoBox
-        
-        changePasswordAsync={changePasswordAsync}
+          changePasswordAsync={changePasswordAsync}
           isOpen={isOpen}
           onOpen={onOpen}
           onClose={onClose}
@@ -77,7 +78,7 @@ const Setting = () => {
           handleInputs={handleInputs}
           setTurnSetting={setTurnSetting}
           turnSetting={turnSetting}
-          token={token}
+          token={auth_Admin_token}
           submitHandler={submitHandler}
         />
       </Box>

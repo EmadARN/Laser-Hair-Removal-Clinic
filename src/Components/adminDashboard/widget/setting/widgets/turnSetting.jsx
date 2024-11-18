@@ -43,6 +43,7 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
               <Input
                 sx={{ borderColor: "#777" }}
                 name="morning_time"
+                type="time"
                 onChange={handleInputs}
               />
             </FormControl>
@@ -53,6 +54,7 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
               <Input
                 sx={{ borderColor: "#777" }}
                 name="afternoon_time"
+                type="time"
                 onChange={handleInputs}
               />
             </FormControl>

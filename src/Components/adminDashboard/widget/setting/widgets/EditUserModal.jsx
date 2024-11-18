@@ -20,16 +20,9 @@ const EditUserModal = ({
   onClose,
   passwordChange,
   changePasswordAsync,
-
-
   handleInputChange,
 }) => {
-
   const [showPassword, setShowPassword] = useState(false);
-
-
-  
-
 
   const toggleShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -62,16 +55,15 @@ const EditUserModal = ({
       <ModalContent>
         <ModalHeader>ویرایش اطلاعات کاربری</ModalHeader>
         <ModalBody>
-        
           {renderPasswordInput("رمز عبور جدید", "password")}
-          {renderPasswordInput(
-            "رمز عبور قبلی",
-            "old_password",
-           
-          )}
+          {renderPasswordInput("رمز عبور قبلی", "old_password")}
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={ ()=>changePasswordAsync( passwordChange)}>
+          <Button
+            colorScheme="blue"
+            mr={3}
+            onClick={() => changePasswordAsync(passwordChange)}
+          >
             ثبت
           </Button>
           <Button variant="ghost" onClick={onClose}>

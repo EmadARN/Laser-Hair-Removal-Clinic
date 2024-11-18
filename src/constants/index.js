@@ -164,13 +164,13 @@ export const DataFaQs = [
 export const get_turn_data = [
   {
     id: 1,
-    icon: <BiTargetLock  size={"24px"} />,
+    icon: <BiTargetLock size={"24px"} />,
     title: "ورود و ثبت نام",
     desc: "درصورتی که برای اولین بار بصورت آنلاین اقدام به دریافت نوبت می کنید، ابتدا باید ثبت نام کرده و یا وارد حساب کاربری خود شوید. برای اینکار شماره تلفن خود را وارد کرده و سپس کد تایید ارسال شده وارد کنید.",
   },
   {
     id: 2,
-    icon: <SlCalender  size={"24px"} />,
+    icon: <SlCalender size={"24px"} />,
     title: "انتخاب روز و ساعت",
     desc: "با استفاده از خدمات رزرو انلاین کلینیک لیانا روز و بازه ساعتی که برایتان مناسب است را انتخاب کنید و سپس در زمان تعیین شده در کلینیک حضور پیدا کنید.",
   },
@@ -182,7 +182,7 @@ export const get_turn_data = [
   },
   {
     id: 4,
-    icon: <FaWallet  size={"24px"} />,
+    icon: <FaWallet size={"24px"} />,
     title: "تایید و پرداخت",
     desc: "جهت نهایی سازی نوبت خود، مراجعین عزیز می بایست مبلغ در نظر گرفته شده به عنوان وثیقه را پرداخت کنند.",
   },
@@ -310,7 +310,13 @@ export const daysOfWeek = [
   "پنجشنبه",
   "جمعه",
 ];
-
+export const tableHeaders = [
+  { label: "روز", key: "day" },
+  { label: "شیفت صبح", key: "morningShift" },
+  { label: "شیفت عصر", key: "afternoonShift" },
+  { label: "ساعت شروع نوبت دهی", key: "morningTime" },
+  { label: "ساعت اتمام نوبت دهی", key: "afternoonTime" },
+];
 //ReceptionDashboard
 export const receptionData = [
   {

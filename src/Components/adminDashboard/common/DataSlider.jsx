@@ -79,7 +79,7 @@ const DataSlider = ({ btnDisplay }) => {
           sx={{
             fontSize: { base: "14px", md: "18px" },
             fontWeight: "bold",
-            color: "blue",
+            color: "brand.400",
           }}
         >
           {currentDate

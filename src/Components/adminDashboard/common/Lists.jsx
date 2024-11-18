@@ -6,7 +6,6 @@ import { CiEdit } from "react-icons/ci";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaChevronLeft } from "react-icons/fa";
 
-
 const Lists = ({
   leftArrowDisplay,
   firstArea,
@@ -76,8 +75,8 @@ const Lists = ({
         />
       </Stack>
 
-<Box display={leftArrowDisplay}>
-      <FaChevronLeft />
+      <Box display={leftArrowDisplay}>
+        <FaChevronLeft />
       </Box>
     </Flex>
   );

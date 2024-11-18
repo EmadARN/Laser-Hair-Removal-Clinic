@@ -78,9 +78,9 @@ const LoginPage = () => {
       }}
     >
       <BgAnimate />
-      {!isCaptchaVerified ? (
+      {/* {!isCaptchaVerified ? (
         <Captcha onVerify={handleCaptchaSuccess} />
-      ) : (
+      ) : ( */}
         <>
           <Box sx={{ position: "absolute", w: "50%", right: 0 }}>
             <Box sx={{ position: "relative", h: "300px" }}>
@@ -142,7 +142,7 @@ const LoginPage = () => {
             />
           </Box>
         </>
-      )}
+      {/* )} */}
     </Flex>
   );
 };

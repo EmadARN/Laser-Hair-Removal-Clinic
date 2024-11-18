@@ -8,7 +8,7 @@ export async function middleware(req) {
   // دریافت کوکی‌ها
   const token = cookies.get("auth_token");
   const adminToken = cookies.get("auth_Admin_token");
-  const employeeToken = cookies.get(" auth_Employee_token");
+  const employeeToken = cookies.get("auth_Employee_token");
 
   // userDashboard
   // بررسی مسیری که در آن قرار داریم

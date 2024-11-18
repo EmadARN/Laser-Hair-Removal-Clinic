@@ -64,37 +64,38 @@ const UserForm = ({ userToEdit, isEdit, token }) => {
         </Stack>
       </RadioGroup>
 
-      {userInputs.slice(3).map(({ label, name, placeholder, isPassword }) => (
-        <FormControl mt={4} key={name}>
-          <FormLabel>{label}</FormLabel>
-          <InputGroup size="lg">
-            <Input
-              padding={4}
-              name={name}
-              type={isPassword && !showPassword ? "password" : "text"}
-              placeholder={placeholder}
-              value={formData[name]}
-              onChange={handleChange}
-            />
-            {isPassword && (
-              <InputLeftElement>
-                <Button
-                  h="1.75rem"
-                  size="sm"
-                  onClick={() => setShowPassword((prev) => !prev)}
-                  variant="text"
-                >
-                  {showPassword ? (
-                    <IoEyeOutline size={18} />
-                  ) : (
-                    <FaRegEyeSlash size={18} />
-                  )}
-                </Button>
-              </InputLeftElement>
-            )}
-          </InputGroup>
-        </FormControl>
-      ))}
+      {formData.user_type === "r" &&
+        userInputs.slice(3).map(({ label, name, placeholder, isPassword }) => (
+          <FormControl mt={4} key={name}>
+            <FormLabel>{label}</FormLabel>
+            <InputGroup size="lg">
+              <Input
+                padding={4}
+                name={name}
+                type={isPassword && !showPassword ? "password" : "text"}
+                placeholder={placeholder}
+                value={formData[name]}
+                onChange={handleChange}
+              />
+              {isPassword && (
+                <InputLeftElement>
+                  <Button
+                    h="1.75rem"
+                    size="sm"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    variant="text"
+                  >
+                    {showPassword ? (
+                      <IoEyeOutline size={18} />
+                    ) : (
+                      <FaRegEyeSlash size={18} />
+                    )}
+                  </Button>
+                </InputLeftElement>
+              )}
+            </InputGroup>
+          </FormControl>
+        ))}
 
       <Button
         mt={6}

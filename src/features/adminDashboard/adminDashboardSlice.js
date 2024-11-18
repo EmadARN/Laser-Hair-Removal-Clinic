@@ -167,6 +167,8 @@ export const settingAsyncChanging = createAsyncThunk(
 
       return data;
     } catch (error) {
+      console.log("error::", error);
+
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -216,6 +218,8 @@ export const fetchWeekData = createAsyncThunk(
 
       return response.data;
     } catch (error) {
+      console.log(error);
+
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -287,7 +291,10 @@ export const changePassword = createAsyncThunk(
     try {
       const { data } = await api.post(
         "/Core/token/change/password/",
-        payload.passwordChange,
+        {
+          password: payload.password,
+          old_password: payload.old_password,
+        },
         {
           headers: {
             Authorization: `Bearer ${payload.token}`,
@@ -297,6 +304,8 @@ export const changePassword = createAsyncThunk(
 
       return data;
     } catch (error) {
+      console.log(error);
+
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
