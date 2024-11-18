@@ -19,8 +19,6 @@ const EnterExite = () => {
     dispatch(getOperatorSchedule({ auth_Employee_token }));
   }, [dispatch]);
 
-
-
   const enterExit = () => {
     const username = operatorSchedule.operator_username;
     dispatch(enterExitedOprators({ username, auth_Employee_token }));

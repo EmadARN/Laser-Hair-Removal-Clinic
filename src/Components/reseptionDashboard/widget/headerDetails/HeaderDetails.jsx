@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Flex, Text, Grid, GridItem, Box } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
 import SearchInput from "@/Common/searchInput/SearchInput";
-import DataSlider from "@/Common/dataSlider/DataSlider";
 import PatientWithoutTime from "../AddPatientWithoutTime/PatientWithoutTime";
 import { getTodayDate } from "@/utils/getTodayDate";
 
