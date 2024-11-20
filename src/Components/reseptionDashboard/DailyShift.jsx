@@ -1,12 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import HeaderDetails from "./widget/headerDetails/HeaderDetails";
 import SearchInput from "@/Common/searchInput/SearchInput";
-import PaidTurns from "./widget/paid-turns/PaidTurns";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import { todayDate } from "@/features/receptionDashboard/receptionDashboardSlice";
-import { ReservationTable } from "./widget/reservationTable/ReservationTable";
+import HeaderDetails from "./headerDetails";
+import PaidTurns from "./paid-turns";
+import { ReservationTable } from "./reservationTable";
+import { todayDate } from "@/features/receptionDashboard/receptionThunks";
 
 const DailyShift = () => {
   const [{ auth_Employee_token } = cookies, setCookie] = useCookies([

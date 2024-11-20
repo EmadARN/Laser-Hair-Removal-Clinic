@@ -1,8 +1,7 @@
 import HeaderImg from "@/Components/contactUs/HeaderImg";
 import SectionInfo from "@/Components/contactUs/Section_info";
-import Layout from "@/Container";
+import Layout from "@/Layout";
 import { Box, Grid } from "@chakra-ui/react";
-import React from "react";
 
 const ContactUs = () => {
   return (

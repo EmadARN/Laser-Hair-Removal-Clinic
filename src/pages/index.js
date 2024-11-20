@@ -1,11 +1,11 @@
 import BackToUp from "@/Common/backToUp/BackToUp";
-import Banner from "@/Components/home/banner/Banner";
-import Faqs from "@/Components/home/faqs/Faqs";
-import { GuideSignup } from "@/Components/home/guideSignup/GuideSignup";
-import Header from "@/Components/home/header/Header";
-import { LaserBefore } from "@/Components/home/laserBefore/LaserBefore";
-import WhyLaser from "@/Components/home/whyLaser/WhyLaser";
-import Layout from "@/Container";
+import Banner from "@/Components/landing/banner";
+import Faqs from "@/Components/landing/faqs";
+import { GuideSignup } from "@/Components/landing/guideSignup";
+import Header from "@/Components/landing/header";
+import { LaserBefore } from "@/Components/landing/laserBefore";
+import WhyLaser from "@/Components/landing/whyLaser";
+import Layout from "@/Layout";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
 

@@ -1,5 +1,5 @@
-import MainModal from "@/Components/home/signinModal/main";
-import NavBar from "@/Container/navbar/NavBar";
+import MainModal from "@/Components/auth/signinModal";
+import NavBar from "@/Layout/navbar/NavBar";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";

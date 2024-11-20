@@ -1,4 +1,4 @@
-import LoginPage from "@/Common/loginReception&Admin/LoginPage";
+import LoginPage from "@/Components/auth/loginReception&Admin";
 import React from "react";
 
 const LoginManagerReception = () => {

@@ -2,22 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Box, Grid, Text, Button, Flex } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import Image from "next/image";
-import NavBar from "@/Container/navbar/NavBar";
 import SessionRecordSection from "@/Common/session_Record_section/SessionRecordSection";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
+import { getCustomerName } from "@/utils/getCustomerName";
+import NavBar from "@/Layout/navbar/NavBar";
 import {
   getAsyncUserName,
   getCutomerList,
-} from "@/features/customerDashboard/customerDashboardSlice";
-import { getCustomerName } from "@/utils/getCustomerName";
+} from "@/features/customerDashboard/customerThunks";
 
-const DashboardLayout = ({ setSteperState, steperState,sessionRecordClick }) => {
+const DashboardLayout = ({
+  setSteperState,
+  steperState,
+  sessionRecordClick,
+}) => {
   const [username, setUsername] = useState(null);
   const [{ auth_token }] = useCookies(["auth_token"]);
   const router = useRouter();
-  
+
   const dispatch = useDispatch();
   const { userNames, customerList } = useSelector(
     (store) => store.customerDashboard
@@ -125,7 +129,7 @@ const DashboardLayout = ({ setSteperState, steperState,sessionRecordClick }) => 
         </Box>
 
         <SessionRecordSection
-        sessionRecordClick={sessionRecordClick}
+          sessionRecordClick={sessionRecordClick}
           steperState={steperState}
           setSteperState={setSteperState}
         />

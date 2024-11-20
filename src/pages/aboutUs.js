@@ -1,6 +1,6 @@
 import AboutHeader from "@/Components/aboutUs/AboutHeader";
 import CounterMain from "@/Components/aboutUs/CounterMain";
-import Layout from "@/Container";
+import Layout from "@/Layout";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
 

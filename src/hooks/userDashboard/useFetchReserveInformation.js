@@ -1,4 +1,4 @@
-import { getreserveInformation } from "@/features/customerDashboard/customerDashboardSlice";
+import { getreserveInformation } from "@/features/customerDashboard/customerThunks";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

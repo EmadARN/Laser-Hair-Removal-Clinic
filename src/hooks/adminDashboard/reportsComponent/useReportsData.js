@@ -1,9 +1,6 @@
+import { getCutomerList, getDate } from "@/features/adminDashboard/adminThunks";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import {
-  getCutomerList,
-  getDate,
-} from "@/features/adminDashboard/adminDashboardSlice";
 
 const useReportsData = (authToken, dateRange) => {
   const dispatch = useDispatch();

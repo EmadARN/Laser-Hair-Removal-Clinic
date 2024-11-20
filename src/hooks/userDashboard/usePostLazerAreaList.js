@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { postLazerAreaList } from "@/features/customerDashboard/customerDashboardSlice";
 import { useCustomToast } from "@/utils/useCustomToast ";
+import { postLazerAreaList } from "@/features/customerDashboard/customerThunks";
 export const usePostLazerAreas = (reserveId, token) => {
   const {showToast}= useCustomToast()
   const dispatch = useDispatch();

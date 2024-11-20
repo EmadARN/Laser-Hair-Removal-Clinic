@@ -1,13 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import HeaderDetails from "./widget/headerDetails/HeaderDetails";
 import SearchInput from "@/Common/searchInput/SearchInput";
-import { ReseptionTable } from "./widget/ReseptionTable/ReseptionTable";
-import PaidTurns from "./widget/paid-turns/PaidTurns";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
-import { todayDate } from "@/features/receptionDashboard/receptionDashboardSlice";
-import PatientList from "./widget/patientList/PatientList";
+import PatientList from "./patientList";
+import { todayDate } from "@/features/receptionDashboard/receptionThunks";
 const ResClients = () => {
   const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
     "auth_Employee_token",

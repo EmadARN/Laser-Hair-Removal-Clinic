@@ -1,4 +1,4 @@
-import Dashboard from "@/Components/adminDashboard";
+import Dashboard from "@/Components/adminDashboard/layout";
 import { admintData } from "@/constants";
 import { findSlug } from "@/utils/findSlug";
 import { useRouter } from "next/router";

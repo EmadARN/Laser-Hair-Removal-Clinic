@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/react";
+import { getDateParts } from "@/utils/extractDate";
+import { daysOfWeek } from "@/constants";
 import {
   getAsyncListDateOperator,
   getAsyncOperatorList,
   getSettingInformation,
-  operatorProgramList,
-} from "@/features/adminDashboard/adminDashboardSlice";
-import { getDateParts } from "@/utils/extractDate";
-import { daysOfWeek } from "@/constants";
+} from "@/features/adminDashboard/adminThunks";
+import { useDispatch, useSelector } from "react-redux";
 
 const useWeeklyCalendar = ({ auth_Admin_token, onClose }) => {
   const dispatch = useDispatch();

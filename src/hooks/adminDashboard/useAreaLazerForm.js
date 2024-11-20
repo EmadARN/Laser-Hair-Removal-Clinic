@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   addLazerArea,
   editLazerArea,
   getLazerAreas,
-} from "@/features/adminDashboard/adminDashboardSlice";
+} from "@/features/adminDashboard/adminThunks";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const useAreaLazerForm = (isEdit, areaToEdit) => {
   const dispatch = useDispatch();
@@ -12,11 +12,10 @@ const useAreaLazerForm = (isEdit, areaToEdit) => {
 
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const [editArea,setEditArea] = useState({
-    name:"",
-    price:0
-
-  })
+  const [editArea, setEditArea] = useState({
+    name: "",
+    price: 0,
+  });
 
   const [lazerArea, setLazerArea] = useState({
     price: 0,
@@ -39,18 +38,15 @@ const useAreaLazerForm = (isEdit, areaToEdit) => {
 
   const areaChangeHandler = (e) => {
     const { value, name } = e.target;
-    setEditArea((prevForm)=>({
+    setEditArea((prevForm) => ({
       ...prevForm,
       [name]: name === "price" ? Number(value) : value,
-    }))
+    }));
     setLazerArea((prevForm) => ({
       ...prevForm,
       [name]: value,
     }));
   };
-
-
-
 
   const handleButtonClick = (value) => {
     setSelectedItem(value);
@@ -83,7 +79,6 @@ const useAreaLazerForm = (isEdit, areaToEdit) => {
     areaChangeHandler,
     handleButtonClick,
     handleSubmit,
- 
   };
 };
 

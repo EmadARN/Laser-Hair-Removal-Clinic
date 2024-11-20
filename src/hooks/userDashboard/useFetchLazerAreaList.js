@@ -1,6 +1,7 @@
+import { getLazerAreaList } from "@/features/customerDashboard/customerThunks";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getLazerAreaList } from "@/features/customerDashboard/customerDashboardSlice";
+
 
 export const useFetchLazerAreas = (token) => {
   const dispatch = useDispatch();

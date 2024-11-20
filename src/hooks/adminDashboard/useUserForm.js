@@ -1,8 +1,5 @@
-import {
-  addAsyncUsers,
-  editAsyncUser,
-  getAsyncUsersList,
-} from "@/features/adminDashboard/adminDashboardSlice";
+
+import { addAsyncUsers, editAsyncUser, getAsyncUsersList } from "@/features/adminDashboard/adminThunks";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";

@@ -6,7 +6,6 @@ import { TbSettings2 } from "react-icons/tb";
 import { IoMdPerson } from "react-icons/io";
 import { FaWallet } from "react-icons/fa";
 import { FaSun, FaClock, FaListUl, FaPills, FaThumbsUp } from "react-icons/fa";
-import { IoCloudyNightOutline } from "react-icons/io5";
 import {
   ChatBubbleBottomCenterIcon,
   HomeIcon,
@@ -15,24 +14,24 @@ import {
 import { FaBottleWater } from "react-icons/fa6";
 import { CiSquareInfo } from "react-icons/ci";
 import { FaMapMarkerAlt, FaCalendarAlt, FaUser } from "react-icons/fa";
-import ChoosingArea from "@/Components/userDashboard/widget/areasChoice";
-import ChoosingPayAmount from "@/Components/userDashboard/widget/choosingPayAmount/ChoosingPayAmount";
-import Date_Time from "@/Components/userDashboard/widget/date-time";
-import ConfirmInfo from "@/Components/userDashboard/widget/informationConfirm";
-import UserInformation from "@/Components/userDashboard/widget/registerForm";
-import ReservationDone from "@/Components/userDashboard/widget/reservationDone/ReservationDone";
-import Unsucces_Transaction from "@/Components/userDashboard/widget/unsuccessfull-transaction/Unsucces_Transaction";
-// import { Home } from "@/Components/adminDashboard/widget/home";
-import WeeklyCalendar from "@/Components/adminDashboard/widget/weeklyCalendar";
-import Empolyees from "@/Components/adminDashboard/widget/employees";
-import Clients from "@/Components/adminDashboard/widget/clients";
-import Reports from "@/Components/adminDashboard/widget/reports";
-import Setting from "@/Components/adminDashboard/widget/setting";
-import AreaLazer from "@/Components/adminDashboard/widget/areaLazer";
-import Home from "@/Components/adminDashboard/widget/home";
+import Home from "@/Components/adminDashboard/homePage";
+import WeeklyCalendar from "@/Components/adminDashboard/weeklyCalendar";
+import Empolyees from "@/Components/adminDashboard/employees";
+import AreaLazer from "@/Components/adminDashboard/areaLazer";
+import Clients from "@/Components/adminDashboard/clientsPage/Clients";
+import Reports from "@/Components/adminDashboard/reportsPage";
+import Setting from "@/Components/adminDashboard/settingPage";
 import DailyShift from "@/Components/reseptionDashboard/DailyShift";
 import ResClients from "@/Components/reseptionDashboard/ResClients";
+import UserInformation from "@/Components/userDashboard/registerForm";
+import ChoosingArea from "@/Components/userDashboard/areasChoice";
+import DateTime from "@/Components/userDashboard/dateTime";
+import ConfirmInfo from "@/Components/userDashboard/informationConfirm";
+import ChoosingPayAmount from "@/Components/userDashboard/choosingPayAmount";
+import ReservationDone from "@/Components/userDashboard/reservationDone";
+import Unsucces_Transaction from "@/Components/userDashboard/unsuccessfull-transaction";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+
 
 //َaboutUs
 export const numberTicker = [
@@ -41,6 +40,7 @@ export const numberTicker = [
   { count: 5, title: "تعداد اوپراتور" },
   { count: 4, title: "تعداد دستگاه" },
 ];
+
 //Home
 export const data = [
   { id: 0, title: "خانه", icon: <HomeIcon />, src: "/" },
@@ -203,6 +203,7 @@ export const contactDetails = [
       "همه روزه از ساعت 7:30 صبح تا 2 بعد از ظهر و 3 بعد از ظهر تا 11 شب",
   },
 ];
+
 //AdminDashboard
 export const admintData = [
   {
@@ -310,6 +311,20 @@ export const daysOfWeek = [
   "پنجشنبه",
   "جمعه",
 ];
+export const persianMonths = [
+  "فروردین",
+  "اردیبهشت",
+  "خرداد",
+  "تیر",
+  "مرداد",
+  "شهریور",
+  "مهر",
+  "آبان",
+  "آذر",
+  "دی",
+  "بهمن",
+  "اسفند",
+];
 export const tableHeaders = [
   { label: "روز", key: "day" },
   { label: "شیفت صبح", key: "morningShift" },
@@ -317,6 +332,7 @@ export const tableHeaders = [
   { label: "ساعت شروع نوبت دهی", key: "morningTime" },
   { label: "ساعت اتمام نوبت دهی", key: "afternoonTime" },
 ];
+
 //ReceptionDashboard
 export const receptionData = [
   {
@@ -392,7 +408,7 @@ export const userData = [
     component: <UserInformation slug={"choosingArea"} />,
   },
   { slug: "choosingArea", component: <ChoosingArea slug={"dateTime"} /> },
-  { slug: "dateTime", component: <Date_Time slug={"confirmInfo"} /> },
+  { slug: "dateTime", component: <DateTime slug={"confirmInfo"} /> },
   {
     slug: "confirmInfo",
     component: <ConfirmInfo slug={"choosingPayAmount"} />,
