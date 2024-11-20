@@ -4,15 +4,23 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const addCustomerWithOutTime = createAsyncThunk(
   "receptionDashboard/addCustomerWithOutTime",
   async (payload, { rejectWithValue }) => {
+    console.log("patientwidthouttime", payload);
+
     try {
-      const { data } = await api.post("/Core/signup/customer/", payload, {
-        headers: {
-          Authorization: `Bearer ${payload.auth_Employee_token}`,
-        },
-      });
+      const { data } = await api.post(
+        "Core/add/customer/information/",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
+          },
+        }
+      );
+      console.log("cuatomer sussess", data);
+
       return data;
     } catch (error) {
-      console.log("error", error);
+      console.log("customer error", error);
     }
   }
 );
@@ -41,8 +49,8 @@ export const todayDate = createAsyncThunk(
       const { data } = await api.post(
         "/Reserve/reserve/list/",
         {
-          from_: "",
-          to: "",
+          from_: "1403/8/28",
+          to: "1403/8/30",
         },
         {
           headers: {
