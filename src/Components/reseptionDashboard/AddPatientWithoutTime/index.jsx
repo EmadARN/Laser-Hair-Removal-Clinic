@@ -16,6 +16,7 @@ import {
   ModalContent,
 } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
+
 import { FaArrowRight, FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Tbody, Tr, Td } from '@chakra-ui/react';
@@ -25,7 +26,7 @@ import { addCustomerWithOutTime, getCutomerList } from "@/features/receptionDash
 const PatientWithoutTime = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [inputsData, setInputsData] = useState({
-    username: "",
+  
     name: "",
     last_name: "",
     phone_number: "",
@@ -36,7 +37,7 @@ const PatientWithoutTime = () => {
     decease_hist: false,
     doctor: "-",
     offline_number: 0,
-    last_date: "",
+
   });
 
   const [drugHistory, setDrugHistory] = useState("false");
@@ -47,10 +48,17 @@ const PatientWithoutTime = () => {
   const { cutomerList, loading, error } = useSelector(
     (store) => store.receptionDashboardSlice
   );
+
+
+  
+
+  
   const [{ auth_Employee_token }] = useCookies(["auth_Employee_token"]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log('vlueeee',value);
+    
     setInputsData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -69,6 +77,7 @@ const PatientWithoutTime = () => {
     setStep(0);
     setInputsData({
       name: "",
+      
       last_name: "",
       phone_number: "",
       national_code: "",
@@ -77,6 +86,7 @@ const PatientWithoutTime = () => {
       drug_hist: false,
       decease_hist: false,
       doctor: "-",
+  
       offline_number: 0,
     });
     onClose();
@@ -91,7 +101,7 @@ const PatientWithoutTime = () => {
 
     // Combine the data from both lists
     setInputsData({
-      username: customer.username,
+     
       name: customer.name,
       last_name: customer.last_name,
       phone_number: customer.phone_number,
@@ -102,13 +112,14 @@ const PatientWithoutTime = () => {
       decease_hist: customerInfo ? customerInfo.decease_hist : false,
       doctor: customerInfo ? customerInfo.doctor : "-",
       offline_number: customerInfo ? customerInfo.offline_num : 0,
-      last_date: customerInfo ? customerInfo.last_date : "-",
+    
+    
     });
 
     // Move to step 1 to show the details
     setStep(1);
   };
-  console.log('inputttt',inputsData);
+  
 
   
   
@@ -220,14 +231,18 @@ const PatientWithoutTime = () => {
               { label: "شماره همراه", name: "phone_number" },
               { label: "شماره ثابت", name: "house_number" },
               { label: "آدرس منزل", name: "address" },
+              
             ].map((field, idx) => (
+              
               <Input
+              onChange={(e)=>handleChange(setInputsData,e)}
                 key={idx}
                 name={field.name}
                
                 placeholder={field.label}
                 size="md"
                 
+           
               />
             ))}
 
