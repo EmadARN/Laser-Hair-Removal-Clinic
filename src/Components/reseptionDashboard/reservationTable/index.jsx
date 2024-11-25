@@ -9,10 +9,13 @@ import {
   Box,
   useDisclosure,
 } from "@chakra-ui/react";
+import { extractTime } from "@/utils/extractTime";
 import { useDispatch } from "react-redux";
-import { cancelReserve } from "@/features/receptionDashboard/receptionDashboardSlice";
+import {
+  cancelReserve,
+  multiplePayment,
+} from "@/features/receptionDashboard/receptionDashboardSlice";
 import PaymentDialog from "../paymentDialog/PaymentDialog";
-import { extractTime } from "@/utils/extractDate";
 
 export const ReservationTable = ({
   isDisabled,
@@ -25,10 +28,79 @@ export const ReservationTable = ({
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedReserve, setSelectedReserve] = useState(null);
+  const [idKeeper, setIdKeeper] = useState("");
 
+  //this state store inputselect 1 component value
+  const [selectedValue, setSelectedValue] = useState("");
+  //this state store inputselect 2 component value
+  const [selectedValue2, setSelectedValue2] = useState("");
+
+  //this state store the first input value price that customer entered for custome payment
+
+  const [paymentPriceKepper1, setPaymentPriceKepper1] = useState();
+
+  //this state store the seccond input value price that customer entered for custome payment
+
+  const [paymentPriceKepper2, setPaymentPriceKepper2] = useState();
+
+  //this state store the radio button value for one payment method
+  const [oneWayPaymentValu, setOneWayPaymentValue] = useState("");
+
+  const [confrimChange, setConfirmChange] = useState(false);
+
+  //this function handle inputSelect components for payment method
+  const handlePaymentChange = (event, type) => {
+    if (type === "value1") {
+      setSelectedValue(event.target.value);
+    } else if (type === "value2") {
+      setSelectedValue2(event.target.value);
+    }
+  };
+  //this function handle inputSelect component for price tp pay
+  const handlePrice = (event, type) => {
+    if (type === "value1") {
+      setPaymentPriceKepper1(event.target.value);
+    } else if (type === "value2") {
+      setPaymentPriceKepper2(event.target.value);
+    }
+  };
+
+  //this function store each customer payment detail
   const handlePaymentClick = (item) => {
     setSelectedReserve(item);
+
+    setIdKeeper(item.id);
+
     onOpen();
+  };
+
+  //final function to dispatch payment api
+  const paymentHandleClick = () => {
+    const reservId = idKeeper;
+
+    // ایجاد ساختار درست برای payment_list
+    const payment_list = confrimChange
+      ? [
+          { price: Number(paymentPriceKepper1), payment_type: selectedValue }, // شیء اول
+          { price: Number(paymentPriceKepper2), payment_type: selectedValue2 }, // شیء دوم
+        ]
+      : selectedReserve && selectedReserve.total_price_amount
+      ? [
+          {
+            price: selectedReserve.total_price_amount,
+            payment_type: oneWayPaymentValu,
+          }, // شیء تنها در صورت عدم تغییر
+        ]
+      : [];
+
+    // دیسپچ کردن اطلاعات
+    dispatch(
+      multiplePayment({
+        reservId,
+        payment_list,
+        auth_Employee_token,
+      })
+    );
   };
 
   const cancelHandler = (item) => {
@@ -43,6 +115,11 @@ export const ReservationTable = ({
         })
       );
     }
+  };
+
+  //this function update radio button values for one payemnt method
+  const handlePaymentMethodChange = (value) => {
+    setOneWayPaymentValue(value);
   };
 
   return (
@@ -117,6 +194,21 @@ export const ReservationTable = ({
       </TableContainer>
       {isOpen && (
         <PaymentDialog
+          confrimChange={confrimChange}
+          setConfirmChange={setConfirmChange}
+          oneWayPaymentValu={oneWayPaymentValu}
+          handlePaymentMethodChange={handlePaymentMethodChange}
+          setPaymentPriceKepper1={setPaymentPriceKepper1}
+          setPaymentPriceKepper2={setPaymentPriceKepper2}
+          setSelectedValue={setSelectedValue}
+          setSelectedValue2={setSelectedValue2}
+          paymentPriceKepper1={paymentPriceKepper1}
+          paymentPriceKepper2={paymentPriceKepper2}
+          handlePrice={handlePrice}
+          selectedValue2={selectedValue2}
+          selectedValue={selectedValue}
+          handlePaymentChange={handlePaymentChange}
+          paymentHandleClick={paymentHandleClick}
           isOpen={isOpen}
           onClose={onClose}
           reserve={selectedReserve}
