@@ -9,13 +9,12 @@ import {
   Box,
   useDisclosure,
 } from "@chakra-ui/react";
-import { extractTime } from "@/utils/extractTime";
+
 import { useDispatch } from "react-redux";
-import {
-  cancelReserve,
-  multiplePayment,
-} from "@/features/receptionDashboard/receptionDashboardSlice";
+import { cancelReserve, multiplePayment } from "@/features/receptionDashboard/receptionThunks";
 import PaymentDialog from "../paymentDialog/PaymentDialog";
+import { extractTime } from "@/utils/extractDate";
+
 
 export const ReservationTable = ({
   isDisabled,

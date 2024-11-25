@@ -9,14 +9,14 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
+
+import { extractTime } from "@/utils/extractDate";
 import InformationBox from "./widget/InformationBox";
-import PaymentMethodSection from "./widget/PaymentMethodSection";
-import { extractTime } from "@/utils/extractTime";
-import { secBox } from "../LaserAreas/style";
-import LaserAreas from "../LaserAreas/LaserAreas";
 import { FaArrowRight } from "react-icons/fa";
-import CustomPayment from "../customPayment/CustomPayment";
+import PaymentMethodSection from "./widget/PaymentMethodSection";
 import ConfitmTransaction from "./widget/ConfitmTransaction";
+import CustomPayment from "../customPayment";
+import LaserAreas from "../LaserAreas";
 
 const PaymentDialog = ({
   setConfirmChange,
