@@ -11,20 +11,56 @@ import {
 import { MdCancel } from "react-icons/md";
 import InformationBox from "./widget/InformationBox";
 import PaymentMethodSection from "./widget/PaymentMethodSection";
+import { extractTime } from "@/utils/extractTime";
 import { secBox } from "../LaserAreas/style";
+import LaserAreas from "../LaserAreas/LaserAreas";
 import { FaArrowRight } from "react-icons/fa";
+import CustomPayment from "../customPayment/CustomPayment";
 import ConfitmTransaction from "./widget/ConfitmTransaction";
-import LaserAreas from "../LaserAreas";
-import CustomPayment from "../customPayment";
-import { extractTime } from "@/utils/extractDate";
 
-const PaymentDialog = ({ isOpen, onClose, reserve }) => {
+const PaymentDialog = ({
+  setConfirmChange,
+  confrimChange,
+  oneWayPaymentValu,
+  handlePaymentMethodChange,
+  setPaymentPriceKepper1,
+  setPaymentPriceKepper2,
+  setSelectedValue,
+  setSelectedValue2,
+  paymentPriceKepper1,
+  paymentPriceKepper2,
+  handlePrice,
+  selectedValue2,
+  isOpen,
+  onClose,
+  reserve,
+  paymentHandleClick,
+  selectedValue,
+  handlePaymentChange,
+}) => {
   const [discountCode, setDiscountCode] = useState("");
   const [step, setStep] = useState(0);
 
   const handleCancel = () => {
     setStep(0);
+    setPaymentPriceKepper1("");
+    setPaymentPriceKepper2("");
+    setSelectedValue("");
+    setSelectedValue2("");
+
     onClose();
+  };
+
+  const getPayementKind = (Payment) => {
+    switch (Payment) {
+      case "ca":
+        return "نقدی";
+      case "cr":
+        return "کارتخوان";
+
+      default:
+        return "اطلاعات موجود نیست";
+    }
   };
 
   const renderInformationBox = (title, value, stepControl = null) => {
@@ -82,8 +118,43 @@ const PaymentDialog = ({ isOpen, onClose, reserve }) => {
                 true
               )}
             </Box>
-            <Box mt={3} width="100%" p={2}>
-              <PaymentMethodSection setStep={setStep} step={step} />
+            <Box>
+              {!confrimChange ? (
+                <Box mt={3} width="100%" p={2}>
+                  <PaymentMethodSection
+                    oneWayPaymentValu={oneWayPaymentValu}
+                    handlePaymentMethodChange={handlePaymentMethodChange}
+                    setStep={setStep}
+                    step={step}
+                  />
+                </Box>
+              ) : (
+                <Box
+                  borderRadius={"6px"}
+                  border={"1px solid #ddd"}
+                  width={"98%"}
+                  h={"auto"}
+                  p={"10px"}
+                  display={"flex"}
+                  flexDirection={"column"}
+                  gap={2}
+                >
+                  <Box p={2} display={"flex"} justifyContent={"space-between"}>
+                    <Text>{getPayementKind(selectedValue)}</Text>
+                    <Text color={"blue"} fontWeight={"bold"}>
+                      {paymentPriceKepper1} تومان
+                    </Text>
+                  </Box>
+                  <hr />
+
+                  <Box p={2} display={"flex"} justifyContent={"space-between"}>
+                    <Text>{getPayementKind(selectedValue2)}</Text>
+                    <Text color={"blue"} fontWeight={"bold"}>
+                      {paymentPriceKepper2} تومان
+                    </Text>
+                  </Box>
+                </Box>
+              )}
             </Box>
             <Box mt={4} width="100%" p={2}>
               <Flex gap={2}>
@@ -97,14 +168,28 @@ const PaymentDialog = ({ isOpen, onClose, reserve }) => {
               </Flex>
             </Box>
             <Box mt={4} width="100%">
-              <ConfitmTransaction reserve={reserve} />
+              <ConfitmTransaction
+                paymentHandleClick={paymentHandleClick}
+                reserve={reserve}
+              />
             </Box>
           </>
         );
       case 1:
         return <LaserAreas onClose={onClose} setStep={setStep} />;
       case 2:
-        return <CustomPayment />;
+        return (
+          <CustomPayment
+            setStep={setStep}
+            setConfirmChange={setConfirmChange}
+            paymentPriceKepper1={paymentPriceKepper1}
+            paymentPriceKepper2={paymentPriceKepper2}
+            handlePrice={handlePrice}
+            selectedValue2={selectedValue2}
+            selectedValue={selectedValue}
+            handlePaymentChange={handlePaymentChange}
+          />
+        );
       default:
         return null;
     }

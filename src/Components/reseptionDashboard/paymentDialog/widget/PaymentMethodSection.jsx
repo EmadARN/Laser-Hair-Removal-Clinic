@@ -1,17 +1,23 @@
+
 import React from "react";
 import { Box, Text, Radio, RadioGroup, Stack, Flex } from "@chakra-ui/react";
 import { CiShare1 } from "react-icons/ci";
 
-const PaymentMethodSection = ({setStep,step}) => {
+const PaymentMethodSection = ({
+  setStep,
+  step,
+  oneWayPaymentValu,
+  handlePaymentMethodChange,
+}) => {
   const paymentMethods = [
-    { value: "pos", label: "کارتخوان" },
-    { value: "cash", label: "نقدی" },
-    { value: "cardTransfer", label: "کارت به کارت" },
-    { value: "credit", label: "پرداخت به صورت نسیه" },
+    { value: "cr", label: "کارتخوان" },
+    { value: "ca", label: "نقدی" },
+    { value: "on", label: "کارت به کارت" },
+    { value: "ch", label: "پرداخت به صورت نسیه" },
   ];
 
   return (
-    <Box  width="100%" h="auto" border="1px solid #ddd" borderRadius="md">
+    <Box width="100%" h="auto" border="1px solid #ddd" borderRadius="md">
       {/* Header Section */}
       <Box
         display="flex"
@@ -30,7 +36,12 @@ const PaymentMethodSection = ({setStep,step}) => {
             mt={{ base: 2, md: 0 }}
           >
             <CiShare1 color="blue" />
-            <Text as={'button'} onClick={()=>setStep(step +2)} color={"blue"} ml={1}>
+            <Text
+              as={"button"}
+              onClick={() => setStep(step + 2)}
+              color={"blue"}
+              ml={1}
+            >
               پرداخت به چند روش
             </Text>
           </Box>
@@ -39,7 +50,11 @@ const PaymentMethodSection = ({setStep,step}) => {
 
       {/* Payment Methods Radio Buttons */}
       <Box mt={2} width="100%" p={2}>
-        <RadioGroup defaultValue="pos">
+        <RadioGroup
+          defaultValue="pos"
+          value={oneWayPaymentValu}
+          onChange={handlePaymentMethodChange}
+        >
           <Stack
             spacing={3}
             direction="row"

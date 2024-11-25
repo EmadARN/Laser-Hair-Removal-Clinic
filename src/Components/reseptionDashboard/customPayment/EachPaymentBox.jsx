@@ -1,13 +1,21 @@
 import React from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { ImNotification } from "react-icons/im";
-import { Box, Flex, Input, Select, Text } from "@chakra-ui/react";
 
-const EachPaymentBox = ({ title }) => {
+import { Box, Flex, Input, Text } from "@chakra-ui/react";
+
+import InputSelect from "./InputSelect";
+const EachPaymentBox = ({
+  paymentPriceKepper,
+  handlePrice,
+  title,
+  selectedValue,
+  handlePaymentChange,
+}) => {
   return (
     <>
       <Flex justifyContent={"space-between"}>
-        <Text> {title}</Text>
+        <Text>{title}</Text>
         <Flex gap={3} alignItems={"center"}>
           <Text color={"red"} fontSize={"16px"}>
             حذف
@@ -23,12 +31,15 @@ const EachPaymentBox = ({ title }) => {
         </Flex>
 
         <Box py={4}>
-          <Select placeholder="انتخاب کنید">
-            <option value="option1"> نقدی</option>
-            <option value="option2"> کارتخوان</option>
-            <option value="option3"> کارت به کارت</option>
-          </Select>
-          <Input placeholder="مبلغ" />
+          <InputSelect
+            selectedValue={selectedValue}
+            handlePaymentChange={handlePaymentChange}
+          />
+          <Input
+            value={paymentPriceKepper}
+            placeholder="مبلغ"
+            onChange={(event) => handlePrice(event)}
+          />
         </Box>
       </Box>
     </>

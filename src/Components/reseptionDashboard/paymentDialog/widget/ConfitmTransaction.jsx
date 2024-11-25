@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Box, Text } from "@chakra-ui/react";
 
-const ConfitmTransaction = ({ reserve }) => {
+const ConfitmTransaction = ({ reserve,paymentHandleClick }) => {
   return (
     <Box
       width="100%"
@@ -13,6 +13,7 @@ const ConfitmTransaction = ({ reserve }) => {
       gap={4} // فاصله بین آیتم‌ها در سایز کوچک‌تر
     >
       <Button
+      onClick={paymentHandleClick}
         bgColor="brand.400"
         color="white"
         _hover={{
