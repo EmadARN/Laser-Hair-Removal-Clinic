@@ -2,12 +2,12 @@ import { Box, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
-import useDateRange from "@/hooks/adminDashboard/reportsComponent/useDateRange";
-import useSummary from "@/hooks/adminDashboard/reportsComponent/useSummary";
-import useReportsData from "@/hooks/adminDashboard/reportsComponent/useReportsData";
 import RepoertHeader from "./ui/RepoertHeader";
 import SessionSummery from "./ui/SessionSummery";
 import ReportItem from "./ui/ReportItem";
+import useReportsData from "./useReportsData";
+import useSummary from "./useSummary";
+import useDateRange from "./useDateRange";
 
 const Reports = () => {
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);

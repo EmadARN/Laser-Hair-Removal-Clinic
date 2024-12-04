@@ -1,12 +1,12 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import useLoginAdminRecptionHooks from "@/hooks/auth/useLoginAdminRecptionHooks";
 // import Captcha from "./widget/Captcha";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { BgAnimate } from "./ui/BgAnimate";
 import Inputs from "./ui/Inputs";
 import AnimationSide from "./ui/AnimationSide";
+import useLoginAdminRecptionHooks from "./useLoginAdminRecptionHooks";
 
 const LoginPage = () => {
   const [btnClick, setBtnClick] = useState(false);
@@ -81,67 +81,67 @@ const LoginPage = () => {
       {/* {!isCaptchaVerified ? (
         <Captcha onVerify={handleCaptchaSuccess} />
       ) : ( */}
-        <>
-          <Box sx={{ position: "absolute", w: "50%", right: 0 }}>
-            <Box sx={{ position: "relative", h: "300px" }}>
-              <Box
-                sx={{
-                  bgColor: "#1111",
-                  w: "100%",
-                  h: "100%",
-                  zIndex: btnClick ? 10 : 0,
-                  opacity: btnClick ? 1 : 0,
-                  p: 6,
-                  position: "absolute",
-                  transition: "opacity 1s ease 0.75s",
-                }}
-              >
-                <Inputs
-                  label="ورود به عنوان مدیر"
-                  submitHandler={handleSubmit}
-                  inputHandler={handleInputChange}
-                  formInput={input}
-                />
-              </Box>
-              <Box
-                sx={{
-                  bgColor: "brand.400",
-                  w: "100%",
-                  h: "100%",
-                  p: 6,
-                  boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
-                  zIndex: btnClick ? 10 : 0,
-                  position: "absolute",
-                  right: btnClick ? "100%" : 0,
-                  transition: "all 1s ease",
-                }}
-              >
-                <AnimationSide clicHandler={toggleForm} btnClick={btnClick} />
-              </Box>
+      <>
+        <Box sx={{ position: "absolute", w: "50%", right: 0 }}>
+          <Box sx={{ position: "relative", h: "300px" }}>
+            <Box
+              sx={{
+                bgColor: "#1111",
+                w: "100%",
+                h: "100%",
+                zIndex: btnClick ? 10 : 0,
+                opacity: btnClick ? 1 : 0,
+                p: 6,
+                position: "absolute",
+                transition: "opacity 1s ease 0.75s",
+              }}
+            >
+              <Inputs
+                label="ورود به عنوان مدیر"
+                submitHandler={handleSubmit}
+                inputHandler={handleInputChange}
+                formInput={input}
+              />
+            </Box>
+            <Box
+              sx={{
+                bgColor: "brand.400",
+                w: "100%",
+                h: "100%",
+                p: 6,
+                boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
+                zIndex: btnClick ? 10 : 0,
+                position: "absolute",
+                right: btnClick ? "100%" : 0,
+                transition: "all 1s ease",
+              }}
+            >
+              <AnimationSide clicHandler={toggleForm} btnClick={btnClick} />
             </Box>
           </Box>
+        </Box>
 
-          <Box
-            sx={{
-              bgColor: "#1111",
-              p: 6,
-              h: "300px",
-              w: "50%",
-              zIndex: btnClick ? 0 : 10,
-              opacity: btnClick ? 0 : 1,
-              transition: "opacity 1s ease 0.75s",
-              position: "absolute",
-              left: btnClick ? "100%" : 0,
-            }}
-          >
-            <Inputs
-              label="ورود به عنوان کارمند"
-              submitHandler={handleSubmit}
-              inputHandler={handleInputChange}
-              formInput={input}
-            />
-          </Box>
-        </>
+        <Box
+          sx={{
+            bgColor: "#1111",
+            p: 6,
+            h: "300px",
+            w: "50%",
+            zIndex: btnClick ? 0 : 10,
+            opacity: btnClick ? 0 : 1,
+            transition: "opacity 1s ease 0.75s",
+            position: "absolute",
+            left: btnClick ? "100%" : 0,
+          }}
+        >
+          <Inputs
+            label="ورود به عنوان کارمند"
+            submitHandler={handleSubmit}
+            inputHandler={handleInputChange}
+            formInput={input}
+          />
+        </Box>
+      </>
       {/* )} */}
     </Flex>
   );

@@ -6,8 +6,8 @@ import {
   SimpleGrid,
   Button,
 } from "@chakra-ui/react";
-import useAreaLazerForm from "@/hooks/adminDashboard/useAreaLazerForm";
 import CustomButton from "@/Common/customeButton/CustomeButton";
+import useAreaLazerForm from "../useAreaLazerForm";
 
 const AreaLazerForm = ({ areaToEdit, isEdit }) => {
   const {

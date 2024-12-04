@@ -6,10 +6,10 @@ import {
   ModalCloseButton,
   Box,
 } from "@chakra-ui/react";
-import useVerificationNumber from "@/hooks/auth/useVerificationNumber";
-import useVerificationCode from "@/hooks/auth/useVerificationCode";
 import VerificationNumber from "./ui/verificationNumber/VerificationNumber";
 import VerificationCode from "./ui/verificationCode/VerificationCode";
+import useVerificationCode from "./useVerificationCode";
+import useVerificationNumber from "./useVerificationNumber";
 
 
 const MainModal = ({ onClose, onOpen, isOpen }) => {
