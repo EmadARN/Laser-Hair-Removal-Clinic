@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { postAsyncCode, postAsyncNumber } from "@/features/signin/authSlice";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import { useCustomToast } from "@/utils/useCustomToast ";
+import { postAsyncCode, postAsyncNumber } from "@/features/signin/authSlice";
 
 const useVerificationCode = (page) => {
   const [phoneNumber, setPhoneNumber] = useState("");

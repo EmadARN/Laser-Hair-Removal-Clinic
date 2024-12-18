@@ -6,13 +6,14 @@ import { getDateParts } from "@/utils/extractDate";
 import HeaderDetails from "./ui/HeaderDetails";
 import CustomerTable from "./ui/CustomerTable";
 import FinancialReports from "./ui/financialReports/FinancialReports";
-import useFinancialData from "@/hooks/adminDashboard/homeComponent/useFinancialData";
+
 import {
   fetchWeekData,
   getAsyncListDateOperator,
   getCutomerList,
   getDate,
 } from "@/features/adminDashboard/adminThunks";
+import useFinancialData from "./useFinancialData";
 
 const Home = () => {
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);

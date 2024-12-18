@@ -2,12 +2,12 @@ import React from "react";
 import { Box, useDisclosure, Button, Flex } from "@chakra-ui/react";
 import { useCookies } from "react-cookie";
 import { FaCalendarAlt } from "react-icons/fa";
-import useWeeklyCalendar from "@/hooks/adminDashboard/useWeeklyCalendar";
 import TableWeekly from "./ui/TableWeekly";
 import OperatorModal from "./ui/OperatorModal";
 import AdminHeader from "../shared/AdminHeader";
 import DataSlider from "./ui/DataSlider";
 import CustomButton from "@/Common/customeButton/CustomeButton";
+import useWeeklyCalendar from "./useWeeklyCalendar";
 
 const WeeklyCalendar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

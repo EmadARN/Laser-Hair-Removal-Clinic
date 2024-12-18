@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import AreaChoice from "./AreaChoice";
 import { Spinner, Text } from "@chakra-ui/react";
-import { useFetchLazerAreas } from "@/hooks/userDashboard/useFetchLazerAreaList";
-import { usePostLazerAreas } from "@/hooks/userDashboard/usePostLazerAreaList";
 import { useCookies } from "react-cookie";
 import useStepper from "@/hooks/userDashboard/useSteper";
 import StepperPrototype from "../stepper";
 import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
 import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
+import { useFetchLazerAreas } from "./useFetchLazerAreaList";
+import { usePostLazerAreas } from "./usePostLazerAreaList";
 
 const ChoosingArea = ({ slug }) => {
   const [checkedItems, setCheckedItems] = useState([]);

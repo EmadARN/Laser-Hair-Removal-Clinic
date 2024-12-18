@@ -18,7 +18,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import TextInput from "./Inputs";
 import { userInputs } from "@/constants";
-import useUserForm from "@/hooks/adminDashboard/useUserForm";
+import useUserForm from "../useUserForm";
 
 const UserForm = ({ userToEdit, isEdit, token }) => {
   const { loading } = useSelector((state) => state.adminDashboard);
