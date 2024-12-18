@@ -10,7 +10,8 @@ import { MdCancel } from "react-icons/md";
 import { thirdBox, fourthBox, fifthBox, sisxthBox } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
-import { getLazerAreas } from "@/features/receptionDashboard/receptionDashboardSlice";
+import { getLazerAreas } from "@/features/receptionDashboard/receptionThunks";
+
 
 const LaserAreas = ({ setStep, onClose }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
