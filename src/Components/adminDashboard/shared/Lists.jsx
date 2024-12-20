@@ -35,7 +35,7 @@ const Lists = ({
   return (
     <Flex
       sx={{
-        flexDirection: { base: "column", md: "row" }, // تغییر جهت بر اساس سایز صفحه
+        flexDirection: { base: "column", md: "row" },
         justifyContent: "space-between",
         alignItems: "center",
         bgColor: bgColor || "graySky.100",
@@ -46,19 +46,46 @@ const Lists = ({
         my: 2,
       }}
     >
-      <Stack direction="row" gap={4} alignItems="center">
-        <img
-          style={{ borderRadius: "50%", display: imgDisplay || display }}
-          src=""
-          alt=""
-        />
-        <Text fontSize={responsiveFontSize}>{firstArea}</Text>
-      </Stack>
-      <Box fontSize={responsiveFontSize}>{secondArea}</Box>
-      <Box fontSize={responsiveFontSize} sx={{ display: displayThirdArea }}>
+   
+      <Box
+        flex="3"
+        minWidth="130px"
+        textAlign="right"
+        fontSize={responsiveFontSize}
+      >
+        {firstArea}
+      </Box>
+
+  
+      <Box
+        flex="3"
+        minWidth="130px"
+        textAlign="right"
+        fontSize={responsiveFontSize}
+      >
+        {secondArea}
+      </Box>
+
+
+      <Box
+        flex="3"
+        minWidth="120px"
+        textAlign="right"
+        fontSize={responsiveFontSize}
+        sx={{ display: displayThirdArea }}
+      >
         {thirdArea}
       </Box>
-      <Stack direction="row" gap={1} display={editDeleteDisplay}>
+
+  
+      <Stack
+        direction="row"
+        gap={2}
+        flex="1"
+        justifyContent="center"
+        alignItems="center"
+        display={editDeleteDisplay}
+      >
         <ModalDefine
           headerContent={headerContentValue}
           bodyContent={ModalBodyContent}
@@ -74,7 +101,8 @@ const Lists = ({
         />
       </Stack>
 
-      <Box display={leftArrowDisplay}>
+
+      <Box flex="0.2" display={leftArrowDisplay} textAlign="center">
         <FaChevronLeft />
       </Box>
     </Flex>
