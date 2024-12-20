@@ -74,7 +74,7 @@ const OutputInformation = ({ confrimInfoDetail, loading, error }) => {
                   sx={{
                     textAlign: "center",
                     color: "#222",
-                    whiteSpace: "nowrap",
+                    whiteSpace: "wrap",
                   }}
                 >
                   {item.value}
