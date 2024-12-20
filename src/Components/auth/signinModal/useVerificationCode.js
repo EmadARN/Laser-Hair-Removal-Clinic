@@ -22,13 +22,13 @@ const useVerificationCode = (page) => {
       setPhoneNumber(storedPhoneNumber);
     }
 
-    if (time > 0) {
-      const timer = setInterval(
-        () => setTime((prevTime) => prevTime - 1),
-        1000
-      );
-      return () => clearInterval(timer);
-    }
+    // if (time > 0) {
+    //   const timer = setInterval(
+    //     () => setTime((prevTime) => prevTime - 1),
+    //     1000
+    //   );
+    //   return () => clearInterval(timer);
+    // }
 
     // زمانی که تایمر به صفر می‌رسد، کد جدید را ارسال کن
     if (time === 0) {
@@ -45,6 +45,7 @@ const useVerificationCode = (page) => {
       postAsyncCode({
         phone_number: phoneNumber,
         code: newCodeValue,
+        router:router.pathname
       })
     );
 
@@ -55,9 +56,10 @@ const useVerificationCode = (page) => {
         description: "به داشبورد هدایت شدید.",
         status: "success",
       });
-      if (receivedToken) {
-        setCookie("auth_token", receivedToken, { path: "/" });
-        router.push("/userDashboard");
+      router.push("/userDashboard");
+      if (result.payload.token) {
+        setCookie("auth_token", result.payload.token, { path: "/" });
+    
       }
     } else {
       showToast({
