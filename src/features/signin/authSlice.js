@@ -94,7 +94,12 @@ const authSlice = createSlice({
         state.phone_number = "";
       })
       .addCase(postAsyncCode.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled");
+       
+        if(action.payload.router === "/userDashboard"){
+         handleAsyncState(state, action, "fulfilled");
+        }else{
+          handleAsyncState(state, {}, "pending");
+        }
         state.code = action.payload.code;
         state.phone_number = action.payload.phone_number;
         // state.token = action.payload.token; // ذخیره توکن در state

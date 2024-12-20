@@ -1,8 +1,12 @@
 import { Button, forwardRef } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 
 const ButtonAccept = forwardRef((props, ref) => {
-  const { value, onSubmit, loading, isDisabled } = props;
+  const { value, onSubmit, loading, isDisabled,page } = props;
+  const router = useRouter()
+  
+  
 
   return (
     <Button
@@ -23,7 +27,8 @@ const ButtonAccept = forwardRef((props, ref) => {
       }}
       id="mybtn"
     >
-      {loading ? "..." : "ادامه"}
+
+      { loading   ? "..." : "ادامه"}
     </Button>
   );
 });
