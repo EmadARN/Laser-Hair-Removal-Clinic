@@ -6,6 +6,7 @@ import NavLink from "./NavLink";
 import { FaUser } from "react-icons/fa";
 import RightBar from "@/Components/landing/drawer";
 import { Logo } from "@/widget/Logo";
+import Link from "next/link";
 
 export default function NavBar({ bgColor }) {
   const router = useRouter();
@@ -44,8 +45,6 @@ export default function NavBar({ bgColor }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
-
   return (
     <Box
       w="100%"
@@ -81,8 +80,12 @@ export default function NavBar({ bgColor }) {
         </Flex>
         <Flex alignItems="center">
           <Menu>
-            <Box
-              onClick={handleAvatarClick}
+            <Link
+              href={
+                cookies.auth_token
+                  ? "/userDashboard"
+                  : "/signInCustomer"
+              }
               rounded="full"
               variant="link"
               cursor="pointer"
@@ -104,7 +107,7 @@ export default function NavBar({ bgColor }) {
                     الان رزرو نوبت
                   </Button>
                 ))}
-            </Box>
+            </Link>
           </Menu>
         </Flex>
       </Flex>
