@@ -13,6 +13,7 @@ const LoginPage = () => {
   const [input, setInput] = useState({ username: "", password: "" });
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
   const [captchaToken, setCaptchaToken] = useState(""); // ذخیره توکن کپچا
+  const [loading, setLoading] = useState(false);
   const login = useLoginAdminRecptionHooks();
   const router = useRouter();
   const { showToast } = useCustomToast();
@@ -24,6 +25,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (!input.username || !input.password) {
       showToast({
         title: "خطا",
@@ -42,7 +44,14 @@ const LoginPage = () => {
       router.push(
         btnClick ? "/adminDashboard/home" : "/reseptionDashboard/dailyShifts"
       );
+      if (
+        success &&
+        (router.pathname === "/adminDashboard/home" || router.pathname === "/reseptionDashboard/dailyShifts")
+      ) {
+        setLoading(false);
+      }
     } else {
+      setLoading(false)
       showToast({
         title: "خطا",
         description: `شما نمی‌توانید به عنوان ${
@@ -97,6 +106,7 @@ const LoginPage = () => {
               }}
             >
               <Inputs
+                loading={loading}
                 label="ورود به عنوان مدیر"
                 submitHandler={handleSubmit}
                 inputHandler={handleInputChange}

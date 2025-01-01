@@ -8,6 +8,7 @@ import StepperPrototype from "../stepper";
 import { postCustomerInformation } from "@/features/customerDashboard/customerThunks";
 import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
 import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
+import { useRouter } from "next/router";
 
 const UserInformation = ({ slug }) => {
   const { showToast } = useCustomToast();
@@ -29,6 +30,7 @@ const UserInformation = ({ slug }) => {
   const [{ auth_token } = cookies] = useCookies(["auth_token"]);
   const dispatch = useDispatch();
   const { handleNextStep } = useStepper();
+  const router = useRouter()
 
   useEffect(() => {
     // تابع برای بررسی اینکه آیا تمام فیلدها پر شده‌اند یا نه
@@ -66,6 +68,8 @@ const UserInformation = ({ slug }) => {
       postCustomerInformation({
         ...inputsData,
         auth_token,
+        slug,
+        router:router.pathname
       })
     );
 

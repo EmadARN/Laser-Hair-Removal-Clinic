@@ -11,7 +11,7 @@ const style = {
     boxShadow: "0 0 0 2px #ab9dfa",
   },
 };
-const Inputs = ({ label, submitHandler, inputHandler, formInput }) => {
+const Inputs = ({ label, submitHandler, inputHandler, formInput,loading }) => {
   return (
     <form onSubmit={submitHandler}>
       <Box
@@ -59,7 +59,7 @@ const Inputs = ({ label, submitHandler, inputHandler, formInput }) => {
       </Box>
       <Flex justifyContent={"center"} alignItems={"center"} mt={4}>
         <Button sx={{ w: "30%" }} type="submit">
-          تایید
+         {loading ?"...":"تایید"}
         </Button>
       </Flex>
     </form>

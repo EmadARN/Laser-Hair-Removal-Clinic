@@ -36,13 +36,19 @@ const Date = ({
   return (
     <Box>
       <Box mb={2} pr={4} pt={2} pb={12} bgColor={"white"} rounded={"8px"}>
-        <SelectTime
-          timeList={timeList}
-          selectedDateId={selectedDateId}
-          setSelectedDateId={setSelectedDateId}
-          selectedSlot={selectedSlot}
-          setSelectedSlot={setSelectedSlot}
-        />
+        {loading ? (
+          "loading"
+        ) : error ? (
+          <Box color="red">خطایی رخ داده است!</Box>
+        ):(
+          <SelectTime
+            timeList={timeList}
+            selectedDateId={selectedDateId}
+            setSelectedDateId={setSelectedDateId}
+            selectedSlot={selectedSlot}
+            setSelectedSlot={setSelectedSlot}
+          />
+        )}
       </Box>
 
       <Accordion defaultIndex={[0]} allowMultiple bgColor={"white"}>

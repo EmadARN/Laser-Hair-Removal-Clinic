@@ -20,6 +20,7 @@ const DashboardLayout = ({
 }) => {
   const [username, setUsername] = useState(null);
   const [{ auth_token }] = useCookies(["auth_token"]);
+  const [loading,setLoading] = useState(false)
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -36,11 +37,15 @@ const DashboardLayout = ({
   }, [dispatch, auth_token]);
 
   const handleButtonClick = () => {
+    setLoading(true)
     router.push(
       checkPhoneNumberMatch()
         ? "userDashboard/choosingArea"
         : "userDashboard/userInformation"
     );
+    if(router.pathname ==="userDashboard/choosingArea"||router.pathname ==="userDashboard/userInformation"){
+      setLoading(false)
+    }
   };
 
   const checkPhoneNumberMatch = () =>
@@ -123,7 +128,7 @@ const DashboardLayout = ({
               fontWeight="500"
               onClick={handleButtonClick}
             >
-              رزرو نوبت
+             {loading ? '...':'رزرو نوبت'}
             </Button>
           </Box>
         </Box>

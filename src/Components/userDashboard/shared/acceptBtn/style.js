@@ -9,7 +9,7 @@ export const MainBox = {
 
 export const ButtonStyle = {
   "&:hover": { bgColor: "#347391" },
-  bgColor: "#2aafed",
+  bgColor: "brand.400",
   color: "#fff",
   w: "27%",
 };

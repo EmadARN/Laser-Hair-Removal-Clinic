@@ -22,7 +22,6 @@ const handleAsyncState = (state, action, status) => {
   }
 };
 
-
 // Initial State
 const initialState = {
   loading: false,
@@ -50,7 +49,11 @@ const customerDashboardSlice = createSlice({
         state.error = "";
       })
       .addCase(postCustomerInformation.fulfilled, (state, action) => {
-        handleAsyncState(state, action, "fulfilled");
+        if (action.payload.router === action.payload.slug) {
+          handleAsyncState(state, action, "fulfilled");
+        } else {
+          (state.loading = true), (state.error = "");
+        }
       })
       .addCase(postCustomerInformation.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");

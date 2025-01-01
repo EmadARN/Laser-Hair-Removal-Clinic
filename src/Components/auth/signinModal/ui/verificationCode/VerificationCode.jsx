@@ -13,6 +13,7 @@ const VerificationCode = ({
   handleBackClick,
   onSubmit,
   loading,
+  page
 }) => {
   const nextInput = useRef([]);
   const buttonFocus = useRef();
@@ -95,6 +96,7 @@ const VerificationCode = ({
 
       <Box w="100%" display="flex" justifyContent="center">
         <ButtonAccept
+        page={page}
           value={inputCode.join("")}
           onSubmit={onSubmit}
           loading={loading}

@@ -15,6 +15,7 @@ import { MdCancel } from "react-icons/md";
 import ButtonAccept from "../ButtonAccept";
 import * as Yup from "yup";
 import { useFormik } from "formik/dist";
+import { useRouter } from "next/router";
 
 // validation schema
 const validationSchema = Yup.object({
@@ -30,6 +31,7 @@ const initialValues = {
 };
 
 export default function VerificationNumber({
+  page,
   onClose,
   isOpen,
   loading,
@@ -44,6 +46,15 @@ export default function VerificationNumber({
     validationSchema,
     validateOnMount: true,
   });
+
+const router = useRouter()
+
+
+  const closeModalHandler = ()=>{
+    onClose();
+    router.push("/")
+    
+  }
 
   return (
     <Modal
@@ -60,7 +71,7 @@ export default function VerificationNumber({
           <MdCancel
             size={"24px"}
             cursor={"pointer"}
-            // onClick={onClose} // برای بستن مودال
+             onClick={closeModalHandler} // برای بستن مودال
           />
         </Box>
 
@@ -88,6 +99,7 @@ export default function VerificationNumber({
 
         <ModalFooter display="flex" justifyContent="center" width="100%">
           <ButtonAccept
+          page={page}
             value={formik.values.phone_number}
             onSubmit={formik.handleSubmit}
             loading={loading}
