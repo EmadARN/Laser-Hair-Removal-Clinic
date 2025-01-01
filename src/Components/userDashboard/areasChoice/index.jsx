@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import AreaChoice from "./AreaChoice";
 import { Spinner, Text } from "@chakra-ui/react";
 import { useCookies } from "react-cookie";
-import useStepper from "@/hooks/userDashboard/useSteper";
 import StepperPrototype from "../stepper";
 import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
 import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
@@ -14,7 +13,6 @@ const ChoosingArea = ({ slug }) => {
   const [reserveId, setReserveId] = useState([]);
   const [{ auth_token } = cookies] = useCookies(["auth_token"]);
 
-  const { handleNextStep } = useStepper();
   const { areas, loading, error } = useFetchLazerAreas(auth_token);
   const { submitHandler } = usePostLazerAreas(reserveId, auth_token);
 
@@ -76,7 +74,6 @@ const ChoosingArea = ({ slug }) => {
         bgColor={"white"}
         submitHandler={submitHandler}
         letPush={reserveId}
-        onNextStep={handleNextStep}
         isDisabled={isDisabled}
       />
     </>

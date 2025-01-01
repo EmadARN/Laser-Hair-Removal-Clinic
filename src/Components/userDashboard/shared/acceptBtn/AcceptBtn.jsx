@@ -8,7 +8,6 @@ export const AcceptBtn = ({
   bgColor,
   slug,
   submitHandler,
-  onNextStep,
   isDisabled,
 }) => {
   const router = useRouter();
@@ -19,10 +18,8 @@ export const AcceptBtn = ({
     if (submitHandler) {
       submitHandler();
       router.push(`${slug}`);
-      onNextStep();
     } else {
       router.push(`${slug}`);
-      onNextStep();
     }
   };
   return (

@@ -8,7 +8,6 @@ import {
   getreserveInformation,
   getTimeList,
 } from "@/features/customerDashboard/customerThunks";
-import { nextStep } from "@/features/steper/stepSlice";
 import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
 import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
 
@@ -88,7 +87,6 @@ const DateTime = ({ slug }) => {
         text="ادامه"
         bgColor={"white"}
         submitHandler={submitHandler}
-        onNextStep={handleCompleteStep}
       />
     </>
   );

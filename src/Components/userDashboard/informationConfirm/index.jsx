@@ -4,7 +4,6 @@ import TurnInfo from "./TurnInfo";
 import OutputInformation from "./OutputInformation";
 import { useDispatch, useSelector } from "react-redux";
 import useStepper from "@/hooks/userDashboard/useSteper";
-import { nextStep } from "@/features/steper/stepSlice";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper";
 import { confirmInfo } from "@/features/customerDashboard/customerThunks";
@@ -12,7 +11,6 @@ import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard"
 import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
 
 const ConfirmInfo = ({ slug }) => {
-  const { handleNextStep } = useStepper();
   const [cookies, setCookie] = useCookies(["auth_token"]);
 
   const { confrimInfoDetail, loading, error } = useSelector(
@@ -62,7 +60,6 @@ const ConfirmInfo = ({ slug }) => {
         text="تایید اطلاعات"
         bgColor={"white"}
         slug={slug}
-        onNextStep={handleCompleteStep}
       />
     </Grid>
   );

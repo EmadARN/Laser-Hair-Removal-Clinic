@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
 import RegisterForm from "./RegisterForm";
-import useStepper from "@/hooks/userDashboard/useSteper";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import StepperPrototype from "../stepper";
 import { postCustomerInformation } from "@/features/customerDashboard/customerThunks";
@@ -29,7 +28,6 @@ const UserInformation = ({ slug }) => {
   const [diseaseHistory, setDiseaseHistory] = useState("fasle");
   const [{ auth_token } = cookies] = useCookies(["auth_token"]);
   const dispatch = useDispatch();
-  const { handleNextStep } = useStepper();
   const router = useRouter()
 
   useEffect(() => {
@@ -104,7 +102,6 @@ const UserInformation = ({ slug }) => {
         text="ادامه"
         bgColor={"white"}
         submitHandler={submitHandler}
-        onNextStep={handleNextStep}
         isDisabled={isDisabled}
       />
     </>

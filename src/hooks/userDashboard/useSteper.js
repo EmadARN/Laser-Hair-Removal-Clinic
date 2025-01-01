@@ -1,4 +1,3 @@
-import { markStepComplete, nextStep } from "@/features/steper/stepSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const useStepper = () => {
