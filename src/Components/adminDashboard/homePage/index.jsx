@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
@@ -6,7 +6,6 @@ import { getDateParts } from "@/utils/extractDate";
 import HeaderDetails from "./ui/HeaderDetails";
 import CustomerTable from "./ui/CustomerTable";
 import FinancialReports from "./ui/financialReports/FinancialReports";
-
 import {
   fetchWeekData,
   getAsyncListDateOperator,
@@ -14,6 +13,8 @@ import {
   getDate,
 } from "@/features/adminDashboard/adminThunks";
 import useFinancialData from "./useFinancialData";
+import TodayIncomeChart from "./ui/charts/TodayIncomeChart";
+import TodayIncomeDoughnut from "./ui/charts/TodayIncomeDoughnut";
 
 const Home = () => {
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
@@ -107,6 +108,22 @@ const Home = () => {
           totalAmountThisMonth={totalAmount}
         />
       </Box>
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        wrap="wrap"
+        justify="space-around"
+        align="center"
+        gap={8}
+        mb={10}
+        sx={{ mt: 8, bgColor: "#F7FAFC", p: 4, rounded: "8px" }}
+      >
+        <Box w={{ base: "100%", md: "20%" }} h="100%" maxW="400px" maxH="300px">
+          <TodayIncomeDoughnut />
+        </Box>
+        <Box w={{ base: "100%", md: "50%" }} h="100%" maxW="400px" maxH="300px">
+          <TodayIncomeChart />
+        </Box>
+      </Flex>
       <CustomerTable
         dateReserve={dateReserve}
         customerListAdmin={customerListAdmin}

@@ -6,3 +6,10 @@ export function getTodayDate() {
 
   return `امروز - ${today}`;
 }
+export function getTodayDateYear() {
+  const today = new Date().toLocaleDateString("fa-IR", {
+    year: "numeric",
+  });
+
+  return `درآمد - ${today}`;
+}

@@ -48,7 +48,7 @@ const ConfirmInfo = ({ slug }) => {
       flexDirection="column"
       gap={3}
     >
-      <StepperPrototype onCompleteStep={handleCompleteStep} />
+      <StepperPrototype currentStep={4} />
       <TitleUserDashboard />
       <OutputInformation
         loading={loading}

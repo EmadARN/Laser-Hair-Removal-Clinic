@@ -61,7 +61,7 @@ const ChoosingArea = ({ slug }) => {
 
   return (
     <>
-      <StepperPrototype onCompleteStep={handleNextStep} />
+      <StepperPrototype currentStep={2} />
       <TitleUserDashboard />
       <AreaChoice
         areas={areas}

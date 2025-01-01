@@ -1,4 +1,4 @@
-import { Box, VStack } from "@chakra-ui/react";
+import { Box, Flex, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
@@ -8,6 +8,8 @@ import ReportItem from "./ui/ReportItem";
 import useReportsData from "./useReportsData";
 import useSummary from "./useSummary";
 import useDateRange from "./useDateRange";
+import LaserSessionsChart from "./ui/charts/LaserSessionsChart";
+import LineChart from "./ui/charts/LineChart";
 
 const Reports = () => {
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
@@ -35,6 +37,40 @@ const Reports = () => {
           totalPriceAmount={summary.totalPriceAmount}
         />
       </Box>
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        wrap="wrap"
+        justify="center" // برای تراز کردن افقی
+        align="center" // برای تراز کردن عمودی
+        gap={4} // کاهش فاصله بین دو چارت
+        mb={10}
+      >
+        <Box
+          w={{ base: "100%", md: "49%" }}
+          sx={{
+            mt: 8,
+            bgColor: "#F7FAFC",
+            p: 4,
+            rounded: "8px",
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+          }}
+        >
+          <LineChart />
+        </Box>
+        <Box
+          w={{ base: "100%", md: "49%" }}
+          sx={{
+            mt: 8,
+            bgColor: "#F7FAFC",
+            p: 4,
+            rounded: "8px",
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+          }}
+        >
+          <LaserSessionsChart />
+        </Box>
+      </Flex>
+
       <Box mt={{ base: 6, md: 8 }}>
         <VStack align="stretch" spacing={2}>
           {dateReserve?.complete_list.map((item) => (

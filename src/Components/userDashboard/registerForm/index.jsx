@@ -86,7 +86,7 @@ const UserInformation = ({ slug }) => {
 
   return (
     <>
-      <StepperPrototype onCompleteStep={handleNextStep} />
+      <StepperPrototype currentStep={1} />
       <TitleUserDashboard />
       <RegisterForm
         handleChange={handleChange}

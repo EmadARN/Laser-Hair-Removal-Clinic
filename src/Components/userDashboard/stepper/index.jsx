@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   Box,
+  Flex,
   Step,
   StepDescription,
   StepIndicator,
@@ -9,79 +10,74 @@ import {
 import { FaCheck } from "react-icons/fa";
 import { steps } from "@/constants";
 
-const StepperPrototype = () => {
-  // const dispatch = useDispatch();
-  const { page, completedSteps } = useSelector((store) => store.steper);
-
-  // const handleNextStep = () => {
-  //   if (!completedSteps.includes(page)) {
-  //     dispatch(markStepComplete(page)); // مرحله فعلی را به عنوان تکمیل شده علامت‌گذاری می‌کنیم
-  //   }
-  //   dispatch(nextStep()); // به مرحله بعدی می‌رویم
-  // };
-
+const StepperComponent = ({ currentStep }) => {
   return (
-    <Stepper
-      orientation={{ base: "vertical", md: "horizontal" }}
-      sx={{
-        minWidth: { base: "200px", sm: "300px", md: "500px" },
-        width: "100%",
-        m: "auto",
-        pt: 2,
-      }}
-      size={{ base: "sm", md: "lg" }}
-      colorScheme="purple"
-      index={page}
-    >
-      {steps.map((step, index) => {
-        const IconComponent = step.icon;
-        const isActive = index === page;
-        const isComplete = completedSteps.includes(index);
+    <Flex w="full" mx="auto" py={10} flexDirection="column" alignItems="center">
+      <Stepper
+        size="lg"
+        index={currentStep - 1} // Index بر اساس مرحله
+        colorScheme="purple"
+        w="95%" // عرض کامل
+      >
+        {steps.map((step, index) => {
+          const StepIcon = step.icon; // آیکون هر استپ
+          return (
+            <Step key={step.id}>
+              <Flex flexDirection="column" alignItems="center">
+                {/* دایره هر مرحله */}
+                <StepIndicator
+                  size="10"
+                  borderWidth="2px"
+                  bg={
+                    currentStep > index + 1
+                      ? "green.500"
+                      : currentStep === index + 1
+                      ? "blue.500"
+                      : "gray.200"
+                  }
+                  color="white"
+                  borderColor={
+                    currentStep > index + 1
+                      ? "green.500"
+                      : currentStep === index + 1
+                      ? "blue.500"
+                      : "gray.300"
+                  }
+                >
+                  {currentStep > index + 1 ? (
+                    <FaCheck size={18} />
+                  ) : (
+                    <StepIcon size={18} />
+                  )}
+                </StepIndicator>
 
-        return (
-          <Step key={index}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-                cursor: "pointer",
-              }}
-            >
-              <StepIndicator
-                transform={isActive ? "scale(1.2)" : "scale(1)"}
-                bg={
-                  isActive
-                    ? "purple.500"
-                    : isComplete
-                    ? "green.400"
-                    : "gray.200"
-                }
-                color="white"
-                transition="transform 0.2s"
-              >
-                {isComplete ? (
-                  <FaCheck size={24} />
-                ) : (
-                  <IconComponent size={isActive ? 24 : 20} />
+                {/* متن مرحله */}
+                <StepDescription
+                  mt={2}
+                  fontSize={{ base: "10px", md: "md" }}
+                  color={currentStep === index + 1 ? "blue.500" : "gray.500"}
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  {step.description}
+                </StepDescription>
+
+                {/* خط اتصال */}
+                {index < steps.length - 1 && (
+                  <Box
+                    h="2px"
+                    w="full"
+                    bg={currentStep > index + 1 ? "green.500" : "gray.300"}
+                    mt={2}
+                    sx={{ display: { base: "none", md: "block" } }}
+                  />
                 )}
-              </StepIndicator>
-
-              <Box
-                mt={2}
-                textAlign="center"
-                fontSize={{ base: "sm", md: "md" }}
-                color={isActive ? "purple.500" : "gray.500"}
-              >
-                <StepDescription>{step.description}</StepDescription>
-              </Box>
-            </Box>
-          </Step>
-        );
-      })}
-    </Stepper>
+              </Flex>
+            </Step>
+          );
+        })}
+      </Stepper>
+    </Flex>
   );
 };
 
-export default StepperPrototype;
+export default StepperComponent;

@@ -4,7 +4,10 @@ import { useCookies } from "react-cookie";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import StepperPrototype from "../stepper";
 import Date from "./Date";
-import { getreserveInformation, getTimeList } from "@/features/customerDashboard/customerThunks";
+import {
+  getreserveInformation,
+  getTimeList,
+} from "@/features/customerDashboard/customerThunks";
 import { nextStep } from "@/features/steper/stepSlice";
 import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
 import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
@@ -68,7 +71,7 @@ const DateTime = ({ slug }) => {
 
   return (
     <>
-      <StepperPrototype onCompleteStep={handleCompleteStep} />
+      <StepperPrototype currentStep={3} />
       <TitleUserDashboard />
       <Date
         error={error}
