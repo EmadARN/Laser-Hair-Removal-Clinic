@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Spinner, Text, Skeleton } from "@chakra-ui/react";
 import { RiShieldUserFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,13 @@ import BodyContent from "./modal/BodyContent";
 import FooterContent from "./modal/FooterContent";
 import ReusableSession from "../shared/ReussableSession";
 import { getAsyncUsersList } from "@/features/adminDashboard/adminThunks";
+import Loading from "@/Common/loading";
+
+
 
 const Empolyees = () => {
+
+
   const dispatch = useDispatch();
 
   // Selector برای دریافت وضعیت بارگذاری، داده‌ها و توکن
@@ -26,13 +31,8 @@ const Empolyees = () => {
     }
   }, [dispatch, token]);
 
-  // مدیریت وضعیت بارگذاری و خطا
   if (loading) {
-    return (
-      <Box sx={{ py: 6 }}>
-        <Spinner />
-      </Box>
-    );
+    return <Loading />;
   }
 
   if (error) {
