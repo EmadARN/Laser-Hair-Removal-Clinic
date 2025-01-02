@@ -14,8 +14,8 @@ import {
 } from "@/features/customerDashboard/customerThunks";
 
 const DashboardLayout = ({
-  setSteperState,
-  steperState,
+
+
   sessionRecordClick,
 }) => {
   const [username, setUsername] = useState(null);
@@ -135,8 +135,8 @@ const DashboardLayout = ({
 
         <SessionRecordSection
           sessionRecordClick={sessionRecordClick}
-          steperState={steperState}
-          setSteperState={setSteperState}
+        
+    
         />
       </Grid>
     </>

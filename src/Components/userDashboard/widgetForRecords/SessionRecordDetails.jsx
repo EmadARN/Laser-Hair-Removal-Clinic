@@ -3,7 +3,7 @@ import { Grid, Box, Text, Button } from "@chakra-ui/react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
-const SessionRecordDetails = ({ setSteperState }) => {
+const SessionRecordDetails = ({ setSteperState, dispatch }) => {
   const { sessionRecords, loading, error } = useSelector(
     (store) => store.customerDashboard
   );
@@ -83,7 +83,7 @@ const SessionRecordDetails = ({ setSteperState }) => {
           <Button
             leftIcon={<FaLongArrowAltRight />}
             onClick={() => {
-              setSteperState(1);
+              dispatch(setSteperState(1));
             }}
           >
             بازگشت

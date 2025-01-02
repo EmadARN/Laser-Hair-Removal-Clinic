@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "./DashboardLayout";
-import { useDashboardContext } from "@/context/DashboardContext";
-import { useDispatch } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 
 import { useCookies } from "react-cookie";
 import Session_Records from "./widgetForRecords/Session-Records";
 import SessionRecordDetails from "./widgetForRecords/SessionRecordDetails";
 import NavBar from "@/Layout/navbar/NavBar";
 import { getSessionRecords } from "@/features/customerDashboard/customerThunks";
+import { setSteperState } from "@/features/dashboardSteper/dashboardSlice";
 
 const Dashboard = () => {
-  const { steperState, setSteperState } = useDashboardContext();
+
+  const { steperState } = useSelector((store) => store.dashboardSteper);
 
   const [phoneNumber, setPhoneNumber] = useState();
 
@@ -21,21 +23,16 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const sessionRecordClick = () => {
-    setSteperState(steperState + 1);
+    dispatch(setSteperState(steperState + 1));
     dispatch(getSessionRecords({ phoneNumber, auth_token }));
   };
 
   if (steperState === 0) {
-    return (
-      <DashboardLayout
-        sessionRecordClick={sessionRecordClick}
-        steperState={steperState}
-        setSteperState={setSteperState}
-      />
-    );
+    return <DashboardLayout sessionRecordClick={sessionRecordClick} />;
   } else if (steperState === 1) {
     return (
       <Session_Records
+        dispatch={dispatch}
         steperState={steperState}
         setSteperState={setSteperState}
       />
@@ -45,7 +42,7 @@ const Dashboard = () => {
       <>
         <NavBar bgColor="#ffffff" />
         <SessionRecordDetails
-          steperState={steperState}
+          dispatch={dispatch}
           setSteperState={setSteperState}
         />
       </>
