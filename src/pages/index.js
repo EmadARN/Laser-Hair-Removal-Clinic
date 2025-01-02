@@ -1,4 +1,5 @@
 import BackToUp from "@/Common/backToUp/BackToUp";
+import Loading from "@/Common/loading";
 import Banner from "@/Components/landing/banner";
 import Faqs from "@/Components/landing/faqs";
 import { GuideSignup } from "@/Components/landing/guideSignup";
@@ -7,10 +8,20 @@ import { LaserBefore } from "@/Components/landing/laserBefore";
 import WhyLaser from "@/Components/landing/whyLaser";
 import Layout from "@/Layout";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Home = () => {
-  return (
+  const [initialLoading, setInitialLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setInitialLoading(false);
+    }, 3000);
+  }, []);
+
+  return initialLoading ? (
+    <Loading />
+  ) : (
     <Layout bgColor={"#F7F7F7"}>
       <Header />
       <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6} my={8}>
