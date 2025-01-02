@@ -4,13 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import UserInfoBox from "./ui/UserInfoBox";
 import TurnSetting from "./ui/turnSetting";
+
 import {
   changePassword,
   getAsyncUserName,
   settingAsyncChanging,
 } from "@/features/adminDashboard/adminThunks";
+import { useCustomToast } from "@/utils/useCustomToast ";
 
 const Setting = () => {
+  const { showToast } = useCustomToast();
+
   const [turnSetting, setTurnSetting] = useState({
     trust_price: 0,
     morning_time: 0,
@@ -38,9 +42,16 @@ const Setting = () => {
     setTurnSetting((prev) => ({ ...prev, [name]: value }));
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    dispatch(settingAsyncChanging({ ...turnSetting, token: auth_Admin_token }));
+    const result = await dispatch(
+      settingAsyncChanging({ ...turnSetting, token: auth_Admin_token })
+    );
+    if (result.meta.requestStatus === "fulfilled") {
+      showToast({ title: "تنظیمات با موفقیت تغییر کرد", status: "success" });
+    } else {
+      showToast({ title: "خطا در تغییر تنظیمات", status: "error" });
+    }
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
