@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import DashboardLayout from "./DashboardLayout";
 import { useDashboardContext } from "@/context/DashboardContext";
 import { useDispatch } from "react-redux";
-import { getSessionRecords } from "@/features/customerDashboard/customerDashboardSlice";
+
 import { useCookies } from "react-cookie";
 import Session_Records from "./widgetForRecords/Session-Records";
 import SessionRecordDetails from "./widgetForRecords/SessionRecordDetails";
 import NavBar from "@/Layout/navbar/NavBar";
+import { getSessionRecords } from "@/features/customerDashboard/customerThunks";
 
 const Dashboard = () => {
   const { steperState, setSteperState } = useDashboardContext();

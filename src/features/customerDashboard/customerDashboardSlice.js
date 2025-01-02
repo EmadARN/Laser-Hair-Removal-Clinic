@@ -79,7 +79,12 @@ const customerDashboardSlice = createSlice({
       })
       .addCase(postLazerAreaList.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
-        state.userReserveId = action.payload.reserve;
+        if (action.payload && action.payload.reserve) {
+          state.userReserveId = action.payload.reserve;
+        } else {
+          console.error("Invalid payload structure:", action.payload);
+          state.error = "Invalid payload structure";
+        }
       })
       .addCase(postLazerAreaList.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");

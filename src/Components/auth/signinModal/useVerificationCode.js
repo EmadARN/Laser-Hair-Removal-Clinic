@@ -17,7 +17,7 @@ const useVerificationCode = (page) => {
 
   //Timer
   useEffect(() => {
-    const storedPhoneNumber = localStorage.getItem("phoneNumber");
+    const storedPhoneNumber =  localStorage.getItem("phoneNumber");
     if (storedPhoneNumber) {
       setPhoneNumber(storedPhoneNumber);
     }
@@ -50,7 +50,6 @@ const useVerificationCode = (page) => {
     );
 
     if (result.meta.requestStatus === "fulfilled") {
-      const receivedToken = result.payload.token;
       showToast({
         title: "ورود موفقیت‌آمیز",
         description: "به داشبورد هدایت شدید.",
