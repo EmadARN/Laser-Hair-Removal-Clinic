@@ -59,6 +59,7 @@ const AreaLazer = () => {
         AreaLaser.all_laser_area_object.first_type.length > 0 ? (
           AreaLaser.all_laser_area_object.first_type.map((item, index) => {
             return (
+              <Box  width={{base:"110vw",md:"100%"}} key={index}>
               <Lists
                 leftArrowDisplay="none"
                 key={index}
@@ -82,6 +83,7 @@ const AreaLazer = () => {
                 FooterContent={<FooterContent item={item} token={token} />}
                 iconBtnDisply="none"
               />
+                </Box>
             );
           })
         ) : (

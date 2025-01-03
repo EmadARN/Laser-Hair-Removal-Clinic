@@ -44,6 +44,8 @@ const PatientWithoutTime = () => {
   const [diseaseHistory, setDiseaseHistory] = useState("false");
   const [step, setStep] = useState(0);
 
+
+  
   const dispatch = useDispatch();
   const { cutomerList, loading, error } = useSelector(
     (store) => store.receptionDashboardSlice
@@ -67,6 +69,8 @@ const PatientWithoutTime = () => {
     if (name === "drug_hist") setDrugHistory(value);
     if (name === "decease_hist") setDiseaseHistory(value);
   };
+
+  
 
   const handleSubmit = () => {
     dispatch(addCustomerWithOutTime({ ...inputsData, auth_Employee_token }));
@@ -155,7 +159,7 @@ const PatientWithoutTime = () => {
           </Box>
 
           {step === 0 ? (
-            <Box height="500px">
+            <Box height="500px" >
               <Input />
               <Text
                 as="button"
@@ -166,7 +170,7 @@ const PatientWithoutTime = () => {
               >
                 +مراجع جدید
               </Text>
-              <Table mt={6} cursor="pointer" overflowY="auto" width="100%" size="sm" dir="rtl" variant="striped">
+              <Table mt={6} cursor="pointer" overflowY="scroll" width="100%" size="sm" dir="rtl" variant="striped">
                 <Tbody>
                   {!loading && !error && cutomerList && cutomerList.customer_list && Array.isArray(cutomerList.customer_list)
                     ? cutomerList.customer_list.map((item) => (
@@ -235,7 +239,7 @@ const PatientWithoutTime = () => {
             ].map((field, idx) => (
               
               <Input
-              onChange={(e)=>handleChange(setInputsData,e)}
+              onChange={(e)=>handleChange(e)}
                 key={idx}
                 name={field.name}
                

@@ -35,11 +35,12 @@ const Lists = ({
   return (
     <Flex
       sx={{
-        flexDirection: { base: "column", md: "row" },
+  
+        flexDirection: { base: "row", md: "row" },
         justifyContent: "space-between",
         alignItems: "center",
         bgColor: bgColor || "graySky.100",
-        width: "95%",
+        width: {base:"110%",md:"100%"},
         rounded: rounded || "8px",
         color,
         p: 5,
@@ -49,7 +50,7 @@ const Lists = ({
    
       <Box
         flex="3"
-        minWidth="130px"
+        minWidth={{base:"100px",md:"130px"}}
         textAlign="right"
         fontSize={responsiveFontSize}
       >
@@ -59,7 +60,7 @@ const Lists = ({
   
       <Box
         flex="3"
-        minWidth="130px"
+        minWidth={{base:"100px",md:"130px"}}
         textAlign="right"
         fontSize={responsiveFontSize}
       >
@@ -69,7 +70,7 @@ const Lists = ({
 
       <Box
         flex="3"
-        minWidth="120px"
+        minWidth={{base:"100px",md:"120px"}}
         textAlign="right"
         fontSize={responsiveFontSize}
         sx={{ display: displayThirdArea }}
@@ -78,7 +79,7 @@ const Lists = ({
       </Box>
 
   
-      <Stack
+      <Box
         direction="row"
         gap={2}
         flex="1"
@@ -99,7 +100,7 @@ const Lists = ({
           FooterContent={FooterContent}
           btn={<RiDeleteBinLine size={18} color="red" />}
         />
-      </Stack>
+      </Box>
 
 
       <Box flex="0.2" display={leftArrowDisplay} textAlign="center">

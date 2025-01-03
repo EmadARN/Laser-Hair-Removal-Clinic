@@ -12,11 +12,7 @@ import ReusableSession from "../shared/ReussableSession";
 import { getAsyncUsersList } from "@/features/adminDashboard/adminThunks";
 import Loading from "@/Common/loading";
 
-
-
 const Empolyees = () => {
-
-
   const dispatch = useDispatch();
 
   // Selector برای دریافت وضعیت بارگذاری، داده‌ها و توکن
@@ -77,28 +73,29 @@ const Empolyees = () => {
           users.user_list.map((user, index) => {
             const userType = type(user);
             return (
-              <Lists
-                key={index}
-                firstArea={user.username}
-                secondArea={user.name + " " + user.last_name}
-                thirdArea={userType}
-                leftArrowDisplay="none"
-                ModalBodyContent={{
-                  body: (
-                    <UserForm
-                      userToEdit={user}
-                      isEdit={true}
-                      users={users}
-                      token={token}
-                    />
-                  ),
-                }}
-                headerContentValue="ویرایش کارمند"
-                HeaderContent={<HeaderContent />}
-                BodyContent={<BodyContent />}
-                FooterContent={<FooterContent user={user} token={token} />}
-                iconBtnDisply="none"
-              />
+              <Box  width={{base:"110vw",md:"100%"}} key={index}>
+                <Lists
+                  firstArea={user.username}
+                  secondArea={user.name + " " + user.last_name}
+                  thirdArea={userType}
+                  leftArrowDisplay="none"
+                  ModalBodyContent={{
+                    body: (
+                      <UserForm
+                        userToEdit={user}
+                        isEdit={true}
+                        users={users}
+                        token={token}
+                      />
+                    ),
+                  }}
+                  headerContentValue="ویرایش کارمند"
+                  HeaderContent={<HeaderContent />}
+                  BodyContent={<BodyContent />}
+                  FooterContent={<FooterContent user={user} token={token} />}
+                  iconBtnDisply="none"
+                />
+              </Box>
             );
           })
         ) : (
