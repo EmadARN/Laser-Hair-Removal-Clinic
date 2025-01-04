@@ -1,14 +1,10 @@
 import { Box, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { tableHeaders } from "@/constants";
 
-const TableWeekly = ({
-  handleCellClick,
-  tableData = [],
-  program_list = [],
-}) => {
+const TableWeekly = ({ handleCellClick, tableData = [], programList = [] }) => {
   const getCellContent = (index) => {
-    if (!program_list.length) return "+";
-    return program_list[index]?.operator_name || "+";
+    if (!programList.length) return "+";
+    return programList[index]?.operator_name || "+";
   };
 
   const renderRow = (row, index) => (

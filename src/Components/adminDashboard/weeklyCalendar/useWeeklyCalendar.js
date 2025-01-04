@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@chakra-ui/react";
-import { getDateParts } from "@/utils/extractDate";
 import { daysOfWeek } from "@/constants";
 import {
   getAsyncListDateOperator,
@@ -8,15 +7,16 @@ import {
   getSettingInformation,
 } from "@/features/adminDashboard/adminThunks";
 import { useDispatch, useSelector } from "react-redux";
+import { getDateParts } from "../utils/getDateParts";
 
 const useWeeklyCalendar = ({ auth_Admin_token, onClose }) => {
-  const dispatch = useDispatch();
   const toast = useToast();
   const tableRef = useRef(null); // استفاده از ref برای اشاره به جدول
   const [selectedCell, setSelectedCell] = useState(null);
   const [tableData, setTableData] = useState({ day: daysOfWeek, time: [] });
   const [op_program_list, set_op_program_list] = useState([]);
 
+  const dispatch = useDispatch();
   const { operators, operatorsDate, dateRanges, dataRangeStatus, settingInfo } =
     useSelector((state) => state.adminDashboard);
 
@@ -63,8 +63,9 @@ const useWeeklyCalendar = ({ auth_Admin_token, onClose }) => {
   ]);
 
   // مدیریت انتخاب سلول
-  const handleCellClick = (day, shift, index) =>
+  const handleCellClick = (day, shift, index) => {
     setSelectedCell({ day, shift, index });
+  };
 
   // دریافت selectedIndex و لیست فعلی
   const getSelectedIndexAndList = () => {

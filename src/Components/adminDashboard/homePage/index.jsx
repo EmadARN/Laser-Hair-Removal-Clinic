@@ -2,7 +2,6 @@ import { Box, Flex } from "@chakra-ui/react";
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
-import { getDateParts } from "@/utils/extractDate";
 import HeaderDetails from "./ui/HeaderDetails";
 import CustomerTable from "./ui/CustomerTable";
 import FinancialReports from "./ui/financialReports/FinancialReports";
@@ -15,6 +14,7 @@ import {
 import useFinancialData from "./useFinancialData";
 import TodayIncomeChart from "./ui/charts/TodayIncomeChart";
 import TodayIncomeDoughnut from "./ui/charts/TodayIncomeDoughnut";
+import { getDateParts } from "../utils/getDateParts";
 
 const Home = () => {
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);

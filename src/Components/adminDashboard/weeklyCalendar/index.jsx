@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, useDisclosure, Button, Flex } from "@chakra-ui/react";
+import React, { useState, useEffect, useRef } from "react";
+import { Box, useDisclosure, Button, Flex, useToast } from "@chakra-ui/react";
 import { useCookies } from "react-cookie";
 import { FaCalendarAlt } from "react-icons/fa";
 import TableWeekly from "./ui/TableWeekly";
@@ -7,22 +7,162 @@ import OperatorModal from "./ui/OperatorModal";
 import AdminHeader from "../shared/AdminHeader";
 import DataSlider from "./ui/DataSlider";
 import CustomButton from "@/Common/customeButton/CustomeButton";
-import useWeeklyCalendar from "./useWeeklyCalendar";
+import { daysOfWeek } from "@/constants";
+import {
+  getAsyncListDateOperator,
+  getAsyncOperatorList,
+  getSettingInformation,
+  operatorProgramList,
+} from "@/features/adminDashboard/adminThunks";
+import { useDispatch, useSelector } from "react-redux";
+import { getDateParts } from "../utils/getDateParts";
 
 const WeeklyCalendar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
+  const toast = useToast();
+  const [selectedCell, setSelectedCell] = useState(null);
+  const [tableData, setTableData] = useState({ day: daysOfWeek, time: [] });
+  const [opProgramList, setOpProgramList] = useState([]);
+
+  const dispatch = useDispatch();
+  const { operators, operatorsDate, dateRanges, dataRangeStatus, settingInfo } =
+    useSelector((state) => state.adminDashboard);
 
   const {
-    tableData,
-    operators,
-    programList,
-    selectedCell,
-    handleCellClick,
-    handleOperatorSelect,
-    handleDeleteOperator,
-    handleSelect,
-  } = useWeeklyCalendar({ auth_Admin_token, onClose });
+    year: date_year,
+    month: date_month,
+    day: date_day,
+  } = getDateParts(dateRanges?.date);
+
+  // همگام‌سازی settingInfo با tableData
+  useEffect(() => {
+    if (settingInfo) {
+      setTableData((prevData) => ({
+        ...prevData,
+        time: settingInfo,
+      }));
+    }
+  }, [settingInfo]);
+
+  // Fetch اطلاعات اولیه
+  useEffect(() => {
+    if (auth_Admin_token) {
+      dispatch(getAsyncOperatorList({ token: auth_Admin_token }));
+      dispatch(getSettingInformation({ token: auth_Admin_token }));
+
+      if (dataRangeStatus) {
+        dispatch(
+          getAsyncListDateOperator({
+            token: auth_Admin_token,
+            date_year,
+            date_month,
+            date_day,
+          })
+        );
+      }
+    }
+  }, [
+    date_year,
+    date_month,
+    date_day,
+    dataRangeStatus,
+    auth_Admin_token,
+    dispatch,
+  ]);
+
+  // مدیریت انتخاب سلول
+  const handleCellClickAndOpenModal = (day, shift, index) => {
+    setSelectedCell({ day, shift, index });
+    onOpen();
+  };
+
+  // دریافت selectedIndex و لیست فعلی
+  const getSelectedIndexAndList = () => {
+    if (!selectedCell) return null;
+
+    const selectedIndex = selectedCell.index;
+    const currentList =
+      opProgramList.length > 0 ? opProgramList : operatorsDate.operator_program;
+
+    return { selectedIndex, currentList };
+  };
+
+  // مدیریت انتخاب اپراتور
+  const handleOperatorSelect = (operator) => {
+    const { selectedIndex, currentList } = getSelectedIndexAndList();
+
+    const updatedProgramList = currentList.map((item, index) =>
+      index === selectedIndex
+        ? {
+            ...item,
+            operator_name: `${operator.name} ${operator.last_name}`,
+            operator: operator.username,
+          }
+        : item
+    );
+
+    setOpProgramList(updatedProgramList);
+    onClose();
+  };
+
+  // مدیریت حذف اپراتور
+  const handleDeleteOperator = () => {
+    const { selectedIndex, currentList } = getSelectedIndexAndList();
+    const updatedProgramList = currentList.map((item, index) =>
+      index === selectedIndex
+        ? {
+            ...item,
+            operator_name: "",
+            operator: "",
+          }
+        : item
+    );
+
+    setOpProgramList(updatedProgramList);
+    onClose();
+  };
+
+  // دانلود جدول به صورت PDF از طریق چاپ مرورگر
+  const downloadPDF = () => {
+    // باز کردن پنجره چاپ مرورگر
+    if (window.print) {
+      window.print();
+      toast({
+        title: "برنامه ثبت شد!",
+        description: "برنامه با موفقیت ثبت شد و فایل PDF دانلود می‌شود.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
+    } else {
+      toast({
+        title: "برنامه ثبت نشد!",
+        description: "مرورگر شما از قابلیت چاپ پشتیبانی نمیکند",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
+    }
+  };
+
+  // ارسال برنامه و دانلود PDF
+  const handleSelect = () => {
+    dispatch(
+      operatorProgramList({
+        token: auth_Admin_token,
+        operator_program_list: opProgramList,
+      })
+    );
+
+    // بعد از ارسال برنامه، چاپ را فعال کنید
+    downloadPDF();
+  };
+
+  const programList =
+    opProgramList.length === 0 ? operatorsDate.operator_program : opProgramList;
 
   return (
     <>
@@ -42,12 +182,9 @@ const WeeklyCalendar = () => {
         {/* Table */}
         <Box overflowX="auto" borderWidth="1px" borderRadius="md" p={4}>
           <TableWeekly
-            handleCellClick={(day, shift, index) => {
-              handleCellClick(day, shift, index);
-              onOpen();
-            }}
+            handleCellClick={handleCellClickAndOpenModal}
             tableData={tableData}
-            program_list={programList}
+            programList={programList}
           />
         </Box>
 
@@ -57,7 +194,7 @@ const WeeklyCalendar = () => {
           onClose={onClose}
           operators={operators}
           handleOperatorSelect={handleOperatorSelect}
-          program_list={programList}
+          programList={programList}
           selectedCell={selectedCell}
           handleDeleteOperator={handleDeleteOperator}
         />

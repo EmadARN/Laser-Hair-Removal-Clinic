@@ -1,48 +1,17 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
-import { persianMonths } from "@/constants";
-import { fetchWeekData } from "@/features/adminDashboard/adminThunks";
+import useDataSliderLogic from "../logic/useDataSliderLogic";
 
 const DataSlider = ({ btnDisplay }) => {
-  const dispatch = useDispatch();
-  const { dateRanges } = useSelector((state) => state.adminDashboard);
-  const [currentRange, setCurrentRange] = React.useState(0); // نگه‌داشتن بازه فعلی
-
-  useEffect(() => {
-    dispatch(fetchWeekData(currentRange)); // بارگذاری داده‌های هفته بر اساس ایندکس فعلی
-  }, [dispatch, currentRange]);
-
-  const dateHandler = (type) => {
-    let newIndex = currentRange;
-    type === "next" ? newIndex++ : newIndex--;
-
-    if (newIndex >= dateRanges.length) {
-      newIndex = dateRanges.length - 1;
-    } else if (newIndex < 0) {
-      newIndex = 0;
-    }
-
-    setCurrentRange(newIndex); // به‌روزرسانی ایندکس فعلی
-  };
-
-  // دسترسی به تاریخ مربوط به ایندکس فعلی
-  const currentDate = dateRanges.date; // بررسی وجود تاریخ
-
-  // تبدیل تاریخ شمسی به میلادی و محاسبه تاریخ‌های شروع و پایان
-  const startDate = new Date(currentDate); // فرض کنید تاریخ در فرمت مناسب است
-  const endDate = new Date(startDate);
-  endDate.setDate(startDate.getDate() + 7); // تاریخ پایان (جمعه)
-
-  const formattedStart = `${startDate.getDate()} ${
-    persianMonths[startDate.getMonth()]
-  }`; // تاریخ شروع
-
-  const formattedEnd = `${endDate.getDate()} ${
-    persianMonths[endDate.getMonth()]
-  }`; // تاریخ پایان
-
+  const {
+    dateRanges,
+    formattedStart,
+    formattedEnd,
+    dateHandler,
+    currentRange,
+    currentDate,
+  } = useDataSliderLogic();
   return (
     <Flex
       sx={{
