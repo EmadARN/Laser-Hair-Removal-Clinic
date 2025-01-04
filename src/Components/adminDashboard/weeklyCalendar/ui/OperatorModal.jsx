@@ -17,15 +17,15 @@ const OperatorModal = ({
   onClose,
   operators,
   handleOperatorSelect,
-  program_list,
+  programList,
   selectedCell,
   handleDeleteOperator, // اضافه کردن تابع حذف از والد
 }) => {
   const router=useRouter()
   // بررسی اینکه سلول انتخاب‌شده اپراتور دارد یا خیر
   const checkOperatorInCell = () => {
-    if (selectedCell && program_list[selectedCell.index]) {
-      return program_list[selectedCell.index].operator ? true : false;
+    if (selectedCell && programList[selectedCell.index]) {
+      return programList[selectedCell.index].operator ? true : false;
     }
     return false;
   };

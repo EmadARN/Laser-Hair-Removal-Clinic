@@ -12,15 +12,3 @@ export function extractTime(reserveTimeStr) {
   return timeMatch ? timeMatch[0].slice(0, 5) : "";
 }
 
-//dateParts
-const splitDate = (dateString, start, end) => {
-  return dateString?.slice(start, end);
-};
-
-
-export const getDateParts = (dateString) => {
-  const year = splitDate(dateString, 0, 4);
-  const month = splitDate(dateString, 5, 6);
-  const day = splitDate(dateString, 7, 10);
-  return { year, month, day };
-};
