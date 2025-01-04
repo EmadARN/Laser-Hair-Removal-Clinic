@@ -94,7 +94,7 @@ const Clients = () => {
             handlechange={handlechange} // به‌روزرسانی مقدار جستجو
           />
         </Box>
-        <Box display={"flex"} justifyContent={"center"} px={{ base: 2, md: 4 }}>
+        <Box  width={{base:"110vw",md:"100%"}}  display={"flex"} justifyContent={"center"} px={{ base: 2, md: 4 }}>
           <Table
             mt={6}
             cursor="pointer"
