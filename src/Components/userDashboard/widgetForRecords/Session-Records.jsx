@@ -4,12 +4,12 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import Section_title from "@/Common/section-title";
 import { IoIosArrowBack } from "react-icons/io";
 import { useSelector } from "react-redux";
-import { extractDate } from "@/utils/extractDate";
+
 import No_Records from "./No_Records";
 import NavBar from "@/Layout/navbar/NavBar";
 
 
-const Session_Records = ({ setSteperState, steperState }) => {
+const Session_Records = ({ setSteperState, steperState,dispatch }) => {
   const { sessionRecords, loading, error } = useSelector(
     (store) => store.customerDashboard
   );
@@ -38,7 +38,7 @@ const Session_Records = ({ setSteperState, steperState }) => {
     return (
       <>
         <NavBar bgColor="#ffffff" />
-        <No_Records setSteperState={setSteperState} />
+        <No_Records dispatch={dispatch} setSteperState={setSteperState} />
       </>
     );
   } else {
@@ -58,7 +58,7 @@ const Session_Records = ({ setSteperState, steperState }) => {
             <Button
               leftIcon={<FaLongArrowAltRight />}
               onClick={() => {
-                setSteperState(0);
+                dispatch(setSteperState(0));
               }}
             >
               بازگشت
@@ -87,7 +87,7 @@ const Session_Records = ({ setSteperState, steperState }) => {
                     display="flex"
                     justifyContent={"space-between"}
                     as="button"
-                    onClick={() => setSteperState(steperState + 1)}
+                    onClick={() => dispatch(setSteperState(steperState + 1))}
                   >
                     <Box mb={4}>
                       <Text fontSize={{ base: "xs", md: "sm" }}>

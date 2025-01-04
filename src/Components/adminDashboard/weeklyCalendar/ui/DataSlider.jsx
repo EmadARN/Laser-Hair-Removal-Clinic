@@ -15,8 +15,10 @@ const DataSlider = ({ btnDisplay }) => {
   return (
     <Flex
       sx={{
+       
         alignItems: "center",
         justifyContent: "center",
+       width:{base:"90%",md:"100%"},
         gap: 4,
         fontSize: "18px",
         color: "blue",

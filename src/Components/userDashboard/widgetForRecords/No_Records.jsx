@@ -4,7 +4,7 @@ import Section_title from "@/Common/section-title";
 import { FaNewspaper } from "react-icons/fa6";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
-const No_Records = ({ steperState, setSteperState }) => {
+const No_Records = ({ dispatch, setSteperState }) => {
   return (
     <Grid
       alignItems={"center"}
@@ -19,7 +19,7 @@ const No_Records = ({ steperState, setSteperState }) => {
         <Button
           leftIcon={<FaLongArrowAltRight />}
           onClick={() => {
-            setSteperState(0);
+            dispatch(setSteperState(0));
           }}
         >
           بازگشت

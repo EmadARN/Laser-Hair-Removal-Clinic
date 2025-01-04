@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Spinner, Text } from "@chakra-ui/react";
 import { BiTargetLock } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,10 @@ import BodyContent from "./modal/BodyContent";
 import FooterContent from "./modal/FooterContent";
 import ReusableSession from "../shared/ReussableSession";
 import { getLazerAreas } from "@/features/adminDashboard/adminThunks";
+import Loading from "@/Common/loading";
 
 const AreaLazer = () => {
+
   const { token, AreaLaser, loading, error } = useSelector(
     (store) => store.adminDashboard
   );
@@ -24,7 +26,7 @@ const AreaLazer = () => {
 
   // مدیریت وضعیت بارگذاری و خطا
   if (loading) {
-    return <Spinner />;
+    return <Loading />;
   }
 
   if (error) {
@@ -57,6 +59,7 @@ const AreaLazer = () => {
         AreaLaser.all_laser_area_object.first_type.length > 0 ? (
           AreaLaser.all_laser_area_object.first_type.map((item, index) => {
             return (
+              <Box  width={{base:"110vw",md:"100%"}} key={index}>
               <Lists
                 leftArrowDisplay="none"
                 key={index}
@@ -80,6 +83,7 @@ const AreaLazer = () => {
                 FooterContent={<FooterContent item={item} token={token} />}
                 iconBtnDisply="none"
               />
+                </Box>
             );
           })
         ) : (

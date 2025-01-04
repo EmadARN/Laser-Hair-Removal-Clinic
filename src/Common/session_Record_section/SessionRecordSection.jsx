@@ -18,7 +18,7 @@ const clearLocalStorage = () => {
 
   keysToRemove.forEach((key) => localStorage.removeItem(key));
 };
-const SessionRecordSection = ({ setSteperState, steperState ,sessionRecordClick}) => {
+const SessionRecordSection = ({ sessionRecordClick}) => {
   const [cookies, , removeCookie] = useCookies(["auth_token"]);
   const router = useRouter();
 

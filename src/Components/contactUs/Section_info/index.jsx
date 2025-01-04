@@ -1,16 +1,21 @@
-import React from "react";
-import { Grid, Box } from "@chakra-ui/react";
-import MapSection from "./MapSection";
+import React, { Suspense } from "react";
+import { Grid, Box, Spinner } from "@chakra-ui/react";
 import ContactInfo from "./ContactInfo";
+
+
+const MapSection = React.lazy(() => import("./MapSection"));
+
 const SectionInfo = () => {
   return (
     <Grid width={"100%"} display={"flex"} justifyContent={"space-around"}>
-      {/* map Box */}
+ 
       <Box width={{ base: "50%", md: "30%" }}>
-        <MapSection />
+        <Suspense fallback={<Spinner size="lg" />}>
+          <MapSection />
+        </Suspense>
       </Box>
 
-      {/* contact info */}
+    
       <Box width={{ base: "50%", md: "37%" }}>
         <ContactInfo />
       </Box>

@@ -167,6 +167,7 @@ const WeeklyCalendar = () => {
   return (
     <>
       {/* Header */}
+      <Box width={{base:"110vw",md:"100%"}} mr={{base:8,md:0}}  display={"flex"} mb={{base:6,md:0}} flexDirection={{base:"column",md:"row"}} justifyContent={{base:"center",md:"space-between"}} alignItems={"center"}>
       <Flex py={2} alignItems="center">
         <AdminHeader
           operator_list={operators.operator_list}
@@ -176,9 +177,13 @@ const WeeklyCalendar = () => {
           iconBtnDisply="none"
           BtnDisply="none"
         />
-        <CustomButton onClick={handleSelect}>فرستادن برنامه</CustomButton>
+       
       </Flex>
       <Box>
+      <CustomButton >فرستادن برنامه</CustomButton>
+      </Box>
+      </Box>
+      <Box  width={{base:"120vw",sm:"100vw",md:"100%"}}>
         {/* Table */}
         <Box overflowX="auto" borderWidth="1px" borderRadius="md" p={4}>
           <TableWeekly
@@ -199,6 +204,7 @@ const WeeklyCalendar = () => {
           handleDeleteOperator={handleDeleteOperator}
         />
       </Box>
+ 
     </>
   );
 };

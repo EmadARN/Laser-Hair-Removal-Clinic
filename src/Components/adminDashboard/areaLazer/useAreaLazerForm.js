@@ -3,13 +3,14 @@ import {
   editLazerArea,
   getLazerAreas,
 } from "@/features/adminDashboard/adminThunks";
+import { useCustomToast } from "@/utils/useCustomToast ";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const useAreaLazerForm = (isEdit, areaToEdit) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.adminDashboard.token);
-
+  const { showToast } = useCustomToast();
   const [selectedItem, setSelectedItem] = useState(null);
 
   const [editArea, setEditArea] = useState({
@@ -65,8 +66,10 @@ const useAreaLazerForm = (isEdit, areaToEdit) => {
 
     if (isEdit) {
       await dispatch(editLazerArea(payload));
+      showToast({ title: "ناحیه ویرایش شد", status: "success" });
     } else {
       await dispatch(addLazerArea(payload));
+      showToast({ title: "ناحیه  اضافه شد", status: "success" });
     }
 
     dispatch(getLazerAreas({ token }));

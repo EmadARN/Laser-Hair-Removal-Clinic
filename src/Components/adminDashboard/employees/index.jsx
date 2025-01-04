@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Spinner, Text, Skeleton } from "@chakra-ui/react";
 import { RiShieldUserFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import BodyContent from "./modal/BodyContent";
 import FooterContent from "./modal/FooterContent";
 import ReusableSession from "../shared/ReussableSession";
 import { getAsyncUsersList } from "@/features/adminDashboard/adminThunks";
+import Loading from "@/Common/loading";
 
 const Empolyees = () => {
   const dispatch = useDispatch();
@@ -26,13 +27,8 @@ const Empolyees = () => {
     }
   }, [dispatch, token]);
 
-  // مدیریت وضعیت بارگذاری و خطا
   if (loading) {
-    return (
-      <Box sx={{ py: 6 }}>
-        <Spinner />
-      </Box>
-    );
+    return <Loading />;
   }
 
   if (error) {
@@ -77,28 +73,29 @@ const Empolyees = () => {
           users.user_list.map((user, index) => {
             const userType = type(user);
             return (
-              <Lists
-                key={index}
-                firstArea={user.username}
-                secondArea={user.name + " " + user.last_name}
-                thirdArea={userType}
-                leftArrowDisplay="none"
-                ModalBodyContent={{
-                  body: (
-                    <UserForm
-                      userToEdit={user}
-                      isEdit={true}
-                      users={users}
-                      token={token}
-                    />
-                  ),
-                }}
-                headerContentValue="ویرایش کارمند"
-                HeaderContent={<HeaderContent />}
-                BodyContent={<BodyContent />}
-                FooterContent={<FooterContent user={user} token={token} />}
-                iconBtnDisply="none"
-              />
+              <Box  width={{base:"110vw",md:"100%"}} key={index}>
+                <Lists
+                  firstArea={user.username}
+                  secondArea={user.name + " " + user.last_name}
+                  thirdArea={userType}
+                  leftArrowDisplay="none"
+                  ModalBodyContent={{
+                    body: (
+                      <UserForm
+                        userToEdit={user}
+                        isEdit={true}
+                        users={users}
+                        token={token}
+                      />
+                    ),
+                  }}
+                  headerContentValue="ویرایش کارمند"
+                  HeaderContent={<HeaderContent />}
+                  BodyContent={<BodyContent />}
+                  FooterContent={<FooterContent user={user} token={token} />}
+                  iconBtnDisply="none"
+                />
+              </Box>
             );
           })
         ) : (
