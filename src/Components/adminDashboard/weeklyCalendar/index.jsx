@@ -167,25 +167,38 @@ const WeeklyCalendar = () => {
   return (
     <>
       {/* Header */}
-      <Box width={{base:"110vw",md:"100%"}} mr={{base:8,md:0}}  display={"flex"} mb={{base:6,md:0}} flexDirection={{base:"column",md:"row"}} justifyContent={{base:"center",md:"space-between"}} alignItems={"center"}>
-      <Flex py={2} alignItems="center">
-        <AdminHeader
-          operator_list={operators.operator_list}
-          headerTitle="برنامه هفتگی"
-          icon={<FaCalendarAlt />}
-          dataSlider={<DataSlider />}
-          iconBtnDisply="none"
-          BtnDisply="none"
-        />
-       
-      </Flex>
-      <Box>
-      <CustomButton >فرستادن برنامه</CustomButton>
+      <Box
+        width={{ base: "110vw", md: "100%" }}
+        mr={{ base: 8, md: 0 }}
+        display={"flex"}
+        mb={{ base: 6, md: 0 }}
+        flexDirection={{ base: "column", md: "row" }}
+        justifyContent={{ base: "center", md: "space-between" }}
+        alignItems={"center"}
+      >
+        <Flex py={2} alignItems="center">
+          <AdminHeader
+            operator_list={operators.operator_list}
+            headerTitle="برنامه هفتگی"
+            icon={<FaCalendarAlt />}
+            dataSlider={<DataSlider />}
+            iconBtnDisply="none"
+            BtnDisply="none"
+          />
+        </Flex>
+        <Box>
+          <CustomButton onClick={handleSelect}>فرستادن برنامه</CustomButton>
+        </Box>
       </Box>
-      </Box>
-      <Box  width={{base:"120vw",sm:"100vw",md:"100%"}}>
+      <Box width={{ base: "120vw", sm: "100vw", md: "100%" }}>
         {/* Table */}
-        <Box overflowX="auto" borderWidth="1px" borderRadius="md" p={4}>
+        <Box
+          overflowX="auto"
+          borderWidth="1px"
+          borderRadius="md"
+          p={6}
+          boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+        >
           <TableWeekly
             handleCellClick={handleCellClickAndOpenModal}
             tableData={tableData}
@@ -204,7 +217,6 @@ const WeeklyCalendar = () => {
           handleDeleteOperator={handleDeleteOperator}
         />
       </Box>
- 
     </>
   );
 };

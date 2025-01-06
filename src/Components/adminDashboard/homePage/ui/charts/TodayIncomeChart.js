@@ -12,13 +12,16 @@ import {
 // ثبت ماژول‌های Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-const TodayIncomeChart = () => {
+const TodayIncomeChart = ({
+  totalPaidAmountThisMonth,
+  totalAmountThisMonth,
+}) => {
   const data = {
-    labels: ["درآمد امروز تا این لحظه", "تخمین درآمد امروز"], // برچسب‌ها
+    labels: ["درآمد امروز تا این لحظه", "تخمین درآمد امروز"],
     datasets: [
       {
         label: "درآمد (تومان)",
-        data: [350, 650], // درآمد امروز و باقی‌مانده از هدف
+        data: [totalAmountThisMonth, totalPaidAmountThisMonth], // درآمد امروز و باقی‌مانده از هدف
         backgroundColor: ["rgba(103, 44, 221, 0.6)", "#7563DC"],
         borderColor: ["#7563DC", "rgba(201, 203, 207, 1)"],
         borderWidth: 1,

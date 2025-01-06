@@ -285,13 +285,15 @@ const adminDashboardSlice = createSlice({
         state.loading = true;
         state.error = "";
       })
-      .addCase(getDate.rejected, (state, action) =>
-        handleAsyncState(state, action, "rejected")
-      )
       .addCase(getDate.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.dateReserve = action.payload;
-      });
+        
+      })
+      .addCase(getDate.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+
   },
 });
 export const { setCurrentRange } = adminDashboardSlice.actions;

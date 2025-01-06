@@ -9,6 +9,11 @@ const CustomButton = ({ children, ...props }) => {
       color="#fff"
       _hover={{ bg: "puple.100", color: "#fff" }}
       borderRadius="md"
+      sx={{
+        display: props.display,
+        justifyContent: props.justifyContent,
+        w: props.w,
+      }}
       {...props}
       onClick={props.onClick}
     >

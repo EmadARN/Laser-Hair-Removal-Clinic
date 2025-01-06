@@ -1,40 +1,48 @@
+import React from "react";
+import { Text, Button, Stack } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
 import {
   deleteAsyncUser,
-  getAsyncUsersList,
-} from "@/features/adminDashboard/adminDashboardSlice";
+  getLazerAreas,
+} from "@/features/adminDashboard/adminThunks";
 import { useCustomToast } from "@/utils/useCustomToast ";
-import { Button, Stack } from "@chakra-ui/react";
-import React from "react";
-import { useDispatch } from "react-redux";
 
-const FooterContent = ({ user, token }) => {
+export const HeaderContent = () => {
+  return <Text>حذف نواحی</Text>;
+};
+
+export const BodyContent = () => {
+  return <Text>آیا از حذف نواحی مطمئنید؟</Text>;
+};
+
+export const FooterContent = ({ item, token }) => {
   const dispatch = useDispatch();
   const { showToast } = useCustomToast();
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteAsyncUser({ id: user.username }));
+      await dispatch(deleteAsyncUser({ id: item.value, token }));
       showToast({
-        title: "کاربر حذف شد.",
+        title: "ناحیه حذف شد.",
         status: "success",
         duration: 3000,
         isClosable: true,
       });
     } catch (error) {
       showToast({
-        title: "خطا در حذف کاربر.",
+        title: "خطا در حذف ناحیه.",
         description: error.message || "خطای نامشخصی رخ داد.",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
     }
-    // فراخوانی مجدد لیست کاربران
-    dispatch(getAsyncUsersList(token));
+    // به‌روزرسانی لیست نواحی
+    dispatch(getLazerAreas(token));
   };
 
   return (
-    <Stack direction={"row"}>
+    <Stack direction="row">
       <Button colorScheme="red" mr={3} onClick={handleDelete}>
         حذف
       </Button>
@@ -44,5 +52,3 @@ const FooterContent = ({ user, token }) => {
     </Stack>
   );
 };
-
-export default FooterContent;

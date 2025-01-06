@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 // import Captcha from "./widget/Captcha";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { BgAnimate } from "./ui/BgAnimate";
-import Inputs from "./ui/Inputs";
 import AnimationSide from "./ui/AnimationSide";
 import useLoginAdminRecptionHooks from "./useLoginAdminRecptionHooks";
 import { useDispatch } from "react-redux";
 import { resetAuthState } from "@/features/signin/authSlice";
+import FormLogin from "./ui/FormLogin";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -115,7 +115,7 @@ const LoginPage = () => {
                 transition: "opacity 1s ease 0.75s",
               }}
             >
-              <Inputs
+              <FormLogin
                 loading={loading}
                 label="ورود به عنوان مدیر"
                 submitHandler={handleSubmit}
@@ -154,7 +154,8 @@ const LoginPage = () => {
             left: btnClick ? "100%" : 0,
           }}
         >
-          <Inputs
+          <FormLogin
+            loading={loading}
             label="ورود به عنوان کارمند"
             submitHandler={handleSubmit}
             inputHandler={handleInputChange}

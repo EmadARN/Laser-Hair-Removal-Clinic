@@ -15,12 +15,11 @@ export const postAsyncLogin = createAsyncThunk(
 
 export const getAsyncUsersList = createAsyncThunk(
   "admin/getAsyncUsersList",
-  async (_, { getState, rejectWithValue }) => {
-    const { token } = getState().adminDashboard;
+  async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.get("/Core/user/list/", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${payload.token}`,
         },
       });
       return data;
@@ -68,8 +67,7 @@ export const editAsyncUser = createAsyncThunk(
 
 export const deleteAsyncUser = createAsyncThunk(
   "user/deleteAsyncUser",
-  async (payload, { getState, rejectWithValue }) => {
-    const { token } = getState().adminDashboard;
+  async (payload, { rejectWithValue }) => {
     try {
       await api.post(
         `/Core/delete/user/`,
@@ -78,7 +76,7 @@ export const deleteAsyncUser = createAsyncThunk(
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${payload.token}`,
           },
         }
       );
@@ -332,7 +330,7 @@ export const getDate = createAsyncThunk(
           },
         }
       );
-      console.log(data);
+      console.log("daaaaa", data);
 
       return data;
     } catch (error) {

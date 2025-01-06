@@ -7,7 +7,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import CustomButton from "@/Common/customeButton/CustomeButton";
-import useAreaLazerForm from "../useAreaLazerForm";
+import useAreaLazerForm from "../logic/useAreaLazerForm";
 
 const AreaLazerForm = ({ areaToEdit, isEdit }) => {
   const {
@@ -67,9 +67,6 @@ const AreaLazerForm = ({ areaToEdit, isEdit }) => {
         </SimpleGrid>
       </FormControl>
 
-      {/* <Button mt={4} type="submit" sx={{ w: "100%" }} colorScheme="blue">
-        {isEdit ? "ویرایش" : "افزودن"}
-      </Button> */}
       <CustomButton mt={4} type="submit" sx={{ w: "100%" }} colorScheme="blue">
         {isEdit ? "ویرایش" : "افزودن"}
       </CustomButton>

@@ -1,3 +1,4 @@
+import Loading from "@/Common/loading";
 import { Box, Button, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
 import React from "react";
 
@@ -11,7 +12,13 @@ const style = {
     boxShadow: "0 0 0 2px #ab9dfa",
   },
 };
-const Inputs = ({ label, submitHandler, inputHandler, formInput,loading }) => {
+const FormLogin = ({
+  label,
+  submitHandler,
+  inputHandler,
+  formInput,
+  loading,
+}) => {
   return (
     <form onSubmit={submitHandler}>
       <Box
@@ -59,11 +66,11 @@ const Inputs = ({ label, submitHandler, inputHandler, formInput,loading }) => {
       </Box>
       <Flex justifyContent={"center"} alignItems={"center"} mt={4}>
         <Button sx={{ w: "30%" }} type="submit">
-         {loading ?"...":"تایید"}
+          {loading ? <Loading w="6px" h="6px" /> : "تایید"}
         </Button>
       </Flex>
     </form>
   );
 };
 
-export default Inputs;
+export default FormLogin;

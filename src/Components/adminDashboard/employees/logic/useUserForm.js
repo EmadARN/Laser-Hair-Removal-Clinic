@@ -44,23 +44,16 @@ const useUserForm = (userToEdit, isEdit, token) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const defaultValues = {
-      address: "",
-      national_code: "",
-      house_number: 0,
-      last_date: 0,
-      drug_hist: false,
-      decease_hist: false,
-      doctor: "-",
-      offline_number: 0,
-    };
-
-    const userData = { ...defaultValues, ...formData };
+    const userData = { ...formData };
 
     try {
       if (isEdit) {
         await dispatch(
-          editAsyncUser({ id: formData.username, ...userData, token })
+          editAsyncUser({
+            id: formData.username,
+            ...userData,
+            token,
+          })
         );
         showToast({ title: "کاربر ویرایش شد.", status: "success" });
       } else {
@@ -68,7 +61,7 @@ const useUserForm = (userToEdit, isEdit, token) => {
         showToast({ title: "کاربر اضافه شد.", status: "success" });
       }
       //بروز رسانی
-      dispatch(getAsyncUsersList(token));
+      dispatch(getAsyncUsersList({ token }));
     } catch (error) {
       showToast({
         title: "خطا در ثبت کاربر.",

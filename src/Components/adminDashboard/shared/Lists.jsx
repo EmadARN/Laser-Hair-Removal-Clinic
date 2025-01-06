@@ -35,42 +35,39 @@ const Lists = ({
   return (
     <Flex
       sx={{
-  
         flexDirection: { base: "row", md: "row" },
         justifyContent: "space-between",
         alignItems: "center",
         bgColor: bgColor || "graySky.100",
-        width: {base:"110%",md:"100%"},
+        width: { base: "110%", md: "100%" },
         rounded: rounded || "8px",
         color,
         p: 5,
         my: 2,
       }}
+      boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
     >
-   
       <Box
         flex="3"
-        minWidth={{base:"100px",md:"130px"}}
+        minWidth={{ base: "100px", md: "130px" }}
         textAlign="right"
         fontSize={responsiveFontSize}
       >
         {firstArea}
       </Box>
 
-  
       <Box
         flex="3"
-        minWidth={{base:"100px",md:"130px"}}
+        minWidth={{ base: "100px", md: "130px" }}
         textAlign="right"
         fontSize={responsiveFontSize}
       >
         {secondArea}
       </Box>
 
-
       <Box
         flex="3"
-        minWidth={{base:"100px",md:"120px"}}
+        minWidth={{ base: "100px", md: "120px" }}
         textAlign="right"
         fontSize={responsiveFontSize}
         sx={{ display: displayThirdArea }}
@@ -78,7 +75,6 @@ const Lists = ({
         {thirdArea}
       </Box>
 
-  
       <Box
         direction="row"
         gap={2}
@@ -101,7 +97,6 @@ const Lists = ({
           btn={<RiDeleteBinLine size={18} color="red" />}
         />
       </Box>
-
 
       <Box flex="0.2" display={leftArrowDisplay} textAlign="center">
         <FaChevronLeft />

@@ -5,13 +5,17 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 // ثبت ماژول‌های Chart.js
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const TodayIncomeDoughnut = () => {
+const TodayIncomeDoughnut = ({
+  totalPaidAmountThisMonth,
+  totalAmountThisMonth,
+}) => {
+
   const data = {
-    labels: ["درآمد امروز", "درآمد هدف"], // برچسب‌ها
+    labels: ["درآمد امروز", "تخمین در آمد امروز"],
     datasets: [
       {
         label: "درآمد (تومان)",
-        data: [350, 650], // درآمد امروز و باقی‌مانده از هدف
+        data: [totalAmountThisMonth, totalPaidAmountThisMonth], // درآمد امروز و باقی‌مانده از هدف
         backgroundColor: ["#7563DC", "rgba(201, 203, 207, 0.6)"],
         borderColor: ["#7563DC", "rgba(201, 203, 207, 1)"],
         borderWidth: 1,

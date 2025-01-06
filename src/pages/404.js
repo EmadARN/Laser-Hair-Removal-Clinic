@@ -28,6 +28,7 @@ const Custom404 = () => {
         fontWeight="bold"
         mb={6}
         animation={`${bounce} 2s ease-in-out infinite`}
+        style={{ willChange: "transform" }}
       >
         ۴۰۴
       </Text>

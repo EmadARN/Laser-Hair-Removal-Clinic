@@ -4,7 +4,10 @@ import { getCustomerName } from "@/utils/getCustomerName";
 
 const CustomerTable = ({ dateReserve, customerListAdmin }) => {
   return (
-    <Box sx={{ mt: 8, bgColor: "#F7FAFC", p: 4, rounded: "8px" }}>
+    <Box
+      sx={{ mt: 8, bgColor: "#F7FAFC", p: 4, rounded: "8px" }}
+      boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+    >
       <Table>
         {/* هدر جدول */}
         <Thead>

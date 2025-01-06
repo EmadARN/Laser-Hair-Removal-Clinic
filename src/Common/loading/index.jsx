@@ -13,29 +13,29 @@ const bounceMove = keyframes`
   }
 `;
 
-const Loading = () => {
+const Loading = ({ h, w }) => {
   return (
     <Flex alignItems="center" justifyContent="center" height="100vh" pt="4px">
       <Box
-        w="16px"
-        h="16px"
+        w={w || "16px"}
+        h={h || "16px"}
         bg="brand.400"
         borderRadius="full"
         animation={`${bounceMove} 1s ease-in-out infinite`}
         mr="4px"
       ></Box>
       <Box
-        w="16px"
-        h="16px"
+        w={w || "16px"}
+        h={h || "16px"}
         bg="brand.400"
         borderRadius="full"
         animation={`${bounceMove} 1s ease-in-out infinite 0.2s`}
-        mr="4px"
+        mx="4px"
       ></Box>
       <Box
-        w="16px"
-        h="16px"
-         bg="brand.400"
+        w={w || "16px"}
+        h={h || "16px"}
+        bg="brand.400"
         borderRadius="full"
         animation={`${bounceMove} 1s ease-in-out infinite 0.4s`}
       ></Box>

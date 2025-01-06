@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Box, Text, Button } from "@chakra-ui/react";
-import RedGreenBox from "@/Common/Red&GreenBox/Red&GreenBox";
 import CustomButton from "@/Common/customeButton/CustomeButton";
+import RedGreenBox from "@/Common/RedGreenBox/RedGreenBox";
 
 const Unsucces_Transaction = () => {
   return (

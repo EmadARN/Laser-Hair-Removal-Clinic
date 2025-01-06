@@ -1,28 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Box, Spinner, Text } from "@chakra-ui/react";
+import React from "react";
+import { Box, Text } from "@chakra-ui/react";
 import { BiTargetLock } from "react-icons/bi";
-import { useDispatch, useSelector } from "react-redux";
 import AdminHeader from "../shared/AdminHeader";
-import AreaLazerForm from "./modal/AreaLazerForm";
 import Lists from "../shared/Lists";
-import HeaderContent from "./modal/HeaderContent";
-import BodyContent from "./modal/BodyContent";
-import FooterContent from "./modal/FooterContent";
 import ReusableSession from "../shared/ReussableSession";
-import { getLazerAreas } from "@/features/adminDashboard/adminThunks";
 import Loading from "@/Common/loading";
+import {
+  BodyContent,
+  FooterContent,
+  HeaderContent,
+} from "./ui/attentionDetailsModal";
+import AreaLazerForm from "./ui/AreaLazerForm";
+import useAreaLazer from "./logic/useAreaLazer";
 
 const AreaLazer = () => {
-
-  const { token, AreaLaser, loading, error } = useSelector(
-    (store) => store.adminDashboard
-  );
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (token) {
-      dispatch(getLazerAreas({ token }));
-    }
-  }, [dispatch, token]);
+  const { loading, error, AreaLaser, token } = useAreaLazer();
 
   // مدیریت وضعیت بارگذاری و خطا
   if (loading) {
@@ -30,7 +22,7 @@ const AreaLazer = () => {
   }
 
   if (error) {
-    return <Text color="red.500">خطا در بارگذاری داده‌ها: {error}</Text>;
+    return <Text color="red.500"> خطا رخ داده لطفا ریفرش کنید: {error}</Text>;
   }
 
   return (
@@ -59,31 +51,31 @@ const AreaLazer = () => {
         AreaLaser.all_laser_area_object.first_type.length > 0 ? (
           AreaLaser.all_laser_area_object.first_type.map((item, index) => {
             return (
-              <Box  width={{base:"110vw",md:"100%"}} key={index}>
-              <Lists
-                leftArrowDisplay="none"
-                key={index}
-                firstArea={item.label}
-                secondArea={item.price}
-                thirdArea={item.operate_time}
-                display="none"
-                ModalBodyContent={{
-                  body: (
-                    <AreaLazerForm
-                      isEdit={true}
-                      areaToEdit={item}
-                      AreaLaser={AreaLaser}
-                      token={token}
-                    />
-                  ),
-                }}
-                headerContentValue="ویرایش ناحیه "
-                HeaderContent={<HeaderContent />}
-                BodyContent={<BodyContent />}
-                FooterContent={<FooterContent item={item} token={token} />}
-                iconBtnDisply="none"
-              />
-                </Box>
+              <Box width={{ base: "110vw", md: "100%" }} key={index}>
+                <Lists
+                  leftArrowDisplay="none"
+                  key={index}
+                  firstArea={item.label}
+                  secondArea={item.price}
+                  thirdArea={item.operate_time}
+                  display="none"
+                  ModalBodyContent={{
+                    body: (
+                      <AreaLazerForm
+                        isEdit={true}
+                        areaToEdit={item}
+                        AreaLaser={AreaLaser}
+                        token={token}
+                      />
+                    ),
+                  }}
+                  headerContentValue="ویرایش ناحیه "
+                  HeaderContent={<HeaderContent />}
+                  BodyContent={<BodyContent />}
+                  FooterContent={<FooterContent item={item} token={token} />}
+                  iconBtnDisply="none"
+                />
+              </Box>
             );
           })
         ) : (
