@@ -39,7 +39,7 @@ const Inputs = ({ label, submitHandler, inputHandler, formInput,loading }) => {
           placeholder="نام کاربری"
           onChange={inputHandler}
           name="username"
-          value={formInput.userName}
+          value={formInput.username}
         />
       </Box>
       <Box mt={{ base: 3, md: 0 }}>

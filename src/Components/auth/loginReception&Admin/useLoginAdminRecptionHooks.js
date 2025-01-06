@@ -1,26 +1,32 @@
-import { postAsyncLogin } from "@/features/signin/authSlice";
+import { postAsyncLogin, resetAuthState } from "@/features/signin/authSlice";
 import { useCookies } from "react-cookie";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const useLoginAdminRecptionHooks = () => {
   const dispatch = useDispatch();
+
+  const {userType} = useSelector((store)=>store.signin)
+  console.log('uu',userType);
+  
   const [cookies, setCookie] = useCookies([
     "auth_Admin_token",
     "auth_Employee_token",
   ]);
 
   const login = async (input, isAdmin) => {
+    dispatch(resetAuthState());
     const result = await dispatch(postAsyncLogin(input));
     if (result.meta.requestStatus === "fulfilled") {
-      const receivedToken = result.payload.token;
-      const userType = result.payload.user_type;
+     
 
       if (
-        receivedToken &&
-        (isAdmin ? userType === "a" : ["o", "r"].includes(userType))
+        result.payload.token &&
+        (isAdmin
+          ? result.payload.user_type === "a"
+          : ["o", "r"].includes(result.payload.user_type))
       ) {
         const tokenName = isAdmin ? "auth_Admin_token" : "auth_Employee_token";
-        setCookie(tokenName, receivedToken, { path: "/" });
+        setCookie(tokenName, result.payload.token, { path: "/" });
         return { success: true, userType };
       }
     }

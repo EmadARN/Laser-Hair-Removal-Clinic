@@ -7,8 +7,11 @@ import { BgAnimate } from "./ui/BgAnimate";
 import Inputs from "./ui/Inputs";
 import AnimationSide from "./ui/AnimationSide";
 import useLoginAdminRecptionHooks from "./useLoginAdminRecptionHooks";
+import { useDispatch } from "react-redux";
+import { resetAuthState } from "@/features/signin/authSlice";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
   const [btnClick, setBtnClick] = useState(false);
   const [input, setInput] = useState({ username: "", password: "" });
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
@@ -25,6 +28,8 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(resetAuthState());
+    setInput({ username: "", password: "" });
     setLoading(true);
     if (!input.username || !input.password) {
       showToast({
@@ -32,8 +37,11 @@ const LoginPage = () => {
         description: "لطفا نام کاربری و رمز عبور را وارد کنید.",
         status: "error",
       });
+      setLoading(false);
+      setInput({ username: "", password: "" });
       return;
     }
+
     const { success } = await login(input, btnClick);
     if (success) {
       showToast({
@@ -46,12 +54,14 @@ const LoginPage = () => {
       );
       if (
         success &&
-        (router.pathname === "/adminDashboard/home" || router.pathname === "/reseptionDashboard/dailyShifts")
+        (router.pathname === "/adminDashboard/home" ||
+          router.pathname === "/reseptionDashboard/dailyShifts")
       ) {
         setLoading(false);
       }
     } else {
-      setLoading(false)
+      setLoading(false);
+
       showToast({
         title: "خطا",
         description: `شما نمی‌توانید به عنوان ${
@@ -59,9 +69,9 @@ const LoginPage = () => {
         } وارد شوید.`,
         status: "error",
       });
+      setInput({ username: "", password: "" });
     }
     // Reset input fields
-    setInput({ username: "", password: "" });
   };
 
   //enter manager ro reception
