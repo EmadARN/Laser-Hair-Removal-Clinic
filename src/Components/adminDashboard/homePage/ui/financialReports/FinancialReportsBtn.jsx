@@ -13,16 +13,19 @@ const FinancialReportsBtn = ({
     <ButtonGroup size="sm" isAttached variant="outline" sx={{ w: "100%" }}>
       <Button
         sx={{
+          p:{base:2,md:0},
           width: "100%",
           h: "auto",
+          textAlign:'center',
+         whiteSpace:{base:'wrap'},
           borderRadius: "0 3px 3px 0",
-          fontSize: { base: "12px", md: "14px" },
+          fontSize: { base: "10px", md: "14px" },
           cursor: "default",
           ":hover": {
             bgColor: "transparent",
           },
         }}
-        size="md"
+        size={{base:"xl",md:"md"}}
       >
         {morningShiftLabel || afternoonShiftLabel}
       </Button>
@@ -35,10 +38,12 @@ const FinancialReportsBtn = ({
       >
         <Text
           sx={{
+            
             display: "flex",
-            justifyContent: "end",
-            p: 2,
-            fontSize: { base: "12px", md: "14px" },
+            alignItems:'center',
+            justifyContent: "center",
+            p: {base:3,md:2},
+            fontSize: { base: "10px", md: "14px" },
           }}
         >
           {totalPaidAmountThisMonth ||

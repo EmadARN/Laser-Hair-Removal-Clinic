@@ -5,7 +5,14 @@ import { getCustomerName } from "@/utils/getCustomerName";
 const CustomerTable = ({ dateReserve, customerListAdmin }) => {
   return (
     <Box
-      sx={{ mt: 8, bgColor: "#F7FAFC", p: 4, rounded: "8px" }}
+      sx={{
+        mt: 8,
+        bgColor: "#F7FAFC",
+        p: 4,
+        rounded: "8px",
+        display: "flex",
+        justifyContent: "center",
+      }}
       boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
     >
       <Table>
@@ -13,7 +20,7 @@ const CustomerTable = ({ dateReserve, customerListAdmin }) => {
         <Thead>
           <Tr>
             <Th
-              fontSize={{ base: "12px", md: "16px" }}
+              fontSize={{ base: "10px", md: "16px" }}
               bgColor="purple.500"
               color="white"
               textAlign="center"
@@ -21,7 +28,7 @@ const CustomerTable = ({ dateReserve, customerListAdmin }) => {
               نام و نام خانوادگی
             </Th>
             <Th
-              fontSize={{ base: "12px", md: "16px" }}
+              fontSize={{ base: "10px", md: "16px" }}
               bgColor="purple.500"
               color="white"
               textAlign="center"
@@ -29,7 +36,7 @@ const CustomerTable = ({ dateReserve, customerListAdmin }) => {
               جمع خدمات (تومان)
             </Th>
             <Th
-              fontSize={{ base: "12px", md: "16px" }}
+              fontSize={{ base: "10px", md: "16px" }}
               bgColor="purple.500"
               color="white"
               textAlign="center"
@@ -44,14 +51,14 @@ const CustomerTable = ({ dateReserve, customerListAdmin }) => {
           {dateReserve?.all_list?.map((item) => (
             <Tr key={item.id}>
               {/* ستون نام کاربر */}
-              <Td fontSize={{ base: "12px", md: "16px" }} textAlign="center">
+              <Td fontSize={{ base: "10px", md: "16px" }} textAlign="center">
                 {getCustomerName(item.user, customerListAdmin)}
               </Td>
 
               {/* ستون قیمت */}
               <Td
                 display={{ base: "none", sm: "table-cell" }}
-                fontSize={{ base: "12px", md: "16px" }}
+                fontSize={{ base: "10px", md: "16px" }}
                 textAlign="center"
               >
                 {item.total_price_amount}
@@ -61,7 +68,7 @@ const CustomerTable = ({ dateReserve, customerListAdmin }) => {
               {/* ستون زمان رزرو */}
               <Td
                 display={{ base: "none", sm: "table-cell" }}
-                fontSize={{ base: "12px", md: "16px" }}
+                fontSize={{ base: "10px", md: "16px" }}
                 textAlign="center"
               >
                 {item.reserve_time_str}

@@ -14,7 +14,7 @@ const FinancialReports = ({
       gap={6}
       px={2}
     >
-      <GridItem w="100%" colSpan={2}>
+      <GridItem w="100%"  colSpan={2}>
         <FinancialReportsBtn
           morningShiftLabel={morningShiftLabel}
           totalPaidAmountThisMonth={totalPaidAmountThisMonth}
