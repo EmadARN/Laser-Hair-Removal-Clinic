@@ -34,7 +34,8 @@ const Home = () => {
       <Box sx={{ py: 6 }}>
         <HeaderDetails />
       </Box>
-      <Box sx={{ bgColor: "#F7FAFC", p: 4, rounded: "8px" }}>
+      <Box sx={{ bgColor: "#F7FAFC", p: 4, rounded: "8px" }}           boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+      >
         <FinancialReports
           morningShiftLabel="شیفت صبح"
           afternoonShiftLabel="شیفت بعد از ظهر"
@@ -42,7 +43,8 @@ const Home = () => {
           totalAmountThisMonth={filteredOperators.aShiftOperators}
         />
       </Box>
-      <Box sx={{ mt: 8, bgColor: "#F7FAFC", p: 4, rounded: "8px" }}>
+      <Box sx={{ mt: 8, bgColor: "#F7FAFC", p: 4, rounded: "8px" }}          boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+      >
         <FinancialReports
           morningShiftLabel="تخمین در آمد روز (پرداخت شده)"
           afternoonShiftLabel="در آمد روز تا این لحظه (رزرو شده)"
@@ -57,7 +59,8 @@ const Home = () => {
         align="center"
         gap={8}
         mb={10}
-        sx={{ mt: 8, bgColor: "#F7FAFC", p: 4, rounded: "8px" }}
+        sx={{ mt: 8, bgColor: "#F7FAFC", p: 4, rounded: "8px" }}          boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+
       >
         <Box w={{ base: "100%", md: "20%" }} h="100%" maxW="400px" maxH="300px">
           <TodayIncomeDoughnut

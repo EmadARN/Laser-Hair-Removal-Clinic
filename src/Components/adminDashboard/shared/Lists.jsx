@@ -45,6 +45,7 @@ const Lists = ({
         p: 5,
         my: 2,
       }}
+      boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
     >
       <Box
         flex="3"

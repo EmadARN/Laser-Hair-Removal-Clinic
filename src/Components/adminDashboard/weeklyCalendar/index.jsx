@@ -192,7 +192,13 @@ const WeeklyCalendar = () => {
       </Box>
       <Box width={{ base: "120vw", sm: "100vw", md: "100%" }}>
         {/* Table */}
-        <Box overflowX="auto" borderWidth="1px" borderRadius="md" p={4}>
+        <Box
+          overflowX="auto"
+          borderWidth="1px"
+          borderRadius="md"
+          p={6}
+          boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+        >
           <TableWeekly
             handleCellClick={handleCellClickAndOpenModal}
             tableData={tableData}
