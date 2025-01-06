@@ -45,6 +45,8 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
                 sx={{ borderColor: "#777" }}
                 name="morning_time"
                 type="time"
+                min="08:00"
+                max="11:00"
                 onChange={handleInputs}
               />
             </FormControl>
@@ -56,6 +58,8 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
                 sx={{ borderColor: "#777" }}
                 name="afternoon_time"
                 type="time"
+                min="12:00"
+                max="23:59"
                 onChange={handleInputs}
               />
             </FormControl>

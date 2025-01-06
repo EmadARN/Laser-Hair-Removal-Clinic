@@ -80,12 +80,14 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
           {!isCollapsed && <Bottom active={active} />}
           <Button sx={styles.logoutButton} onClick={handleLogout}>
             <Flex sx={styles.logoutFlex}>
-              <MdExitToApp />
+              <Box sx={{ mr: { md: isCollapsed ? "14px" : "0px" } }}>
+                <MdExitToApp />
+              </Box>
               <Text
                 sx={styles.logoutText}
                 display={isCollapsed ? "none" : "flex"}
               >
-                خروج از حساب کاربری
+                {isSmallScreen ? "خروج" : "خروج از حساب کاربری"}
               </Text>
             </Flex>
           </Button>

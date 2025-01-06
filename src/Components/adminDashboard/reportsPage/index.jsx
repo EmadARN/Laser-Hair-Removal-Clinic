@@ -5,11 +5,11 @@ import { useCookies } from "react-cookie";
 import RepoertHeader from "./ui/RepoertHeader";
 import SessionSummery from "./ui/SessionSummery";
 import ReportItem from "./ui/ReportItem";
-import useReportsData from "./useReportsData";
-import useSummary from "./useSummary";
-import useDateRange from "./useDateRange";
 import LaserSessionsChart from "./ui/charts/LaserSessionsChart";
 import LineChart from "./ui/charts/LineChart";
+import useDateRange from "./logic/useDateRange";
+import useSummary from "./logic/useSummary";
+import useReportsData from "./logic/useReportsData";
 
 const Reports = () => {
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
@@ -73,13 +73,14 @@ const Reports = () => {
 
       <Box mt={{ base: 6, md: 8 }}>
         <VStack align="stretch" spacing={2}>
-          {dateReserve?.complete_list.map((item) => (
-            <ReportItem
-              key={item.id}
-              item={item}
-              customerListAdmin={customerListAdmin}
-            />
-          ))}
+          {dateReserve &&
+            dateReserve.complete_list.map((item) => (
+              <ReportItem
+                key={item.id}
+                item={item}
+                customerListAdmin={customerListAdmin}
+              />
+            ))}
         </VStack>
       </Box>
     </Box>

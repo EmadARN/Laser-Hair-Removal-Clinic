@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Box, Text, Button } from "@chakra-ui/react";
-import RedGreenBox from "@/Common/Red&GreenBox/Red&GreenBox";
+import RedGreenBox from "@/Common/RedGreenBox/RedGreenBox";
+
 
 const ReservationDone = ({ slug }) => {
   return (

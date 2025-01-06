@@ -66,6 +66,7 @@ const UserInfoBox = ({
             fontWeight={"bold"}
             leftIcon={<CiEdit size={"25px"} />}
             onClick={onOpen}
+            display="flex"
           >
             <Text fontSize={{ base: "15px", md: "17px" }}>ویرایش</Text>
           </CustomButton>

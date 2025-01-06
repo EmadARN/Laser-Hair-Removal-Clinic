@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 // import Captcha from "./widget/Captcha";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { BgAnimate } from "./ui/BgAnimate";
-import Inputs from "./ui/Inputs";
 import AnimationSide from "./ui/AnimationSide";
 import useLoginAdminRecptionHooks from "./useLoginAdminRecptionHooks";
+import FormLogin from "./ui/FormLogin";
 
 const LoginPage = () => {
   const [btnClick, setBtnClick] = useState(false);
@@ -46,12 +46,13 @@ const LoginPage = () => {
       );
       if (
         success &&
-        (router.pathname === "/adminDashboard/home" || router.pathname === "/reseptionDashboard/dailyShifts")
+        (router.pathname === "/adminDashboard/home" ||
+          router.pathname === "/reseptionDashboard/dailyShifts")
       ) {
         setLoading(false);
       }
     } else {
-      setLoading(false)
+      setLoading(false);
       showToast({
         title: "خطا",
         description: `شما نمی‌توانید به عنوان ${
@@ -105,7 +106,7 @@ const LoginPage = () => {
                 transition: "opacity 1s ease 0.75s",
               }}
             >
-              <Inputs
+              <FormLogin
                 loading={loading}
                 label="ورود به عنوان مدیر"
                 submitHandler={handleSubmit}
@@ -144,7 +145,8 @@ const LoginPage = () => {
             left: btnClick ? "100%" : 0,
           }}
         >
-          <Inputs
+          <FormLogin
+            loading={loading}
             label="ورود به عنوان کارمند"
             submitHandler={handleSubmit}
             inputHandler={handleInputChange}

@@ -7,11 +7,14 @@ const FinancialReportsBtn = ({
   totalPaidAmountThisMonth,
   totalAmountThisMonth,
 }) => {
+  const isValuePresent = totalPaidAmountThisMonth || totalAmountThisMonth;
+
   return (
     <ButtonGroup size="sm" isAttached variant="outline" sx={{ w: "100%" }}>
       <Button
         sx={{
           width: "100%",
+          h: "auto",
           borderRadius: "0 3px 3px 0",
           fontSize: { base: "12px", md: "14px" },
           cursor: "default",
@@ -26,6 +29,7 @@ const FinancialReportsBtn = ({
       <Box
         sx={{
           width: "100%",
+          height: isValuePresent ? "auto" : "50px", 
           border: "1px solid #1111",
         }}
       >
@@ -37,7 +41,9 @@ const FinancialReportsBtn = ({
             fontSize: { base: "12px", md: "14px" },
           }}
         >
-          {totalPaidAmountThisMonth || totalAmountThisMonth}
+          {totalPaidAmountThisMonth ||
+            totalAmountThisMonth ||
+            "0"}
         </Text>
       </Box>
     </ButtonGroup>
