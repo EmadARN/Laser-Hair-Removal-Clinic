@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SearchInput from "@/Common/searchInput/SearchInput";
-import { Box, Table, Tbody } from "@chakra-ui/react";
+import { Box, Table, Tbody, Button, HStack, Text } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import Lists from "../shared/Lists";
@@ -11,6 +11,8 @@ const Clients = () => {
   const [step, setStep] = useState(0);
   const [clientData, setClientData] = useState({});
   const [searchQuery, setSearchQuery] = useState(""); // state برای جستجو
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // تعداد آیتم‌ها در هر صفحه
 
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
   const dispatch = useDispatch();
@@ -73,14 +75,31 @@ const Clients = () => {
     });
   };
 
-  // فیلتر کردن لیست مشتریان بر اساس جستجو
   const filteredClients =
     customerListAdmin && customerListAdmin.customer_list
       ? filterClients(customerListAdmin.customer_list)
       : [];
 
-  const handlechange = (e) => {
+  const handleChange = (e) => {
     setSearchQuery(e.target.value);
+  };
+
+  // محاسبه داده‌های صفحه جاری
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentClients = filteredClients.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
+  // تعداد کل صفحات
+  const totalPages = Math.ceil(filteredClients.length / itemsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
   if (step === 0) {
@@ -91,10 +110,15 @@ const Clients = () => {
             placeholder="جستجو در بین مراجعین"
             size="lg"
             value={searchQuery}
-            handlechange={handlechange} // به‌روزرسانی مقدار جستجو
+            handlechange={handleChange}
           />
         </Box>
-        <Box display={"flex"} justifyContent={"center"} px={{ base: 2, md: 4 }}>
+        <Box
+          width={{ base: "110vw", md: "100%" }}
+          display={"flex"}
+          justifyContent={"center"}
+          px={{ base: 2, md: 4 }}
+        >
           <Table
             mt={6}
             cursor="pointer"
@@ -107,9 +131,9 @@ const Clients = () => {
             <Tbody>
               {!loading &&
               !error &&
-              filteredClients &&
-              Array.isArray(filteredClients)
-                ? filteredClients.map((item, index) => (
+              currentClients &&
+              Array.isArray(currentClients)
+                ? currentClients.map((item, index) => (
                     <Box key={index} onClick={() => handleRowClick(item)}>
                       <Lists
                         firstArea={item.name + " " + item.last_name}
@@ -124,6 +148,21 @@ const Clients = () => {
             </Tbody>
           </Table>
         </Box>
+        <HStack mt={4} justifyContent="center">
+          <Button
+            onClick={handlePrevPage}
+            isDisabled={currentPage === 1}
+          >
+            صفحه قبل
+          </Button>
+          <Text>{`${currentPage} از ${totalPages}`}</Text>
+          <Button
+            onClick={handleNextPage}
+            isDisabled={currentPage === totalPages}
+          >
+            صفحه بعد
+          </Button>
+        </HStack>
       </>
     );
   } else {
