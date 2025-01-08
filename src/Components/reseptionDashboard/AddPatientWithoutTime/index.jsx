@@ -19,14 +19,16 @@ import { MdCancel } from "react-icons/md";
 
 import { FaArrowRight, FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Table, Tbody, Tr, Td } from '@chakra-ui/react';
+import { Table, Tbody, Tr, Td } from "@chakra-ui/react";
 import { useCookies } from "react-cookie";
-import { addCustomerWithOutTime, getCutomerList } from "@/features/receptionDashboard/receptionThunks";
+import {
+  addCustomerWithOutTime,
+  getCutomerList,
+} from "@/features/receptionDashboard/receptionThunks";
 
 const PatientWithoutTime = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [inputsData, setInputsData] = useState({
-  
     name: "",
     last_name: "",
     phone_number: "",
@@ -37,30 +39,25 @@ const PatientWithoutTime = () => {
     decease_hist: false,
     doctor: "-",
     offline_number: 0,
-
   });
 
   const [drugHistory, setDrugHistory] = useState("false");
   const [diseaseHistory, setDiseaseHistory] = useState("false");
   const [step, setStep] = useState(0);
 
-
-  
   const dispatch = useDispatch();
   const { cutomerList, loading, error } = useSelector(
     (store) => store.receptionDashboardSlice
   );
 
 
-  
 
-  
   const [{ auth_Employee_token }] = useCookies(["auth_Employee_token"]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log('vlueeee',value);
-    
+    console.log("vlueeee", value);
+
     setInputsData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -69,8 +66,6 @@ const PatientWithoutTime = () => {
     if (name === "drug_hist") setDrugHistory(value);
     if (name === "decease_hist") setDiseaseHistory(value);
   };
-
-  
 
   const handleSubmit = () => {
     dispatch(addCustomerWithOutTime({ ...inputsData, auth_Employee_token }));
@@ -81,7 +76,6 @@ const PatientWithoutTime = () => {
     setStep(0);
     setInputsData({
       name: "",
-      
       last_name: "",
       phone_number: "",
       national_code: "",
@@ -90,7 +84,6 @@ const PatientWithoutTime = () => {
       drug_hist: false,
       decease_hist: false,
       doctor: "-",
-  
       offline_number: 0,
     });
     onClose();
@@ -99,13 +92,14 @@ const PatientWithoutTime = () => {
   const handleRowClick = (item) => {
     // Get the customer info from customer_list
     const customer = item;
-    
+
     // Find the detailed information for this customer from customer_information_list
-    const customerInfo = cutomerList.customer_information_list.find(info => info.user === customer.username);
+    const customerInfo = cutomerList.customer_information_list.find(
+      (info) => info.user === customer.username
+    );
 
     // Combine the data from both lists
     setInputsData({
-     
       name: customer.name,
       last_name: customer.last_name,
       phone_number: customer.phone_number,
@@ -116,17 +110,11 @@ const PatientWithoutTime = () => {
       decease_hist: customerInfo ? customerInfo.decease_hist : false,
       doctor: customerInfo ? customerInfo.doctor : "-",
       offline_number: customerInfo ? customerInfo.offline_num : 0,
-    
-    
     });
 
     // Move to step 1 to show the details
     setStep(1);
   };
-  
-
-  
-  
 
   useEffect(() => {
     dispatch(getCutomerList({ auth_Employee_token }));
@@ -150,16 +138,27 @@ const PatientWithoutTime = () => {
       <Modal isOpen={isOpen} onClose={mdCancelHandler}>
         <ModalOverlay />
         <ModalContent p={6}>
-          <Box mb={5} display="flex" justifyContent="space-between" alignItems="center">
+          <Box
+            mb={5}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Box gap={3} display="flex" alignItems="center">
-              <FaArrowRight onClick={() => setStep(0)} cursor="pointer" fontSize="17px" />
-              <Text fontWeight="bold">{step === 0 ? "مراجع بین نوبت" : "مراجع جدید"}</Text>
+              <FaArrowRight
+                onClick={() => setStep(0)}
+                cursor="pointer"
+                fontSize="17px"
+              />
+              <Text fontWeight="bold">
+                {step === 0 ? "مراجع بین نوبت" : "مراجع جدید"}
+              </Text>
             </Box>
             <MdCancel cursor="pointer" onClick={mdCancelHandler} />
           </Box>
 
           {step === 0 ? (
-            <Box height="500px" >
+            <Box height="500px">
               <Input />
               <Text
                 as="button"
@@ -170,13 +169,32 @@ const PatientWithoutTime = () => {
               >
                 +مراجع جدید
               </Text>
-              <Table mt={6} cursor="pointer" overflowY="scroll" width="100%" size="sm" dir="rtl" variant="striped">
+              <Table
+                mt={6}
+                cursor="pointer"
+                overflowY="scroll"
+                width="100%"
+                size="sm"
+                dir="rtl"
+                variant="striped"
+              >
                 <Tbody>
-                  {!loading && !error && cutomerList && cutomerList.customer_list && Array.isArray(cutomerList.customer_list)
+                  {!loading &&
+                  !error &&
+                  cutomerList &&
+                  cutomerList.customer_list &&
+                  Array.isArray(cutomerList.customer_list)
                     ? cutomerList.customer_list.map((item) => (
-                        <Tr key={item.username} onClick={() => handleRowClick(item)}>
-                          <Td fontSize={{ base: "12px", md: "16px" }}>{item.name} {item.last_name}</Td>
-                          <Td fontSize={{ base: "12px", md: "16px" }}>{item.phone_number}</Td>
+                        <Tr
+                          key={item.username}
+                          onClick={() => handleRowClick(item)}
+                        >
+                          <Td fontSize={{ base: "12px", md: "16px" }}>
+                            {item.name} {item.last_name}
+                          </Td>
+                          <Td fontSize={{ base: "12px", md: "16px" }}>
+                            {item.phone_number}
+                          </Td>
                         </Tr>
                       ))
                     : error
@@ -185,8 +203,14 @@ const PatientWithoutTime = () => {
                 </Tbody>
               </Table>
             </Box>
-          ) : step ===1 ?(
-            <Box mb={4} display="flex" flexDirection="column" gap={4} width="100%">
+          ) : step === 1 ? (
+            <Box
+              mb={4}
+              display="flex"
+              flexDirection="column"
+              gap={4}
+              width="100%"
+            >
               {[
                 { label: "نام", name: "name" },
                 { label: "نام خانوادگی", name: "last_name" },
@@ -208,11 +232,18 @@ const PatientWithoutTime = () => {
               <Flex flexWrap="wrap" gap={4}>
                 {[
                   { label: "مصرف دارو", value: drugHistory, name: "drug_hist" },
-                  { label: "سابقه بیماری", value: diseaseHistory, name: "decease_hist" },
+                  {
+                    label: "سابقه بیماری",
+                    value: diseaseHistory,
+                    name: "decease_hist",
+                  },
                 ].map((radio, idx) => (
                   <FormControl key={idx} as="fieldset" flexBasis="48%">
                     <FormLabel as="legend">{radio.label}</FormLabel>
-                    <RadioGroup onChange={(value) => handleRadioChange(radio.name, value)} value={radio.value}>
+                    <RadioGroup
+                      onChange={(value) => handleRadioChange(radio.name, value)}
+                      value={radio.value}
+                    >
                       <Stack direction="row">
                         <Radio value="true">دارد</Radio>
                         <Radio value="false">ندارد</Radio>
@@ -226,53 +257,60 @@ const PatientWithoutTime = () => {
                 تایید اطلاعات و ادامه
               </Button>
             </Box>
-          ):step ===2 ?(
-            <Box mb={4} display="flex" flexDirection="column" gap={4} width="100%">
-            {[
-              { label: "نام", name: "name" },
-              { label: "نام خانوادگی", name: "last_name" },
-              { label: "کد ملی", name: "national_code" },
-              { label: "شماره همراه", name: "phone_number" },
-              { label: "شماره ثابت", name: "house_number" },
-              { label: "آدرس منزل", name: "address" },
-              
-            ].map((field, idx) => (
-              
-              <Input
-              onChange={(e)=>handleChange(e)}
-                key={idx}
-                name={field.name}
-               
-                placeholder={field.label}
-                size="md"
-                
-           
-              />
-            ))}
-
-            <Flex flexWrap="wrap" gap={4}>
+          ) : step === 2 ? (
+            <Box
+              mb={4}
+              display="flex"
+              flexDirection="column"
+              gap={4}
+              width="100%"
+            >
               {[
-                { label: "مصرف دارو", value: drugHistory, name: "drug_hist" },
-                { label: "سابقه بیماری", value: diseaseHistory, name: "decease_hist" },
-              ].map((radio, idx) => (
-                <FormControl key={idx} as="fieldset" flexBasis="48%">
-                  <FormLabel as="legend">{radio.label}</FormLabel>
-                  <RadioGroup onChange={(value) => handleRadioChange(radio.name, value)} value={radio.value}>
-                    <Stack direction="row">
-                      <Radio value="true">دارد</Radio>
-                      <Radio value="false">ندارد</Radio>
-                    </Stack>
-                  </RadioGroup>
-                </FormControl>
+                { label: "نام", name: "name" },
+                { label: "نام خانوادگی", name: "last_name" },
+                { label: "کد ملی", name: "national_code" },
+                { label: "شماره همراه", name: "phone_number" },
+                { label: "شماره ثابت", name: "house_number" },
+                { label: "آدرس منزل", name: "address" },
+              ].map((field, idx) => (
+                <Input
+                  onChange={(e) => handleChange(e)}
+                  key={idx}
+                  name={field.name}
+                  placeholder={field.label}
+                  size="md"
+                />
               ))}
-            </Flex>
 
-            <Button onClick={handleSubmit} w="100%" colorScheme="blue">
-              تایید اطلاعات و ادامه
-            </Button>
-          </Box>
-            
-          ):null}
+              <Flex flexWrap="wrap" gap={4}>
+                {[
+                  { label: "مصرف دارو", value: drugHistory, name: "drug_hist" },
+                  {
+                    label: "سابقه بیماری",
+                    value: diseaseHistory,
+                    name: "decease_hist",
+                  },
+                ].map((radio, idx) => (
+                  <FormControl key={idx} as="fieldset" flexBasis="48%">
+                    <FormLabel as="legend">{radio.label}</FormLabel>
+                    <RadioGroup
+                      onChange={(value) => handleRadioChange(radio.name, value)}
+                      value={radio.value}
+                    >
+                      <Stack direction="row">
+                        <Radio value="true">دارد</Radio>
+                        <Radio value="false">ندارد</Radio>
+                      </Stack>
+                    </RadioGroup>
+                  </FormControl>
+                ))}
+              </Flex>
+
+              <Button onClick={handleSubmit} w="100%" colorScheme="blue">
+                تایید اطلاعات و ادامه
+              </Button>
+            </Box>
+          ) : null}
         </ModalContent>
       </Modal>
     </>

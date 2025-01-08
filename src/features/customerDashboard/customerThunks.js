@@ -155,12 +155,12 @@ export const confirmInfo = createAsyncThunk(
   }
 );
 export const getCutomerList = createAsyncThunk(
-  "receptionDashboard/getCutomerList",
+  "customer/getCutomerList",
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.get("/Core/customer/list/", {
         headers: {
-          Authorization: `Bearer ${payload.auth_token}`,
+          Authorization: `Bearer ${payload.token}`,
         },
       });
       return data;
@@ -171,8 +171,10 @@ export const getCutomerList = createAsyncThunk(
 );
 
 export const getAsyncUserName = createAsyncThunk(
-  "admin/getAsyncUserName",
+  "customer/getAsyncUserName",
   async (payload, { rejectWithValue }) => {
+    console.log('ppp',payload);
+    
     try {
       const { data } = await api.get("/Core/get/username/", {
         headers: {

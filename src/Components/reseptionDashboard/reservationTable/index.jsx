@@ -11,10 +11,13 @@ import {
 } from "@chakra-ui/react";
 
 import { useDispatch } from "react-redux";
-import { cancelReserve, multiplePayment } from "@/features/receptionDashboard/receptionThunks";
+import {
+  cancelReserve,
+  editLazerArea,
+  multiplePayment,
+} from "@/features/receptionDashboard/receptionThunks";
 import PaymentDialog from "../paymentDialog/PaymentDialog";
 import { extractTime } from "@/utils/extractDate";
-
 
 export const ReservationTable = ({
   isDisabled,
@@ -28,6 +31,8 @@ export const ReservationTable = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedReserve, setSelectedReserve] = useState(null);
   const [idKeeper, setIdKeeper] = useState("");
+
+
 
   //this state store inputselect 1 component value
   const [selectedValue, setSelectedValue] = useState("");
@@ -66,9 +71,13 @@ export const ReservationTable = ({
 
   //this function store each customer payment detail
   const handlePaymentClick = (item) => {
+  
+
     setSelectedReserve(item);
 
     setIdKeeper(item.id);
+
+   
 
     onOpen();
   };
@@ -193,6 +202,7 @@ export const ReservationTable = ({
       </TableContainer>
       {isOpen && (
         <PaymentDialog
+        idKeeper={idKeeper}
           confrimChange={confrimChange}
           setConfirmChange={setConfirmChange}
           oneWayPaymentValu={oneWayPaymentValu}

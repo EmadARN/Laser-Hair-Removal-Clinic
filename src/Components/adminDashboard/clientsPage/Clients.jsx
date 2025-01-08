@@ -6,6 +6,8 @@ import { useCookies } from "react-cookie";
 import Lists from "../shared/Lists";
 import AccordionLists from "../shared/AccordionLists";
 import { getCutomerList } from "@/features/adminDashboard/adminThunks";
+import SearchFilter from "@/Common/searchFilter";
+
 
 const Clients = () => {
   const [step, setStep] = useState(0);
@@ -24,16 +26,6 @@ const Clients = () => {
   const { loading, error, customerListAdmin } = useSelector(
     (store) => store.adminDashboard
   );
-
-  // تابع فیلتر برای جستجو بر اساس اسم و فامیل
-  const filterClients = (clients) => {
-    if (!searchQuery) return clients; // اگر چیزی جستجو نشده، همه مشتری‌ها نمایش داده می‌شوند
-    return clients.filter(
-      (client) =>
-        client.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        client.last_name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  };
 
   const handleRowClick = (item) => {
     const customer = item;
@@ -75,14 +67,12 @@ const Clients = () => {
     });
   };
 
-  const filteredClients =
-    customerListAdmin && customerListAdmin.customer_list
-      ? filterClients(customerListAdmin.customer_list)
-      : [];
-
-  const handleChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  const { filteredData: filteredClients, handleChange } = SearchFilter({
+    data: customerListAdmin?.customer_list || [],
+    searchQuery,
+    setSearchQuery,
+    filterKeys: ["name", "last_name"], // فیلدهایی که باید جستجو شود
+  });
 
   // محاسبه داده‌های صفحه جاری
   const startIndex = (currentPage - 1) * itemsPerPage;

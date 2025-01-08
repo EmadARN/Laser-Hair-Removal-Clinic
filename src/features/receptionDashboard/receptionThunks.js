@@ -217,19 +217,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 //   }
 // );
 
-
-
-
-
-
-
-
 // Async Thunks
 export const addCustomerWithOutTime = createAsyncThunk(
   "receptionDashboard/addCustomerWithOutTime",
   async (payload, { rejectWithValue }) => {
-    console.log("patientwidthouttime", payload);
-
     try {
       const { data } = await api.post(
         "Core/add/customer/information/",
@@ -259,7 +250,6 @@ export const getCutomerList = createAsyncThunk(
         },
       });
       return data;
-      console.log("customer list", data);
     } catch (error) {
       console.log("error", error);
     }
@@ -273,8 +263,8 @@ export const todayDate = createAsyncThunk(
       const { data } = await api.post(
         "/Reserve/reserve/list/",
         {
-          from_: "1403/8/28",
-          to: "1403/8/30",
+          from_: "",
+          to: "",
         },
         {
           headers: {
@@ -447,5 +437,26 @@ export const multiplePayment = createAsyncThunk(
   }
 );
 
-
-
+export const editLazerArea = createAsyncThunk(
+  "reseption/editLazerArea",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post(
+        "/Reserve/edit/reserve/laser/area/",
+        {
+          reserve: payload.idKeeper,
+          laser_area_list: payload.laserAreaList,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
+          },
+        }
+      );
+      console.log("edit success", data);
+      return data;
+    } catch (err) {
+      console.log("edit error", err);
+    }
+  }
+);

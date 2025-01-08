@@ -20,6 +20,8 @@ import LaserAreas from "../LaserAreas";
 import { secBox } from "../LaserAreas/style";
 
 const PaymentDialog = ({
+  idKeeper,
+  setLaserAreaList,
   setConfirmChange,
   confrimChange,
   oneWayPaymentValu,
@@ -177,7 +179,7 @@ const PaymentDialog = ({
           </>
         );
       case 1:
-        return <LaserAreas onClose={onClose} setStep={setStep} />;
+        return <LaserAreas idKeeper={idKeeper} onClose={onClose} setStep={setStep} />;
       case 2:
         return (
           <CustomPayment

@@ -10,14 +10,17 @@ import { MdCancel } from "react-icons/md";
 import { thirdBox, fourthBox, fifthBox, sisxthBox } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
-import { getLazerAreas } from "@/features/receptionDashboard/receptionThunks";
+import {
+  editLazerArea,
+  getLazerAreas,
+} from "@/features/receptionDashboard/receptionThunks";
 
-
-const LaserAreas = ({ setStep, onClose }) => {
+const LaserAreas = ({ setStep, onClose, idKeeper }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [{ auth_Employee_token }] = useCookies(["auth_Employee_token"]);
   const dispatch = useDispatch();
   const { LazerAreas } = useSelector((store) => store.receptionDashboardSlice);
+  const [laserAreaList, setLaserAreaList] = useState([]);
 
   // Handle fetching laser areas
   useEffect(() => {
@@ -28,7 +31,9 @@ const LaserAreas = ({ setStep, onClose }) => {
   const buttonWidth = useBreakpointValue({ base: "100%", md: "30%" });
 
   const removeHandle = (id) => {
-    setSelectedOptions(selectedOptions.filter((item) => item.id !== id));
+    const updatedOptions = selectedOptions.filter((item) => item.id !== id);
+    setSelectedOptions(updatedOptions);
+    setLaserAreaList(updatedOptions.map((option) => option.value));
   };
 
   const handleSelectChange = (e) => {
@@ -37,10 +42,18 @@ const LaserAreas = ({ setStep, onClose }) => {
 
     if (selectedOptions.some((option) => option.id === selectedId)) return;
 
-    setSelectedOptions([
+    const updatedOptions = [
       { id: selectedId, value: selectedValue },
       ...selectedOptions,
-    ]);
+    ];
+    setSelectedOptions(updatedOptions);
+    setLaserAreaList(updatedOptions.map((option) => option.value)); // به‌روزرسانی استیت مقادیر
+  };
+
+  const submitEditLazerArea = () => {
+    if (idKeeper) {
+      dispatch(editLazerArea({ idKeeper, laserAreaList, auth_Employee_token }));
+    }
   };
 
   return (
@@ -85,7 +98,12 @@ const LaserAreas = ({ setStep, onClose }) => {
           gap={3}
           mt={4}
         >
-          <Button bgColor="#3854c4" color="#fff" width={buttonWidth}>
+          <Button
+            onClick={submitEditLazerArea}
+            bgColor="#3854c4"
+            color="#fff"
+            width={buttonWidth}
+          >
             تایید نواحی
           </Button>
           <Button

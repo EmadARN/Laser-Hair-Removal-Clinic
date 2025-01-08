@@ -143,13 +143,14 @@ const customerDashboardSlice = createSlice({
         state.loading = true;
         state.error = "";
       })
-      .addCase(getCutomerList.rejected, (state, action) =>
-        handleAsyncState(state, action, "rejected")
-      )
+    
       .addCase(getCutomerList.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.customerList = action.payload;
       })
+      .addCase(getCutomerList.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
       // getAsyncUserName
       .addCase(getAsyncUserName.pending, (state) => {
         handleAsyncState(state, {}, "pending");

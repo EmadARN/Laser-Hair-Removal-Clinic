@@ -27,11 +27,12 @@ const DashboardLayout = ({
   const { userNames, customerList } = useSelector(
     (store) => store.customerDashboard
   );
+console.log('cccc',customerList);
 
   useEffect(() => setUsername(localStorage.getItem("phoneNumber")), []);
   useEffect(() => {
     if (auth_token) {
-      dispatch(getCutomerList({ auth_token }));
+      dispatch(getCutomerList({ token:auth_token }));
       dispatch(getAsyncUserName({ token: auth_token }));
     }
   }, [dispatch, auth_token]);
