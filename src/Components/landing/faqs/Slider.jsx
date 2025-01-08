@@ -26,6 +26,7 @@ const Slider = () => {
 
   return (
     <Box
+    
       flex="1"
       p={{ base: 3, md: 5 }}
       position="relative"

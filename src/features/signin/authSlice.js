@@ -55,6 +55,7 @@ export const postAsyncLogin = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.post("/Core/login/", payload);
+
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -69,9 +70,15 @@ const authSlice = createSlice({
     phone_number: "",
     code: "",
     error: null,
+    userType: "",
     // token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   },
-  reducers: {},
+  reducers: {
+    resetAuthState: (state) => {
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(postAsyncNumber.pending, (state) => {
@@ -94,10 +101,9 @@ const authSlice = createSlice({
         state.phone_number = "";
       })
       .addCase(postAsyncCode.fulfilled, (state, action) => {
-       
-        if(action.payload.router === "/userDashboard"){
-         handleAsyncState(state, action, "fulfilled");
-        }else{
+        if (action.payload.router === "/userDashboard") {
+          handleAsyncState(state, action, "fulfilled");
+        } else {
           handleAsyncState(state, {}, "pending");
         }
         state.code = action.payload.code;
@@ -124,5 +130,6 @@ const authSlice = createSlice({
       );
   },
 });
+export const { resetAuthState } = authSlice.actions;
 export default authSlice.reducer;
 // typeof window !== "undefined" ? localStorage.getItem("auth_token") : null, // بررسی محیط مرورگر
