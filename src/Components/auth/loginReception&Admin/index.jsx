@@ -92,8 +92,14 @@ const LoginPage = () => {
         <Captcha onVerify={handleCaptchaSuccess} />
       ) : ( */}
       <>
-        <Box sx={{ position: "absolute", w: "50%", right: 0 }}>
-          <Box sx={{ position: "relative", h: "300px" }}>
+        <Box
+          sx={{
+            position: "absolute",
+            w: "50%",
+            right: 0,
+          }}
+        >
+          <Box sx={{ position: "relative", h: { base: "230px", md: "300px" } }}>
             <Box
               sx={{
                 bgColor: "#1111",
@@ -136,7 +142,7 @@ const LoginPage = () => {
           sx={{
             bgColor: "#1111",
             p: 6,
-            h: "300px",
+            h: { base: "230px", md: "300px" },
             w: "50%",
             zIndex: btnClick ? 0 : 10,
             opacity: btnClick ? 0 : 1,

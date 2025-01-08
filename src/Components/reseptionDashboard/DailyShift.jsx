@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import SearchInput from "@/Common/searchInput/SearchInput";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,19 +9,15 @@ import { ReservationTable } from "./reservationTable";
 import { todayDate } from "@/features/receptionDashboard/receptionThunks";
 
 const DailyShift = () => {
-  const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
-    "auth_Employee_token",
-  ]);
+  const [{ auth_Employee_token } = cookies, setCookie] = useCookies();
   const dispatch = useDispatch();
-  const { todayReserve } = useSelector(
+  const { todayReserve, cutomerList } = useSelector(
     (store) => store.receptionDashboardSlice
   );
 
   useEffect(() => {
     dispatch(todayDate({ auth_Employee_token }));
   }, [dispatch]);
-
-  console.log(todayReserve);
 
   return (
     <>
@@ -42,6 +38,7 @@ const DailyShift = () => {
           ButtonValue="پرداخت"
           todayReserve={todayReserve}
           auth_Employee_token={auth_Employee_token}
+          cutomerList={cutomerList}
         />
       </Box>
 

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Box, Button } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import SearchInput from "@/Common/searchInput/SearchInput";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
@@ -20,30 +20,18 @@ const RepoertHeader = ({ from, to, onDateChange, onTodayClick }) => {
         <SearchInput placeholder="جست و جو" size="lg" />
       </Box>
 
-      <Box display="flex" alignItems="center" gap={3}>
-        <Button
-          variant="ghost"
-          border="2px solid orange"
-          color="orange"
-          textAlign="center"
-          padding="20px"
-          onClick={onTodayClick}
-        >
-          امروز
-        </Button>
-        <Box>
-          <DatePicker
-            ref={datePickerRef}
-            value={[from, to].filter(Boolean)}
-            onChange={onDateChange}
-            multiple
-            numberOfMonths={2}
-            style={{ padding: "20px" }}
-            placeholder="انتخاب بازه‌ی تاریخ"
-            calendar={persian}
-            locale={persian_fa}
-          />
-        </Box>
+      <Box>
+        <DatePicker
+          ref={datePickerRef}
+          value={[from, to].filter(Boolean)}
+          onChange={onDateChange}
+          multiple
+          numberOfMonths={2}
+          style={{ padding: "20px" }}
+          placeholder="انتخاب بازه‌ی تاریخ"
+          calendar={persian}
+          locale={persian_fa}
+        />
       </Box>
     </Box>
   );

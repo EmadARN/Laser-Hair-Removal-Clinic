@@ -8,6 +8,8 @@ const useReportsData = (authToken, dateRange) => {
   useEffect(() => {
     if (dateRange.from && dateRange.to) {
       dispatch(getDate({ ...dateRange, auth_Admin_token: authToken }));
+    } else {
+      dispatch(getDate({ from: "", to: "", auth_Admin_token: authToken }));
     }
   }, [dispatch, dateRange, authToken]);
 

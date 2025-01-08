@@ -11,10 +11,13 @@ import {
 } from "@chakra-ui/react";
 
 import { useDispatch } from "react-redux";
-import { cancelReserve, multiplePayment } from "@/features/receptionDashboard/receptionThunks";
+import {
+  cancelReserve,
+  multiplePayment,
+} from "@/features/receptionDashboard/receptionThunks";
 import PaymentDialog from "../paymentDialog/PaymentDialog";
 import { extractTime } from "@/utils/extractDate";
-
+import { getCustomerName } from "@/utils/getCustomerName";
 
 export const ReservationTable = ({
   isDisabled,
@@ -23,6 +26,7 @@ export const ReservationTable = ({
   todayReserve,
   auth_Employee_token,
   isPaymentTable, // Prop to determine which table is being rendered
+  cutomerList,
 }) => {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -103,17 +107,18 @@ export const ReservationTable = ({
   };
 
   const cancelHandler = (item) => {
-    if (isPaymentTable) {
-      setSelectedReserve(item);
-      dispatch(
-        cancelReserve({
-          reserve: item.id,
-          cancel_type: "sc",
-          sms_status: true,
-          auth_Employee_token,
-        })
-      );
-    }
+    setSelectedReserve(item);
+    console.log("selectedReserveID", item.id);
+    console.log("selectedReserve", selectedReserve);
+
+    dispatch(
+      cancelReserve({
+        reserve: item.id,
+        cancel_type: "sc",
+        sms_status: "جلسه لیزر شما لغو شد",
+        auth_Employee_token,
+      })
+    );
   };
 
   //this function update radio button values for one payemnt method
@@ -141,7 +146,7 @@ export const ReservationTable = ({
                     display={{ base: "none", sm: "table-cell" }}
                     fontSize={{ base: "12px", md: "16px" }}
                   >
-                    {item.user}
+                    {getCustomerName(item.user, cutomerList)}
                   </Td>
 
                   {/* ستون زمان رزرو */}

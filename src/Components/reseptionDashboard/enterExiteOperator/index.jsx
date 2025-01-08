@@ -9,9 +9,8 @@ import {
 } from "@/features/receptionDashboard/receptionThunks";
 
 const EnterExite = () => {
-  const [{ auth_Employee_token } = cookies] = useCookies([
-    "auth_Employee_token",
-  ]);
+  const [{ auth_Employee_token } = cookies] = useCookies();
+
   const dispatch = useDispatch();
   const { operatorSchedule } = useSelector(
     (store) => store.receptionDashboardSlice
@@ -58,9 +57,7 @@ const EnterExite = () => {
         bgColor="transparent"
         _hover={{ bgColor: "purple.50" }}
       >
-        {!operatorSchedule.entered_operator_username
-          ? `ثپت ورود اوپراتور`
-          : `خروج اوپراتور`}
+        خروج اوپراتور
       </Button>
     </Box>
   );

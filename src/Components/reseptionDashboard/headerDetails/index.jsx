@@ -36,13 +36,6 @@ const HeaderDetails = ({ todayDateReserve }) => {
             >
               نوبت های روز
             </Text>
-            {/* <DataSlider btnDisplay={true} />
-            <Button
-              sx={{ color: "blue", mt: { base: 2, sm: 0 } }}
-              onClick={todayDateReserve}
-            >
-              امروز
-            </Button> */}
             <Box>{getTodayDate()}</Box>
           </Flex>
         </Flex>

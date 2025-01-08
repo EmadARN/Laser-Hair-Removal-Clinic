@@ -13,3 +13,10 @@ export function getTodayDateYear() {
 
   return `درآمد - ${today}`;
 }
+export function getMonthDate() {
+  const today = new Date().toLocaleDateString("fa-IR", {
+    month: "long",
+  });
+
+  return `${today}`;
+}

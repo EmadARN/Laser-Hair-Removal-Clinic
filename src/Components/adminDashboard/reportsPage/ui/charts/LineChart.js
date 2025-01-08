@@ -24,23 +24,21 @@ ChartJS.register(
   Legend
 );
 
-const LineChart = () => {
-  // داده‌های چارت
+const LineChart = ({ totalIncomes }) => {
   const data = {
     labels: persianMonths,
     datasets: [
       {
-        label: getTodayDateYear(),
-        data: [30, 20, 50, 60, 40, 80, 90],
+        label: "درآمد ماهانه",
+        data: totalIncomes, // استفاده از داده‌های جدید
         backgroundColor: "blue",
         borderColor: "#7563DC",
-        tension: 0.3, // برای منحنی کردن خط
-        fill: true, // برای پر کردن فضای زیر خط
+        tension: 0.3,
+        fill: true,
       },
     ],
   };
 
-  // تنظیمات چارت
   const options = {
     responsive: true,
     plugins: {
@@ -54,7 +52,7 @@ const LineChart = () => {
           display: true,
           text: "درآمد",
         },
-        beginAtZero: true, // شروع محور y از صفر
+        beginAtZero: true,
       },
     },
   };

@@ -28,6 +28,7 @@ const WeeklyCalendar = () => {
   const dispatch = useDispatch();
   const { operators, operatorsDate, dateRanges, dataRangeStatus, settingInfo } =
     useSelector((state) => state.adminDashboard);
+  console.log("dateRanges", dateRanges);
 
   const {
     year: date_year,

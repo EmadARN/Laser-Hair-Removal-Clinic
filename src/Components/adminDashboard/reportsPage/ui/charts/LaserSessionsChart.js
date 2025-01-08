@@ -13,13 +13,15 @@ import { persianMonths } from "@/constants";
 // ثبت ماژول‌های Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-const LaserSessionsChart = () => {
+const LaserSessionsChart = ({ sessionCounts }) => {
+  console.log("sessionCounts", sessionCounts);
+
   const data = {
     labels: persianMonths,
     datasets: [
       {
         label: "تعداد جلسات لیزر",
-        data: [5, 8, 12, 7, 10, 6, 9], // تعداد جلسات لیزر در هر روز
+        data: sessionCounts, // استفاده از داده‌های جدید
         backgroundColor: "#7563DC",
         borderColor: "#1111",
         borderWidth: 1,
@@ -31,15 +33,15 @@ const LaserSessionsChart = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top", // موقعیت لِیبل‌ها
+        position: "top",
       },
       tooltip: {
-        enabled: true, // نمایش Tooltip
+        enabled: true,
       },
     },
     scales: {
       y: {
-        beginAtZero: true, // شروع از صفر در محور Y
+        beginAtZero: true,
       },
     },
   };

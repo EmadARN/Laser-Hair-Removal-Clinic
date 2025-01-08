@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import PatientList from "./patientList";
 import { todayDate } from "@/features/receptionDashboard/receptionThunks";
+import HeaderDetails from "./headerDetails";
 const ResClients = () => {
-  const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
-    "auth_Employee_token",
-  ]);
+  const [{ auth_Employee_token } = cookies, setCookie] = useCookies();
+
   const dispatch = useDispatch();
   const { todayReserve } = useSelector(
     (store) => store.receptionDashboardSlice
@@ -20,9 +20,6 @@ const ResClients = () => {
 
   return (
     <>
-      <Box sx={{ pt: 6, pr: { base: 12, md: 0 } }}>
-        {/* <HeaderDetails todayDateReserve={todayDateReserve} /> */}
-      </Box>
       <Box sx={{ p: 4, display: { base: "none", md: "flex" } }}>
         <SearchInput size={"lg"} placeholder="جستجو در نوبت های روز" />
       </Box>
