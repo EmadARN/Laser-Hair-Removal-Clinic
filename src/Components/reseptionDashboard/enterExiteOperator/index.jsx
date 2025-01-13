@@ -7,21 +7,35 @@ import {
   enterExitedOprators,
   getOperatorSchedule,
 } from "@/features/receptionDashboard/receptionThunks";
+import { useCustomToast } from "@/utils/useCustomToast ";
 
 const EnterExite = () => {
   const [{ auth_Employee_token } = cookies] = useCookies();
-
+  const { showToast } = useCustomToast();
   const dispatch = useDispatch();
   const { operatorSchedule } = useSelector(
     (store) => store.receptionDashboardSlice
   );
+
+  // نمایش توست فقط در صورت undefined بودن operatorSchedule
+  useEffect(() => {
+    if (!operatorSchedule) {
+      showToast({
+        title: "خطا.",
+        description: "هیچ اوپراتوری یافت نشد.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  }, [operatorSchedule]);
 
   useEffect(() => {
     dispatch(getOperatorSchedule({ auth_Employee_token }));
   }, [dispatch]);
 
   const enterExit = () => {
-    const username = operatorSchedule.operator_username;
+    const username = operatorSchedule?.operator_username;
     dispatch(enterExitedOprators({ username, auth_Employee_token }));
     dispatch(getOperatorSchedule({ auth_Employee_token }));
   };
@@ -38,7 +52,7 @@ const EnterExite = () => {
         </Text>
         <Flex justifyContent="space-between" align="center" w="100%" p={2}>
           <Text color="gray.500" fontSize={{ base: "10px", md: "14px" }}>
-            {operatorSchedule.operator_name}
+            {operatorSchedule?.operator_name || "نام اوپراتور یافت نشد"}
           </Text>
           <MdOutlineAccessTime color="gray" size={18} />
         </Flex>
