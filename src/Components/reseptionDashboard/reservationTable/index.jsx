@@ -34,8 +34,6 @@ export const ReservationTable = ({
   const [selectedReserve, setSelectedReserve] = useState(null);
   const [idKeeper, setIdKeeper] = useState("");
 
-
-
   //this state store inputselect 1 component value
   const [selectedValue, setSelectedValue] = useState("");
   //this state store inputselect 2 component value
@@ -73,13 +71,9 @@ export const ReservationTable = ({
 
   //this function store each customer payment detail
   const handlePaymentClick = (item) => {
-  
-
     setSelectedReserve(item);
 
     setIdKeeper(item.id);
-
-   
 
     onOpen();
   };
@@ -205,7 +199,7 @@ export const ReservationTable = ({
       </TableContainer>
       {isOpen && (
         <PaymentDialog
-        idKeeper={idKeeper}
+          idKeeper={idKeeper}
           confrimChange={confrimChange}
           setConfirmChange={setConfirmChange}
           oneWayPaymentValu={oneWayPaymentValu}

@@ -1,8 +1,20 @@
 import EnterExite from "@/Components/reseptionDashboard/enterExiteOperator";
 import { Box } from "@chakra-ui/react";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 const Bottom = ({ active }) => {
+  const { pathname } = useRouter();
+  const [exist, setExist] = useState(false);
+  useEffect(() => {
+    if (pathname) {
+      if (pathname.startsWith("/reseptionDashboard")) {
+        setExist(true);
+      } else {
+        setExist(false);
+      }
+    }
+  }, [pathname]);
   return (
     <Box
       sx={{
@@ -20,7 +32,7 @@ const Bottom = ({ active }) => {
         right: "15%",
       }}
     >
-      <EnterExite />
+      {exist && <EnterExite />}
     </Box>
   );
 };
