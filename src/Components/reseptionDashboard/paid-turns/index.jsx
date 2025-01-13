@@ -16,7 +16,7 @@ const PaidTurns = ({ display }) => {
     "auth_Employee_token",
   ]);
   const dispatch = useDispatch();
-  const { todayReserve,cutomerList } = useSelector(
+  const { todayReserve, cutomerList } = useSelector(
     (store) => store.receptionDashboardSlice
   );
 
