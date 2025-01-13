@@ -20,7 +20,7 @@ const Bottom = ({ active }) => {
         right: "15%",
       }}
     >
-      {/* <EnterExite /> */}
+      <EnterExite />
     </Box>
   );
 };

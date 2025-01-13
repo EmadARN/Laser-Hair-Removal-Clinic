@@ -6,7 +6,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { Search2Icon, SmallCloseIcon } from "@chakra-ui/icons";
-const SearchInput = ({ placeholder, size,handlechange }) => {
+const SearchInput = ({ placeholder, size, handlechange }) => {
   return (
     <InputGroup sx={{ display: "flex", alignItems: "center" }}>
       <InputRightElement
@@ -18,7 +18,17 @@ const SearchInput = ({ placeholder, size,handlechange }) => {
       >
         <Search2Icon />
       </InputRightElement>
-      <Input onChange={handlechange} placeholder={placeholder} size={size} />
+      <Input
+        _focus={{
+          borderColor: "brand.400",
+          outline: "none",
+          boxShadow: "none",
+          zIndex: "unset",
+        }}
+        onChange={handlechange}
+        placeholder={placeholder}
+        size={size}
+      />
       <InputLeftElement pt={2}>
         <SmallCloseIcon />
       </InputLeftElement>

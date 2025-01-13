@@ -16,18 +16,18 @@ const theme = extendTheme({
   },
   styles: {
     global: {
+      "::-webkit-scrollbar": {
+        width: "0.7em",
+      },
+      "::-webkit-scrollbar-thumb": {
+        backgroundColor: " #9999",
+        borderRadius: "50px",
+      },
       body: {
         padding: 0,
         margin: 0,
         boxSizing: "border-box",
         fontFamily: "IRANYekan-Regular, sans-serif",
-        "::-webkit-scrollbar": {
-          width: "0.7em",
-        },
-        "::-webkit-scrollbar-thumb": {
-          backgroundColor: " #9999",
-          borderRadius: "50px",
-        },
       },
       a: {
         textDecoration: "none",

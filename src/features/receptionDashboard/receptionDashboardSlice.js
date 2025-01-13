@@ -8,6 +8,7 @@ import {
   getLazerAreas,
   getOperatorSchedule,
   multiplePayment,
+  ReserveReceptionWithOutTime,
   reservesListPerson,
   todayDate,
 } from "./receptionThunks";
@@ -21,8 +22,6 @@ const handleAsyncState = (state, action, status) => {
     state.error = action.payload;
   }
 };
-
-// Async Thunks
 
 // Initial State
 const initialState = {
@@ -51,6 +50,18 @@ const receptionDashboardSlice = createSlice({
         handleAsyncState(state, action, "rejected")
       )
       .addCase(addCustomerWithOutTime.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+
+      //ReserveReceptionWithOutTime
+      .addCase(ReserveReceptionWithOutTime.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(ReserveReceptionWithOutTime.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(ReserveReceptionWithOutTime.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
       })
 

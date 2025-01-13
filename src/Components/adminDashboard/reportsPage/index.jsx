@@ -10,6 +10,7 @@ import LineChart from "./ui/charts/LineChart";
 import useDateRange from "./logic/useDateRange";
 import useSummary from "./logic/useSummary";
 import useReportsData from "./logic/useReportsData";
+import useMonthlyData from "./logic/useMonthlyData";
 
 const Reports = () => {
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
@@ -20,6 +21,13 @@ const Reports = () => {
   const { dateRange, handleDateChange, handleTodayClick } = useDateRange();
   const summary = useSummary(dateReserve);
   useReportsData(auth_Admin_token, dateRange);
+  const { sessionCounts, totalIncomes } = useMonthlyData(
+    dateReserve,
+    "1403/8/01",
+    "1403/12/30"
+  );
+  console.log("sessionCounts", sessionCounts);
+  console.log("totalIncomes", totalIncomes);
 
   return (
     <Box px={{ base: 2, md: 8 }}>
@@ -55,7 +63,7 @@ const Reports = () => {
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
         >
-          <LineChart />
+          <LaserSessionsChart completeListLength={sessionCounts} />
         </Box>
         <Box
           w={{ base: "100%", md: "49%" }}
@@ -67,7 +75,7 @@ const Reports = () => {
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
         >
-          <LaserSessionsChart />
+          <LineChart totalPriceAmount={totalIncomes} />
         </Box>
       </Flex>
 

@@ -1,10 +1,9 @@
 import React from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { ImNotification } from "react-icons/im";
-
 import { Box, Flex, Input, Text } from "@chakra-ui/react";
-
 import InputSelect from "./InputSelect";
+
 const EachPaymentBox = ({
   paymentPriceKepper,
   handlePrice,

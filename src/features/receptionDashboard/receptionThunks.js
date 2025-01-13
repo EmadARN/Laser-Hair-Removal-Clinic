@@ -240,6 +240,28 @@ export const addCustomerWithOutTime = createAsyncThunk(
   }
 );
 
+export const ReserveReceptionWithOutTime = createAsyncThunk(
+  "receptionDashboard/ReserveReceptionWithOutTime",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post(
+        "Reserve/reception/add/reserve/",
+        { username: payload.usernameValue },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Employee_token}`,
+          },
+        }
+      );
+      console.log("cuatomer sussess", data);
+
+      return data;
+    } catch (error) {
+      console.log("customer error", error);
+    }
+  }
+);
+
 export const getCutomerList = createAsyncThunk(
   "receptionDashboard/getCutomerList",
   async (payload, { rejectWithValue }) => {
@@ -272,6 +294,8 @@ export const todayDate = createAsyncThunk(
           },
         }
       );
+      console.log(data);
+
       return data;
     } catch (error) {
       console.log("error", error);
@@ -284,7 +308,7 @@ export const cancelReserve = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.post(
-        "/Reserve/cancel/reserve/",
+        "Reserve/cancel/reserve/",
         {
           reserve: payload.reserve,
           cancel_type: payload.cancel_type,
@@ -296,6 +320,8 @@ export const cancelReserve = createAsyncThunk(
           },
         }
       );
+      console.log("CANCEL", data);
+
       return data;
     } catch (error) {
       console.log("error", error);
@@ -334,6 +360,7 @@ export const enterExitedOprators = createAsyncThunk(
           },
         }
       );
+      console.log('huhu',data);
 
       return data;
     } catch (error) {
