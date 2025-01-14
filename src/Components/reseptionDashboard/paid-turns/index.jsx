@@ -16,7 +16,7 @@ const PaidTurns = ({ display }) => {
     "auth_Employee_token",
   ]);
   const dispatch = useDispatch();
-  const { todayReserve } = useSelector(
+  const { todayReserve, cutomerList } = useSelector(
     (store) => store.receptionDashboardSlice
   );
 
@@ -47,6 +47,7 @@ const PaidTurns = ({ display }) => {
               todayReserve={todayReserve}
               ButtonValue="ورود به شارژ"
               isPaymentTable={true}
+              cutomerList={cutomerList}
             />
           </Stack>
         </AccordionPanel>
