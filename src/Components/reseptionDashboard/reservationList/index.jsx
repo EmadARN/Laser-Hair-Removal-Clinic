@@ -1,41 +1,33 @@
 import React, { useState } from "react";
-import {
-  Table,
-  Tbody,
-  Tr,
-  Td,
-  TableContainer,
-  Button,
-  Box,
-  useDisclosure,
-} from "@chakra-ui/react";
-
+import { Box, useDisclosure } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import {
   cancelReserve,
-  editLazerArea,
   multiplePayment,
 } from "@/features/receptionDashboard/receptionThunks";
 import PaymentDialog from "../paymentDialog/PaymentDialog";
 import { extractTime } from "@/utils/extractDate";
 import { getCustomerName } from "@/utils/getCustomerName";
 import { useCustomToast } from "@/utils/useCustomToast ";
+import Lists from "../shared/Lists";
 
-export const ReservationTable = ({
+export const ReservationList = ({
   isDisabled,
   ButtonValue,
   display,
   todayReserve,
   auth_Employee_token,
-  isPaymentTable, // Prop to determine which table is being rendered
+  isPaymentTable,
   cutomerList,
 }) => {
   const dispatch = useDispatch();
   const { showToast } = useCustomToast();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelModal = useDisclosure();
+  const paymentModal = useDisclosure();
+
   const [selectedReserve, setSelectedReserve] = useState(null);
   const [idKeeper, setIdKeeper] = useState("");
-  console.log("ttttt", todayReserve);
 
   //this state store inputselect 1 component value
   const [selectedValue, setSelectedValue] = useState("");
@@ -73,12 +65,12 @@ export const ReservationTable = ({
   };
 
   //this function store each customer payment detail
-  const handlePaymentClick = (item) => {
-    setSelectedReserve(item);
+  const handleProcessPaymentCharge = (item) => {
+      paymentModal.onOpen();
+      setSelectedReserve(item);
 
-    setIdKeeper(item.id);
+      setIdKeeper(item.id);
 
-    onOpen();
   };
 
   //final function to dispatch payment api
@@ -110,7 +102,7 @@ export const ReservationTable = ({
     );
     if (result.meta.requestStatus === "fulfilled") {
       showToast({ title: "پرداخت با موفقیت انجام شد", status: "success" });
-      onClose();
+      paymentModal.onClose();
     } else {
       showToast({ title: " خطای ناشناخته ای رخ داده است   ", status: "error" });
     }
@@ -118,6 +110,7 @@ export const ReservationTable = ({
 
   const cancelHandler = async (item) => {
     setSelectedReserve(item);
+    cancelModal.onOpen();
 
     const result = await dispatch(
       cancelReserve({
@@ -129,9 +122,12 @@ export const ReservationTable = ({
     );
     if (result.meta.requestStatus === "fulfilled") {
       showToast({ title: "لغو با موفقیت انجام شد", status: "success" });
-      onClose();
+      cancelModal.onClose();
     } else {
-      showToast({ title: " خطای ناشناخته ای رخ داده است   ", status: "error" });
+      showToast({
+        title: " خطای ناشناخته ای رخ داده است   ",
+        status: "error",
+      });
     }
   };
 
@@ -142,80 +138,30 @@ export const ReservationTable = ({
 
   return (
     <Box w={{ base: "100vw", md: "100%" }} px={4}>
-      <TableContainer>
-        <Table
-          overflowY="auto"
-          width="100%"
-          size="sm"
-          dir="rtl"
-          variant="striped"
-        >
-          <Tbody>
-            {todayReserve?.all_list
-              ?.filter(
-                (item) =>
-                  !isPaymentTable || item.payed || item.reserve_type === "sc"
-              ) // Show only paid users if isPaymentTable is true
-              .map((item) => (
-                <Tr key={item.id}>
-                  {/* ستون نام کاربر */}
-                  <Td
-                    display={{ base: "none", sm: "table-cell" }}
-                    fontSize={{ base: "12px", md: "16px" }}
-                  >
-                    {getCustomerName(item.user, cutomerList)}
-                  </Td>
+      <Box>
+        {todayReserve?.all_list
+          ?.filter(
+            (item) =>
+              !isPaymentTable || item.payed || item.reserve_type === "sc"
+          )
+          .map((item) => (
+            <Lists
+              key={item.id}
+              firstArea={getCustomerName(item.user)}
+              secondArea={getCustomerName(item.user, cutomerList)}
+              thirdArea={extractTime(item.reserve_time_str)}
+              fourthArea={item.laser_area_name}
+              item={item}
+              ButtonValue={ButtonValue}
+              isPaymentTable={isPaymentTable}
+              isDisabled={isDisabled}
+              handleProcessPaymentCharge={handleProcessPaymentCharge}
+              cancelHandler={cancelHandler}
+            />
+          ))}
+      </Box>
 
-                  {/* ستون زمان رزرو */}
-                  <Td
-                    display={{ base: "none", sm: "table-cell" }}
-                    fontSize={{ base: "12px", md: "16px" }}
-                  >
-                    {extractTime(item.reserve_time_str)}
-                  </Td>
-
-                  {/* ستون ناحیه لیزر */}
-                  <Td
-                    display={{ base: "none", md: "table-cell" }}
-                    fontSize={{ base: "12px", md: "16px" }}
-                  >
-                    {item.laser_area_name}
-                  </Td>
-
-                  {/* دکمه‌ها */}
-                  <Td textAlign="center">
-                    <Button
-                      onClick={() => handlePaymentClick(item)}
-                      size={{ base: "xs", md: "sm" }}
-                      bg="transparent"
-                      color="blue"
-                      px={2}
-                    >
-                      {ButtonValue}
-                    </Button>
-                  </Td>
-
-                  <Td textAlign="center">
-                    <Button
-                      onClick={() => cancelHandler(item)}
-                      display={display}
-                      isDisabled={
-                        item.reserve_type === "sc" ? true : isDisabled
-                      }
-                      size={{ base: "xs", md: "sm" }}
-                      bg="transparent"
-                      color={!isPaymentTable ? "red" : "gray"}
-                      px={2}
-                    >
-                      {item.reserve_type === "sc" ? "لغو شده" : "لغو نوبت"}
-                    </Button>
-                  </Td>
-                </Tr>
-              ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
-      {isOpen && (
+      {paymentModal.isOpen && (
         <PaymentDialog
           idKeeper={idKeeper}
           confrimChange={confrimChange}
@@ -233,8 +179,8 @@ export const ReservationTable = ({
           selectedValue={selectedValue}
           handlePaymentChange={handlePaymentChange}
           paymentHandleClick={paymentHandleClick}
-          isOpen={isOpen}
-          onClose={onClose}
+          isOpen={paymentModal.isOpen}
+          onClose={paymentModal.onClose}
           reserve={selectedReserve}
         />
       )}

@@ -4,9 +4,9 @@ import SearchInput from "@/Common/searchInput/SearchInput";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderDetails from "./headerDetails";
-import PaidTurns from "./paid-turns";
-import { ReservationTable } from "./reservationTable";
 import { todayDate } from "@/features/receptionDashboard/receptionThunks";
+import { ReservationList } from "./reservationList";
+import PaidTurns from "./paidTurnList";
 
 const DailyShift = () => {
   const [{ auth_Employee_token } = cookies, setCookie] = useCookies();
@@ -33,9 +33,8 @@ const DailyShift = () => {
 
       {/* ReseptionTable بخش */}
       <Box px={{ base: 2, md: 4 }}>
-        <ReservationTable
+        <ReservationList
           isDisabled={false}
-          ButtonValue="پرداخت"
           todayReserve={todayReserve}
           auth_Employee_token={auth_Employee_token}
           cutomerList={cutomerList}

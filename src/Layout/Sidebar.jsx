@@ -16,8 +16,8 @@ import { MdExitToApp } from "react-icons/md";
 import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
 import styles from "./Style";
-import Icon from "react-multi-date-picker/components/icon";
 import { Logo } from "@/widget/Logo";
+import CustomModal from "@/Common/attentionModal/CustomModal";
 
 const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -29,13 +29,20 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
   ]);
   const router = useRouter();
 
+  const [isModalOpen, setIsModalOpen] = useState(false); // مدیریت وضعیت باز یا بسته بودن مدال
+
   const handleLogout = () => {
     removeCookie("auth_Admin_token", { path: "/" });
     removeCookie("auth_Employee_token", { path: "/" });
-
     localStorage.removeItem("token");
     router.push("/");
+    setIsModalOpen(false); // بستن مدال بعد از خروج
   };
+
+  const handleCancelLogout = () => {
+    setIsModalOpen(false); // بستن مدال بدون انجام هیچ کاری
+  };
+
   return (
     <Box sx={styles.container}>
       <Sidebar collapsed={isCollapsed} width={isSmallScreen ? "110%" : "250px"}>
@@ -59,7 +66,7 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
                   <Logo />
                 </Box>
                 <IconButton
-                  sx={{}}
+                  sx={{ w: "10px", h: "30px" }}
                   onClick={() => setIsCollapsed(!isCollapsed)}
                 >
                   <IoIosArrowForward />
@@ -67,7 +74,6 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
               </Box>
             )}
           </MenuItem>
-          {/* {!isCollapsed && <Header textHead={textHead} />} */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Body
               selected={selected}
@@ -78,7 +84,9 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
             />
           </Box>
           {!isCollapsed && <Bottom active={active} />}
-          <Button sx={styles.logoutButton} onClick={handleLogout}>
+
+          {/* دکمه خروج که مدال را نمایش می‌دهد */}
+          <Button sx={styles.logoutButton} onClick={() => setIsModalOpen(true)}>
             <Flex sx={styles.logoutFlex}>
               <Box sx={{ mr: { md: isCollapsed ? "14px" : "0px" } }}>
                 <MdExitToApp />
@@ -93,6 +101,18 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
           </Button>
         </Menu>
       </Sidebar>
+
+      {/* نمایش مدال تایید خروج */}
+      <CustomModal
+        isOpen={isModalOpen}
+        onClose={handleCancelLogout}
+        title="خروج از حساب کاربری"
+        description="خروج از حساب کاربری به معنی پایان ساعت کاری می باشد. آیا میخواهید از حساب کاربری خارج شوید؟"
+        confirmText="خروج از حساب کاربری"
+        cancelText="بازگشت"
+        onConfirm={handleLogout}
+        onCancel={handleCancelLogout}
+      />
     </Box>
   );
 };

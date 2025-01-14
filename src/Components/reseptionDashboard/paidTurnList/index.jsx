@@ -9,8 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
-import { ReservationTable } from "../reservationTable";
 import { todayDate } from "@/features/receptionDashboard/receptionThunks";
+import { ReservationList } from "../reservationList";
 const PaidTurns = ({ display }) => {
   const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
     "auth_Employee_token",
@@ -33,7 +33,7 @@ const PaidTurns = ({ display }) => {
     >
       <AccordionItem>
         <AccordionButton display={"flex"} justifyContent={"space-between"}>
-          <Box>نوبت های پرداخت شده</Box>
+          <Box>نوبت های تکمیل شده</Box>
           <Box as="span" textAlign="right">
             نمایش <AccordionIcon />
           </Box>
@@ -41,11 +41,10 @@ const PaidTurns = ({ display }) => {
 
         <AccordionPanel pb={4} px={0}>
           <Stack>
-            <ReservationTable
+            <ReservationList
               display={display}
               isDisabled={true}
               todayReserve={todayReserve}
-              ButtonValue="ورود به شارژ"
               isPaymentTable={true}
               cutomerList={cutomerList}
             />

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import PatientList from "./patientList";
 import { todayDate } from "@/features/receptionDashboard/receptionThunks";
-import HeaderDetails from "./headerDetails";
 const ResClients = () => {
   const [{ auth_Employee_token } = cookies, setCookie] = useCookies();
 
