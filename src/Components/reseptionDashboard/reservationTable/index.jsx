@@ -19,6 +19,7 @@ import {
 import PaymentDialog from "../paymentDialog/PaymentDialog";
 import { extractTime } from "@/utils/extractDate";
 import { getCustomerName } from "@/utils/getCustomerName";
+import { useCustomToast } from "@/utils/useCustomToast ";
 
 export const ReservationTable = ({
   isDisabled,
@@ -30,9 +31,11 @@ export const ReservationTable = ({
   cutomerList,
 }) => {
   const dispatch = useDispatch();
+  const { showToast } = useCustomToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedReserve, setSelectedReserve] = useState(null);
   const [idKeeper, setIdKeeper] = useState("");
+  console.log("ttttt", todayReserve);
 
   //this state store inputselect 1 component value
   const [selectedValue, setSelectedValue] = useState("");
@@ -79,7 +82,7 @@ export const ReservationTable = ({
   };
 
   //final function to dispatch payment api
-  const paymentHandleClick = () => {
+  const paymentHandleClick = async () => {
     const reservId = idKeeper;
 
     // ایجاد ساختار درست برای payment_list
@@ -98,21 +101,25 @@ export const ReservationTable = ({
       : [];
 
     // دیسپچ کردن اطلاعات
-    dispatch(
+    const result = await dispatch(
       multiplePayment({
         reservId,
         payment_list,
         auth_Employee_token,
       })
     );
+    if (result.meta.requestStatus === "fulfilled") {
+      showToast({ title: "پرداخت با موفقیت انجام شد", status: "success" });
+      onClose();
+    } else {
+      showToast({ title: " خطای ناشناخته ای رخ داده است   ", status: "error" });
+    }
   };
 
-  const cancelHandler = (item) => {
+  const cancelHandler = async (item) => {
     setSelectedReserve(item);
-    console.log("selectedReserveID", item.id);
-    console.log("selectedReserve", selectedReserve);
 
-    dispatch(
+    const result = await dispatch(
       cancelReserve({
         reserve: item.id,
         cancel_type: "sc",
@@ -120,6 +127,12 @@ export const ReservationTable = ({
         auth_Employee_token,
       })
     );
+    if (result.meta.requestStatus === "fulfilled") {
+      showToast({ title: "لغو با موفقیت انجام شد", status: "success" });
+      onClose();
+    } else {
+      showToast({ title: " خطای ناشناخته ای رخ داده است   ", status: "error" });
+    }
   };
 
   //this function update radio button values for one payemnt method
@@ -139,7 +152,10 @@ export const ReservationTable = ({
         >
           <Tbody>
             {todayReserve?.all_list
-              ?.filter((item) => !isPaymentTable || item.payed) // Show only paid users if isPaymentTable is true
+              ?.filter(
+                (item) =>
+                  !isPaymentTable || item.payed || item.reserve_type === "sc"
+              ) // Show only paid users if isPaymentTable is true
               .map((item) => (
                 <Tr key={item.id}>
                   {/* ستون نام کاربر */}
@@ -183,13 +199,15 @@ export const ReservationTable = ({
                     <Button
                       onClick={() => cancelHandler(item)}
                       display={display}
-                      isDisabled={isDisabled}
+                      isDisabled={
+                        item.reserve_type === "sc" ? true : isDisabled
+                      }
                       size={{ base: "xs", md: "sm" }}
                       bg="transparent"
                       color={!isPaymentTable ? "red" : "gray"}
                       px={2}
                     >
-                      لغو نوبت
+                      {item.reserve_type === "sc" ? "لغو شده" : "لغو نوبت"}
                     </Button>
                   </Td>
                 </Tr>
