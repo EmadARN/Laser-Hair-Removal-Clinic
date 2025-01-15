@@ -15,9 +15,9 @@ import InformationBox from "./widget/InformationBox";
 import { FaArrowRight } from "react-icons/fa";
 import PaymentMethodSection from "./widget/PaymentMethodSection";
 import ConfitmTransaction from "./widget/ConfitmTransaction";
-import CustomPayment from "../customPayment";
-import LaserAreas from "../LaserAreas";
-import { secBox } from "../LaserAreas/style";
+import CustomPayment from "./widget/customPayment"; 
+import LaserAreas from "./widget/LaserAreas"; 
+import { secBox } from "./widget/LaserAreas/style"; 
 
 const PaymentDialog = ({
   idKeeper,

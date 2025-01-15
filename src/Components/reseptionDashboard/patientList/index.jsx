@@ -18,13 +18,15 @@ import {
   reservesListPerson,
 } from "@/features/receptionDashboard/receptionThunks";
 import PatientsProfile from "./ui/PaitientsProfile";
+import { useCustomToast } from "@/utils/useCustomToast ";
 
 const PatientList = ({ todayReserve, isPaymentTable }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [{ auth_Employee_token }] = useCookies(["auth_Employee_token"]);
+  const [selectedId, setSelectedId] = useState();
   const [selectedReserve, setSelectedReserve] = useState(null);
   const [profileInfo, setProfileInfo] = useState(null);
-
+  const { showToast } = useCustomToast();
   const dispatch = useDispatch();
   const { reservesLists, cutomerList } = useSelector(
     (store) => store.receptionDashboardSlice
@@ -42,10 +44,25 @@ const PatientList = ({ todayReserve, isPaymentTable }) => {
     onOpen();
   };
 
-  const handleChargeClick = (item) => {
-    dispatch(addcharge({ username: item.user, auth_Employee_token }));
-    setSelectedReserve(item);
-    onOpen();
+  
+
+  const handleChargeClick = async (selectedId) => {
+    const result = await dispatch(
+      addcharge({ username: selectedId.user, auth_Employee_token })
+    );
+    if (result.meta.requestStatus === "fulfilled") {
+      showToast({
+        title: "با موفقیت ثبت شد",
+
+        status: "success",
+      });
+    } else {
+      showToast({
+        title: "خطای ناشناخته رخ داده است",
+        description: "ورود ناموفق",
+        status: "error",
+      });
+    }
   };
   useEffect(() => {
     dispatch(getCutomerList({ auth_Employee_token }));
@@ -78,7 +95,10 @@ const PatientList = ({ todayReserve, isPaymentTable }) => {
                   {/* دکمه‌ها */}
                   <Td textAlign="center">
                     <Button
-                      onClick={() => handleChargeClick(item)}
+                      onClick={() => {
+                        setSelectedId(item);
+                        onOpen();
+                      }}
                       size={{ base: "xs", md: "sm" }}
                       bg="transparent"
                       color="blue"
@@ -94,6 +114,7 @@ const PatientList = ({ todayReserve, isPaymentTable }) => {
       </TableContainer>
 
       <PatientsProfile
+        handleChargeClick={handleChargeClick}
         isOpen={isOpen}
         onClose={onClose}
         profileInfo={profileInfo}
