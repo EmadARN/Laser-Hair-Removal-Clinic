@@ -15,7 +15,7 @@ import {
   getLazerAreas,
 } from "@/features/receptionDashboard/receptionThunks";
 
-const LaserAreas = ({ setStep, onClose, idKeeper }) => {
+const LaserAreas = ({ setStep, onClose,...props }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [{ auth_Employee_token }] = useCookies(["auth_Employee_token"]);
   const dispatch = useDispatch();
@@ -51,8 +51,9 @@ const LaserAreas = ({ setStep, onClose, idKeeper }) => {
   };
 
   const submitEditLazerArea = () => {
-    if (idKeeper) {
-      dispatch(editLazerArea({ idKeeper, laserAreaList, auth_Employee_token }));
+    const keepId = props.idKeeper
+    if (keepId) {
+      dispatch(editLazerArea({ keepId, laserAreaList, auth_Employee_token }));
     }
   };
 

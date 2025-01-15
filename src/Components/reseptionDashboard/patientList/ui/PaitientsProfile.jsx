@@ -5,7 +5,7 @@ import { Modal, ModalOverlay, ModalContent } from "@chakra-ui/react";
 import { getCustomerName } from "@/utils/getCustomerName";
 import { ProfileField } from "./ProfileField";
 
-const PatientsProfile = ({ isOpen, onClose, profileInfo, cutomerList }) => {
+const PatientsProfile = ({ isOpen, onClose, profileInfo, cutomerList,handleChargeClick }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -52,6 +52,7 @@ const PatientsProfile = ({ isOpen, onClose, profileInfo, cutomerList }) => {
           </Box>
           <Box width="100%" mt={4}>
             <Button
+            onClick={handleChargeClick}
               width="100%"
               bgColor="brand.400"
               color="white"

@@ -2,16 +2,15 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import React from "react";
 import EachPaymentBox from "./EachPaymentBox";
 
-const CustomPayment = ({
-  setStep,
+const CustomPayment = ({  setStep,
   setConfirmChange,
   handlePaymentChange,
   selectedValue,
   selectedValue2,
   paymentPriceKepper1,
   paymentPriceKepper2,
-  handlePrice,
-}) => {
+  handlePrice, }) => {
+
   const changeHandler = () => {
     setConfirmChange(true);
     setStep(0);

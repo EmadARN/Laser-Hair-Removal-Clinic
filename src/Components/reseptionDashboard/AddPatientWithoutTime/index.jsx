@@ -88,8 +88,7 @@ const PatientWithoutTime = () => {
         return renderCustomerList();
       case 1:
         return renderCustomerDetails(true);
-      case 2:
-        return renderCustomerDetails(false);
+     
       default:
         return null;
     }

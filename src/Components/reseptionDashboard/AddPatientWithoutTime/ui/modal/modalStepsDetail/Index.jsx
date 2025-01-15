@@ -53,15 +53,7 @@ const ModalStepDetail = (
         />
         <Button onClick={acceptPhoneNumber}>ثبت</Button>
       </Flex>
-      <Text
-        as="button"
-        mt={4}
-        onClick={() => setStep(2)}
-        color="brand.400"
-        fontWeight="bold"
-      >
-        +مراجع جدید
-      </Text>
+
       <Table
         mt={6}
         cursor="pointer"
