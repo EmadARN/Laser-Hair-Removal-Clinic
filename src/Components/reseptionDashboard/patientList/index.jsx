@@ -44,11 +44,14 @@ const PatientList = ({ todayReserve, isPaymentTable }) => {
     onOpen();
   };
 
+ 
   
 
-  const handleChargeClick = async (selectedId) => {
+  const handleChargeClick = async () => {
+    console.log('sssss',selectedId);
+    
     const result = await dispatch(
-      addcharge({ username: selectedId.user, auth_Employee_token })
+      addcharge({ username: selectedId &&sele, auth_Employee_token })
     );
     if (result.meta.requestStatus === "fulfilled") {
       showToast({
@@ -56,13 +59,15 @@ const PatientList = ({ todayReserve, isPaymentTable }) => {
 
         status: "success",
       });
+
     } else {
       showToast({
         title: "خطای ناشناخته رخ داده است",
-        description: "ورود ناموفق",
+        
         status: "error",
       });
     }
+    onClose()
   };
   useEffect(() => {
     dispatch(getCutomerList({ auth_Employee_token }));

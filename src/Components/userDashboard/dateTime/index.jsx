@@ -7,6 +7,7 @@ import Date from "./Date";
 import {
   getreserveInformation,
   getTimeList,
+  postAddTime,
 } from "@/features/customerDashboard/customerThunks";
 import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
 import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
