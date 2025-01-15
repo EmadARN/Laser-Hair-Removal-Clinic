@@ -1,9 +1,32 @@
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex, Button } from "@chakra-ui/react";
+import { IoIosArrowBack } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
 
-const BodyModal = ({ handleClick, phoneNumber, time }) => {
+const LayoutModal = ({ handleClick, phoneNumber, time, handleBackClick }) => {
   return (
     <>
+      <Box
+        mb={4}
+        display="flex"
+        w="100%"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Box>
+          <Text fontSize={{ base: "xs", md: "sm" }} noOfLines={1}>
+            کد تایید
+          </Text>
+        </Box>
+
+        <Button
+          onClick={handleBackClick}
+          rightIcon={<IoIosArrowBack size={"13px"} />}
+          variant="ghost"
+          fontSize={{ base: "xs", md: "xs" }}
+        >
+          <Text>بازگشت</Text>
+        </Button>
+      </Box>
       <Flex alignItems="center" mb={4}>
         <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "md" }}>
           کد تایید به شماره‌ی
@@ -29,4 +52,4 @@ const BodyModal = ({ handleClick, phoneNumber, time }) => {
   );
 };
 
-export default BodyModal;
+export default LayoutModal;
