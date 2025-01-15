@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { postAsyncCode, postAsyncNumber } from "@/features/signin/authSlice";
 
-const useVerificationCode = (page) => {
+const useVerificationCode = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [inputCode, setInputCode] = useState(["", "", "", "", "", ""]);
   const [time, setTime] = useState(90);
@@ -17,18 +17,18 @@ const useVerificationCode = (page) => {
 
   //Timer
   useEffect(() => {
-    const storedPhoneNumber =  localStorage.getItem("phoneNumber");
+    const storedPhoneNumber = localStorage.getItem("phoneNumber");
     if (storedPhoneNumber) {
       setPhoneNumber(storedPhoneNumber);
     }
 
-    // if (time > 0) {
-    //   const timer = setInterval(
-    //     () => setTime((prevTime) => prevTime - 1),
-    //     1000
-    //   );
-    //   return () => clearInterval(timer);
-    // }
+    if (time > 0) {
+      const timer = setInterval(
+        () => setTime((prevTime) => prevTime - 1),
+        1000
+      );
+      return () => clearInterval(timer);
+    }
 
     // زمانی که تایمر به صفر می‌رسد، کد جدید را ارسال کن
     if (time === 0) {
@@ -45,7 +45,7 @@ const useVerificationCode = (page) => {
       postAsyncCode({
         phone_number: phoneNumber,
         code: newCodeValue,
-        router:router.pathname
+        router: router.pathname,
       })
     );
 
@@ -58,7 +58,6 @@ const useVerificationCode = (page) => {
       router.push("/userDashboard");
       if (result.payload.token) {
         setCookie("auth_token", result.payload.token, { path: "/" });
-    
       }
     } else {
       showToast({

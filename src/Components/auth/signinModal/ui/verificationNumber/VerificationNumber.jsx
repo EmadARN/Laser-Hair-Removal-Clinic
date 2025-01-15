@@ -12,10 +12,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { MdCancel } from "react-icons/md";
-import ButtonAccept from "../ButtonAccept";
 import * as Yup from "yup";
 import { useFormik } from "formik/dist";
 import { useRouter } from "next/router";
+import CustomButton from "@/Common/customeButton/CustomeButton";
+import Loading from "@/Common/loading";
 
 // validation schema
 const validationSchema = Yup.object({
@@ -31,7 +32,6 @@ const initialValues = {
 };
 
 export default function VerificationNumber({
-  page,
   onClose,
   isOpen,
   loading,
@@ -47,14 +47,12 @@ export default function VerificationNumber({
     validateOnMount: true,
   });
 
-const router = useRouter()
+  const router = useRouter();
 
-
-  const closeModalHandler = ()=>{
+  const closeModalHandler = () => {
     onClose();
-    router.push("/")
-    
-  }
+    router.push("/");
+  };
 
   return (
     <Modal
@@ -62,7 +60,7 @@ const router = useRouter()
       finalFocusRef={finalRef}
       isOpen={isOpen}
       // onClose={onClose}
-      isCentered // این خط مودال را در وسط صفحه قرار می‌دهد
+      isCentered
     >
       <ModalOverlay />
       <ModalContent w={80}>
@@ -71,7 +69,7 @@ const router = useRouter()
           <MdCancel
             size={"24px"}
             cursor={"pointer"}
-             onClick={closeModalHandler} // برای بستن مودال
+            onClick={closeModalHandler} // برای بستن مودال
           />
         </Box>
 
@@ -98,12 +96,16 @@ const router = useRouter()
         </ModalBody>
 
         <ModalFooter display="flex" justifyContent="center" width="100%">
-          <ButtonAccept
-          page={page}
+          <CustomButton
             value={formik.values.phone_number}
-            onSubmit={formik.handleSubmit}
-            loading={loading}
-          />
+            onClick={formik.handleSubmit}
+          >
+            {loading ? (
+              <Loading noneHeight="0vh" bg="#fff" h="8px" w="8px" />
+            ) : (
+              "ادامه"
+            )}
+          </CustomButton>
         </ModalFooter>
       </ModalContent>
     </Modal>
