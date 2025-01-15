@@ -31,7 +31,7 @@ const DailyShift = () => {
         <SearchInput size="lg" placeholder="جستجو در نوبت های روز" />
       </Box>
 
-      {/* ReseptionTable بخش */}
+      {/* ReservationList بخش */}
       <Box px={{ base: 2, md: 4 }}>
         <ReservationList
           isDisabled={false}

@@ -1,8 +1,7 @@
 import React from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { ImNotification } from "react-icons/im";
-import { Box, Flex, Input, Text } from "@chakra-ui/react";
-import InputSelect from "./InputSelect";
+import { Box, Flex, Input, Select, Text } from "@chakra-ui/react";
 
 const EachPaymentBox = ({
   paymentPriceKepper,
@@ -30,10 +29,14 @@ const EachPaymentBox = ({
         </Flex>
 
         <Box py={4}>
-          <InputSelect
-            selectedValue={selectedValue}
-            handlePaymentChange={handlePaymentChange}
-          />
+          <Select
+            placeholder="انتخاب کنید"
+            value={selectedValue}
+            onChange={(event) => handlePaymentChange(event)}
+          >
+            <option value="ca">نقدی</option>
+            <option value="cr">کارتخوان</option>
+          </Select>
           <Input
             value={paymentPriceKepper}
             placeholder="مبلغ"

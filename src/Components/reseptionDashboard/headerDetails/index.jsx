@@ -1,11 +1,10 @@
 import React from "react";
-import { Button, Flex, Text, Grid, GridItem, Box } from "@chakra-ui/react";
-import { FaPlus } from "react-icons/fa";
+import { Flex, Text, Grid, GridItem, Box } from "@chakra-ui/react";
 import SearchInput from "@/Common/searchInput/SearchInput";
 import { getTodayDate } from "@/utils/getTodayDate";
 import PatientWithoutTime from "../AddPatientWithoutTime";
 
-const HeaderDetails = ({ todayDateReserve }) => {
+const HeaderDetails = () => {
   return (
     <Grid
       templateColumns={{ base: "1fr", md: "repeat(5, 1fr)" }}

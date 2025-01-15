@@ -68,6 +68,7 @@ const Header = () => {
           autoPlay
           loop
           muted
+          controls={false}
           initial={{ x: "-100%", opacity: 0 }} // شروع از سمت چپ با اوپسیتی 0
           animate={{ x: 0, opacity: 1 }} // حرکت به سمت راست با اوپسیتی 1
           transition={{ duration: 1 }} // زمان انیمیشن

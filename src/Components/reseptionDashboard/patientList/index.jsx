@@ -12,12 +12,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { getCustomerName } from "@/utils/getCustomerName";
-import PatientsProfile from "../paitientsProfile";
 import {
   addcharge,
   getCutomerList,
   reservesListPerson,
 } from "@/features/receptionDashboard/receptionThunks";
+import PatientsProfile from "./ui/PaitientsProfile";
 
 const PatientList = ({ todayReserve, isPaymentTable }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

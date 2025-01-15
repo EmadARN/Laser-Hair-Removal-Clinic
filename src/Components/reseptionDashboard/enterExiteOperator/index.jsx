@@ -8,7 +8,7 @@ import {
   getOperatorSchedule,
 } from "@/features/receptionDashboard/receptionThunks";
 import { useCustomToast } from "@/utils/useCustomToast ";
-import CustomModal from "@/Common/attentionModal/CustomModal"; // وارد کردن CustomModal
+import CustomModal from "@/Common/attentionModal/CustomModal";
 
 const EnterExite = () => {
   const [{ auth_Employee_token } = cookies] = useCookies();
@@ -18,8 +18,8 @@ const EnterExite = () => {
     (store) => store.receptionDashboardSlice
   );
 
-  const [isEntered, setIsEntered] = useState(false); // مدیریت وضعیت ورود/خروج
-  const [isModalOpen, setModalOpen] = useState(false); // مدیریت وضعیت باز بودن مودال
+  const [isEntered, setIsEntered] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null); // برای ذخیره انتخاب کاربر (ورود یا خروج)
 
   useEffect(() => {
@@ -74,6 +74,14 @@ const EnterExite = () => {
     dispatch(getOperatorSchedule({ auth_Employee_token }));
     closeModal(); // بستن مودال بعد از تایید
   };
+  //Props to customModal
+  const modalProps = {
+    title: isEntered ? "ثبت خروج" : "ثبت ورود",
+    description: `آیا از ${isEntered ? "خروج" : "ورود"} اوپراتور (${
+      operatorSchedule?.operator_name
+    }) مطمئن هستید؟`,
+    confirmText: isEntered ? "ثبت خروج" : "ثبت ورود",
+  };
 
   return (
     <Box w="100%" maxW="450px" mx="auto" p={{ base: 1, md: 4 }}>
@@ -113,11 +121,9 @@ const EnterExite = () => {
       <CustomModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title={isEntered ? "ثبت خروج" : "ثبت ورود"} // عنوان مودال
-        description={`آیا از ${isEntered ? "خروج" : "ورود"} اوپراتور (${
-          operatorSchedule?.operator_name
-        }) مطمئن هستید؟`} // توضیحات مودال
-        confirmText={isEntered ? "ثبت خروج" : "ثبت ورود"} // متن دکمه تایید
+        title={modalProps.title} // عنوان مودال
+        description={modalProps.description} // توضیحات مودال
+        confirmText={modalProps.confirmText} // متن دکمه تایید
         cancelText="بازگشت"
         onConfirm={handleConfirm} // تایید عملیات
         onCancel={closeModal} // بستن مودال
