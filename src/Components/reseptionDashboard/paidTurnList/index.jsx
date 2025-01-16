@@ -12,7 +12,7 @@ import { useCookies } from "react-cookie";
 import { todayDate } from "@/features/receptionDashboard/receptionThunks";
 import { ReservationList } from "../reservationList";
 const PaidTurns = ({ display }) => {
-  const [{ auth_Employee_token } = cookies, setCookie] = useCookies([
+  const [{ auth_Employee_token } = cookies] = useCookies([
     "auth_Employee_token",
   ]);
   const dispatch = useDispatch();
