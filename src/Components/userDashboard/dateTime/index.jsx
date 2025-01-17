@@ -3,14 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import StepperPrototype from "../stepper";
-import Date from "./Date";
 import {
+  cancelReserve,
   getreserveInformation,
   getTimeList,
   postAddTime,
 } from "@/features/customerDashboard/customerThunks";
 import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
 import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
+import { Flex } from "@chakra-ui/react";
+import CustomButton from "@/Common/customeButton/CustomeButton";
+import Loading from "@/Common/loading";
+import { useRouter } from "next/router";
+import Date from "./ui/Date";
 
 const DateTime = ({ slug }) => {
   const { showToast } = useCustomToast();
@@ -64,11 +69,6 @@ const DateTime = ({ slug }) => {
     }
   };
 
-  const handleCompleteStep = () => {
-    dispatch(nextStep());
-    console.log("مرحله کامل شد!");
-  };
-
   return (
     <>
       <StepperPrototype currentStep={3} />
@@ -83,12 +83,28 @@ const DateTime = ({ slug }) => {
         selectedSlot={selectedSlot}
         setSelectedSlot={setSelectedSlot}
       />
-      <AcceptBtn
+      <Flex
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          p: 3,
+        }}
+      >
+        <CustomButton slug={slug} onClick={submitHandler} w="30%">
+          {loading ? (
+            <Loading noneHeight="0vh" bg="#fff" h="4px" w="4px" />
+          ) : (
+            "ادامه"
+          )}{" "}
+        </CustomButton>
+      </Flex>
+      {/* <AcceptBtn
         slug={slug}
         text="ادامه"
         bgColor={"white"}
         submitHandler={submitHandler}
-      />
+      /> */}
     </>
   );
 };

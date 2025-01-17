@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid, Text, Button, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import Image from "next/image";
 import SessionRecordSection from "@/Common/session_Record_section/SessionRecordSection";
@@ -12,40 +12,40 @@ import {
   getAsyncUserName,
   getCutomerList,
 } from "@/features/customerDashboard/customerThunks";
+import Loading from "@/Common/loading";
+import CustomButton from "@/Common/customeButton/CustomeButton";
 
-const DashboardLayout = ({
-
-
-  sessionRecordClick,
-}) => {
+const DashboardLayout = ({ sessionRecordClick }) => {
   const [username, setUsername] = useState(null);
   const [{ auth_token }] = useCookies(["auth_token"]);
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const dispatch = useDispatch();
   const { userNames, customerList } = useSelector(
     (store) => store.customerDashboard
   );
-console.log('cccc',customerList);
 
   useEffect(() => setUsername(localStorage.getItem("phoneNumber")), []);
   useEffect(() => {
     if (auth_token) {
-      dispatch(getCutomerList({ token:auth_token }));
+      dispatch(getCutomerList({ token: auth_token }));
       dispatch(getAsyncUserName({ token: auth_token }));
     }
   }, [dispatch, auth_token]);
 
   const handleButtonClick = () => {
-    setLoading(true)
+    setLoading(true);
     router.push(
       checkPhoneNumberMatch()
         ? "userDashboard/choosingArea"
         : "userDashboard/userInformation"
     );
-    if(router.pathname ==="userDashboard/choosingArea"||router.pathname ==="userDashboard/userInformation"){
-      setLoading(false)
+    if (
+      router.pathname === "userDashboard/choosingArea" ||
+      router.pathname === "userDashboard/userInformation"
+    ) {
+      setLoading(false);
     }
   };
 
@@ -64,8 +64,7 @@ console.log('cccc',customerList);
   return (
     <>
       <NavBar bgColor="#ffffff" />
-      <Grid
-        display="flex"
+      <Flex
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
@@ -85,10 +84,9 @@ console.log('cccc',customerList);
           </Text>
         </Flex>
 
-        <Box
+        <Flex
           width={{ base: "100%", md: "45%" }}
           p={4}
-          display="flex"
           flexDirection="column"
           bgColor="#fff"
           borderRadius="10px"
@@ -96,7 +94,10 @@ console.log('cccc',customerList);
           <Section_title section_title="نوبت بعدی شما" />
           {checkPhoneNumberMatch() ? (
             <>
-              <InfoRow label="وضعیت" value="رزرو نشده" />
+              <InfoRow
+                label="وضعیت"
+                // value={getReserveStatus(reserveType.reserve_Type)}
+              />
               <InfoRow label="تاریخ نوبت بعدی" value="1402/1/24" />
             </>
           ) : (
@@ -117,29 +118,19 @@ console.log('cccc',customerList);
               </Text>
             </Box>
           )}
-          <Box display="flex" justifyContent="center" width="100%">
-            <Button
-              width="90%"
-              rounded="md"
-              variant="solid"
-              bgColor="brand.400"
-              color="purple.50"
-              _hover={{ bgColor: "purple.100", color: "purple.500" }}
-              transition=".5s"
-              fontWeight="500"
-              onClick={handleButtonClick}
-            >
-             {loading ? '...':'رزرو نوبت'}
-            </Button>
-          </Box>
-        </Box>
+          <Flex justifyContent="center" width="100%">
+            <CustomButton w="90%" onClick={handleButtonClick}>
+              {loading ? (
+                <Loading noneHeight="0vh" bg="#fff" h="4px" w="4px" />
+              ) : (
+                "رزرو نوبت"
+              )}
+            </CustomButton>
+          </Flex>
+        </Flex>
 
-        <SessionRecordSection
-          sessionRecordClick={sessionRecordClick}
-        
-    
-        />
-      </Grid>
+        <SessionRecordSection sessionRecordClick={sessionRecordClick} />
+      </Flex>
     </>
   );
 };
