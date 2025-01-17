@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Grid, Box, Text, Button, useDisclosure } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
-import SessionRecordSection from "@/Common/session_Record_section/SessionRecordSection";
 import { UserData } from "@/constants";
 import CancelTurnModal from "../cancelTurn/CancelTurnModal";
 import Session_Records from "../widgetForRecords/Session-Records";
+import SessionRecordSection from "../sessionRecordSection/SessionRecordSection";
 const FinalReserve = () => {
   const [viewMore, setViewMore] = useState(false);
   const [steperState, setSteperState] = useState(0);

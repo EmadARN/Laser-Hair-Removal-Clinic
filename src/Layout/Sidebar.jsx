@@ -34,15 +34,15 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
   const handleLogout = () => {
     removeCookie("auth_Admin_token", { path: "/" });
     removeCookie("auth_Employee_token", { path: "/" });
-    localStorage.removeItem("token");
-    router.push("/");
+    router.push("/panel");
     setIsModalOpen(false); // بستن مدال بعد از خروج
   };
 
   const handleCancelLogout = () => {
     setIsModalOpen(false); // بستن مدال بدون انجام هیچ کاری
   };
-
+  const logoutRout = router.pathname.startsWith("/adminDashboard");
+  
   return (
     <Box sx={styles.container}>
       <Sidebar collapsed={isCollapsed} width={isSmallScreen ? "110%" : "250px"}>
@@ -107,7 +107,11 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
         isOpen={isModalOpen}
         onClose={handleCancelLogout}
         title="خروج از حساب کاربری"
-        description="خروج از حساب کاربری به معنی پایان ساعت کاری می باشد. آیا میخواهید از حساب کاربری خارج شوید؟"
+        description={
+          logoutRout
+            ? "آیا میخواهید از حساب کاربری خارج شوید؟"
+            : "خروج از حساب کاربری به معنی پایان ساعت کاری می باشد. آیا میخواهید از حساب کاربری خارج شوید؟"
+        }
         confirmText="خروج از حساب کاربری"
         cancelText="بازگشت"
         onConfirm={handleLogout}

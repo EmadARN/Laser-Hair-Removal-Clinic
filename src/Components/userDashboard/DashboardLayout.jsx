@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import Image from "next/image";
-import SessionRecordSection from "@/Common/session_Record_section/SessionRecordSection";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
@@ -14,6 +13,7 @@ import {
 } from "@/features/customerDashboard/customerThunks";
 import Loading from "@/Common/loading";
 import CustomButton from "@/Common/customeButton/CustomeButton";
+import SessionRecordSection from "./sessionRecordSection/SessionRecordSection";
 
 const DashboardLayout = ({ sessionRecordClick }) => {
   const [username, setUsername] = useState(null);

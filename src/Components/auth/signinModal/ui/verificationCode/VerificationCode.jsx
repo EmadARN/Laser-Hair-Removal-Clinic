@@ -1,9 +1,12 @@
 import React, { useRef } from "react";
 import { Box, Input } from "@chakra-ui/react";
-import { handleCodeChange, handleKeyDown } from "@/utils/confirmPsswordHandler";
 import CustomButton from "@/Common/customeButton/CustomeButton";
 import Loading from "@/Common/loading";
 import LayoutModal from "./LayoutModal";
+import {
+  handleCodeChange,
+  handleKeyDown,
+} from "../../logic/confirmPsswordHandler";
 
 const VerificationCode = ({
   phoneNumber,
@@ -65,7 +68,7 @@ const VerificationCode = ({
             onChange={(event) => handleCodeChangeWrapper(event, index)}
             onKeyDown={(event) => handleKeyDownWrapper(event, index)}
             onFocus={handleFocus}
-            marginX={2} 
+            marginX={2}
             width={{ base: "40px", sm: "60px", md: "70px" }}
           />
         ))}

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Box, Flex, Grid } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import useStepper from "@/hooks/userDashboard/useSteper";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper";
 import { confirmInfo } from "@/features/customerDashboard/customerThunks";
