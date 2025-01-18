@@ -8,6 +8,7 @@ import SessionList from "./ui/SessionList";
 import SessionDetailsModal from "./ui/SessionDetailsModal";
 import Loading from "@/Common/loading";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import SectionTitle from "@/Common/sectionTitle";
 
 const RESERVE_STATUSES = {
   pe: "رزرو شده",
@@ -82,7 +83,8 @@ const SessionReports = ({ dispatch, setSteperState }) => {
           borderRadius="md"
           p={4}
         >
-          <Text
+          <SectionTitle section_title="گزارش جلسات" />
+          {/* <Text
             fontSize="xl"
             fontWeight="bold"
             mb={4}
@@ -90,7 +92,7 @@ const SessionReports = ({ dispatch, setSteperState }) => {
             pr={2}
           >
             گزارش جلسات
-          </Text>
+          </Text> */}
           <SessionList
             sessions={sessionRecords.reserve_list}
             onSessionClick={handleSessionClick}

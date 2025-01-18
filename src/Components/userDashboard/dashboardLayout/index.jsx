@@ -16,7 +16,6 @@ import {
 const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   const [username, setUsername] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState();
-
   const [{ auth_token }] = useCookies(["auth_token"]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -52,11 +51,13 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
     customerList?.customer_list?.some(
       (customer) => customer.username === username && customer.name !== "user"
     );
-  const sessionRecordClick = () => {
+  const reportsClick = () => {
     dispatch(setSteperState(steperState + 1));
     dispatch(getSessionRecords({ phoneNumber, auth_token }));
   };
-
+  const accountClick = () => {
+    dispatch(setSteperState(steperState + 2));
+  };
   return (
     <>
       <NavBar bgColor="#ffffff" />
@@ -84,7 +85,7 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
           handleButtonClick={handleButtonClick}
           checkPhoneNumberMatch={checkPhoneNumberMatch}
         />
-        <SecondBox sessionRecordClick={sessionRecordClick} />
+        <SecondBox reportsClick={reportsClick} accountClick={accountClick} />
       </Flex>
     </>
   );

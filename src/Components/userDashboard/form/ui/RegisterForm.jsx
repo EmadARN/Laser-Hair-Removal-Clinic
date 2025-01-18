@@ -10,6 +10,7 @@ const RegisterForm = ({
   diseaseHistory,
   inputsData,
 }) => {
+
   return (
     <Box
       width={{ base: "90%", md: "60%", lg: "40%" }}
