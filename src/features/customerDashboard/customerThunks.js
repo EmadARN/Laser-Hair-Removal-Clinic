@@ -214,3 +214,28 @@ export const getSessionRecords = createAsyncThunk(
     }
   }
 );
+export const cancelReserve = createAsyncThunk(
+  "customer/cancelReserve",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post(
+        "Reserve/cancel/reserve/",
+        {
+          reserve: payload.reserve,
+          cancel_type: payload.cancel_type,
+          sms_status: payload.sms_status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.tokenAuth}`,
+          },
+        }
+      );
+      console.log("CANCEL", data);
+
+      return data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);

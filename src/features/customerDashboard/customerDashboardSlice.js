@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  cancelReserve,
   confirmInfo,
   getAsyncUserName,
   getCutomerList,
@@ -143,7 +144,7 @@ const customerDashboardSlice = createSlice({
         state.loading = true;
         state.error = "";
       })
-    
+
       .addCase(getCutomerList.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
         state.customerList = action.payload;
@@ -173,6 +174,16 @@ const customerDashboardSlice = createSlice({
       })
       .addCase(getSessionRecords.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
+      })
+      // cancelReserve
+      .addCase(cancelReserve.pending, (state) => {
+        handleAsyncState(state, {}, "pending");
+      })
+      .addCase(cancelReserve.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(cancelReserve.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
       });
   },
 });

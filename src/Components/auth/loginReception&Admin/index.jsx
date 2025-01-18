@@ -5,10 +5,10 @@ import { useRouter } from "next/router";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { BgAnimate } from "./ui/BgAnimate";
 import AnimationSide from "./ui/AnimationSide";
-import useLoginAdminRecptionHooks from "./useLoginAdminRecptionHooks";
 import { useDispatch } from "react-redux";
 import { resetAuthState } from "@/features/signin/authSlice";
 import FormLogin from "./ui/FormLogin";
+import useLoginAdminRecptionHooks from "./logic/useLoginAdminRecptionHooks";
 
 const LoginPage = () => {
   const dispatch = useDispatch();

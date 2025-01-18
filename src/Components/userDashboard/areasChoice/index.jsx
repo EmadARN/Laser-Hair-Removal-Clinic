@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import AreaChoice from "./AreaChoice";
-import { Spinner, Text } from "@chakra-ui/react";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper";
 import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
 import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
 import { useFetchLazerAreas } from "./useFetchLazerAreaList";
 import { usePostLazerAreas } from "./usePostLazerAreaList";
+import CustomButton from "@/Common/customeButton/CustomeButton";
+import Loading from "@/Common/loading";
 
 const ChoosingArea = ({ slug }) => {
   const [checkedItems, setCheckedItems] = useState([]);
@@ -68,14 +70,35 @@ const ChoosingArea = ({ slug }) => {
         handleSelectAll={handleSelectAll}
         handleCheckboxChange={handleCheckboxChange}
       />
-      <AcceptBtn
+      <Flex
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          p: 3,
+        }}
+      >
+        <CustomButton
+          slug={slug}
+          onClick={submitHandler}
+          isDisabled={isDisabled}
+          w="30%"
+        >
+          {loading ? (
+            <Loading noneHeight="0vh" bg="#fff" h="4px" w="4px" />
+          ) : (
+            "ادامه"
+          )}{" "}
+        </CustomButton>
+      </Flex>
+      {/* <AcceptBtn
         slug={slug}
         text="ادامه"
         bgColor={"white"}
         submitHandler={submitHandler}
         letPush={reserveId}
         isDisabled={isDisabled}
-      />
+      /> */}
     </>
   );
 };

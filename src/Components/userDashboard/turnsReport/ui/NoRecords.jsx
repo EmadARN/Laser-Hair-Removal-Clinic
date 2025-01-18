@@ -1,14 +1,13 @@
 import React from "react";
-import { Box, Grid, Text, Button } from "@chakra-ui/react";
+import { Box, Grid, Text, Button, Flex } from "@chakra-ui/react";
 import Section_title from "@/Common/section-title";
 import { FaNewspaper } from "react-icons/fa6";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
-const No_Records = ({ dispatch, setSteperState }) => {
+const NoRecords = ({ dispatch, setSteperState }) => {
   return (
-    <Grid
+    <Flex
       alignItems={"center"}
-      display={"flex"}
       justifyContent={"center"}
       flexDirection={"column"}
       width={"100%"}
@@ -57,8 +56,8 @@ const No_Records = ({ dispatch, setSteperState }) => {
           </Box>
         </Box>
       </Box>
-    </Grid>
+    </Flex>
   );
 };
 
-export default No_Records;
+export default NoRecords;

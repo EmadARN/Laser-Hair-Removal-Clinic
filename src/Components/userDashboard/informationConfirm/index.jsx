@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import { Box, Grid } from "@chakra-ui/react";
-import TurnInfo from "./TurnInfo";
-import OutputInformation from "./OutputInformation";
+import { Box, Flex, Grid } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import useStepper from "@/hooks/userDashboard/useSteper";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper";
 import { confirmInfo } from "@/features/customerDashboard/customerThunks";
 import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
 import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
+import CustomButton from "@/Common/customeButton/CustomeButton";
+import Loading from "@/Common/loading";
+import OutputInformation from "./ui/OutputInformation";
+import TurnInfo from "./ui/TurnInfo";
 
 const ConfirmInfo = ({ slug }) => {
   const [cookies, setCookie] = useCookies(["auth_token"]);
@@ -34,8 +35,11 @@ const ConfirmInfo = ({ slug }) => {
   }, [username, token, dispatch]);
 
   const handleCompleteStep = () => {
-    dispatch(nextStep());
-    console.log("مرحله کامل شد!");
+    // localStorage.removeItem("reserveId");
+    // localStorage.removeItem("slots");
+    // localStorage.removeItem("date");
+    // localStorage.removeItem("timeList");
+    // localStorage.removeItem("date");
   };
 
   return (
@@ -56,11 +60,23 @@ const ConfirmInfo = ({ slug }) => {
       <Box mt={2}>
         <TurnInfo date={date} slots={slots} operatorName={operatorName} />
       </Box>
-      <AcceptBtn
-        text="تایید اطلاعات"
-        bgColor={"white"}
-        slug={slug}
-      />
+      <Flex
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          p: 3,
+        }}
+      >
+        <CustomButton oncClick={handleCompleteStep} slug={slug} w="30%">
+          {loading ? (
+            <Loading noneHeight="0vh" bg="#fff" h="4px" w="4px" />
+          ) : (
+            "تایید اطلاعات"
+          )}{" "}
+        </CustomButton>
+      </Flex>
+      {/* <AcceptBtn text="تایید اطلاعات" bgColor={"white"} slug={slug} /> */}
     </Grid>
   );
 };

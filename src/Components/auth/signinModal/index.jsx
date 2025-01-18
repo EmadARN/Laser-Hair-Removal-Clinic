@@ -8,8 +8,9 @@ import {
 } from "@chakra-ui/react";
 import VerificationNumber from "./ui/verificationNumber/VerificationNumber";
 import VerificationCode from "./ui/verificationCode/VerificationCode";
-import useVerificationCode from "./useVerificationCode";
-import useVerificationNumber from "./useVerificationNumber";
+import useVerificationNumber from "./logic/useVerificationNumber";
+import useVerificationCode from "./logic/useVerificationCode";
+
 
 
 const MainModal = ({ onClose, onOpen, isOpen }) => {

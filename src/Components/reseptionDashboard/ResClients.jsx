@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 import PatientList from "./patientList";
 import { todayDate } from "@/features/receptionDashboard/receptionThunks";
 const ResClients = () => {
-  const [{ auth_Employee_token } = cookies, setCookie] = useCookies();
+  const [{ auth_Employee_token } = cookies] = useCookies();
 
   const dispatch = useDispatch();
   const { todayReserve } = useSelector(

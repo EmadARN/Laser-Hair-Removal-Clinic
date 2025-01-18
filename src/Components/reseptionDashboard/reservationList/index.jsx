@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, useDisclosure } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   cancelReserve,
   multiplePayment,
 } from "@/features/receptionDashboard/receptionThunks";
-import PaymentDialog from "../paymentDialog/PaymentDialog";
 import { extractTime } from "@/utils/extractDate";
 import { getCustomerName } from "@/utils/getCustomerName";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import Lists from "../shared/Lists";
+import {
+  setSelectedReserve,
+  setIdKeeper,
+  setSelectedValue,
+  setSelectedValue2,
+  setPaymentPriceKepper1,
+  setPaymentPriceKepper2,
+  setOneWayPaymentValue,
+} from "@/features/receptionDashboard/paymentSlice";
+import PaymentDialog from "../paymentDialog";
 
 export const ReservationList = ({
   isDisabled,
@@ -20,79 +29,63 @@ export const ReservationList = ({
   isPaymentTable,
   cutomerList,
 }) => {
-  const dispatch = useDispatch();
   const { showToast } = useCustomToast();
-  // const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelModal = useDisclosure();
   const paymentModal = useDisclosure();
 
-  const [selectedReserve, setSelectedReserve] = useState(null);
-  const [idKeeper, setIdKeeper] = useState("");
+  const dispatch = useDispatch();
+  // انتخاب استیت‌ها از ریداکس
+  const {
+    selectedReserve,
+    idKeeper,
+    selectedValue,
+    selectedValue2,
+    paymentPriceKepper1,
+    paymentPriceKepper2,
+    oneWayPaymentValu,
+    confrimChange,
+  } = useSelector((state) => state.payment);
 
-  //this state store inputselect 1 component value
-  const [selectedValue, setSelectedValue] = useState("");
-  //this state store inputselect 2 component value
-  const [selectedValue2, setSelectedValue2] = useState("");
-
-  //this state store the first input value price that customer entered for custome payment
-
-  const [paymentPriceKepper1, setPaymentPriceKepper1] = useState();
-
-  //this state store the seccond input value price that customer entered for custome payment
-
-  const [paymentPriceKepper2, setPaymentPriceKepper2] = useState();
-
-  //this state store the radio button value for one payment method
-  const [oneWayPaymentValu, setOneWayPaymentValue] = useState("");
-
-  const [confrimChange, setConfirmChange] = useState(false);
-
-  //this function handle inputSelect components for payment method
+  // هندل تغییر مقادیر
   const handlePaymentChange = (event, type) => {
     if (type === "value1") {
-      setSelectedValue(event.target.value);
+      dispatch(setSelectedValue(event.target.value));
     } else if (type === "value2") {
-      setSelectedValue2(event.target.value);
+      dispatch(setSelectedValue2(event.target.value));
     }
   };
-  //this function handle inputSelect component for price tp pay
+
   const handlePrice = (event, type) => {
     if (type === "value1") {
-      setPaymentPriceKepper1(event.target.value);
+      dispatch(setPaymentPriceKepper1(event.target.value));
     } else if (type === "value2") {
-      setPaymentPriceKepper2(event.target.value);
+      dispatch(setPaymentPriceKepper2(event.target.value));
     }
   };
 
-  //this function store each customer payment detail
   const handleProcessPaymentCharge = (item) => {
-      paymentModal.onOpen();
-      setSelectedReserve(item);
-
-      setIdKeeper(item.id);
-
+    paymentModal.onOpen();
+    dispatch(setSelectedReserve(item));
+    dispatch(setIdKeeper(item.id));
   };
 
-  //final function to dispatch payment api
   const paymentHandleClick = async () => {
     const reservId = idKeeper;
 
-    // ایجاد ساختار درست برای payment_list
     const payment_list = confrimChange
       ? [
-          { price: Number(paymentPriceKepper1), payment_type: selectedValue }, // شیء اول
-          { price: Number(paymentPriceKepper2), payment_type: selectedValue2 }, // شیء دوم
+          { price: Number(paymentPriceKepper1), payment_type: selectedValue },
+          { price: Number(paymentPriceKepper2), payment_type: selectedValue2 },
         ]
-      : selectedReserve && selectedReserve.total_price_amount
+      : selectedReserve?.total_price_amount
       ? [
           {
             price: selectedReserve.total_price_amount,
             payment_type: oneWayPaymentValu,
-          }, // شیء تنها در صورت عدم تغییر
+          },
         ]
       : [];
 
-    // دیسپچ کردن اطلاعات
     const result = await dispatch(
       multiplePayment({
         reservId,
@@ -100,6 +93,7 @@ export const ReservationList = ({
         auth_Employee_token,
       })
     );
+
     if (result.meta.requestStatus === "fulfilled") {
       showToast({ title: "پرداخت با موفقیت انجام شد", status: "success" });
       paymentModal.onClose();
@@ -109,7 +103,7 @@ export const ReservationList = ({
   };
 
   const cancelHandler = async (item) => {
-    setSelectedReserve(item);
+    dispatch(setSelectedReserve(item));
     cancelModal.onOpen();
 
     const result = await dispatch(
@@ -120,6 +114,7 @@ export const ReservationList = ({
         auth_Employee_token,
       })
     );
+
     if (result.meta.requestStatus === "fulfilled") {
       showToast({ title: "لغو با موفقیت انجام شد", status: "success" });
       cancelModal.onClose();
@@ -131,11 +126,9 @@ export const ReservationList = ({
     }
   };
 
-  //this function update radio button values for one payemnt method
   const handlePaymentMethodChange = (value) => {
-    setOneWayPaymentValue(value);
+    dispatch(setOneWayPaymentValue(value));
   };
-
   return (
     <Box w={{ base: "100vw", md: "100%" }} px={4}>
       <Box>
@@ -163,25 +156,12 @@ export const ReservationList = ({
 
       {paymentModal.isOpen && (
         <PaymentDialog
-          idKeeper={idKeeper}
-          confrimChange={confrimChange}
-          setConfirmChange={setConfirmChange}
-          oneWayPaymentValu={oneWayPaymentValu}
           handlePaymentMethodChange={handlePaymentMethodChange}
-          setPaymentPriceKepper1={setPaymentPriceKepper1}
-          setPaymentPriceKepper2={setPaymentPriceKepper2}
-          setSelectedValue={setSelectedValue}
-          setSelectedValue2={setSelectedValue2}
-          paymentPriceKepper1={paymentPriceKepper1}
-          paymentPriceKepper2={paymentPriceKepper2}
-          handlePrice={handlePrice}
-          selectedValue2={selectedValue2}
-          selectedValue={selectedValue}
           handlePaymentChange={handlePaymentChange}
           paymentHandleClick={paymentHandleClick}
           isOpen={paymentModal.isOpen}
           onClose={paymentModal.onClose}
-          reserve={selectedReserve}
+          handlePrice={handlePrice}
         />
       )}
     </Box>
