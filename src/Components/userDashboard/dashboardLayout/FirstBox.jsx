@@ -17,40 +17,21 @@ const FirstBox = ({
   sessionRecords,
   loading,
   handleButtonClick,
+  operatorName,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   if (sessionRecords?.last_reserve) {
     return (
       <Grid
-        p={4}
-        bgColor={"#F7F7F7"}
+        borderRadius={"10px"}
+        bgColor={"white"}
         width={"100%"}
         display={"flex"}
         flexDirection={"column"}
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <Box
-          alignItems={"flex-start"}
-          width={{ base: "100%" }}
-          display={"flex"}
-          flexDirection={"column"}
-          gap={3}
-          mb={4}
-        >
-          <Box mb={2}>
-            <Text color={"#999"}>خوش آمدید</Text>
-          </Box>
-          <Box>
-            <Text pr={1} fontWeight="bold" color="gray.500">
-              {checkPhoneNumberMatch()
-                ? getCustomerName(userNames.username, customerList)
-                : ""}
-            </Text>
-          </Box>
-        </Box>
-
         <Box
           h={"auto"}
           boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
@@ -95,7 +76,7 @@ const FirstBox = ({
                   sessionRecords?.last_reserve?.reserve_time_str
                 );
               } else if (item.title === "اپراتور") {
-                customValue = "essionRecords?.last_reserve.operator";
+                customValue = operatorName;
               } else if (item.title === "مبلغ کل") {
                 customValue = sessionRecords?.last_reserve?.total_price_amount;
               }
@@ -130,7 +111,14 @@ const FirstBox = ({
 
           <Box mt={3} display={"flex"} justifyContent={"center"} width={"100%"}>
             {" "}
-            <Button onClick={onOpen} width={"95%"} textAlign={"center"}>
+            <Button
+              bgColor={"red"}
+              color={"#fff"}
+              borderRadius={"7px"}
+              onClick={onOpen}
+              width={"95%"}
+              textAlign={"center"}
+            >
               لغو نوبت
             </Button>
           </Box>

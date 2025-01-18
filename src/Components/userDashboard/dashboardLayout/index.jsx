@@ -19,18 +19,22 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   const [phoneNumber, setPhoneNumber] = useState();
   const [{ auth_token }] = useCookies(["auth_token"]);
   const [loading, setLoading] = useState(false);
-  const [usernames , setUsernames] = useState()
+  const [operatorName , setOperatorName] = useState()
+
   const router = useRouter();
   const { userNames, customerList ,sessionRecords} = useSelector(
     (store) => store.customerDashboard
   );
 
 
+
   
   useEffect(() => {
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
+    const storedOperatorName = localStorage.getItem("operatorName")
     setPhoneNumber(storedPhoneNumber);
-    setUsernames(storedPhoneNumber);
+    if(storedOperatorName) setOperatorName(storedOperatorName);
+   
   }, []);
 
 
@@ -109,6 +113,7 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
         </Flex>
         <Box mb={3} width={{ base: "100%", md: "45%" }}>
           <FirstBox
+          operatorName={operatorName}
           sessionRecords={sessionRecords}
             customerList={customerList}
             userNames={userNames}

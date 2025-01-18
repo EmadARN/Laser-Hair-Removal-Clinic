@@ -9,13 +9,7 @@ import SessionDetailsModal from "./ui/SessionDetailsModal";
 import Loading from "@/Common/loading";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import SectionTitle from "@/Common/sectionTitle";
-
-const RESERVE_STATUSES = {
-  pe: "رزرو شده",
-  co: "تکمیل شده",
-  sc: "کنسل شده",
-  do: "در انتظار پرداخت",
-};
+import { getReserveStatus } from "../utils/ReserveStatus";
 
 const SessionReports = ({ dispatch, setSteperState }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,9 +17,6 @@ const SessionReports = ({ dispatch, setSteperState }) => {
   const { sessionRecords, loading, error } = useSelector(
     (store) => store.customerDashboard
   );
-
-  const getReserveStatus = (reserveType) =>
-    RESERVE_STATUSES[reserveType] || "اطلاعات موجود نیست";
 
   const handleSessionClick = (session) => {
     setSelectedSession({

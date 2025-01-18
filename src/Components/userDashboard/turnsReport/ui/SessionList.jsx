@@ -7,7 +7,7 @@ const SessionList = ({ sessions, onSessionClick }) => {
   return (
     <Box>
       {sessions
-        .reverse()
+        
         .map((session) => (
           <Box key={session.id} borderBottom="1px solid #ddd" pb={2}>
             <Button
