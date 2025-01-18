@@ -3,12 +3,12 @@ import AreaChoice from "./AreaChoice";
 import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper";
-import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
-import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
+
 import { useFetchLazerAreas } from "./useFetchLazerAreaList";
 import { usePostLazerAreas } from "./usePostLazerAreaList";
 import CustomButton from "@/Common/customeButton/CustomeButton";
 import Loading from "@/Common/loading";
+import TitleUserDashboard from "../shared/TitleUserDashboard";
 
 const ChoosingArea = ({ slug }) => {
   const [checkedItems, setCheckedItems] = useState([]);
@@ -91,14 +91,6 @@ const ChoosingArea = ({ slug }) => {
           )}{" "}
         </CustomButton>
       </Flex>
-      {/* <AcceptBtn
-        slug={slug}
-        text="ادامه"
-        bgColor={"white"}
-        submitHandler={submitHandler}
-        letPush={reserveId}
-        isDisabled={isDisabled}
-      /> */}
     </>
   );
 };

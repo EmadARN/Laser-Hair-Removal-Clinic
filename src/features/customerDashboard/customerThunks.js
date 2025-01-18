@@ -24,6 +24,29 @@ export const postCustomerInformation = createAsyncThunk(
     }
   }
 );
+export const EditCustomerInformation = createAsyncThunk(
+  "customerDashboard/EditCustomerInformation",
+  async (payload, { rejectWithValue }) => {
+    console.log("payload", payload);
+
+    try {
+      const { data } = await api.post(
+        "Core/add/customer/information/",
+        payload,
+
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_token}`,
+          },
+        }
+      );
+      console.log("EditCustomerInformation", data);
+      return data;
+    } catch (error) {
+      console.log("error payload EditCustomerInformation", error);
+    }
+  }
+);
 
 export const getLazerAreaList = createAsyncThunk(
   "customerDashboard/getLazerAreaList",
@@ -173,8 +196,8 @@ export const getCutomerList = createAsyncThunk(
 export const getAsyncUserName = createAsyncThunk(
   "customer/getAsyncUserName",
   async (payload, { rejectWithValue }) => {
-    console.log('ppp',payload);
-    
+    console.log("ppp", payload);
+
     try {
       const { data } = await api.get("/Core/get/username/", {
         headers: {

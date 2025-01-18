@@ -28,7 +28,7 @@ export default function Footer() {
       <Container as={Stack} maxW={"85%"} py={14}>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={22}>
           <Stack align={"flex-start"}>
-            <ListHeader>ساید لیزر:</ListHeader>
+            <ListHeader>لیزر ساید:</ListHeader>
             <Text mb={3}>
               مرکز تخصصی لیزر موهای زائد با سابقه ی پنج ساله و استفاده از بهترین
               دستگاه لیزر موهای زائد با استفاده از مجرب ترین تیم اپراتور لیزر .
@@ -47,7 +47,7 @@ export default function Footer() {
             </Text>
           </Stack>
           <Stack>
-            <ListHeader>ساید لیزر در شبکه های اجتماعی:</ListHeader>
+            <ListHeader>لیزر ساید در شبکه های اجتماعی:</ListHeader>
             <SocialMedias />
           </Stack>
         </SimpleGrid>

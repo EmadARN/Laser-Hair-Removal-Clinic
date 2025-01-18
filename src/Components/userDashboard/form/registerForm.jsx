@@ -4,13 +4,12 @@ import { useCookies } from "react-cookie";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import StepperPrototype from "../stepper";
 import { postCustomerInformation } from "@/features/customerDashboard/customerThunks";
-import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
-import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
 import { useRouter } from "next/router";
 import CustomButton from "@/Common/customeButton/CustomeButton";
 import Loading from "@/Common/loading";
 import { Flex } from "@chakra-ui/react";
 import RegisterForm from "./ui/RegisterForm";
+import TitleUserDashboard from "../shared/TitleUserDashboard";
 
 const UserInformation = ({ slug }) => {
   const { showToast } = useCustomToast();
@@ -123,13 +122,6 @@ const UserInformation = ({ slug }) => {
           )}{" "}
         </CustomButton>
       </Flex>
-      {/* <AcceptBtn
-        slug={slug}
-        text="ادامه"
-        bgColor={"white"}
-        submitHandler={submitHandler}
-        isDisabled={isDisabled}
-      /> */}
     </>
   );
 };

@@ -23,7 +23,6 @@ import Reports from "@/Components/adminDashboard/reportsPage";
 import Setting from "@/Components/adminDashboard/settingPage";
 import DailyShift from "@/Components/reseptionDashboard/DailyShift";
 import ResClients from "@/Components/reseptionDashboard/ResClients";
-import UserInformation from "@/Components/userDashboard/registerForm";
 import ChoosingArea from "@/Components/userDashboard/areasChoice";
 import DateTime from "@/Components/userDashboard/dateTime";
 import ConfirmInfo from "@/Components/userDashboard/informationConfirm";
@@ -31,7 +30,7 @@ import ChoosingPayAmount from "@/Components/userDashboard/choosingPayAmount";
 import ReservationDone from "@/Components/userDashboard/reservationDone";
 import Unsucces_Transaction from "@/Components/userDashboard/unsuccessfull-transaction";
 import { toPersianDigits } from "@/utils/toPersianDigits";
-
+import UserInformation from "@/Components/userDashboard/form/registerForm";
 
 //َaboutUs
 export const numberTicker = [
@@ -411,20 +410,11 @@ export const userData = [
   { slug: "dateTime", component: <DateTime slug={"confirmInfo"} /> },
   {
     slug: "confirmInfo",
-    component: <ConfirmInfo slug={"choosingPayAmount"} />,
-  },
-
-  {
-    slug: "choosingPayAmount",
-    component: <ChoosingPayAmount slug={"reservationDone"} />,
+    component: <ConfirmInfo slug={"reservationDone"} />,
   },
   {
     slug: "reservationDone",
-    component: <ReservationDone slug={"unsuccesTransaction"} />,
-  },
-  {
-    slug: "unsuccesTransaction",
-    component: <Unsucces_Transaction slug={"unsuccesTransaction"} />,
+    component: <ReservationDone />,
   },
 ];
 export const steps = [

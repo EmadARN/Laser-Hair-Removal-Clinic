@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   cancelReserve,
   confirmInfo,
+  EditCustomerInformation,
   getAsyncUserName,
   getCutomerList,
   getLazerAreaList,
@@ -57,6 +58,18 @@ const customerDashboardSlice = createSlice({
         }
       })
       .addCase(postCustomerInformation.rejected, (state, action) => {
+        handleAsyncState(state, action, "rejected");
+      })
+
+      //EditCustomerInformation
+      .addCase(EditCustomerInformation.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(EditCustomerInformation.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+      .addCase(EditCustomerInformation.rejected, (state, action) => {
         handleAsyncState(state, action, "rejected");
       })
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSteperState } from "@/features/dashboardSteper/dashboardSlice";
 import SessionReports from "./turnsReport";
 import DashboardLayout from "./dashboardLayout";
+import UserAccount from "./form/UserAccount";
 
 const Dashboard = () => {
   const { steperState } = useSelector((store) => store.dashboardSteper);
@@ -23,6 +24,10 @@ const Dashboard = () => {
         steperState={steperState}
         setSteperState={setSteperState}
       />
+    );
+  } else if (steperState === 2) {
+    return (
+      <UserAccount steperState={steperState} setSteperState={setSteperState} />
     );
   }
 };
