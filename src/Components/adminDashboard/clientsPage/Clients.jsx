@@ -7,16 +7,18 @@ import Lists from "../shared/Lists";
 import AccordionLists from "../shared/AccordionLists";
 import { getCutomerList } from "@/features/adminDashboard/adminThunks";
 import SearchFilter from "@/Common/searchFilter";
+import SearchComponent from "@/Common/searchInput/SearchInput";
+
 
 
 const Clients = () => {
   const [step, setStep] = useState(0);
   const [clientData, setClientData] = useState({});
-  const [searchQuery, setSearchQuery] = useState(""); // state برای جستجو
+  const [filteredClients, setFilteredClients] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // تعداد آیتم‌ها در هر صفحه
+  const itemsPerPage = 10;
 
-  const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
+  const [{ auth_Admin_token }] = useCookies(['auth_Admin_token']);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,14 +40,14 @@ const Clients = () => {
       name: customer.name,
       last_name: customer.last_name,
       phone_number: customer.phone_number,
-      national_code: customerInfo ? customerInfo.national_code : "",
-      address: customerInfo ? customerInfo.address : "",
-      house_number: customerInfo ? customerInfo.house_number : "",
+      national_code: customerInfo ? customerInfo.national_code : '',
+      address: customerInfo ? customerInfo.address : '',
+      house_number: customerInfo ? customerInfo.house_number : '',
       drug_hist: customerInfo ? customerInfo.drug_hist : false,
       decease_hist: customerInfo ? customerInfo.decease_hist : false,
-      doctor: customerInfo ? customerInfo.doctor : "-",
+      doctor: customerInfo ? customerInfo.doctor : '-',
       offline_number: customerInfo ? customerInfo.offline_num : 0,
-      last_date: customerInfo ? customerInfo.last_date : "-",
+      last_date: customerInfo ? customerInfo.last_date : '-',
     });
 
     setStep(1);
@@ -54,34 +56,35 @@ const Clients = () => {
   const mdCancelHandler = () => {
     setStep(0);
     setClientData({
-      name: "",
-      last_name: "",
-      phone_number: "",
-      national_code: "",
-      address: "",
-      house_number: "",
+      name: '',
+      last_name: '',
+      phone_number: '',
+      national_code: '',
+      address: '',
+      house_number: '',
       drug_hist: false,
       decease_hist: false,
-      doctor: "-",
+      doctor: '-',
       offline_number: 0,
     });
   };
 
-  const { filteredData: filteredClients, handleChange } = SearchFilter({
-    data: customerListAdmin?.customer_list || [],
-    searchQuery,
-    setSearchQuery,
-    filterKeys: ["name", "last_name"], // فیلدهایی که باید جستجو شود
-  });
+  const handleSearch = (results) => {
+    setFilteredClients(results);
+  };
 
-  // محاسبه داده‌های صفحه جاری
+  useEffect(() => {
+    if (customerListAdmin?.customer_list) {
+      setFilteredClients(customerListAdmin.customer_list);
+    }
+  }, [customerListAdmin]);
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentClients = filteredClients.slice(
     startIndex,
     startIndex + itemsPerPage
   );
 
-  // تعداد کل صفحات
   const totalPages = Math.ceil(filteredClients.length / itemsPerPage);
 
   const handleNextPage = () => {
@@ -96,17 +99,18 @@ const Clients = () => {
     return (
       <>
         <Box sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 4 } }}>
-          <SearchInput
+          <SearchComponent
+            data={customerListAdmin?.customer_list || []}
+            filterKeys={['name', 'last_name']}
             placeholder="جستجو در بین مراجعین"
             size="lg"
-            value={searchQuery}
-            handlechange={handleChange}
+            onSearch={handleSearch}
           />
         </Box>
         <Box
-          width={{ base: "110vw", md: "100%" }}
-          display={"flex"}
-          justifyContent={"center"}
+          width={{ base: '110vw', md: '100%' }}
+          display={'flex'}
+          justifyContent={'center'}
           px={{ base: 2, md: 4 }}
         >
           <Table
@@ -116,7 +120,6 @@ const Clients = () => {
             width="100%"
             size="sm"
             dir="rtl"
-            variant=""
           >
             <Tbody>
               {!loading &&
@@ -126,43 +129,33 @@ const Clients = () => {
                 ? currentClients.map((item, index) => (
                     <Box key={index} onClick={() => handleRowClick(item)}>
                       <Lists
-                        firstArea={item.name + " " + item.last_name}
+                        firstArea={item.name + ' ' + item.last_name}
                         editDeleteDisplay="none"
                         leftArrowDisplay="flex"
                       />
                     </Box>
                   ))
                 : error
-                ? console.log("Error:", error)
+                ? console.log('Error:', error)
                 : null}
             </Tbody>
           </Table>
         </Box>
         <HStack mt={4} justifyContent="center">
-          <Button
-            onClick={handlePrevPage}
-            isDisabled={currentPage === 1}
-          >
+          <Button onClick={handlePrevPage} isDisabled={currentPage === 1}>
             صفحه قبل
           </Button>
           <Text>{`${currentPage} از ${totalPages}`}</Text>
-          <Button
-            onClick={handleNextPage}
-            isDisabled={currentPage === totalPages}
-          >
+          <Button onClick={handleNextPage} isDisabled={currentPage === totalPages}>
             صفحه بعد
           </Button>
         </HStack>
       </>
     );
   } else {
-    return (
-      <AccordionLists
-        mdCancelHandler={mdCancelHandler}
-        clientData={clientData}
-      />
-    );
+    return <AccordionLists mdCancelHandler={mdCancelHandler} clientData={clientData} />;
   }
 };
 
 export default Clients;
+
