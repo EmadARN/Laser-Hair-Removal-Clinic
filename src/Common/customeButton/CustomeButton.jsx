@@ -25,9 +25,6 @@ const CustomButton = forwardRef(
       if (onClick && slug) {
         router.push(`${slug}`);
       }
-      // else {
-      //   router.push(`${slug}`);
-      // }
     };
     return (
       <Button

@@ -410,20 +410,11 @@ export const userData = [
   { slug: "dateTime", component: <DateTime slug={"confirmInfo"} /> },
   {
     slug: "confirmInfo",
-    component: <ConfirmInfo slug={"choosingPayAmount"} />,
-  },
-
-  {
-    slug: "choosingPayAmount",
-    component: <ChoosingPayAmount slug={"reservationDone"} />,
+    component: <ConfirmInfo slug={"reservationDone"} />,
   },
   {
     slug: "reservationDone",
-    component: <ReservationDone slug={"unsuccesTransaction"} />,
-  },
-  {
-    slug: "unsuccesTransaction",
-    component: <Unsucces_Transaction slug={"unsuccesTransaction"} />,
+    component: <ReservationDone />,
   },
 ];
 export const steps = [

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Box, Text } from "@chakra-ui/react";
 import { Checkbox } from "@chakra-ui/react";
-import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
 
 const ChoosingPayAmount = ({ slug }) => {
   const [checkboxColor, setCheckboxColor] = useState(false);
@@ -100,9 +99,7 @@ const ChoosingPayAmount = ({ slug }) => {
             <Text>250,000تومان</Text>
           </Box>
         </Box>
-        <Box width="100%" display="flex" justifyContent="center" p={3}>
-          <AcceptBtn text="پرداخت" bgColor={"transparent"} slug={slug} />
-        </Box>
+        <Box width="100%" display="flex" justifyContent="center" p={3}></Box>
       </Box>
     </Grid>
   );

@@ -68,7 +68,7 @@ export default function NavBar({ bgColor }) {
             fontFamily={"IRANYekan-Medium"}
             color="gray.600"
           >
-            <NavLink path="/">ساید لیزر</NavLink>
+            <NavLink path="/">لیزر ساید</NavLink>
             <NavLink path="/contactUs">ارتباط با ما</NavLink>
             <NavLink path="/aboutUs">درباره ما</NavLink>
           </Flex>
@@ -81,11 +81,7 @@ export default function NavBar({ bgColor }) {
         <Flex alignItems="center">
           <Menu>
             <Link
-              href={
-                cookies.auth_token
-                  ? "/userDashboard"
-                  : "/signInCustomer"
-              }
+              href={cookies.auth_token ? "/userDashboard" : "/signInCustomer"}
               rounded="full"
               variant="link"
               cursor="pointer"

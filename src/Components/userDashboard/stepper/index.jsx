@@ -24,6 +24,7 @@ const StepperComponent = ({ currentStep }) => {
           return (
             <Step key={step.id}>
               <Flex flexDirection="column" alignItems="center">
+                
                 {/* دایره هر مرحله */}
                 <StepIndicator
                   size="10"

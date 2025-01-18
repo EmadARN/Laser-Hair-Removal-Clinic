@@ -84,15 +84,6 @@ const SessionReports = ({ dispatch, setSteperState }) => {
           p={4}
         >
           <SectionTitle section_title="گزارش جلسات" />
-          {/* <Text
-            fontSize="xl"
-            fontWeight="bold"
-            mb={4}
-            borderRight="4px solid #7563DC"
-            pr={2}
-          >
-            گزارش جلسات
-          </Text> */}
           <SessionList
             sessions={sessionRecords.reserve_list}
             onSessionClick={handleSessionClick}

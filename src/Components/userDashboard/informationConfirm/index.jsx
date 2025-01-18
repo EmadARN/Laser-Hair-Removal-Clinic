@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper";
 import { confirmInfo } from "@/features/customerDashboard/customerThunks";
-import TitleUserDashboard from "../shared/titleUserDashboard/TitleUserDashboard";
-import { AcceptBtn } from "../shared/acceptBtn/AcceptBtn";
 import CustomButton from "@/Common/customeButton/CustomeButton";
 import Loading from "@/Common/loading";
 import OutputInformation from "./ui/OutputInformation";
 import TurnInfo from "./ui/TurnInfo";
+import TitleUserDashboard from "../shared/TitleUserDashboard";
 
 const ConfirmInfo = ({ slug }) => {
   const [cookies, setCookie] = useCookies(["auth_token"]);
@@ -35,11 +34,11 @@ const ConfirmInfo = ({ slug }) => {
   }, [username, token, dispatch]);
 
   const handleCompleteStep = () => {
-    // localStorage.removeItem("reserveId");
-    // localStorage.removeItem("slots");
-    // localStorage.removeItem("date");
-    // localStorage.removeItem("timeList");
-    // localStorage.removeItem("date");
+    localStorage.removeItem("reserveId");
+    localStorage.removeItem("slots");
+    localStorage.removeItem("date");
+    localStorage.removeItem("timeList");
+    localStorage.removeItem("name");
   };
 
   return (
@@ -68,7 +67,7 @@ const ConfirmInfo = ({ slug }) => {
           p: 3,
         }}
       >
-        <CustomButton oncClick={handleCompleteStep} slug={slug} w="30%">
+        <CustomButton slug={slug} onClick={handleCompleteStep} w="30%">
           {loading ? (
             <Loading noneHeight="0vh" bg="#fff" h="4px" w="4px" />
           ) : (
@@ -76,7 +75,6 @@ const ConfirmInfo = ({ slug }) => {
           )}{" "}
         </CustomButton>
       </Flex>
-      {/* <AcceptBtn text="تایید اطلاعات" bgColor={"white"} slug={slug} /> */}
     </Grid>
   );
 };
