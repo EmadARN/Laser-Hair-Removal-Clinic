@@ -3,8 +3,6 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import NavBar from "@/Layout/navbar/NavBar";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import FirstBox from "./FirstBox";
-import SecondBox from "./SecondBox";
 import { useCookies } from "react-cookie";
 import { getCustomerName } from "@/utils/getCustomerName";
 import {
@@ -13,30 +11,26 @@ import {
   getSessionRecords,
 } from "@/features/customerDashboard/customerThunks";
 import { getDayPart } from "@/utils/getTodayDate";
-
+import SecondBox from "./ui/SecondBox";
+import FirstBox from "./ui/firstBox";
 
 const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   const [phoneNumber, setPhoneNumber] = useState();
   const [{ auth_token }] = useCookies(["auth_token"]);
   const [loading, setLoading] = useState(false);
-  const [operatorName , setOperatorName] = useState()
+  const [operatorName, setOperatorName] = useState();
 
   const router = useRouter();
-  const { userNames, customerList ,sessionRecords} = useSelector(
+  const { userNames, customerList, sessionRecords } = useSelector(
     (store) => store.customerDashboard
   );
 
-
-
-  
   useEffect(() => {
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
-    const storedOperatorName = localStorage.getItem("operatorName")
+    const storedOperatorName = localStorage.getItem("operatorName");
     setPhoneNumber(storedPhoneNumber);
-    if(storedOperatorName) setOperatorName(storedOperatorName);
-   
+    if (storedOperatorName) setOperatorName(storedOperatorName);
   }, []);
-
 
   useEffect(() => {
     if (auth_token) {
@@ -44,10 +38,7 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
       dispatch(getAsyncUserName({ token: auth_token }));
       dispatch(getSessionRecords({ phoneNumber, auth_token }));
     }
-  }, [dispatch, auth_token,phoneNumber]);
-
-
-
+  }, [dispatch, auth_token, phoneNumber]);
 
   // بررسی اینکه آیا شماره تلفن با لیست مشتریان مطابقت دارد
   const handleButtonClick = () => {
@@ -79,23 +70,19 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
 
   return (
     <>
-      <NavBar bgColor="#ffffff" />
+      <NavBar bgColor="#ffffff" py={6} />
       <Flex
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        pt={20}
-        pb={8}
+        pt={16}
         bgColor="#efefef"
         height="100vh"
       >
- 
-
-        
         <Flex w="45%" justifyContent="space-between" alignItems="center">
           <Flex
             flexDirection="column"
-            mb={3}
+            mb={1}
             width={{ base: "100%", md: "45%" }}
           >
             <Text color="gray.400" fontSize={{ base: "xs", sm: "sm" }}>
@@ -111,10 +98,10 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
             {getDayPart()} بخیر
           </Text>
         </Flex>
-        <Box mb={3} width={{ base: "100%", md: "45%" }}>
+        <Box width={{ base: "100%", md: "45%" }}>
           <FirstBox
-          operatorName={operatorName}
-          sessionRecords={sessionRecords}
+            operatorName={operatorName}
+            sessionRecords={sessionRecords}
             customerList={customerList}
             userNames={userNames}
             loading={loading}
@@ -122,7 +109,7 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
             checkPhoneNumberMatch={checkPhoneNumberMatch}
           />
         </Box>
-    
+
         <SecondBox reportsClick={reportsClick} accountClick={accountClick} />
       </Flex>
     </>

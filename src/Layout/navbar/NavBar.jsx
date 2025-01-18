@@ -8,7 +8,7 @@ import RightBar from "@/Components/landing/drawer";
 import { Logo } from "@/widget/Logo";
 import Link from "next/link";
 
-export default function NavBar({ bgColor }) {
+export default function NavBar({ bgColor, py }) {
   const router = useRouter();
   const [cookies] = useCookies(["auth_token"]);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,7 +51,7 @@ export default function NavBar({ bgColor }) {
       position="fixed"
       bg={bgColor}
       px={4}
-      py={isScrolled ? 6 : 9}
+      py={isScrolled ? 6 : py || 9}
       zIndex={5}
       transition="all 0.3s"
       h={isScrolled ? "8" : "16"}
