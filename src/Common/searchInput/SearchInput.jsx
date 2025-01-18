@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useState } from 'react';
 import {
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
-} from "@chakra-ui/react";
-import { Search2Icon, SmallCloseIcon } from "@chakra-ui/icons";
-const SearchInput = ({ placeholder, size, handlechange }) => {
+} from '@chakra-ui/react';
+import { Search2Icon, SmallCloseIcon } from '@chakra-ui/icons';
+
+const SearchComponent = ({
+  data = [],
+  filterKeys = [],
+  placeholder = 'Search...',
+  size = 'md',
+  onSearch,
+}) => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    if (onSearch) {
+      const filteredData = filterData(value);
+      onSearch(filteredData);
+    }
+  };
+
+  const filterData = (query) => {
+    if (!query) return data;
+    return data.filter((item) =>
+      filterKeys.some((key) =>
+        String(item[key]).toLowerCase().includes(query.toLowerCase())
+      )
+    );
+  };
+
   return (
-    <InputGroup sx={{ display: "flex", alignItems: "center" }}>
+    <InputGroup sx={{ display: 'flex', alignItems: 'center' }}>
       <InputRightElement
         pointerEvents="none"
         color="gray.500"
@@ -20,12 +47,13 @@ const SearchInput = ({ placeholder, size, handlechange }) => {
       </InputRightElement>
       <Input
         _focus={{
-          borderColor: "brand.400",
-          outline: "none",
-          boxShadow: "none",
-          zIndex: "unset",
+          borderColor: 'brand.400',
+          outline: 'none',
+          boxShadow: 'none',
+          zIndex: 'unset',
         }}
-        onChange={handlechange}
+        value={searchQuery}
+        onChange={handleChange}
         placeholder={placeholder}
         size={size}
       />
@@ -36,4 +64,4 @@ const SearchInput = ({ placeholder, size, handlechange }) => {
   );
 };
 
-export default SearchInput;
+export default SearchComponent;

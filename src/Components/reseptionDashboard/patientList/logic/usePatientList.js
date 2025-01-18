@@ -29,7 +29,10 @@ const usePatientList = () => {
 
   const handleChargeClick = async () => {
     const result = await dispatch(
-      addcharge({ username: selectedId, auth_Employee_token })
+      addcharge({
+        username: selectedId && selectedId.user,
+        auth_Employee_token,
+      })
     );
     if (result.meta.requestStatus === "fulfilled") {
       showToast({
