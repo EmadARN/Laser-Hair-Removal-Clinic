@@ -40,7 +40,7 @@ export default function SelectTime({
 
     // ذخیره‌سازی در localStorage
     localStorage.setItem("date", dateId.replace(/\//g, "-"));
-    localStorage.setItem("name", operatorName.replace(/ /g, "-"));
+    localStorage.setItem("operatorName", operatorName.replace(/ /g, "-"));
   };
 
   const handleShiftClick = (shift) => {

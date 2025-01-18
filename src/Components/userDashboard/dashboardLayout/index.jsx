@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import NavBar from "@/Layout/navbar/NavBar";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import {
   getSessionRecords,
 } from "@/features/customerDashboard/customerThunks";
 
+
 const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   const [username, setUsername] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState();
@@ -20,18 +21,29 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   const [{ auth_token }] = useCookies(["auth_token"]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { userNames, customerList } = useSelector(
+  const { userNames, customerList ,sessionRecords} = useSelector(
     (store) => store.customerDashboard
   );
 
-  useEffect(() => setPhoneNumber(localStorage.getItem("phoneNumber")), []);
-  useEffect(() => setUsername(localStorage.getItem("phoneNumber")), []);
+
+  
+  useEffect(() => {
+    const storedPhoneNumber = localStorage.getItem("phoneNumber");
+    setPhoneNumber(storedPhoneNumber);
+    setUsername(storedPhoneNumber);
+  }, []);
+
+
   useEffect(() => {
     if (auth_token) {
       dispatch(getCutomerList({ token: auth_token }));
       dispatch(getAsyncUserName({ token: auth_token }));
+      dispatch(getSessionRecords({ phoneNumber, auth_token }));
     }
-  }, [dispatch, auth_token]);
+  }, [dispatch, auth_token,phoneNumber]);
+
+
+
 
   const handleButtonClick = () => {
     setLoading(true);
@@ -57,6 +69,9 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
     dispatch(getSessionRecords({ phoneNumber, auth_token }));
   };
 
+  const getReserveStatus = (reserveType) =>
+    RESERVE_STATUSES[reserveType] || "اطلاعات موجود نیست";
+
   return (
     <>
       <NavBar bgColor="#ffffff" />
@@ -69,21 +84,17 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
         bgColor="#efefef"
         height="100vh"
       >
-        <Flex flexDirection="column" mb={3} width={{ base: "100%", md: "45%" }}>
-          <Text color="gray.400" fontSize={{ base: "xs", sm: "sm" }}>
-            خوش آمدید
-          </Text>
-          <Text pr={1} fontWeight="bold" color="gray.500">
-            {checkPhoneNumberMatch()
-              ? getCustomerName(userNames.username, customerList)
-              : ""}
-          </Text>
-        </Flex>
-        <FirstBox
-          loading={loading}
-          handleButtonClick={handleButtonClick}
-          checkPhoneNumberMatch={checkPhoneNumberMatch}
-        />
+        <Box mb={3} width={{ base: "100%", md: "45%" }}>
+          <FirstBox
+          sessionRecords={sessionRecords}
+            customerList={customerList}
+            userNames={userNames}
+            loading={loading}
+            handleButtonClick={handleButtonClick}
+            checkPhoneNumberMatch={checkPhoneNumberMatch}
+          />
+        </Box>
+
         <SecondBox sessionRecordClick={sessionRecordClick} />
       </Flex>
     </>
