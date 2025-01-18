@@ -19,14 +19,14 @@ const TitleUserDashboard = () => {
 
   const handleCancelReserve = () => {
     if (router.query.dashboardSlug === "dateTime") {
-      // dispatch(
-      //   cancelReserve({
-      //     reserve: reserveId,
-      //     cancel_type: "sc",
-      //     sms_status: "جلسه لیزر شما تغییر یافت",
-      //     tokenAuth,
-      //   })
-      // );
+      dispatch(
+        cancelReserve({
+          reserve: reserveId,
+          cancel_type: "sc",
+          sms_status: "جلسه لیزر شما تغییر یافت",
+          tokenAuth,
+        })
+      );
       console.log("JHello");
     }
   };

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import DashboardLayout from "./DashboardLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { getSessionRecords } from "@/features/customerDashboard/customerThunks";
 import { setSteperState } from "@/features/dashboardSteper/dashboardSlice";
 import SessionReports from "./turnsReport";
+import DashboardLayout from "./dashboardLayout";
 
 const Dashboard = () => {
   const { steperState } = useSelector((store) => store.dashboardSteper);

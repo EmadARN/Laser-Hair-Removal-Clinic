@@ -1,8 +1,8 @@
 import React from "react";
-import { Box, Grid, Text, Button, Flex } from "@chakra-ui/react";
-import Section_title from "@/Common/section-title";
+import { Box, Text, Button, Flex } from "@chakra-ui/react";
 import { FaNewspaper } from "react-icons/fa6";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import SectionTitle from "@/Common/sectionTitle";
 
 const NoRecords = ({ dispatch, setSteperState }) => {
   return (
@@ -31,7 +31,7 @@ const NoRecords = ({ dispatch, setSteperState }) => {
         p={3}
       >
         <Box textAlign={"right"}>
-          <Section_title section_title="گزارش جلسات"></Section_title>
+          <SectionTitle section_title="گزارش جلسات"></SectionTitle>
         </Box>
         <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
           <Box mt={2} mb={6}>

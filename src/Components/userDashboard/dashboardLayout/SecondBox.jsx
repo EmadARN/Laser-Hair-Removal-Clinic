@@ -18,7 +18,7 @@ const clearLocalStorage = () => {
 
   keysToRemove.forEach((key) => localStorage.removeItem(key));
 };
-const SessionRecordSection = ({ sessionRecordClick}) => {
+const SecondBox = ({ sessionRecordClick }) => {
   const [cookies, , removeCookie] = useCookies(["auth_token"]);
   const router = useRouter();
 
@@ -43,17 +43,16 @@ const SessionRecordSection = ({ sessionRecordClick}) => {
       }}
     >
       <Box
-      onClick={sessionRecordClick}
+        onClick={sessionRecordClick}
         sx={{
           w: "100%",
           display: "flex",
           justifyContent: "space-between",
         }}
         as="button"
-        
       >
-        <Box   mb={4}>
-          <Text  fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
+        <Box mb={4}>
+          <Text fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
         </Box>
         <Box>
           <IoIosArrowBack />
@@ -81,4 +80,4 @@ const SessionRecordSection = ({ sessionRecordClick}) => {
   );
 };
 
-export default SessionRecordSection;
+export default SecondBox;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
-import Section_title from "@/Common/section-title";
 import { dataForMap } from "@/constants";
+import SectionTitle from "@/Common/sectionTitle";
 
 const OutputInformation = ({ confrimInfoDetail, loading, error }) => {
   if (loading) {
@@ -44,7 +44,7 @@ const OutputInformation = ({ confrimInfoDetail, loading, error }) => {
         borderRadius="10px"
       >
         <Box pr={2} textAlign="right" w="100%">
-          <Section_title section_title="اطلاعات مرجع"></Section_title>
+          <SectionTitle section_title="اطلاعات مرجع"></SectionTitle>
         </Box>
         {dataForMap(confrimInfoDetailCustomer, customerInformation).map(
           (item) => (

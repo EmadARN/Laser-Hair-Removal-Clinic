@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { get_turn_data } from "@/constants";
-import SectionTitle from "@/Common/section-title";
 import TabButtons from "./TabButtons";
 import FadeInDiv from "./FadeInDiv";
 

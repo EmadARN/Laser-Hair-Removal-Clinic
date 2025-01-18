@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Grid, Box, Text, Button, useDisclosure } from "@chakra-ui/react";
-import Section_title from "@/Common/section-title";
 import { UserData } from "@/constants";
 import CancelTurnModal from "../cancelTurn/CancelTurnModal";
 import Session_Records from "../widgetForRecords/Session-Records";
 import SessionRecordSection from "../sessionRecordSection/SessionRecordSection";
+import SectionTitle from "@/Common/sectionTitle";
 const FinalReserve = () => {
   const [viewMore, setViewMore] = useState(false);
   const [steperState, setSteperState] = useState(0);
@@ -44,7 +44,7 @@ const FinalReserve = () => {
           p={4}
         >
           <Box>
-            <Section_title section_title="نوبت بعدی شما"></Section_title>
+            <SectionTitle section_title="نوبت بعدی شما"></SectionTitle>
           </Box>
 
           <Box

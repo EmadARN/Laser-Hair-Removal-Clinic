@@ -1,5 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
-const Section_title = ({ section_title, size }) => {
+import React from "react";
+
+const SectionTitle = ({ section_title, size }) => {
   return (
     <Box sx={{ display: "flex", mb: 6 }}>
       <Box
@@ -18,4 +20,4 @@ const Section_title = ({ section_title, size }) => {
   );
 };
 
-export default Section_title;
+export default SectionTitle;
