@@ -43,16 +43,32 @@ const SecondBox = ({ sessionRecordClick }) => {
       }}
     >
       <Box
+        as="button"
         onClick={sessionRecordClick}
         sx={{
           w: "100%",
           display: "flex",
           justifyContent: "space-between",
         }}
-        as="button"
       >
         <Box mb={4}>
           <Text fontSize={{ base: "xs", md: "sm" }}>گزارش جلسات</Text>
+        </Box>
+        <Box>
+          <IoIosArrowBack />
+        </Box>
+      </Box>
+      <Box
+        as="button"
+        onClick={sessionRecordClick}
+        sx={{
+          w: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Box mb={4}>
+          <Text fontSize={{ base: "xs", md: "sm" }}>حساب کاربری</Text>
         </Box>
         <Box>
           <IoIosArrowBack />

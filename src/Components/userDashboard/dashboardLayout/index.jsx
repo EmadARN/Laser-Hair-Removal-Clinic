@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Flex, Text } from "@chakra-ui/react";
 import NavBar from "@/Layout/navbar/NavBar";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import FirstBox from "./FirstBox";
 import SecondBox from "./SecondBox";
 import { useCookies } from "react-cookie";
@@ -10,19 +10,21 @@ import { getCustomerName } from "@/utils/getCustomerName";
 import {
   getAsyncUserName,
   getCutomerList,
+  getSessionRecords,
 } from "@/features/customerDashboard/customerThunks";
 
-const DashboardLayout = ({ sessionRecordClick }) => {
+const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   const [username, setUsername] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState();
+
   const [{ auth_token }] = useCookies(["auth_token"]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  const dispatch = useDispatch();
   const { userNames, customerList } = useSelector(
     (store) => store.customerDashboard
   );
 
+  useEffect(() => setPhoneNumber(localStorage.getItem("phoneNumber")), []);
   useEffect(() => setUsername(localStorage.getItem("phoneNumber")), []);
   useEffect(() => {
     if (auth_token) {
@@ -50,6 +52,11 @@ const DashboardLayout = ({ sessionRecordClick }) => {
     customerList?.customer_list?.some(
       (customer) => customer.username === username && customer.name !== "user"
     );
+  const sessionRecordClick = () => {
+    dispatch(setSteperState(steperState + 1));
+    dispatch(getSessionRecords({ phoneNumber, auth_token }));
+  };
+
   return (
     <>
       <NavBar bgColor="#ffffff" />
