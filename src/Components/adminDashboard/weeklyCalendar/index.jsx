@@ -28,7 +28,10 @@ const WeeklyCalendar = () => {
   const dispatch = useDispatch();
   const { operators, operatorsDate, dateRanges, dataRangeStatus, settingInfo } =
     useSelector((state) => state.adminDashboard);
-  console.log("dateRanges", dateRanges);
+
+
+    
+
 
   const {
     year: date_year,
@@ -126,12 +129,13 @@ const WeeklyCalendar = () => {
 
   // دانلود جدول به صورت PDF از طریق چاپ مرورگر
   const downloadPDF = () => {
-    // باز کردن پنجره چاپ مرورگر
-    if (window.print) {
+    const printableElement = document.getElementById("printable-table");
+
+    if (printableElement) {
       window.print();
       toast({
-        title: "برنامه ثبت شد!",
-        description: "برنامه با موفقیت ثبت شد و فایل PDF دانلود می‌شود.",
+        title: "پرینت موفق!",
+        description: "جدول با موفقیت آماده پرینت شد.",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -139,9 +143,9 @@ const WeeklyCalendar = () => {
       });
     } else {
       toast({
-        title: "برنامه ثبت نشد!",
-        description: "مرورگر شما از قابلیت چاپ پشتیبانی نمیکند",
-        status: "success",
+        title: "خطا در پرینت!",
+        description: "جدول پیدا نشد.",
+        status: "error",
         duration: 5000,
         isClosable: true,
         position: "top-right",
@@ -158,7 +162,7 @@ const WeeklyCalendar = () => {
       })
     );
 
-    // بعد از ارسال برنامه، چاپ را فعال کنید
+  
     downloadPDF();
   };
 
@@ -194,6 +198,8 @@ const WeeklyCalendar = () => {
       <Box width={{ base: "120vw", sm: "100vw", md: "100%" }}>
         {/* Table */}
         <Box
+        width="100%"
+      
           overflowX="auto"
           borderWidth="1px"
           borderRadius="md"

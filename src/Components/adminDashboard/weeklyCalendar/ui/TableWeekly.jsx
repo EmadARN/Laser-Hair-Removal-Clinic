@@ -33,32 +33,12 @@ const TableWeekly = ({ handleCellClick, tableData = [], programList = [] }) => {
 
   return (
     <Box
-      className="table-wrapper"
+        id="printable-table"
+      className="printable"
       padding={4}
       width="100%"
       overflowX="auto"
-      css={{
-        "@media print": {
-          ".chakra-table": {
-            width: "100% !important",
-            border: "1px solid black",
-            borderCollapse: "collapse",
-          },
-          ".chakra-th, .chakra-td": {
-            border: "1px solid black",
-            padding: "8px",
-            textAlign: "center",
-            whiteSpace: "nowrap",
-          },
-          ".chakra-th": {
-            backgroundColor: "#4A90E2",
-            color: "white",
-          },
-          ".no-print": {
-            display: "none !important",
-          },
-        },
-      }}
+      
     >
       <Table variant="simple" size="md">
         <Thead bg="brand.400">
