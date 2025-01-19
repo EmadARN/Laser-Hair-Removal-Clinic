@@ -29,8 +29,10 @@ const CustomButton = forwardRef(
     return (
       <Button
         ref={ref}
-        bg="brand.400"
+        bg={props.bg || "brand.400"}
         color="#fff"
+        mt={props.mt}
+        boxShadow={props.boxShadow}
         _hover={{ bg: "purple.100", color: "#fff" }}
         borderRadius="md"
         isDisabled={isDisabled}

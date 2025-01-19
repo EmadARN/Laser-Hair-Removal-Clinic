@@ -1,16 +1,16 @@
 import React from "react";
 import { Bars3Icon, XCircleIcon } from "@heroicons/react/24/outline";
-const {
+import {
+  Box,
   Drawer,
-  DrawerOverlay,
-  DrawerContent,
   DrawerBody,
-  useDisclosure,
+  DrawerContent,
+  DrawerOverlay,
   Icon,
-} = require("@chakra-ui/react");
-import { Box, IconButton } from "@chakra-ui/react";
+  IconButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 import Link from "next/link";
-import { iconButton, seccondIcon } from "./Style";
 import BodyContent from "./BodyContent";
 import CustomButton from "@/Common/customeButton/CustomeButton";
 
@@ -22,7 +22,13 @@ const RightBar = () => {
     <>
       <IconButton
         ref={btnRef}
-        sx={iconButton}
+        sx={{
+          bgColor: "#ffffff",
+          mr: -1,
+          "&:hover": {
+            bgColor: "#ffffff",
+          },
+        }}
         size={"xs"}
         icon={<Bars3Icon />}
         aria-label={"Open Menu"}
@@ -36,13 +42,22 @@ const RightBar = () => {
       >
         <DrawerOverlay />
         <DrawerContent transition={".05s ease"}>
-          <Icon sx={seccondIcon} onClick={onClose}>
+          <Icon
+            sx={{
+              color: "gray.500",
+              fontSize: "30px",
+              cursor: "pointer",
+              mt: 4,
+              mr: 4,
+            }}
+            onClick={onClose}
+          >
             <XCircleIcon />
           </Icon>
           <DrawerBody>
             <BodyContent />
             <Box display="flex" justifyContent="start" mt={10}>
-              <Link href={"/UserDashboard"}>
+              <Link href={"/userDashboard"}>
                 <CustomButton px={4} onClick={onClose}>
                   دریافت نوبت
                 </CustomButton>
