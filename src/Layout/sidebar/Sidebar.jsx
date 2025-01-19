@@ -15,9 +15,9 @@ import Bottom from "./widgets/Bottom";
 import { MdExitToApp } from "react-icons/md";
 import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
-import styles from "./Style";
 import { Logo } from "@/widget/Logo";
 import CustomModal from "@/Common/attentionModal/CustomModal";
+import styles from "../Style";
 
 const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -42,7 +42,7 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
     setIsModalOpen(false); // بستن مدال بدون انجام هیچ کاری
   };
   const logoutRout = router.pathname.startsWith("/adminDashboard");
-  
+
   return (
     <Box sx={styles.container}>
       <Sidebar collapsed={isCollapsed} width={isSmallScreen ? "110%" : "250px"}>

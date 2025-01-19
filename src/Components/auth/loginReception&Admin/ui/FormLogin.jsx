@@ -1,5 +1,6 @@
+import CustomButton from "@/Common/customeButton/CustomeButton";
 import Loading from "@/Common/loading";
-import { Box, Button, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
 import React from "react";
 
 const style = {
@@ -68,12 +69,13 @@ const FormLogin = ({
         />
       </Box>
       <Flex justifyContent={"center"} alignItems={"center"} mt={4}>
-        <Button
-          sx={{ w: "30%", h: { base: "30px", md: "40px" } }}
+        <CustomButton
           type="submit"
+          bg="#fff"
+          color="#555"
         >
-          {loading ? <Loading w="6px" h="6px" /> : "تایید"}
-        </Button>
+          {loading ? <Loading noneHeight="0vh" h="8px" w="8px" /> : "تایید"}
+        </CustomButton>
       </Flex>
     </form>
   );

@@ -1,12 +1,13 @@
-import { Box, Flex, Avatar, Button, Menu, MenuButton } from "@chakra-ui/react";
+import { Box, Flex, Menu } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import NavLink from "./NavLink";
 import { FaUser } from "react-icons/fa";
-import RightBar from "@/Components/landing/drawer";
 import { Logo } from "@/widget/Logo";
 import Link from "next/link";
+import CustomButton from "@/Common/customeButton/CustomeButton";
+import RightBar from "../drawer";
 
 export default function NavBar({ bgColor, py }) {
   const router = useRouter();
@@ -91,17 +92,7 @@ export default function NavBar({ bgColor, py }) {
                 (cookies.auth_token ? (
                   <FaUser size={20} color="gray" />
                 ) : (
-                  <Button
-                    color="white"
-                    bgColor="brand.400"
-                    _hover={{ bg: "purple.500" }}
-                    w={["100%", "auto"]} // دکمه در صفحه‌های کوچک 100% عرض خواهد داشت
-                    fontSize={["sm"]} // اندازه فونت در صفحه‌های کوچک "sm" و در صفحه‌های بزرگتر "md"
-                    px={4} // فاصله افقی داخلی دکمه
-                    py={3} // فاصله عمودی داخلی دکمه
-                  >
-                    الان رزرو نوبت
-                  </Button>
+                  <CustomButton>الان رزرو نوبت</CustomButton>
                 ))}
             </Link>
           </Menu>
