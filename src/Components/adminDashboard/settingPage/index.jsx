@@ -21,10 +21,6 @@ const Setting = () => {
     auth_Admin_token,
   } = useSettingLogic(showToast);
 
-  function formatNumber(number) {
-    return number.toLocaleString();
-  }
-
   return (
     <>
       <Box sx={{ py: 6 }}>تنظیمات</Box>

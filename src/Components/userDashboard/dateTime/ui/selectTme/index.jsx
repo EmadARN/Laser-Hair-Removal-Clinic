@@ -4,7 +4,6 @@ import DateSelection from "./DateSelection";
 import { ShiftSelection } from "./ShiftButton";
 import TimeSlots from "./TimeSlots";
 
-
 export default function SelectTime({
   timeList,
   selectedDateId,
@@ -23,7 +22,6 @@ export default function SelectTime({
   useEffect(() => {
     // بارگذاری مقادیر از localStorage در زمان راه‌اندازی کامپوننت
     const storedDate = localStorage.getItem("date");
-    const storedName = localStorage.getItem("name");
     const storedSlots = localStorage.getItem("slots");
 
     if (storedDate) {

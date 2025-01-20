@@ -10,9 +10,9 @@ import {
   getCutomerList,
   getSessionRecords,
 } from "@/features/customerDashboard/customerThunks";
-import { getDayPart } from "@/utils/getTodayDate";
 import SecondBox from "./ui/SecondBox";
 import FirstBox from "./ui/firstBox";
+import { getDayPart } from "@/utils/extractDate";
 
 const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   const [phoneNumber, setPhoneNumber] = useState();

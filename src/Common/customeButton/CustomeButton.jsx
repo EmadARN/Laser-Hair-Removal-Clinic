@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { baseTheme, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { forwardRef } from "react";
 
@@ -11,6 +11,7 @@ const CustomButton = forwardRef(
       display,
       justifyContent,
       w,
+      h,
       slug,
       ...props
     },
@@ -45,6 +46,8 @@ const CustomButton = forwardRef(
           display,
           justifyContent,
           w,
+          h: h || "40px",
+          fontSize: { base: "12px", md: "16px" },
         }}
         {...props}
         onClick={handleNextStep}

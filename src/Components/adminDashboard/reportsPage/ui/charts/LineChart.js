@@ -11,7 +11,6 @@ import {
   Legend,
 } from "chart.js";
 import { persianMonths } from "@/constants";
-import { getTodayDateYear } from "@/utils/getTodayDate";
 
 // ثبت کامپوننت‌ها در Chart.js
 ChartJS.register(

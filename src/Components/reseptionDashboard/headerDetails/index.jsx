@@ -1,8 +1,8 @@
 import React from "react";
 import { Flex, Text, Grid, GridItem, Box } from "@chakra-ui/react";
 import SearchInput from "@/Common/searchInput/SearchInput";
-import { getTodayDate } from "@/utils/getTodayDate";
 import PatientWithoutTime from "../AddPatientWithoutTime";
+import { getTodayDate } from "@/utils/extractDate";
 
 const HeaderDetails = () => {
   return (

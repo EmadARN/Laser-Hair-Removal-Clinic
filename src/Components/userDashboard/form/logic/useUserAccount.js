@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import {
   EditCustomerInformation,
@@ -29,6 +29,7 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
   const [drugHistory, setDrugHistory] = useState("false");
   const [diseaseHistory, setDiseaseHistory] = useState("false");
   const [filteredForms, setFilteredForms] = useState([]);
+  const [hasChanges, setHasChanges] = useState(false); // State جدید برای ردیابی تغییرات
 
   useEffect(() => {
     dispatch(getCutomerList({ token: auth_token }));
@@ -86,6 +87,7 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputsData((prev) => ({ ...prev, [name]: value }));
+    setHasChanges(true); // تغییرات رخ داده است
   };
 
   // تابع برای تغییر مقادیر رادیو باتن‌ها (تاریخچه دارو و بیماری)
@@ -93,6 +95,7 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
     setInputsData((prev) => ({ ...prev, [name]: value === "true" }));
     if (name === "drug_hist") setDrugHistory(value);
     if (name === "decease_hist") setDiseaseHistory(value);
+    setHasChanges(true); // تغییرات رخ داده است
   };
 
   // تابع ارسال اطلاعات فرم به سرور
@@ -108,6 +111,7 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
           : "خطا در ویرایش اطلاعات",
       status: result.meta.requestStatus === "fulfilled" ? "success" : "error",
     });
+    setHasChanges(false); // تغییرات اعمال شد، دکمه را غیرفعال کنید
   };
 
   // برگشت مقادیر مورد نیاز برای استفاده در کامپوننت
@@ -122,6 +126,7 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
     submitHandler,
     loading,
     setSteperState,
+    hasChanges, // اضافه کردن hasChanges به مقادیر برگشتی
   };
 };
 

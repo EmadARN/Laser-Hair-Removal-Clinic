@@ -1,40 +1,85 @@
 import React from "react";
 import { Box, Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import SectionTitle from "@/Common/sectionTitle";
-import CancelTurnModal from "@/Components/userDashboard/cancelTurn/CancelTurnModal";
 import { UserData } from "@/constants";
 import { getReserveStatus } from "@/Components/userDashboard/utils/ReserveStatus";
 import { extractDate, extractTime } from "@/utils/extractDate";
+import CustomModal from "@/Common/attentionModal/CustomModal";
+import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { cancelReserve } from "@/features/customerDashboard/customerThunks";
+import { useCustomToast } from "@/utils/useCustomToast ";
+import { useRouter } from "next/router";
+import { toPersianDigits } from "@/utils/toPersianDigits";
+import { formatNumber } from "@/utils/formatNumber";
 
 const formatReserveData = (item, sessionRecords, operatorName) => {
   switch (item.title) {
     case "تاریخ":
-      return extractDate(sessionRecords?.last_reserve?.reserve_time_str);
+      return toPersianDigits(
+        extractDate(sessionRecords?.last_reserve?.reserve_time_str)
+      );
     case "زمان":
-      return extractTime(sessionRecords?.last_reserve?.reserve_time_str);
+      return toPersianDigits(
+        extractTime(sessionRecords?.last_reserve?.reserve_time_str)
+      );
     case "اپراتور":
       return operatorName;
+    case "نام ناحیه":
+      return sessionRecords?.last_reserve?.laser_area_name;
     case "مبلغ کل":
-      return sessionRecords?.last_reserve?.total_price_amount;
+      return `${toPersianDigits(
+        formatNumber(sessionRecords?.last_reserve?.total_price_amount)
+      )} تومان`;
     default:
       return "";
   }
 };
 
-const ReserveInfoRow = ({ title, value }) => (
+const ReserveInfoRow = ({ title, value, color }) => (
   <Flex justifyContent="space-between" p={2} w="100%">
     <Text color="#999" fontSize={{ base: "13px", md: "14px" }}>
       {title}
     </Text>
-    <Text fontWeight="bold" fontSize={{ base: "13px", md: "14px" }}>
+    <Text
+      fontWeight="bold"
+      fontSize={{ base: "13px", md: "14px" }}
+      color={color}
+    >
       {value}
     </Text>
   </Flex>
 );
 
-const ExistUser = ({ sessionRecords, operatorName }) => {
+const ExistUser = ({ sessionRecords, operatorName, loading }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [cookies] = useCookies(["auth_token"]);
+  const { showToast } = useCustomToast();
+  const router = useRouter();
+  const tokenAuth = cookies.auth_token;
+  const dispatch = useDispatch();
 
+  const handleConfirmCancel = async () => {
+    const result = await dispatch(
+      cancelReserve({
+        reserve: sessionRecords.last_reserve.id,
+        cancel_type: "sc",
+        sms_status: "جلسه لیزر شما لغو شد",
+        tokenAuth,
+      })
+    );
+
+    if (result.meta.requestStatus === "fulfilled") {
+      showToast({ title: "لغو با موفقیت انجام شد", status: "success" });
+      router.reload();
+      onClose();
+    } else {
+      showToast({
+        title: " خطای ناشناخته ای رخ داده است   ",
+        status: "error",
+      });
+    }
+  };
   return (
     <Flex
       borderRadius="10px"
@@ -54,6 +99,11 @@ const ExistUser = ({ sessionRecords, operatorName }) => {
         <ReserveInfoRow
           title="وضعیت"
           value={getReserveStatus(sessionRecords?.last_reserve?.reserve_type)}
+          color={
+            sessionRecords?.last_reserve?.reserve_type === "sc"
+              ? "red"
+              : "green"
+          }
         />
         {UserData.map((item) => (
           <ReserveInfoRow
@@ -75,7 +125,17 @@ const ExistUser = ({ sessionRecords, operatorName }) => {
         </Box>
       </Box>
       {isOpen && (
-        <CancelTurnModal onOpen={onOpen} onClose={onClose} isOpen={isOpen} />
+        <CustomModal
+          isOpen={isOpen}
+          onClose={onClose}
+          title="لغو نوبت"
+          description="آیا از لغو این نوبت مطمئن هستید؟"
+          confirmText="لغو"
+          cancelText="بازگشت"
+          onConfirm={handleConfirmCancel}
+          onCancel={onClose}
+          loading={loading}
+        />
       )}
     </Flex>
   );

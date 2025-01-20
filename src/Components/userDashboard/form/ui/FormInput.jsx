@@ -3,14 +3,13 @@ import RadioControl from "@/Common/formController/RadioControl";
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 
-const RegisterForm = ({
+const FormInput = ({
   handleChange,
   handleRadioChange,
   drugHistory,
   diseaseHistory,
   inputsData,
 }) => {
-
   return (
     <Box
       width={{ base: "90%", md: "60%", lg: "40%" }}
@@ -77,4 +76,4 @@ const RegisterForm = ({
   );
 };
 
-export default RegisterForm;
+export default FormInput;

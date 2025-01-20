@@ -9,6 +9,7 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
+import Loading from "../loading";
 
 const CustomModal = ({
   isOpen,
@@ -19,6 +20,7 @@ const CustomModal = ({
   cancelText,
   onConfirm,
   onCancel,
+  loading,
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -33,7 +35,7 @@ const CustomModal = ({
             {cancelText || "بازگشت"}
           </Button>
           <Button onClick={onConfirm} colorScheme="red">
-            {confirmText || "تایید"}
+            {loading ? <Loading /> : confirmText || "تایید"}
           </Button>
         </ModalFooter>
       </ModalContent>

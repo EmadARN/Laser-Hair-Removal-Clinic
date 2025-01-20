@@ -20,16 +20,14 @@ import Empolyees from "@/Components/adminDashboard/employees";
 import AreaLazer from "@/Components/adminDashboard/areaLazer";
 import Clients from "@/Components/adminDashboard/clientsPage/Clients";
 import Reports from "@/Components/adminDashboard/reportsPage";
-import Setting from "@/Components/adminDashboard/settingPage";
 import DailyShift from "@/Components/reseptionDashboard/DailyShift";
 import ResClients from "@/Components/reseptionDashboard/ResClients";
 import ChoosingArea from "@/Components/userDashboard/areasChoice";
 import DateTime from "@/Components/userDashboard/dateTime";
 import ConfirmInfo from "@/Components/userDashboard/informationConfirm";
-import ChoosingPayAmount from "@/Components/userDashboard/choosingPayAmount";
 import ReservationDone from "@/Components/userDashboard/reservationDone";
-import Unsucces_Transaction from "@/Components/userDashboard/unsuccessfull-transaction";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import Setting from "@/Components/adminDashboard/settingPage";
 import UserInformation from "@/Components/userDashboard/form/registerForm";
 
 //َaboutUs
@@ -428,11 +426,12 @@ export const items = [
   { text: "قابل انتخاب", color: "gray.400" }, // طوسی
   { text: "در انتظار پرداخت سایر مراجعین", color: "gray.400" }, // طوسی
 ];
-export const UserData =  [
-  { id: 1, title: "تاریخ", },
-  { id: 2, title: "زمان", },
+export const UserData = [
+  { id: 1, title: "تاریخ" },
+  { id: 2, title: "زمان" },
   { id: 3, title: "اپراتور" },
-  { id: 3, title: "مبلغ کل",  },
+  { id: 4, title: "نام ناحیه" },
+  { id: 5, title: "مبلغ کل" },
   // { id: 3, title: "مبلغ پرداخت شده", value: "50.000تومان " },
   // { id: 3, title: "مبلغ قابل پرداخت", value: "200.000تومان " },
 ];

@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
+import { formatNumber } from "@/utils/formatNumber";
 const SessionSummeryBox = ({ icon, title, number }) => {
   return (
     <Box
@@ -20,7 +21,7 @@ const SessionSummeryBox = ({ icon, title, number }) => {
       </Box>
 
       <Box>
-        <Text color="blue">{number}</Text>
+        <Text color="blue">{formatNumber(number)}</Text>
       </Box>
     </Box>
   );

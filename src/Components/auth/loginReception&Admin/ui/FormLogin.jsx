@@ -73,6 +73,9 @@ const FormLogin = ({
           type="submit"
           bg="#fff"
           color="#555"
+          w={{ base: "40%", md: "30%" }}
+          h={{ base: "25px", md: "40px" }}
+          textAlign="center"
         >
           {loading ? <Loading noneHeight="0vh" h="8px" w="8px" /> : "تایید"}
         </CustomButton>

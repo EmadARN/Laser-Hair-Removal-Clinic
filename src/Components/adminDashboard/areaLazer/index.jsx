@@ -12,6 +12,7 @@ import {
 } from "./ui/attentionDetailsModal";
 import AreaLazerForm from "./ui/AreaLazerForm";
 import useAreaLazer from "./logic/useAreaLazer";
+import { formatNumber } from "@/utils/formatNumber";
 
 const AreaLazer = () => {
   const { loading, error, AreaLaser, token } = useAreaLazer();
@@ -56,7 +57,7 @@ const AreaLazer = () => {
                   leftArrowDisplay="none"
                   key={index}
                   firstArea={item.label}
-                  secondArea={item.price}
+                  secondArea={formatNumber(item.price)}
                   thirdArea={item.operate_time}
                   display="none"
                   ModalBodyContent={{

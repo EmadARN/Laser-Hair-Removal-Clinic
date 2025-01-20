@@ -8,8 +8,8 @@ import { useRouter } from "next/router";
 import CustomButton from "@/Common/customeButton/CustomeButton";
 import Loading from "@/Common/loading";
 import { Flex } from "@chakra-ui/react";
-import RegisterForm from "./ui/RegisterForm";
 import TitleUserDashboard from "../shared/TitleUserDashboard";
+import FormInput from "./ui/FormInput";
 
 const UserInformation = ({ slug }) => {
   const { showToast } = useCustomToast();
@@ -94,7 +94,7 @@ const UserInformation = ({ slug }) => {
     <>
       <StepperPrototype currentStep={1} />
       <TitleUserDashboard />
-      <RegisterForm
+      <FormInput
         handleChange={handleChange}
         handleRadioChange={handleRadioChange}
         drugHistory={drugHistory}

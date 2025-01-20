@@ -6,6 +6,7 @@ import {
   settingAsyncChanging,
   changePassword,
 } from "@/features/adminDashboard/adminThunks";
+import { removeCommas } from "@/utils/formatNumber";
 
 const useSettingLogic = () => {
   const [turnSetting, setTurnSetting] = useState({
@@ -28,13 +29,11 @@ const useSettingLogic = () => {
     }
   }, [dispatch, auth_Admin_token]);
 
-  const formatNumber = (number) => {
-    return Number(number).toLocaleString();
-  };
   const handleInputs = (e) => {
     const { name, value } = e.target;
-    setTurnSetting((prev) => ({ ...prev, [name]: value }));
-    
+    const rawValue = removeCommas(value); // مقدار اصلی بدون ویرگول
+    // setTurnSetting((prev) => ({ ...prev, [name]: value }));
+    setTurnSetting((prev) => ({ ...prev, [name]: rawValue })); 
   };
 
   const handleInputChange = (e) => {

@@ -21,7 +21,7 @@ const OperatorModal = ({
   selectedCell,
   handleDeleteOperator, // اضافه کردن تابع حذف از والد
 }) => {
-  const router=useRouter()
+  const router = useRouter();
   // بررسی اینکه سلول انتخاب‌شده اپراتور دارد یا خیر
   const checkOperatorInCell = () => {
     if (selectedCell && programList[selectedCell.index]) {
@@ -66,7 +66,7 @@ const OperatorModal = ({
             )}
 
             {/* دکمه‌های اضافی */}
-            <Flex justifyContent="space-between" width="100%" mt={4}>
+            <Flex justifyContent="space-between" width="100%" mt={4} gap={2}>
               {deleteBtn} {/* نمایش دکمه حذف فقط در صورت وجود اپراتور */}
               <Button
                 onClick={() => router.push("/adminDashboard/employee")}

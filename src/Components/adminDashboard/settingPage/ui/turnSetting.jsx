@@ -9,8 +9,9 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import CustomButton from "@/Common/customeButton/CustomeButton";
+import { formatNumber } from "@/utils/formatNumber";
 
-const TurnSetting = ({ handleInputs, submitHandler }) => {
+const TurnSetting = ({ handleInputs, submitHandler,turnSetting }) => {
   return (
     <form onSubmit={submitHandler}>
       <Box
@@ -71,6 +72,7 @@ const TurnSetting = ({ handleInputs, submitHandler }) => {
                 sx={{ borderColor: "#777" }}
                 onChange={handleInputs}
                 name="trust_price"
+                value={formatNumber(turnSetting.trust_price)}
               />
             </FormControl>
           </Box>

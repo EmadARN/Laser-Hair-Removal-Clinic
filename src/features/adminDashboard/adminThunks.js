@@ -82,8 +82,6 @@ export const deleteAsyncUser = createAsyncThunk(
       );
       return { id: payload.id };
     } catch (error) {
-      console.log("delte Err", error);
-
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -100,7 +98,6 @@ export const getLazerAreas = createAsyncThunk(
       });
       return data;
     } catch (error) {
-      console.log("get lazer area error", error);
       return rejectWithValue(error.message);
     }
   }
@@ -132,7 +129,6 @@ export const editLazerArea = createAsyncThunk(
           Authorization: `Bearer ${payload.token}`,
         },
       });
-      console.log("data", data);
 
       return data;
     } catch (error) {
@@ -150,12 +146,9 @@ export const settingAsyncChanging = createAsyncThunk(
           Authorization: `Bearer ${payload.token}`,
         },
       });
-      console.log("data::", data);
 
       return data;
     } catch (error) {
-      console.log("error::", error);
-
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -170,10 +163,8 @@ export const getSettingInformation = createAsyncThunk(
           Authorization: `Bearer ${payload.token}`,
         },
       });
-      console.log("setting", data);
       return data;
     } catch (error) {
-      console.log("setting error", error);
       return rejectWithValue(error.message);
     }
   }
@@ -224,12 +215,9 @@ export const getAsyncListDateOperator = createAsyncThunk(
           },
         }
       );
-      console.log("recive ListDateOperator:", payload);
 
       return data;
     } catch (error) {
-      console.log("Error recive ListDateOperator:", payload);
-
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -249,9 +237,7 @@ export const operatorProgramList = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log("payload error", payload);
-
-      console.log("Error operatorProgramList", error);
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
@@ -291,8 +277,6 @@ export const changePassword = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log(error);
-
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -309,7 +293,7 @@ export const getCutomerList = createAsyncThunk(
       });
       return data;
     } catch (error) {
-      console.log("customer list error", error);
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
@@ -330,11 +314,10 @@ export const getDate = createAsyncThunk(
           },
         }
       );
-      console.log("daaaaa", data);
 
       return data;
     } catch (error) {
-      console.log("error", error);
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );

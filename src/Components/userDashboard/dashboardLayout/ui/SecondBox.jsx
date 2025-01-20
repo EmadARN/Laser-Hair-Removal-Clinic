@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Text, Button, Divider } from "@chakra-ui/react";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
+import Loading from "@/Common/loading";
 
 // تابع کمکی برای حذف مقادیر از localStorage
 const clearLocalStorage = () => {
@@ -15,7 +16,6 @@ const clearLocalStorage = () => {
     "slots",
     "timeList",
   ];
-
   keysToRemove.forEach((key) => localStorage.removeItem(key));
 };
 
@@ -37,12 +37,40 @@ const MenuItem = ({ onClick, children }) => (
 const SecondBox = ({ reportsClick, accountClick }) => {
   const [, , removeCookie] = useCookies(["auth_token"]);
   const router = useRouter();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  const handleLogout = () => {
-    removeCookie("auth_token");
-    clearLocalStorage();
-    router.push("/");
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      removeCookie("auth_token", { path: "/" });
+      clearLocalStorage();
+      router.push("/");
+    } catch (error) {
+      console.error("خطا در خروج:", error);
+    } finally {
+      setIsLoggingOut(false);
+    }
   };
+
+  if (isLoggingOut) {
+    return (
+      <Box
+        position="fixed"
+        top={0}
+        left={0}
+        width="100vw"
+        height="100vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        bg="rgba(255, 255, 255, 0.8)"
+        zIndex={9999}
+      >
+        <Loading />
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -50,7 +78,7 @@ const SecondBox = ({ reportsClick, accountClick }) => {
       mt={4}
       w={{ base: "100%", md: "45%" }}
       borderRadius="10px"
-      p={4}
+      px={4}
       display="flex"
       flexDirection="column"
     >
@@ -65,7 +93,7 @@ const SecondBox = ({ reportsClick, accountClick }) => {
         justifyContent="flex-start"
         variant="ghost"
         fontSize={{ base: "xs", md: "sm" }}
-        color="red"
+        colorScheme="red"
         p={0}
         leftIcon={<IoExitOutline size="18px" />}
         onClick={handleLogout}

@@ -7,11 +7,14 @@ import React from "react";
 const NewUser = ({ loading, handleButtonClick }) => {
   return (
     <Box
-      mb={6}
+      mt={1}
       display="flex"
       flexDirection="column"
       alignItems="center"
       gap={4}
+      bg="#fff"
+      p={4}
+      rounded="lg"
     >
       <Image
         src="/images/download.png"

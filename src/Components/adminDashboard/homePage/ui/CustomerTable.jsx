@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import { getCustomerName } from "@/utils/getCustomerName";
+import { formatNumber } from "@/utils/formatNumber";
 
 const CustomerTable = ({ dateReserve, customerListAdmin }) => {
   return (
@@ -61,7 +62,7 @@ const CustomerTable = ({ dateReserve, customerListAdmin }) => {
                 fontSize={{ base: "10px", md: "16px" }}
                 textAlign="center"
               >
-                {item.total_price_amount}
+                {formatNumber(item.total_price_amount)}
                 {/* فرض می‌کنیم که قیمت در اینجا موجود است */}
               </Td>
 

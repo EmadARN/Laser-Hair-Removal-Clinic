@@ -1,6 +1,6 @@
-import { groupByWeekdays } from "@/utils/getDayOFWeeks";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
+import { groupByWeekdays } from "../../logic/getDayOFWeeks";
 
 const DateSelection = ({
   timeList,
@@ -8,6 +8,7 @@ const DateSelection = ({
   onClickDate,
   numberOfSlots,
 }) => {
+
   return (
     <Flex
       overflowX="auto"

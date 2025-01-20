@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Flex, Box, Text, useDisclosure, Button } from "@chakra-ui/react";
+import { Flex, Box, useDisclosure, Button } from "@chakra-ui/react";
 import NavBar from "@/Layout/navbar/NavBar";
 import { extractDate, extractTime } from "@/utils/extractDate";
 import NoRecords from "./ui/NoRecords";
