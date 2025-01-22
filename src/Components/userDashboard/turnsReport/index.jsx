@@ -17,15 +17,21 @@ const SessionReports = ({ dispatch, setSteperState }) => {
   const { sessionRecords, loading, error } = useSelector(
     (store) => store.customerDashboard
   );
+  const reserveList = sessionRecords?.reserve_list;
+  const ComparePayeds = reserveList
+    .filter((p) => p.payed === true)
+    .map((p) => p.id);
 
-  const handleSessionClick = (session) => {
+  //[false, true, true]
+  const handleSessionClick = (session, isPaid) => {
     setSelectedSession({
       details: {
-        reserveStatus: getReserveStatus(session.reserve_type),
+        reserveStatus: getReserveStatus(isPaid ? "co" : session.reserve_type),
         sessionDate: extractDate(session.reserve_time_str),
         sessionTime: extractTime(session.reserve_time_str),
         laserArea: session.laser_area_name,
         totalPrice: session.total_price_amount,
+        paid: isPaid,
       },
     });
     onOpen();
@@ -76,8 +82,9 @@ const SessionReports = ({ dispatch, setSteperState }) => {
         >
           <SectionTitle section_title="گزارش جلسات" />
           <SessionList
-            sessions={sessionRecords.reserve_list}
+            sessions={reserveList}
             onSessionClick={handleSessionClick}
+            ComparePayeds={ComparePayeds}
           />
         </Box>
       </Flex>

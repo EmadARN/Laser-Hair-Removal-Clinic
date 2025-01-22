@@ -20,12 +20,12 @@ const SessionDetailsModal = ({ isOpen, onClose, sessionDetails }) => {
   };
 
   const isCancelled = sessionDetails?.reserveStatus === "کنسل شده";
-
+  const isPaid = sessionDetails?.paid;
   const sessionInfo = [
     {
       label: "وضعیت",
       value: sessionDetails?.reserveStatus,
-      color: isCancelled ? "red.500" : "green.500",
+      color: isCancelled ? "red.500" : isPaid ? "gray.400" : "green.500",
     },
     {
       label: "تاریخ جلسه",
