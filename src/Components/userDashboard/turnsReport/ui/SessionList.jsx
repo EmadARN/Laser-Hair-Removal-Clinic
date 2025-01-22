@@ -9,7 +9,7 @@ const SessionList = ({ sessions, onSessionClick, ComparePayeds }) => {
   const isCancelled = (session) => session?.reserve_type === "sc";
 
   return (
-    <Box overflowX="auto">
+    <Box overflowX="auto" height="300px">
       <Table variant="simple" size="md">
         <Thead bg="gray.100">
           <Tr>
