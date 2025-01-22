@@ -51,7 +51,12 @@ const ReserveInfoRow = ({ title, value, color }) => (
   </Flex>
 );
 
-const ExistUser = ({ sessionRecords, operatorName, loading }) => {
+const ExistUser = ({
+  sessionRecords,
+  operatorName,
+  loading,
+  reserveCompelete,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [cookies] = useCookies(["auth_token"]);
   const { showToast } = useCustomToast();
@@ -98,7 +103,9 @@ const ExistUser = ({ sessionRecords, operatorName, loading }) => {
         <SectionTitle section_title="نوبت بعدی شما" />
         <ReserveInfoRow
           title="وضعیت"
-          value={getReserveStatus(sessionRecords?.last_reserve?.reserve_type)}
+          value={getReserveStatus(
+            reserveCompelete ? "co" : sessionRecords?.last_reserve?.reserve_type
+          )}
           color={
             sessionRecords?.last_reserve?.reserve_type === "sc"
               ? "red"
