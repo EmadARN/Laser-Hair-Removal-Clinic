@@ -6,56 +6,55 @@ import { getTodayDate } from "@/utils/extractDate";
 
 const HeaderDetails = () => {
   return (
-    <Grid
-      templateColumns={{ base: "1fr", md: "repeat(5, 1fr)" }}
+    <Box
+      width={"100%"}
+    mr={{base:12,md:0}}
       gap={4}
-      sx={{ alignItems: "center", px: 4, pb: 4 }}
+    
     >
-      <GridItem colSpan={{ base: 1, md: 4 }}>
-        <Flex
-          sx={{
-            justifyContent: { base: "center", md: "space-between" },
-            alignItems: "center",
-            flexDirection: { base: "column", md: "row" },
-            gap: { base: 2, md: 0 },
-          }}
-        >
-          <Flex
-            sx={{
-              flexDirection: { base: "column", sm: "row" },
-              alignItems: "center",
-              gap: { base: 2, sm: 4, md: 8 },
-            }}
-          >
-            <Text
-              sx={{
-                fontSize: { base: "16px", sm: "18px", md: "22px" },
-                fontWeight: "bold",
-              }}
-            >
-              نوبت های روز
-            </Text>
-            <Box>{getTodayDate()}</Box>
-          </Flex>
-        </Flex>
-      </GridItem>
-
-      <GridItem
-        colSpan={{ base: 1, md: 1 }}
+      <Flex
+       
         sx={{
-          display: "flex",
-          justifyContent: { base: "center", md: "flex-end" },
-          gap: 4,
+          justifyContent:"space-between",
+          width: "100%",
+          flexDirection: { base: "row" },
           alignItems: "center",
-          flexDirection: { base: "column", sm: "row" },
+          gap: { base: 5, sm: 4, md: 8 },
         }}
       >
-        <Box sx={{ display: { base: "flex", md: "none" }, width: "100%" }}>
-          <SearchInput size={"md"} placeholder="جستجو در نوبت های روز" />
+        <Text
+          sx={{
+            whiteSpace: "nowrap",
+            fontSize: { base: "12px", sm: "15px", md: "20px" },
+            fontWeight: "bold",
+          }}
+        >
+          نوبت های روز
+        </Text>
+        <Box
+          whiteSpace="nowrap"
+          fontSize={{ base: "12px", sm: "15px", md: "20px" }}
+        >
+          {" "}
+          {getTodayDate()}
         </Box>
+
+        <Box
+      
+        sx={{
+        
+          gap: { base: 5, md: 4 },
+          alignItems: "center",
+   
+        }}
+      >
+  
         <PatientWithoutTime />
-      </GridItem>
-    </Grid>
+      </Box>
+      </Flex>
+
+ 
+    </Box>
   );
 };
 

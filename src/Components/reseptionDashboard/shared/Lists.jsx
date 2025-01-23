@@ -57,16 +57,17 @@ const Lists = ({
   return (
     <>
       <Flex
-        direction={{ base: "column", md: "row" }}
-        justifyContent="space-between"
-        alignItems={{ base: "flex-start", md: "center" }}
-        bgColor={bgColor}
-        width="100%"
-        rounded={rounded}
-        color={color}
-        p={4}
-        my={2}
-        gap={4}
+        sx={{
+          flexDirection: { base: "row", md: "row" },
+          justifyContent: "space-between",
+          alignItems: "center",
+          bgColor: bgColor || "graySky.100",
+          width: { base: "110%", md: "100%" },
+          rounded: rounded || "8px",
+          color,
+          p: 5,
+          my: 2,
+        }}
         boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
       >
         <AreaBox fontSize={responsiveFontSize}>{firstArea}</AreaBox>

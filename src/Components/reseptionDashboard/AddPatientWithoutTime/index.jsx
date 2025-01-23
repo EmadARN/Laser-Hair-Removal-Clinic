@@ -99,12 +99,13 @@ const PatientWithoutTime = () => {
       <Button
         onClick={onOpen}
         leftIcon={<FaPlus />}
-        w="100%"
+        w={{base:"60%",lg:"100%"}}
         py={3}
-        px={8}
+        px={{base:10,md:8}}
         variant="outline"
         color="brand.400"
         borderColor="brand.400"
+        fontSize ={{ base: "12px", sm: "15px"}}
       >
         مراجع بین نوبت
       </Button>

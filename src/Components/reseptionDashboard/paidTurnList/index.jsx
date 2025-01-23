@@ -26,10 +26,11 @@ const PaidTurns = ({ display }) => {
 
   return (
     <Accordion
+  
       defaultIndex={[0]}
       allowMultiple
       mt={10}
-      w={{ base: "100vw", md: "100%" }}
+      w={{ base: "120vw", md: "100%" }}
     >
       <AccordionItem>
         <AccordionButton display={"flex"} justifyContent={"space-between"}>

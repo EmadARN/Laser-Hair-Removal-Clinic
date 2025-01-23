@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   cancelReserve,
   multiplePayment,
+  todayDate,
 } from "@/features/receptionDashboard/receptionThunks";
 import { extractTime } from "@/utils/extractDate";
 import { getCustomerName } from "@/utils/getCustomerName";
@@ -96,6 +97,7 @@ export const ReservationList = ({
 
     if (result.meta.requestStatus === "fulfilled") {
       showToast({ title: "پرداخت با موفقیت انجام شد", status: "success" });
+      await dispatch(todayDate({ auth_Employee_token }));
       paymentModal.onClose();
     } else {
       showToast({ title: " خطای ناشناخته ای رخ داده است   ", status: "error" });
@@ -131,13 +133,14 @@ export const ReservationList = ({
   };
   return (
     <Box w={{ base: "100vw", md: "100%" }} px={4}>
-      <Box>
+      <Box >
         {todayReserve?.all_list
           ?.filter(
             (item) =>
               !isPaymentTable || item.payed || item.reserve_type === "sc"
           )
           .map((item) => (
+            <Box key={item.id} width={{ base: "110vw", md: "100%" }} >
             <Lists
               key={item.id}
               firstArea={getCustomerName(item.user)}
@@ -151,6 +154,7 @@ export const ReservationList = ({
               handleProcessPaymentCharge={handleProcessPaymentCharge}
               cancelHandler={cancelHandler}
             />
+            </Box>
           ))}
       </Box>
 
