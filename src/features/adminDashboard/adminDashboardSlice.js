@@ -18,6 +18,7 @@ import {
   operatorProgramList,
   postAsyncLogin,
   settingAsyncChanging,
+  getClientInformation
 } from "./adminThunks";
 
 // Helper function to handle state updates
@@ -46,6 +47,7 @@ const initialState = {
   userType: null,
   customerListAdmin: [],
   dateReserve: null,
+  clientInformation:[]
 };
 
 const adminDashboardSlice = createSlice({
@@ -291,6 +293,19 @@ const adminDashboardSlice = createSlice({
         
       })
       .addCase(getDate.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      //getClientInformation
+      .addCase(getClientInformation.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(getClientInformation.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+        state.clientInformation = action.payload;
+        
+      })
+      .addCase(getClientInformation.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       )
 

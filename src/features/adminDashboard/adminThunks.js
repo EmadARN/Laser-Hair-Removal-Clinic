@@ -299,7 +299,7 @@ export const getCutomerList = createAsyncThunk(
 );
 
 export const getDate = createAsyncThunk(
-  "receptionDashboard/getDate",
+  "adminDashboard/getDate",
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.post(
@@ -307,6 +307,29 @@ export const getDate = createAsyncThunk(
         {
           from_: payload.from,
           to: payload.to,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${payload.auth_Admin_token}`,
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const getClientInformation = createAsyncThunk(
+  "adminDashboard/getClientInformation",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post(
+        "/Reserve/user/reserve/list/",
+        {
+          username: payload.username,
         },
         {
           headers: {
