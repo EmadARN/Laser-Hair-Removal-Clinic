@@ -8,8 +8,9 @@ import {
   AccordionIcon,
 } from "@chakra-ui/react";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
+import { extractTime } from "@/utils/extractDate";
 
-const AccordionLists = ({ clientData, mdCancelHandler }) => {
+const AccordionLists = ({ clientData, mdCancelHandler, clientInformation }) => {
   return (
     <>
       <Box display={"flex"} alignItems={"center"} gap={6} mt={6}>
@@ -113,69 +114,66 @@ const AccordionLists = ({ clientData, mdCancelHandler }) => {
                 <Text fontSize={{ base: "lg", md: "xl", lg: "2xl" }}>
                   تاریخچه جلسات
                 </Text>
-                <Accordion defaultIndex={[0]} allowMultiple>
-                  <AccordionItem>
-                    <Heading as="h2" size="md" noOfLines={1}>
-                      <AccordionButton
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        flexWrap="wrap"
-                        sx={{
-                          ":hover": {
-                            bgColor: "transparent",
-                          },
-                          bgColor: "gray.50",
-                          rounded: "8px",
-                          p: { base: 3, md: 5 },
-                        }}
-                      >
-                        <Text
-                          mb={4}
-                          as="span"
-                          textAlign="right"
-                          fontSize={{ base: "sm", md: "md" }}
+                <Accordion  allowMultiple>
+                  {clientInformation?.map((item, index) => (
+                    <AccordionItem key={index}>
+                      <Heading as="h2" size="md" noOfLines={1}>
+                        <AccordionButton
+                          display="flex"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          flexWrap="wrap"
+                          sx={{
+                            ":hover": {
+                              bgColor: "transparent",
+                            },
+                            bgColor: "gray.50",
+                            rounded: "8px",
+                            p: { base: 3, md: 5 },
+                          }}
                         >
-                          1 دوشنبه 17 دی , 1401
-                        </Text>
-                        <Stack
-                          direction={{ base: "column", sm: "row" }}
-                          spacing={2}
-                          textAlign={{ base: "right", sm: "center" }}
-                        >
-                          <Text mb={4} fontSize={{ base: "sm", md: "md" }}>
-                            16:20
+                          <Text
+                            mb={4}
+                            as="span"
+                            textAlign="right"
+                            fontSize={{ base: "sm", md: "md" }}
+                          >
+                            {item.reserve_time_str}
                           </Text>
-                          <Text mb={4} fontSize={{ base: "sm", md: "md" }}>
-                            فول بادی
-                          </Text>
-                          <Text fontSize={{ base: "sm", md: "md" }}>
-                            پرداخت نقدی
-                          </Text>
+                          <Stack
+                            direction={{ base: "column", sm: "row" }}
+                            spacing={2}
+                            textAlign={{ base: "right", sm: "center" }}
+                          >
+                            <Text mb={4} fontSize={{ base: "sm", md: "md" }}>
+                              {extractTime(item.reserve_time_str)}
+                            </Text>
+                            <Text mb={4} fontSize={{ base: "sm", md: "md" }}>
+                              {item.laser_area_name}
+                            </Text>
+                          </Stack>
+                          <AccordionIcon />
+                        </AccordionButton>
+                      </Heading>
+                      <AccordionPanel pb={4}>
+                        <Stack spacing={3}>
+                          <Box fontSize={{ base: "sm", md: "md" }}>
+                            نواحی انتخاب شده:{" "}
+                            <Box as="span"> {item.laser_area_name}</Box>
+                          </Box>
+                          <Box fontSize={{ base: "sm", md: "md" }}>
+                            ودیعه جهت رزرو نوبت:{" "}
+                            <Box as="span">{item.total_payment_amount}</Box>
+                          </Box>
+
+                          <Box fontSize={{ base: "sm", md: "md" }}>
+                            مبلغ کل:{" "}
+                            <Box as="span">{item.total_price_amount}</Box>
+                          </Box>
                         </Stack>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </Heading>
-                    <AccordionPanel pb={4}>
-                      <Stack spacing={3}>
-                        <Box fontSize={{ base: "sm", md: "md" }}>
-                          مدت زمان جلسه: <Box as="span"></Box>
-                        </Box>
-                        <Box fontSize={{ base: "sm", md: "md" }}>
-                          نواحی انتخاب شده: <Box as="span"></Box>
-                        </Box>
-                        <Box fontSize={{ base: "sm", md: "md" }}>
-                          ودیعه جهت رزرو نوبت: <Box as="span"></Box>
-                        </Box>
-                        <Box fontSize={{ base: "sm", md: "md" }}>
-                          موجودی کیف پول: <Box as="span"></Box>
-                        </Box>
-                        <Box fontSize={{ base: "sm", md: "md" }}>
-                          مبلغ کل: <Box as="span"></Box>
-                        </Box>
-                      </Stack>
-                    </AccordionPanel>
-                  </AccordionItem>
+                      </AccordionPanel>
+                    </AccordionItem>
+                  ))}
                 </Accordion>
               </Stack>
 

@@ -27,7 +27,7 @@ export const GuideSignup = ({
 
   return (
     <Box
-      px={{ base: 10, md: 6 }}
+      px={{ base: 10, md: 28 }}
       py={{ base: 4, md: 8 }}
       minH="350px"
       bgColor="#fff"

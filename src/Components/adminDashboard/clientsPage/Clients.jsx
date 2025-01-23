@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import Lists from "../shared/Lists";
 import AccordionLists from "../shared/AccordionLists";
-import { getCutomerList } from "@/features/adminDashboard/adminThunks";
+import { getClientInformation, getCutomerList } from "@/features/adminDashboard/adminThunks";
 import SearchFilter from "@/Common/searchFilter";
 import SearchComponent from "@/Common/searchInput/SearchInput";
 
@@ -25,15 +25,19 @@ const Clients = () => {
     dispatch(getCutomerList({ auth_Admin_token }));
   }, [dispatch, auth_Admin_token]);
 
-  const { loading, error, customerListAdmin } = useSelector(
+  const { loading, error, customerListAdmin,clientInformation } = useSelector(
     (store) => store.adminDashboard
   );
 
-  const handleRowClick = (item) => {
+  const handleRowClick = async(item) => {
+
+
     const customer = item;
     const customerInfo = customerListAdmin.customer_information_list.find(
       (info) => info.user === customer.username
     );
+    await dispatch(getClientInformation({auth_Admin_token,username:item.username}))
+
 
     setClientData({
       username: customer.username,
@@ -52,6 +56,9 @@ const Clients = () => {
 
     setStep(1);
   };
+
+
+  
 
   const mdCancelHandler = () => {
     setStep(0);
@@ -153,7 +160,7 @@ const Clients = () => {
       </>
     );
   } else {
-    return <AccordionLists mdCancelHandler={mdCancelHandler} clientData={clientData} />;
+    return <AccordionLists mdCancelHandler={mdCancelHandler} clientData={clientData} clientInformation={clientInformation.reserve_list} />;
   }
 };
 

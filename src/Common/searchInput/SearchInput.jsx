@@ -35,7 +35,7 @@ const SearchComponent = ({
   };
 
   return (
-    <InputGroup sx={{ display: 'flex', alignItems: 'center' }}>
+    <InputGroup sx={{ display: 'flex', alignItems: 'center' }} width={"100%"}>
       <InputRightElement
         pointerEvents="none"
         color="gray.500"
@@ -43,7 +43,7 @@ const SearchComponent = ({
         pt={2}
         pr={2}
       >
-        <Search2Icon />
+        <Search2Icon width={{base:"10px",md:"20px"}} />
       </InputRightElement>
       <Input
         _focus={{
