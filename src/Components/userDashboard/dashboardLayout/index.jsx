@@ -79,22 +79,35 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
         bgColor="#efefef"
         height="100vh"
       >
-        <Flex w="45%" justifyContent="space-between" alignItems="center">
+        <Flex
+          width={{ base: "80%", md: "45%" }}
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Flex
             flexDirection="column"
             mb={1}
             width={{ base: "100%", md: "45%" }}
           >
-            <Text color="gray.400" fontSize={{ base: "xs", sm: "sm" }}>
+            <Text color="gray.400" fontSize={{ base: "xs", md: "sm" }}>
               خوش آمدید
             </Text>
-            <Text pr={1} fontWeight="bold" color="gray.500">
+            <Text
+              pr={1}
+              fontSize={{ base: "xs", md: "sm" }}
+              fontWeight="bold"
+              color="gray.500"
+            >
               {checkPhoneNumberMatch()
                 ? getCustomerName(userNames.username, customerList)
                 : ""}{" "}
             </Text>
           </Flex>
-          <Text fontWeight="bold" color="gray.500">
+          <Text
+            fontSize={{ base: "xs", md: "sm" }}
+            fontWeight="bold"
+            color="gray.500"
+          >
             {getDayPart()} بخیر
           </Text>
         </Flex>

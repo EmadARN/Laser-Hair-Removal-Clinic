@@ -40,7 +40,7 @@ const Date = ({
           "loading"
         ) : error ? (
           <Box color="red">خطایی رخ داده است!</Box>
-        ):(
+        ) : (
           <SelectTime
             timeList={timeList}
             selectedDateId={selectedDateId}
@@ -77,13 +77,6 @@ const Date = ({
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
-      <Box bgColor={"white"} my={2}>
-        {/* <AccordionMenu
-          error={error}
-          loading={loading}
-          reserveInformation={reserveInformation}
-        /> */}
-      </Box>
     </Box>
   );
 };

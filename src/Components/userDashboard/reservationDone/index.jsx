@@ -28,27 +28,17 @@ const ReservationDone = ({ slug }) => {
         flexDirection="column"
         gap={3}
       >
-        <RedGreenBox
-          bgColor="lightgreen"
-          bgColor2="green"
-          iconColor="green"
-          textColor="#15a523"
-        />
-
-        <Box display="flex" flexDirection="column" gap={3} w="100%">
-          {reservationDetails.map(({ label, value }, index) => (
-            <Box
-              key={index}
-              display="flex"
-              justifyContent="space-between"
-              mb={4}
-            >
-              <Text color="#999">{label}</Text>
-              <Text fontSize={{ base: "13px", md: "14px" }} fontWeight="500">
-                {value}
-              </Text>
-            </Box>
-          ))}
+        <Box
+          display="flex"
+          justifyContent={"center"}
+          alignItems={"center"}
+          gap={3}
+          w="100%"
+        >
+          <Text variant="h2" textAlign={"center"}>
+            به علت نبود درگاه پرداخت، عملیاتی جهت انتقال به مرحله ی پرداخت تعریف
+            نشده است
+          </Text>
         </Box>
 
         <Box
