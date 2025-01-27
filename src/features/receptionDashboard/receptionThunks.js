@@ -221,16 +221,37 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const addCustomerWithOutTime = createAsyncThunk(
   "receptionDashboard/addCustomerWithOutTime",
   async (payload, { rejectWithValue }) => {
+    console.log("payload", payload);
+
     try {
       const { data } = await api.post(
         "Core/add/customer/information/",
         payload,
+
         {
           headers: {
             Authorization: `Bearer ${payload.auth_Employee_token}`,
           },
         }
       );
+      console.log("postCustomerInformation", data);
+      return data;
+    } catch (error) {
+      console.log("error payload postCustomerInformation", error);
+    }
+  }
+);
+export const addSignupCustomer = createAsyncThunk(
+  "receptionDashboard/addSignupCustomer",
+  async (payload, { rejectWithValue }) => {
+    console.log(payload);
+
+    try {
+      const { data } = await api.post("/Core/signup/customer/", payload, {
+        headers: {
+          Authorization: `Bearer ${payload.auth_Employee_token}`,
+        },
+      });
       console.log("cuatomer sussess", data);
 
       return data;
@@ -360,7 +381,7 @@ export const enterExitedOprators = createAsyncThunk(
           },
         }
       );
-      console.log('huhu',data);
+      console.log("huhu", data);
 
       return data;
     } catch (error) {

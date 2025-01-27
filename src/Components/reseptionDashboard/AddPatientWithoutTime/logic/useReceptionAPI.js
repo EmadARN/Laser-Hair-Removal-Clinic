@@ -1,7 +1,6 @@
-import { useDispatch } from "react-redux";
 import {
-  addCustomerWithOutTime,
   ReserveReceptionWithOutTime,
+  addSignupCustomer,
   getCutomerList,
   todayDate,
 } from "@/features/receptionDashboard/receptionThunks";
@@ -17,8 +16,25 @@ const useReceptionAPI = ({
 }) => {
   const { showToast } = useCustomToast();
 
-  const handleSubmit = () => {
-    dispatch(addCustomerWithOutTime(inputsData));
+  const handleSubmit = async () => {
+    const updateUser = {
+      ...inputsData,
+      username: inputsData.phone_number,
+      password: "",
+      last_date: "",
+    };
+    const result = await dispatch(
+      addSignupCustomer({ ...updateUser, auth_Employee_token })
+    );
+    showToast({
+      title: result.meta.requestStatus === "fulfilled" ? "موفقیت‌آمیز" : "خطا",
+      description:
+        result.meta.requestStatus === "fulfilled"
+          ? "اطلاعات ویرایش شد"
+          : "خطا در ویرایش اطلاعات",
+      status: result.meta.requestStatus === "fulfilled" ? "success" : "error",
+    });
+
     resetForm();
   };
 

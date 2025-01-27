@@ -1,6 +1,6 @@
-import CustomButton from "@/Common/customeButton/CustomeButton";
-import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import CustomButton from "@/Common/customeButton/CustomeButton";
 
 const AnimationSide = ({ clicHandler, btnClick }) => {
   return (
@@ -17,11 +17,18 @@ const AnimationSide = ({ clicHandler, btnClick }) => {
           به سامانه مدیریت کلینیک لیزر <Text>ساید خوش آمدید</Text>
         </Text>
       </Box>
-      <Flex sx={{ w: "100%", justifyContent: "center" }}>
+      <Flex
+        sx={{
+          w: "90%",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
         <CustomButton
           onClick={clicHandler}
-          mt={{ base: 12, md: 10 }}
-          w={{ base: "60%", md: "40%" }}
+          mt={10}
+          w={{ base: "100%", md: "40%" }}
           boxShadow="rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset"
           bg="#fff"
           color="#666"

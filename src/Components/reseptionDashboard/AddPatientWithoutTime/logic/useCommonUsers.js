@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const useCommonUsers = (setInputsData, setStep, initialInputState) => {
   const [commonUsers, setCommonUsers] = useState([]);
-  const { todayReserve, cutomerList } = useSelector(
+  const { todayReserve, cutomerList, loading } = useSelector(
     (store) => store.receptionDashboardSlice
   );
   useEffect(() => {
@@ -41,7 +41,7 @@ const useCommonUsers = (setInputsData, setStep, initialInputState) => {
     });
     setStep(1);
   };
-  return { filteredList, handleRowClick };
+  return { filteredList, handleRowClick, loading, cutomerList };
 };
 
 export default useCommonUsers;

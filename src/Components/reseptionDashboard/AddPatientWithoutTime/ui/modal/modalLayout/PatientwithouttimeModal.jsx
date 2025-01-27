@@ -16,6 +16,8 @@ const PatientwithouttimeModal = ({
   setStep,
   step,
   renderStepContent,
+  setInputsData,
+  initialInputState,
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={resetForm} size="lg">
@@ -28,11 +30,17 @@ const PatientwithouttimeModal = ({
           alignItems="center"
         >
           <Flex alignItems="center" gap={2}>
-            <FaArrowRight
-              onClick={() => setStep(0)}
-              cursor="pointer"
-              fontSize="17px"
-            />
+            <Box display={step === 0 ? "none" : "flex"}>
+              <FaArrowRight
+                onClick={() => {
+                  setInputsData(initialInputState);
+                  setStep(0);
+                }}
+                cursor="pointer"
+                fontSize="17px"
+              />
+            </Box>
+
             <Text fontWeight="bold">
               {step === 0 ? "مراجع بین نوبت" : "مراجع جدید"}
             </Text>

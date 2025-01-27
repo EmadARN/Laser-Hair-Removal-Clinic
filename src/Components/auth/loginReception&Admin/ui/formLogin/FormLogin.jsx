@@ -1,7 +1,8 @@
 import CustomButton from "@/Common/customeButton/CustomeButton";
 import Loading from "@/Common/loading";
 import { Box, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 const style = {
   width: "100%",
@@ -22,9 +23,16 @@ const FormLogin = ({
   inputHandler,
   formInput,
   loading,
+  dispatch,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
+  const onOpen = () => setIsOpen(true);
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} style={{ position: "relative" }}>
       <Box
         sx={{
           mr: { base: 0, md: 20 },
@@ -80,6 +88,24 @@ const FormLogin = ({
           {loading ? <Loading noneHeight="0vh" h="8px" w="8px" /> : "تایید"}
         </CustomButton>
       </Flex>
+      <Text
+        onClick={onOpen}
+        sx={{
+          mt: { base: 3, md: 0 },
+          color: "#fff",
+          cursor: "pointer",
+          position: "absolute",
+
+          fontSize: { base: "10px", md: "16px" },
+        }}
+      >
+        فراموشی رمز عبور
+      </Text>
+      <ForgotPasswordModal
+        isOpen={isOpen}
+        onClose={onClose}
+        dispatch={dispatch}
+      />
     </form>
   );
 };

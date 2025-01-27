@@ -23,7 +23,7 @@ const useEnterExit = () => {
     if (!operatorSchedule) {
       showToast({
         title: "خطا.",
-        description: "هیچ اوپراتوری یافت نشد.",
+        description: "اوپراتور وجود ندارد یا خطایی پیش آمده",
         status: "error",
         duration: 3000,
         isClosable: true,

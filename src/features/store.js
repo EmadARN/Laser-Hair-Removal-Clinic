@@ -6,6 +6,7 @@ import receptionDashboardReducer from "./receptionDashboard/receptionDashboardSl
 import customerDashboardReducer from "./customerDashboard/customerDashboardSlice";
 import dashboardReducer from "./dashboardSteper/dashboardSlice";
 import paymentReducer from "./receptionDashboard/paymentSlice";
+import logOutReducer from "./logOutSlice";
 
 const combinedReducer = combineReducers({
   signin: signinReducer,
@@ -14,6 +15,7 @@ const combinedReducer = combineReducers({
   customerDashboard: customerDashboardReducer,
   dashboardSteper: dashboardReducer,
   payment: paymentReducer,
+  logOut: logOutReducer,
 });
 const masterReducer = (state, action) => {
   if (action.type === HYDRATE) {

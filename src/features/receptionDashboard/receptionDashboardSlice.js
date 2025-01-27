@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   addcharge,
   addCustomerWithOutTime,
+  addSignupCustomer,
   cancelReserve,
   enterExitedOprators,
   getCutomerList,
@@ -50,6 +51,17 @@ const receptionDashboardSlice = createSlice({
         handleAsyncState(state, action, "rejected")
       )
       .addCase(addCustomerWithOutTime.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+      // addSignupCustomer
+      .addCase(addSignupCustomer.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(addSignupCustomer.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      .addCase(addSignupCustomer.fulfilled, (state, action) => {
         handleAsyncState(state, action, "fulfilled");
       })
 

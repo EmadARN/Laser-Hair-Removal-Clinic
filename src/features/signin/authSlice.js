@@ -62,6 +62,30 @@ export const postAsyncLogin = createAsyncThunk(
     }
   }
 );
+export const forgotPassword = createAsyncThunk(
+  "user/forgotPassword",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("Core/forgot/password/", payload);
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const changeUserInfo = createAsyncThunk(
+  "user/changeUserInfo",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("Core/change/password/", payload);
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "signin",
@@ -126,6 +150,27 @@ const authSlice = createSlice({
         state.userType = action.payload.user_type;
       })
       .addCase(postAsyncLogin.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      // ADMIN & RECEPTION forgotPassword
+      .addCase(forgotPassword.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+
+      .addCase(forgotPassword.rejected, (state, action) =>
+        handleAsyncState(state, action, "rejected")
+      )
+      // ADMIN & RECEPTION changeUserInfo
+      .addCase(changeUserInfo.pending, (state) =>
+        handleAsyncState(state, {}, "pending")
+      )
+      .addCase(changeUserInfo.fulfilled, (state, action) => {
+        handleAsyncState(state, action, "fulfilled");
+      })
+      .addCase(changeUserInfo.rejected, (state, action) =>
         handleAsyncState(state, action, "rejected")
       );
   },

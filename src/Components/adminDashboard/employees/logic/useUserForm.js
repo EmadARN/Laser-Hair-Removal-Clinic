@@ -44,20 +44,19 @@ const useUserForm = (userToEdit, isEdit, token) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = { ...formData };
 
     try {
       if (isEdit) {
         await dispatch(
           editAsyncUser({
-            id: formData.username,
-            ...userData,
+            ...formData,
             token,
           })
         );
+
         showToast({ title: "کاربر ویرایش شد.", status: "success" });
       } else {
-        await dispatch(addAsyncUsers({ ...userData, token }));
+        await dispatch(addAsyncUsers({ ...formData, token }));
         showToast({ title: "کاربر اضافه شد.", status: "success" });
       }
       //بروز رسانی

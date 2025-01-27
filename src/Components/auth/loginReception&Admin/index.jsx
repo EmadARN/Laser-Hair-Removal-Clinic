@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 // import Captcha from "./widget/Captcha";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { BgAnimate } from "./ui/BgAnimate";
-import AnimationSide from "./ui/AnimationSide";
 import { useDispatch } from "react-redux";
 import { resetAuthState } from "@/features/signin/authSlice";
-import FormLogin from "./ui/FormLogin";
 import useLoginAdminRecptionHooks from "./logic/useLoginAdminRecptionHooks";
+import FormLogin from "./ui/formLogin/FormLogin";
+import AnimationSide from "./ui/AnimationSide";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -16,8 +16,9 @@ const LoginPage = () => {
   const [input, setInput] = useState({ username: "", password: "" });
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
   const [captchaToken, setCaptchaToken] = useState(""); // ذخیره توکن کپچا
+
   const [loading, setLoading] = useState(false);
-  const login = useLoginAdminRecptionHooks();
+  const login = useLoginAdminRecptionHooks(dispatch);
   const router = useRouter();
   const { showToast } = useCustomToast();
 
@@ -79,7 +80,7 @@ const LoginPage = () => {
     setBtnClick((prev) => !prev);
     setInput({ username: "", password: "" });
   };
-
+  const openModal = () => {};
   // مدیریت موفقیت کپچا
   const handleCaptchaSuccess = (token) => {
     setCaptchaToken(token); // ذخیره توکن کپچا در هنگام تایید
@@ -108,15 +109,15 @@ const LoginPage = () => {
             right: 0,
           }}
         >
-          <Box sx={{ position: "relative", h: { base: "230px", md: "300px" } }}>
+          <Box sx={{ position: "relative", h: { base: "240px", md: "320px" } }}>
             <Box
               sx={{
                 bgColor: "#1111",
                 w: "100%",
-                h: "100%",
+                h: { base: "240px", md: "320px" },
                 zIndex: btnClick ? 10 : 0,
                 opacity: btnClick ? 1 : 0,
-                p: 6,
+                p: { base: 2, md: 6 },
                 position: "absolute",
                 transition: "opacity 1s ease 0.75s",
               }}
@@ -127,6 +128,7 @@ const LoginPage = () => {
                 submitHandler={handleSubmit}
                 inputHandler={handleInputChange}
                 formInput={input}
+                dispatch={dispatch}
               />
             </Box>
             <Box
@@ -150,8 +152,8 @@ const LoginPage = () => {
         <Box
           sx={{
             bgColor: "#1111",
-            p: 6,
-            h: { base: "230px", md: "300px" },
+            p: { base: 2, md: 6 },
+            h: { base: "240px", md: "320px" },
             w: "50%",
             zIndex: btnClick ? 0 : 10,
             opacity: btnClick ? 0 : 1,
@@ -166,10 +168,10 @@ const LoginPage = () => {
             submitHandler={handleSubmit}
             inputHandler={handleInputChange}
             formInput={input}
+            dispatch={dispatch}
           />
         </Box>
       </>
-      {/* )} */}
     </Flex>
   );
 };

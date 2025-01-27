@@ -162,7 +162,7 @@ const EnterExite = () => {
         </Text>
         <Flex justifyContent="space-between" align="center" w="100%" p={2}>
           <Text color="gray.500" fontSize={{ base: "10px", md: "14px" }}>
-            {operatorSchedule?.operator_name || "نام اوپراتور یافت نشد"}
+            {operatorSchedule?.operator_name || "اوپراتور وجود ندارد"}
           </Text>
           <MdOutlineAccessTime color="gray" size={18} />
         </Flex>

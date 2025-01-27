@@ -18,6 +18,8 @@ import { useCookies } from "react-cookie";
 import { Logo } from "@/widget/Logo";
 import CustomModal from "@/Common/attentionModal/CustomModal";
 import styles from "../Style";
+import { useDispatch } from "react-redux";
+import { logOutAsyncUsers } from "@/features/logOutSlice";
 
 const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -28,14 +30,27 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
     "auth_Employee_token",
   ]);
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false); // مدیریت وضعیت باز یا بسته بودن مدال
 
-  const handleLogout = () => {
-    removeCookie("auth_Admin_token", { path: "/" });
-    removeCookie("auth_Employee_token", { path: "/" });
-    router.push("/panel");
-    setIsModalOpen(false); // بستن مدال بعد از خروج
+  const handleLogout = async () => {
+    try {
+      await dispatch(
+        logOutAsyncUsers({
+          token: cookies.auth_Employee_token || cookies.auth_Admin_token,
+        })
+      ).unwrap();
+
+      // پاک کردن کوکی‌ها
+      removeCookie("auth_Admin_token", { path: "/" });
+      removeCookie("auth_Employee_token", { path: "/" });
+
+      // هدایت کاربر به صفحه ورود
+      router.push("/panel");
+      setIsModalOpen(false); // بستن مدال بعد از خروج
+    } catch (error) {
+      // نمایش پیام خطا به کاربر (اختیاری)
+    }
   };
 
   const handleCancelLogout = () => {

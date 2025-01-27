@@ -6,7 +6,6 @@ import { useCookies } from "react-cookie";
 import Lists from "../shared/Lists";
 import AccordionLists from "../shared/AccordionLists";
 import { getClientInformation, getCutomerList } from "@/features/adminDashboard/adminThunks";
-import SearchFilter from "@/Common/searchFilter";
 import SearchComponent from "@/Common/searchInput/SearchInput";
 
 

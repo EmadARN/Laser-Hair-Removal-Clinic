@@ -4,7 +4,6 @@ const useFormManagement = (onClose, initialInputState) => {
   const [inputsData, setInputsData] = useState(initialInputState);
   const [usernameValue, setUsernameValue] = useState("");
   const [step, setStep] = useState(0);
-
   const resetForm = () => {
     setInputsData(initialInputState);
     setStep(0);
@@ -34,6 +33,7 @@ const useFormManagement = (onClose, initialInputState) => {
     handleChange,
     handleRadioChange,
     patientWithoutTimeHandleChange,
+
   };
 };
 

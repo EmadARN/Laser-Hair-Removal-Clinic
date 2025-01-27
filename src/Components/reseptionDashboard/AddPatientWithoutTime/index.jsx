@@ -8,10 +8,10 @@ import {
   todayDate,
 } from "@/features/receptionDashboard/receptionThunks";
 import PatientwithouttimeModal from "./ui/modal/modalLayout/PatientwithouttimeModal";
-import ModalStepDetail from "./ui/modal/modalStepsDetail/Index";
 import useCommonUsers from "./logic/useCommonUsers";
 import useReceptionAPI from "./logic/useReceptionAPI";
 import useFormManagement from "./logic/useFormManagement";
+import ModalStepDetail from "./ui/modal/modalStepsDetail/modalStepsDetail";
 
 const initialInputState = {
   name: "",
@@ -52,7 +52,7 @@ const PatientWithoutTime = () => {
   } = useFormManagement(onClose, initialInputState);
 
   // Filterd common userName
-  const { filteredList, handleRowClick } = useCommonUsers(
+  const { filteredList, handleRowClick, loading, cutomerList } = useCommonUsers(
     setInputsData,
     setStep,
     initialInputState
@@ -79,7 +79,12 @@ const PatientWithoutTime = () => {
     handleRadioChange,
     filteredList,
     inputsData,
-    usernameValue
+    usernameValue,
+    handleChange,
+    handleRadioChange,
+    handleRowClick,
+    loading,
+    cutomerList
   );
 
   const renderStepContent = () => {
@@ -88,7 +93,8 @@ const PatientWithoutTime = () => {
         return renderCustomerList();
       case 1:
         return renderCustomerDetails(true);
-     
+      case 2:
+        return renderCustomerDetails();
       default:
         return null;
     }
@@ -99,19 +105,21 @@ const PatientWithoutTime = () => {
       <Button
         onClick={onOpen}
         leftIcon={<FaPlus />}
-        w={{base:"60%",lg:"100%"}}
+        w={{ base: "60%", lg: "100%" }}
         py={3}
-        px={{base:10,md:8}}
+        px={{ base: 10, md: 8 }}
         variant="outline"
         color="brand.400"
         borderColor="brand.400"
-        fontSize ={{ base: "12px", sm: "15px"}}
+        fontSize={{ base: "12px", sm: "15px" }}
       >
         مراجع بین نوبت
       </Button>
       <PatientwithouttimeModal
         renderStepContent={renderStepContent}
+        initialInputState={initialInputState}
         step={step}
+        setInputsData={setInputsData}
         setStep={setStep}
         resetForm={resetForm}
         isOpen={isOpen}

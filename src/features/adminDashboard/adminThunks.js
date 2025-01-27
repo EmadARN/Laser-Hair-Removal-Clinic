@@ -32,6 +32,8 @@ export const getAsyncUsersList = createAsyncThunk(
 export const addAsyncUsers = createAsyncThunk(
   "user/addAsyncUsers",
   async (payload, { rejectWithValue }) => {
+    console.log(payload);
+
     try {
       const { data } = await api.post("/Core/signup/admin/", payload, {
         headers: {
@@ -40,6 +42,8 @@ export const addAsyncUsers = createAsyncThunk(
       });
       return data;
     } catch (error) {
+      console.log(error);
+
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -48,6 +52,8 @@ export const addAsyncUsers = createAsyncThunk(
 export const editAsyncUser = createAsyncThunk(
   "user/editAsyncUser",
   async (payload, { rejectWithValue }) => {
+    console.log(payload);
+
     try {
       const { data } = await api.post(
         `/Core/change/user/information/`,
@@ -60,6 +66,8 @@ export const editAsyncUser = createAsyncThunk(
       );
       return data;
     } catch (error) {
+      console.log(error);
+
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
