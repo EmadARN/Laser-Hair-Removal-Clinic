@@ -23,7 +23,7 @@ export const usePostLazerAreas = (reserveId, token) => {
         status: "error",
       });
     }
-  }, [reserveId, token, dispatch]);
+  }, [reserveId, token, dispatch,showToast]);
 
   return { submitHandler };
 };

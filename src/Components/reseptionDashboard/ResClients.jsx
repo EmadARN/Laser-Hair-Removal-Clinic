@@ -15,7 +15,7 @@ const ResClients = () => {
 
   useEffect(() => {
     dispatch(todayDate({ auth_Employee_token }));
-  }, [dispatch]);
+  }, [dispatch,auth_Employee_token]);
 
   return (
     <>

@@ -62,7 +62,7 @@ export const datasWhyLaser = (Compare) => {
       text: "کاهش مو پس از 2 هفته ",
       images: (
         <Compare
-          firstImage={"images/body/homepage-after-2weeks.jpg"}
+          firstImage={"/images/body/homepage-after-2weeks.jpg"}
           secondImage={"/images/body/before-using-pure-fit-12.jpg"}
         />
       ),
@@ -72,7 +72,7 @@ export const datasWhyLaser = (Compare) => {
       text: "کاهش مو پس از 8 هفته ",
       images: (
         <Compare
-          firstImage={"images/body/homepage-after-2weeks.jpg"}
+          firstImage={"/images/body/homepage-after-2weeks.jpg"}
           secondImage={"/images/body/after-using-pure-fit-8treatments2.jpg"}
         />
       ),
@@ -82,7 +82,7 @@ export const datasWhyLaser = (Compare) => {
       text: "کاهش مو پس از 12 هفته ",
       images: (
         <Compare
-          firstImage={"images/body/homepage-after-2weeks.jpg"}
+          firstImage={"/images/body/homepage-after-2weeks.jpg"}
           secondImage={"/images/body/after-using-pure-fit-12treatments2.jpg"}
         />
       ),
@@ -482,3 +482,16 @@ export const TurnData = (date, slots, operatorName) => {
     { id: 3, title: "اپراتور", value: operatorName || "" },
   ];
 };
+
+
+export const  lazerAreas = [
+  { value: "278401855741925133398455544592257173971", label: "صورت کامل" },
+
+  { value: "52880784631365082508082463346048104802", label: "پشت لب و چانه" },
+
+  { value: "118742540204459479831792833099368436296", label: "بیکینی" },
+
+  { value: "61851989835394545968256823461737857820", label: "صورت و گردن" },
+
+  { value: "194578541884809032188351290921055498751", label: "باسن" },
+];

@@ -121,7 +121,7 @@ const CustomPayment = ({
             paymentPriceKepper={paymentPriceKepper}
             selectedValue={selectedValue}
             handlePaymentChange={(event) => handlePaymentChange(event, key)}
-            title1={title}
+            title={title}
           />
         </Box>
       ))}

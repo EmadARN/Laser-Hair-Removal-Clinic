@@ -7,20 +7,13 @@ const styles = {
     cursor: "col-resize",
   },
   imageFirst: {
-    width: "100%",
-    height: "100%",
-    borderRadius: "lg",
-    position: "absolute",
-    top: "10px",
-    left: 0,
+    borderRadius: "16px", 
   },
   imageSecond: {
-    width: "100%",
-    height: "100%",
+    
     borderRadius: "lg",
     position: "absolute",
-    top: 0,
-    left: 0,
+
   },
   handlebar: {
     height: "5",

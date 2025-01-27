@@ -33,7 +33,7 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
 
   useEffect(() => {
     dispatch(getCutomerList({ token: auth_token }));
-  }, [auth_token]);
+  }, [auth_token,dispatch]);
 
   // فیلتر کردن و ادغام داده‌ها بر اساس شماره موبایل کاربر
   useEffect(() => {

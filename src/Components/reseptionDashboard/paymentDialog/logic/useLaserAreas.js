@@ -4,9 +4,10 @@ import { useCookies } from "react-cookie";
 import {
   editLazerArea,
   getLazerAreas,
+  todayDate,
 } from "@/features/receptionDashboard/receptionThunks";
 
-export const useLaserAreas = (idKeeper) => {
+export const useLaserAreas = (idKeeper,onClose) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [laserAreaList, setLaserAreaList] = useState([]);
   const [{ auth_Employee_token }] = useCookies(["auth_Employee_token"]);
@@ -37,12 +38,18 @@ export const useLaserAreas = (idKeeper) => {
     setLaserAreaList(updatedOptions.map((option) => option.value));
   };
 
-  const submitEditLazerArea = () => {
+  const submitEditLazerArea = async() => {
     if (idKeeper) {
-      dispatch(
+     const result = await dispatch(
         editLazerArea({ keepId: idKeeper, laserAreaList, auth_Employee_token })
       );
+      if (result.meta.requestStatus === "fulfilled"){
+        await  dispatch(todayDate({ auth_Employee_token }));
+      }
+      onClose()
     }
+
+  
   };
 
   return {

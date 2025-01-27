@@ -20,6 +20,7 @@ import {
   setOneWayPaymentValue,
 } from "@/features/receptionDashboard/paymentSlice";
 import PaymentDialog from "../paymentDialog";
+import { lazerAreas } from "@/constants";
 
 export const ReservationList = ({
   isDisabled,
@@ -56,11 +57,26 @@ export const ReservationList = ({
     }
   };
 
+  // const handlePrice = (event, type) => {
+  //   if (type === "value1") {
+  //     dispatch(setPaymentPriceKepper1(event.target.value));
+  //   } else if (type === "value2") {
+  //     dispatch(setPaymentPriceKepper2(event.target.value));
+  //   }
+  // };
   const handlePrice = (event, type) => {
+    const value = parseFloat(event.target.value) || 0; // تبدیل ورودی به عدد
+
     if (type === "value1") {
-      dispatch(setPaymentPriceKepper1(event.target.value));
+      dispatch(setPaymentPriceKepper1(value));
+      dispatch(
+        setPaymentPriceKepper2(selectedReserve.total_price_amount - value)
+      ); // محاسبه باقی‌مانده
     } else if (type === "value2") {
-      dispatch(setPaymentPriceKepper2(event.target.value));
+      dispatch(setPaymentPriceKepper2(value));
+      dispatch(
+        setPaymentPriceKepper1(selectedReserve.total_price_amount - value)
+      ); // محاسبه باقی‌مانده
     }
   };
 
@@ -131,31 +147,43 @@ export const ReservationList = ({
   const handlePaymentMethodChange = (value) => {
     dispatch(setOneWayPaymentValue(value));
   };
+
   return (
     <Box w={{ base: "100vw", md: "100%" }} px={4}>
-      <Box >
+      <Box>
         {todayReserve?.all_list
           ?.filter(
             (item) =>
               !isPaymentTable || item.payed || item.reserve_type === "sc"
           )
-          .map((item) => (
-            <Box key={item.id} width={{ base: "110vw", md: "100%" }} >
-            <Lists
-              key={item.id}
-              firstArea={getCustomerName(item.user)}
-              secondArea={getCustomerName(item.user, cutomerList)}
-              thirdArea={extractTime(item.reserve_time_str)}
-              fourthArea={item.laser_area_name}
-              item={item}
-              ButtonValue={ButtonValue}
-              isPaymentTable={isPaymentTable}
-              isDisabled={isDisabled}
-              handleProcessPaymentCharge={handleProcessPaymentCharge}
-              cancelHandler={cancelHandler}
-            />
-            </Box>
-          ))}
+          .map((item) => {
+            const matchedAreas = item.laser_area_list
+              .map(
+                (area) =>
+                  lazerAreas.find((lazerArea) => lazerArea.value === area)
+                    ?.label
+              )
+              .filter(Boolean) // حذف مقادیر null یا undefined
+              .join(", "); // تبدیل آرایه به یک رشته با جداکننده‌ی ", "
+
+            return (
+              <Box key={item.id} width={{ base: "110vw", md: "100%" }}>
+                <Lists
+                  key={item.id}
+                  firstArea={getCustomerName(item.user)}
+                  secondArea={getCustomerName(item.user, cutomerList)}
+                  thirdArea={extractTime(item.reserve_time_str)}
+                  fourthArea={matchedAreas || item.laser_area_name} // استفاده از مقدار پیش‌فرض اگر مقایسه‌ای انجام نشد
+                  item={item}
+                  ButtonValue={ButtonValue}
+                  isPaymentTable={isPaymentTable}
+                  isDisabled={isDisabled}
+                  handleProcessPaymentCharge={handleProcessPaymentCharge}
+                  cancelHandler={cancelHandler}
+                />
+              </Box>
+            );
+          })}
       </Box>
 
       {paymentModal.isOpen && (

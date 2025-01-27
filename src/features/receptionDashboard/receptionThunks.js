@@ -488,11 +488,13 @@ export const multiplePayment = createAsyncThunk(
 export const editLazerArea = createAsyncThunk(
   "reseption/editLazerArea",
   async (payload, { rejectWithValue }) => {
+ 
+    
     try {
       const { data } = await api.post(
         "/Reserve/edit/reserve/laser/area/",
         {
-          reserve: payload.idKeeper,
+          reserve: payload.keepId,
           laser_area_list: payload.laserAreaList,
         },
         {
