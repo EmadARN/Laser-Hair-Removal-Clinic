@@ -1,4 +1,5 @@
 import { Box, Text, Flex } from "@chakra-ui/react";
+import Image from "next/image";
 import React from "react";
 
 const AboutHeader = () => {
@@ -10,11 +11,12 @@ const AboutHeader = () => {
       p={5}
     >
       <Box flex="1" display="flex" justifyContent="center">
-        <img
-          width={"90%"}
-          style={{ borderRadius: "8px" }}
-          src="images/about.jpg"
+        <Image
+          src="/images/about.jpg"
           alt="image"
+          width={800} 
+          height={600}
+          style={{ borderRadius: "8px", width: "90%" }}
         />
       </Box>
 

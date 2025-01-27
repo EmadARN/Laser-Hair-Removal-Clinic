@@ -17,7 +17,7 @@ export default function SelectTime({
     if (timeList?.time_data?.length) {
       setSelectedDateId(timeList.time_data[0].date_id);
     }
-  }, [timeList]);
+  }, [timeList,setSelectedDateId]);
 
   useEffect(() => {
     // بارگذاری مقادیر از localStorage در زمان راه‌اندازی کامپوننت
@@ -30,7 +30,7 @@ export default function SelectTime({
     if (storedSlots) {
       setSelectedSlot(storedSlots);
     }
-  }, []);
+  }, [setSelectedDateId,setSelectedSlot]);
 
   const handleClickDate = (dateId) => {
     setSelectedDateId(dateId);

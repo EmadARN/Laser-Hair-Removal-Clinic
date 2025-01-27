@@ -29,11 +29,11 @@ const useEnterExit = () => {
         isClosable: true,
       });
     }
-  }, [operatorSchedule]);
+  }, [operatorSchedule,showToast]);
 
   useEffect(() => {
     dispatch(getOperatorSchedule({ auth_Employee_token }));
-  }, [dispatch]);
+  }, [dispatch,auth_Employee_token]);
 
   const openModal = (action) => {
     setSelectedAction(action); // انتخاب عملیات (ورود یا خروج)

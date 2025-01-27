@@ -62,7 +62,7 @@ export const datasWhyLaser = (Compare) => {
       text: "کاهش مو پس از 2 هفته ",
       images: (
         <Compare
-          firstImage={"images/body/homepage-after-2weeks.jpg"}
+          firstImage={"/images/body/homepage-after-2weeks.jpg"}
           secondImage={"/images/body/before-using-pure-fit-12.jpg"}
         />
       ),
@@ -72,7 +72,7 @@ export const datasWhyLaser = (Compare) => {
       text: "کاهش مو پس از 8 هفته ",
       images: (
         <Compare
-          firstImage={"images/body/homepage-after-2weeks.jpg"}
+          firstImage={"/images/body/homepage-after-2weeks.jpg"}
           secondImage={"/images/body/after-using-pure-fit-8treatments2.jpg"}
         />
       ),
@@ -82,7 +82,7 @@ export const datasWhyLaser = (Compare) => {
       text: "کاهش مو پس از 12 هفته ",
       images: (
         <Compare
-          firstImage={"images/body/homepage-after-2weeks.jpg"}
+          firstImage={"/images/body/homepage-after-2weeks.jpg"}
           secondImage={"/images/body/after-using-pure-fit-12treatments2.jpg"}
         />
       ),

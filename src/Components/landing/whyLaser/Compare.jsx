@@ -3,6 +3,7 @@ import { Box, Icon } from "@chakra-ui/react";
 import { GiResize } from "react-icons/gi";
 import { motion, useAnimation } from "framer-motion";
 import styles from "./style";
+import Image from "next/image";
 
 export const Compare = ({
   firstImage,
@@ -37,7 +38,7 @@ export const Compare = ({
     }, 30); // هر 30 میلی ثانیه به روز رسانی می‌شود
 
     return () => clearInterval(interval); // پاک کردن interval در هنگام unmount
-  }, [controls, direction]);
+  }, [controls, direction,animateSlider]);
 
   const handleMouseMove = useCallback((clientX) => {
     if (!sliderRef.current) return;
@@ -72,9 +73,11 @@ export const Compare = ({
         height={{ base: "31.3vh", md: "50vh" }}
         sx={{ clipPath: `inset(0 ${100 - sliderXPercent}% 0 0)` }}
       >
-        <img
+        <Image
           alt="first image"
           src={firstImage}
+          layout="fill" 
+          objectFit="cover" 
           style={styles.imageFirst}
           draggable={false}
         />
@@ -89,8 +92,10 @@ export const Compare = ({
         height={{ base: "30vh", md: "50vh" }}
         sx={{ clipPath: `inset(0 0 0 ${sliderXPercent}%)` }}
       >
-        <img
+        <Image
           alt="second image"
+          layout="fill" 
+          objectFit="cover" 
           src={secondImage}
           style={styles.imageSecond}
           draggable={false}

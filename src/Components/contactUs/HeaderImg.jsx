@@ -9,8 +9,9 @@ const HeaderImg = () => {
       width={"100%"}
       height={"100%"}
     >
-      <img
-        style={{ width: "750px", maxHeight: "300px" }}
+      <Image
+      width={700} 
+      height={600}
         src="/images/welcome_1.jpg"
         alt="Picture of the author"
       />

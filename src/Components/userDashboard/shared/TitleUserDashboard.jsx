@@ -44,7 +44,7 @@ const TitleUserDashboard = () => {
     return () => {
       window.removeEventListener("popstate", onPopState);
     };
-  }, [router.query.dashboardSlug]);
+  }, [router.query.dashboardSlug,handleCancelReserve]);
 
   return (
     <Flex sx={{ justifyContent: "space-between", bgColor: "#1111", w: "full" }}>
