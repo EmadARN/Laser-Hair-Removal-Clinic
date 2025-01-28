@@ -31,7 +31,7 @@ const TurnSetting = ({ handleInputs, submitHandler,turnSetting }) => {
         <Stack
           spacing={3}
           boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
-          bgColor={"graySky.100"}
+          bgColor={"#FEFEFE"}
           width={{ sm: "100%", lg: "100%" }}
           height={"auto"}
           p={6}

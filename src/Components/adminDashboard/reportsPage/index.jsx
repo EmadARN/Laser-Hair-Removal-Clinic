@@ -57,7 +57,7 @@ const Reports = () => {
           w={{ base: "100%", md: "49%" }}
           sx={{
             mt: 8,
-            bgColor: "#F7FAFC",
+            bgColor: "#FEFEFE",
             p: 4,
             rounded: "8px",
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -69,7 +69,7 @@ const Reports = () => {
           w={{ base: "100%", md: "49%" }}
           sx={{
             mt: 8,
-            bgColor: "#F7FAFC",
+            bgColor: "#FEFEFE",
             p: 4,
             rounded: "8px",
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",

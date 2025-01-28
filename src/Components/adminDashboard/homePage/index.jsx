@@ -4,7 +4,6 @@ import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderDetails from "./ui/HeaderDetails";
 import CustomerTable from "./ui/CustomerTable";
-import FinancialReports from "./ui/financialReports/FinancialReports";
 import TodayIncomeChart from "./ui/charts/TodayIncomeChart";
 import TodayIncomeDoughnut from "./ui/charts/TodayIncomeDoughnut";
 import useFinancialProcessing from "./logic/useFinancialProcessing";
@@ -16,6 +15,7 @@ import {
   getDate,
 } from "@/features/adminDashboard/adminThunks";
 import { getDateParts } from "../utils/getDateParts";
+import FinancialReportsBtn from "./ui/financialReports/FinancialReportsBtn";
 
 const Home = () => {
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
@@ -72,28 +72,34 @@ const Home = () => {
       <Box sx={{ py: 6 }}>
         <HeaderDetails />
       </Box>
-      <Box
-        sx={{ bgColor: "#F7FAFC", p: 4, rounded: "8px" }}
+      <Flex
+        sx={{ bgColor:"#FEFEFE", p: 4, rounded: "8px" }}
         boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+        gap={2}
       >
-        <FinancialReports
-          morningShiftLabel="شیفت صبح"
-          afternoonShiftLabel="شیفت بعد از ظهر"
-          totalPaidAmountThisMonth={filteredOperators.mShiftOperators}
-          totalAmountThisMonth={filteredOperators.aShiftOperators}
+        <FinancialReportsBtn
+          Label1="شیفت صبح"
+          value1={filteredOperators.mShiftOperators}
         />
-      </Box>
-      <Box
-        sx={{ mt: 8, bgColor: "#F7FAFC", p: 4, rounded: "8px" }}
+        <FinancialReportsBtn
+          Label2="شیفت بعد از ظهر"
+          value2={filteredOperators.aShiftOperators}
+        />
+      </Flex>
+      <Flex
+        sx={{ mt: 8, bgColor: "#FEFEFE", p: 4, rounded: "8px" }}
         boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+        gap={2}
       >
-        <FinancialReports
-          morningShiftLabel="تخمین در آمد روز (پرداخت شده)"
-          afternoonShiftLabel="در آمد روز تا این لحظه (رزرو شده)"
-          totalPaidAmountThisMonth={totalPaidAmount}
-          totalAmountThisMonth={totalAmount}
+        <FinancialReportsBtn
+          Label1="تخمین در آمد روز (پرداخت شده)"
+          value1={totalPaidAmount}
         />
-      </Box>
+        <FinancialReportsBtn
+          Label2="در آمد روز تا این لحظه (رزرو شده)"
+          value2={totalAmount}
+        />
+      </Flex>
       <Flex
         direction={{ base: "column", md: "row" }}
         wrap="wrap"
@@ -101,7 +107,7 @@ const Home = () => {
         align="center"
         gap={8}
         mb={10}
-        sx={{ mt: 8, bgColor: "#F7FAFC", p: 4, rounded: "8px" }}
+        sx={{ mt: 8, bgColor: "#FEFEFE", p: 4, rounded: "8px" }}
         boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
       >
         <Box w={{ base: "100%", md: "20%" }} h="100%" maxW="400px" maxH="300px">

@@ -15,6 +15,7 @@ import {
   Text,
   Tr,
 } from "@chakra-ui/react";
+import CustomButton from "@/Common/customeButton/CustomeButton";
 
 const formFields = [
   { label: "نام", name: "name" },
@@ -119,14 +120,14 @@ const ModalStepDetail = (
           </FormControl>
         ))}
       </Flex>
-      <Button
+      <CustomButton
         onClick={handleSubmit}
         w="100%"
         colorScheme="blue"
         display={isReadOnly && "none"}
       >
         تایید اطلاعات و ادامه
-      </Button>
+      </CustomButton>
     </Box>
   );
 

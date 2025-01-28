@@ -33,12 +33,11 @@ const TableWeekly = ({ handleCellClick, tableData = [], programList = [] }) => {
 
   return (
     <Box
-        id="printable-table"
+      id="printable-table"
       className="printable"
       padding={4}
       width="100%"
       overflowX="auto"
-      
     >
       <Table variant="simple" size="md">
         <Thead bg="brand.400">

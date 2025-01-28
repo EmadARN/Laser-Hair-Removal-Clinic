@@ -3,7 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 import React, { useEffect } from "react";
 import { datasWhyLaser } from "@/constants";
 import { toPersianDigits } from "@/utils/toPersianDigits";
-import Compare from "./Compare";
+import Compare from "./ui/Compare";
 
 const MotionBox = motion(Box);
 

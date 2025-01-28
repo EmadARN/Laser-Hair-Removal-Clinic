@@ -6,19 +6,13 @@ const styles = {
     position: "relative",
     cursor: "col-resize",
   },
-  imageFirst: {
-    borderRadius: "16px", 
-  },
-  imageSecond: {
-    
-    borderRadius: "lg",
-    position: "absolute",
 
+  imageSecond: {
+    position: "absolute",
   },
   handlebar: {
     height: "5",
     width: "5",
-    borderRadius: "md",
     position: "absolute",
     top: "50%",
     transform: "translateY(-50%)",

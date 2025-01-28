@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Text, Button } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { CiEdit } from "react-icons/ci";
 import EditUserModal from "./EditUserModal";
 import CustomButton from "@/Common/customeButton/CustomeButton";
@@ -32,7 +32,7 @@ const UserInfoBox = ({
       </Box>
       <Box
         boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
-        bgColor={"graySky.100"}
+        bgColor={"#FEFEFE"}
         width={"100%"}
         height={"auto"}
         p={6}

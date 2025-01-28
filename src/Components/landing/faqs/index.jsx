@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
-import Slider from "./Slider";
+import Slider from "./ui/Slider";
 
 const MotionBox = motion(Box);
 

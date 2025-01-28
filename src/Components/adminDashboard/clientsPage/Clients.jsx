@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import Lists from "../shared/Lists";
 import AccordionLists from "../shared/AccordionLists";
-import { getClientInformation, getCutomerList } from "@/features/adminDashboard/adminThunks";
+import {
+  getClientInformation,
+  getCutomerList,
+} from "@/features/adminDashboard/adminThunks";
 import SearchComponent from "@/Common/searchInput/SearchInput";
-
-
 
 const Clients = () => {
   const [step, setStep] = useState(0);
@@ -17,60 +18,56 @@ const Clients = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const [{ auth_Admin_token }] = useCookies(['auth_Admin_token']);
+  const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCutomerList({ auth_Admin_token }));
   }, [dispatch, auth_Admin_token]);
 
-  const { loading, error, customerListAdmin,clientInformation } = useSelector(
+  const { loading, error, customerListAdmin, clientInformation } = useSelector(
     (store) => store.adminDashboard
   );
 
-  const handleRowClick = async(item) => {
-
-
+  const handleRowClick = async (item) => {
     const customer = item;
     const customerInfo = customerListAdmin.customer_information_list.find(
       (info) => info.user === customer.username
     );
-    await dispatch(getClientInformation({auth_Admin_token,username:item.username}))
-
+    await dispatch(
+      getClientInformation({ auth_Admin_token, username: item.username })
+    );
 
     setClientData({
       username: customer.username,
       name: customer.name,
       last_name: customer.last_name,
       phone_number: customer.phone_number,
-      national_code: customerInfo ? customerInfo.national_code : '',
-      address: customerInfo ? customerInfo.address : '',
-      house_number: customerInfo ? customerInfo.house_number : '',
+      national_code: customerInfo ? customerInfo.national_code : "",
+      address: customerInfo ? customerInfo.address : "",
+      house_number: customerInfo ? customerInfo.house_number : "",
       drug_hist: customerInfo ? customerInfo.drug_hist : false,
       decease_hist: customerInfo ? customerInfo.decease_hist : false,
-      doctor: customerInfo ? customerInfo.doctor : '-',
+      doctor: customerInfo ? customerInfo.doctor : "-",
       offline_number: customerInfo ? customerInfo.offline_num : 0,
-      last_date: customerInfo ? customerInfo.last_date : '-',
+      last_date: customerInfo ? customerInfo.last_date : "-",
     });
 
     setStep(1);
   };
 
-
-  
-
   const mdCancelHandler = () => {
     setStep(0);
     setClientData({
-      name: '',
-      last_name: '',
-      phone_number: '',
-      national_code: '',
-      address: '',
-      house_number: '',
+      name: "",
+      last_name: "",
+      phone_number: "",
+      national_code: "",
+      address: "",
+      house_number: "",
       drug_hist: false,
       decease_hist: false,
-      doctor: '-',
+      doctor: "-",
       offline_number: 0,
     });
   };
@@ -107,16 +104,16 @@ const Clients = () => {
         <Box sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 4 } }}>
           <SearchComponent
             data={customerListAdmin?.customer_list || []}
-            filterKeys={['name', 'last_name']}
+            filterKeys={["name", "last_name"]}
             placeholder="جستجو در بین مراجعین"
             size="lg"
             onSearch={handleSearch}
           />
         </Box>
         <Box
-          width={{ base: '110vw', md: '100%' }}
-          display={'flex'}
-          justifyContent={'center'}
+          width={{ base: "110vw", md: "100%" }}
+          display={"flex"}
+          justifyContent={"center"}
           px={{ base: 2, md: 4 }}
         >
           <Table
@@ -135,33 +132,41 @@ const Clients = () => {
                 ? currentClients.map((item, index) => (
                     <Box key={index} onClick={() => handleRowClick(item)}>
                       <Lists
-                        firstArea={item.name + ' ' + item.last_name}
+                        firstArea={item.name + " " + item.last_name}
                         editDeleteDisplay="none"
                         leftArrowDisplay="flex"
                       />
                     </Box>
                   ))
                 : error
-                ? console.log('Error:', error)
+                ? console.log("Error:", error)
                 : null}
             </Tbody>
           </Table>
         </Box>
-        <HStack mt={4} justifyContent="center">
+        <HStack mt={4} justifyContent="end" ml={4}>
           <Button onClick={handlePrevPage} isDisabled={currentPage === 1}>
-            صفحه قبل
+            قبل
           </Button>
           <Text>{`${currentPage} از ${totalPages}`}</Text>
-          <Button onClick={handleNextPage} isDisabled={currentPage === totalPages}>
-            صفحه بعد
+          <Button
+            onClick={handleNextPage}
+            isDisabled={currentPage === totalPages}
+          >
+            بعد
           </Button>
         </HStack>
       </>
     );
   } else {
-    return <AccordionLists mdCancelHandler={mdCancelHandler} clientData={clientData} clientInformation={clientInformation.reserve_list} />;
+    return (
+      <AccordionLists
+        mdCancelHandler={mdCancelHandler}
+        clientData={clientData}
+        clientInformation={clientInformation.reserve_list}
+      />
+    );
   }
 };
 
 export default Clients;
-

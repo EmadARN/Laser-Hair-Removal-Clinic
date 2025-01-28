@@ -8,7 +8,7 @@ const CustomerTable = ({ dateReserve, customerListAdmin }) => {
     <Box
       sx={{
         mt: 8,
-        bgColor: "#F7FAFC",
+        bgColor: "#FEFEFE",
         p: 4,
         rounded: "8px",
         display: "flex",

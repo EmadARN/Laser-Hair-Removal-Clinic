@@ -1,18 +1,13 @@
 import { formatNumber } from "@/utils/formatNumber";
-import { Box, Button, ButtonGroup, Text } from "@chakra-ui/react";
+import { Box, ButtonGroup, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
-const FinancialReportsBtn = ({
-  morningShiftLabel,
-  afternoonShiftLabel,
-  totalPaidAmountThisMonth,
-  totalAmountThisMonth,
-}) => {
-  const isValuePresent = totalPaidAmountThisMonth || totalAmountThisMonth;
+const FinancialReportsBtn = ({ Label1, Label2, value1, value2 }) => {
+  const isValuePresent = value1 || value2;
 
   return (
-    <ButtonGroup size="sm" isAttached variant="outline" sx={{ w: "100%" }}>
-      <Button
+    <ButtonGroup size="sm" isAttached variant="outline" sx={{ w: "50%" }}>
+      <Flex
         sx={{
           p: { base: 2, md: 0 },
           width: "100%",
@@ -25,11 +20,14 @@ const FinancialReportsBtn = ({
           ":hover": {
             bgColor: "transparent",
           },
+          border: "1px solid #1111",
+          justifyContent: "center",
+          alignItems: "center",
         }}
         size={{ base: "xl", md: "md" }}
       >
-        {morningShiftLabel || afternoonShiftLabel}
-      </Button>
+        {Label1 || Label2}
+      </Flex>
       <Box
         sx={{
           width: "100%",
@@ -40,16 +38,13 @@ const FinancialReportsBtn = ({
         <Text
           sx={{
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            placeItems: "center",
             p: { base: 3, md: 2 },
+            h: "100%",
             fontSize: { base: "10px", md: "14px" },
           }}
         >
-          {totalPaidAmountThisMonth ||
-            (totalAmountThisMonth &&
-              formatNumber(totalPaidAmountThisMonth || totalAmountThisMonth)) ||
-            "0"}
+          {value2 || (value1 && formatNumber(value1 || value2)) || 0}
         </Text>
       </Box>
     </ButtonGroup>

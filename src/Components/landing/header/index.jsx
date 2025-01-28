@@ -2,8 +2,9 @@ import React from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { toPersianDigits } from "@/utils/toPersianDigits";
-import { TextGenerateEffect } from "./TextEffect";
-import HeaderBtn from "./HeaderBtn";
+import { TextGenerateEffect } from "./ui/TextEffect";
+import HeaderBtn from "./ui/HeaderBtn";
+
 
 const MotionHeading = motion(Heading);
 const MotionButton = motion(Box);

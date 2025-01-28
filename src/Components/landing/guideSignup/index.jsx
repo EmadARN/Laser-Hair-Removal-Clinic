@@ -1,8 +1,9 @@
 import { useEffect, useState, useMemo } from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { get_turn_data } from "@/constants";
-import TabButtons from "./TabButtons";
-import FadeInDiv from "./FadeInDiv";
+import TabButtons from "./ui/TabButtons";
+import FadeInDiv from "./ui/FadeInDiv";
+
 
 export const GuideSignup = ({
   tabs: propTabs = get_turn_data,

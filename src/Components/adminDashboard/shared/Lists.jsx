@@ -1,4 +1,4 @@
-import { Box, Flex, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Flex, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -11,8 +11,6 @@ const Lists = ({
   firstArea,
   secondArea,
   thirdArea,
-  imgDisplay,
-  display,
   displayThirdArea,
   editDeleteDisplay,
   bgColor,
@@ -38,7 +36,7 @@ const Lists = ({
         flexDirection: { base: "row", md: "row" },
         justifyContent: "space-between",
         alignItems: "center",
-        bgColor: bgColor || "graySky.100",
+        bgColor: bgColor || "#FEFEFE",
         width: { base: "110%", md: "100%" },
         rounded: rounded || "8px",
         color,
@@ -75,7 +73,7 @@ const Lists = ({
         {thirdArea}
       </Box>
 
-      <Box
+      <Flex
         direction="row"
         gap={2}
         flex="1"
@@ -96,7 +94,7 @@ const Lists = ({
           FooterContent={FooterContent}
           btn={<RiDeleteBinLine size={18} color="red" />}
         />
-      </Box>
+      </Flex>
 
       <Box flex="0.2" display={leftArrowDisplay} textAlign="center">
         <FaChevronLeft />
