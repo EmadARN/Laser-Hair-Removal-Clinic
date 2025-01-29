@@ -29,14 +29,6 @@ export default function NavBar({ bgColor, py }) {
     }
   }, [cookies.auth_token, router]);
 
-  const handleAvatarClick = () => {
-    if (cookies.auth_token) {
-      router.push("/userDashboard");
-    } else {
-      router.push("/signInCustomer");
-    }
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -92,7 +84,7 @@ export default function NavBar({ bgColor, py }) {
                 (cookies.auth_token ? (
                   <FaUser size={20} color="gray" />
                 ) : (
-                  <CustomButton>الان رزرو نوبت</CustomButton>
+                  <CustomButton>الان رزرو کن</CustomButton>
                 ))}
             </Link>
           </Menu>
