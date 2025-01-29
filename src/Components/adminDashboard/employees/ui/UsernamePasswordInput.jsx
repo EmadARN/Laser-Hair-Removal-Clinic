@@ -9,7 +9,7 @@ import {
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 
-import TextInput from "../../shared/Inputs";
+import InputControl from "@/Common/formController/InputControl";
 const UsernamePasswordInput = ({
   label,
   name,
@@ -23,7 +23,7 @@ const UsernamePasswordInput = ({
   <FormControl mt={4}>
     <FormLabel>{label}</FormLabel>
     <InputGroup size="lg">
-      <TextInput
+      <InputControl
         padding={4}
         name={name}
         type={isPassword && !showPassword ? "password" : "text"}

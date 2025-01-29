@@ -182,6 +182,8 @@ export const getAsyncOperatorList = createAsyncThunk(
   "admin/getAsyncOperatorList",
   async (_, { getState, rejectWithValue }) => {
     const { token } = getState().adminDashboard;
+    console.log("token", token);
+
     try {
       const { data } = await api.get("/Core/operator/list/", {
         headers: {

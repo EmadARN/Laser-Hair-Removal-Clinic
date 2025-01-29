@@ -23,7 +23,7 @@ const ConfirmInfo = ({ slug }) => {
   const token = cookies.auth_token;
   const date = localStorage.getItem("date");
   const slots = localStorage.getItem("slots");
-  const operatorName = localStorage.getItem("name");
+  const operatorName = localStorage.getItem("operatorName");
 
   const dispatch = useDispatch();
 

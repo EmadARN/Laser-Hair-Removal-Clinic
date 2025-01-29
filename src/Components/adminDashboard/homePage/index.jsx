@@ -66,6 +66,7 @@ const Home = () => {
     operatorsDate,
     dateReserve
   );
+  console.log("dateReserve", dateReserve);
 
   return (
     <>
@@ -73,7 +74,7 @@ const Home = () => {
         <HeaderDetails />
       </Box>
       <Flex
-        sx={{ bgColor:"#FEFEFE", p: 4, rounded: "8px" }}
+        sx={{ bgColor: "#FEFEFE", p: 4, rounded: "8px" }}
         boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
         gap={2}
       >

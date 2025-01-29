@@ -24,24 +24,28 @@ const FormInput = ({
         name="name"
         value={inputsData.name}
         handleChange={handleChange}
+        label="نام"
         placeholder="نام"
       />
       <InputControl
         name="last_name"
         value={inputsData.last_name}
         handleChange={handleChange}
+        label="نام خانوادگی"
         placeholder="نام خانوادگی"
       />
       <InputControl
         name="national_code"
         value={inputsData.national_code}
         handleChange={handleChange}
+        label="کد ملی"
         placeholder="کد ملی"
       />
       <InputControl
         name="phone_number"
         value={inputsData.phone_number}
         handleChange={handleChange}
+        label="شماره همراه"
         placeholder="شماره همراه"
       />
 
@@ -64,12 +68,14 @@ const FormInput = ({
         name="house_number"
         value={inputsData.house_number}
         handleChange={handleChange}
+        label="شماره ثابت"
         placeholder="شماره ثابت"
       />
       <InputControl
         name="address"
         value={inputsData.address}
         handleChange={handleChange}
+        label="آدرس منزل"
         placeholder="آدرس منزل"
       />
     </Box>

@@ -18,18 +18,18 @@ export async function middleware(req) {
       return NextResponse.redirect(new URL("/signInCustomer", url));
     }
   }
-  
+
   // adminDashboard
   if (pathname.startsWith("/adminDashboard")) {
     if (!adminToken) {
-      return NextResponse.redirect(new URL("/loginManagerReception", url));
+      return NextResponse.redirect(new URL("/panel", url));
     }
   }
 
   // reseptionDashboard
   if (pathname.startsWith("/reseptionDashboard")) {
     if (!employeeToken) {
-      return NextResponse.redirect(new URL("/loginManagerReception", url));
+      return NextResponse.redirect(new URL("/panel", url));
     }
   }
   // اگر همه چیز صحیح باشد، ادامه درخواست داده می‌شود

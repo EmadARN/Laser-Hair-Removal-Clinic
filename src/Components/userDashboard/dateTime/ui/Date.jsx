@@ -39,7 +39,7 @@ const Date = ({
         {loading ? (
           "loading"
         ) : error ? (
-          <Box color="red">خطایی رخ داده است!</Box>
+          <Box color="red">خطایی رخ داده است! احتمالا قبلا رزرو کردید</Box>
         ) : (
           <SelectTime
             timeList={timeList}

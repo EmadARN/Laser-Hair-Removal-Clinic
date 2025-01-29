@@ -99,7 +99,7 @@ const FormLogin = ({
           fontSize: { base: "10px", md: "16px" },
         }}
       >
-        فراموشی رمز عبور
+        فراموشی رمز عبور ؟
       </Text>
       <ForgotPasswordModal
         isOpen={isOpen}

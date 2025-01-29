@@ -33,8 +33,14 @@ const FirstBox = ({
   const reserveDate = toPersianDigits(
     extractDate(lastReserve && lastReserve.reserve_time_str)
   );
+
   const nowDay = date.toLocaleDateString("fa-IR");
-  const compareDate = reserveDate < nowDay ? true : false;
+
+  const compareDate =
+    reserveDate.split("/")[2]?.padStart(2, toPersianDigits(0)) <
+    nowDay.split("/")[2]
+      ? true
+      : false;
   const reserveCompelete = compareDate === true && payed === true;
   const isExistingUser =
     lastReserve &&
