@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SearchInput from "@/Common/searchInput/SearchInput";
 import { Box, Table, Tbody, Button, HStack, Text } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";

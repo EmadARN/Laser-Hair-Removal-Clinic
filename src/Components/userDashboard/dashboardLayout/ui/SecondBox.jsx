@@ -42,7 +42,7 @@ const SecondBox = ({ reportsClick, accountClick }) => {
   const handleLogout = async () => {
     setIsLoggingOut(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       removeCookie("auth_token", { path: "/" });
       clearLocalStorage();
       router.push("/");

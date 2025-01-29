@@ -18,22 +18,23 @@ const useEnterExit = () => {
   const [isEntered, setIsEntered] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null); // برای ذخیره انتخاب کاربر (ورود یا خروج)
+  console.log("operatorSchedule", operatorSchedule);
 
-  useEffect(() => {
-    if (!operatorSchedule) {
-      showToast({
-        title: "خطا.",
-        description: "اوپراتور وجود ندارد یا خطایی پیش آمده",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-    }
-  }, [operatorSchedule,showToast]);
+  // useEffect(() => {
+  //   if (!operatorSchedule.operator_name) {
+  //     showToast({
+  //       title: "خطا.",
+  //       description: "اوپراتور وجود ندارد یا خطایی پیش آمده",
+  //       status: "error",
+  //       duration: 3000,
+  //       isClosable: true,
+  //     });
+  //   }
+  // }, [operatorSchedule, showToast]);
 
   useEffect(() => {
     dispatch(getOperatorSchedule({ auth_Employee_token }));
-  }, [dispatch,auth_Employee_token]);
+  }, [dispatch, auth_Employee_token]);
 
   const openModal = (action) => {
     setSelectedAction(action); // انتخاب عملیات (ورود یا خروج)

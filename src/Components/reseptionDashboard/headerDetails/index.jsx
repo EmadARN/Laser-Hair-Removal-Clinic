@@ -1,38 +1,39 @@
 import React from "react";
 import { Flex, Text, Box } from "@chakra-ui/react";
 import PatientWithoutTime from "../AddPatientWithoutTime";
-import { getTodayDate } from "@/utils/extractDate";
+import { getDayPart, getTodayDate } from "@/utils/extractDate";
 
 const HeaderDetails = () => {
   return (
-    <Box width={"100%"} mr={{ base: 12, md: 0 }} gap={4}>
+    <Box width="100%" mr={{ base: 12, md: 0 }}>
       <Flex
-        sx={{
-          justifyContent: "space-between",
-          width: "100%",
-          flexDirection: { base: "row" },
-          alignItems: "center",
-          gap: { base: 5, sm: 4, md: 8 },
-        }}
+        direction={{ base: "column", sm: "row" }}
+        justify="space-between"
+        align="center"
+        gap={{ base: 4, sm: 8 }}
+        width="100%"
       >
         <Text
-          sx={{
-            whiteSpace: "nowrap",
-            fontSize: { base: "12px", sm: "15px", md: "20px" },
-            fontWeight: "bold",
-          }}
+          fontSize={{ base: "12px", sm: "15px", md: "20px" }}
+          fontWeight="bold"
+          color="gray.500"
+          whiteSpace="nowrap"
         >
           نوبت های روز
         </Text>
+
         <Flex
+          direction={{ base: "column", sm: "row" }}
+          align="center"
+          gap={{ base: 2, sm: 4 }}
           whiteSpace="nowrap"
-          fontSize={{ base: "12px", sm: "15px", md: "20px" }}
-          sx={{
-            gap: { base: 5, md: 4 },
-            alignItems: "center",
-          }}
+          fontWeight="bold"
+          color="gray.500"
         >
-          {getTodayDate()}
+          <Flex align="center">
+            <Text>{getDayPart()} بخیر &nbsp;,</Text>
+            <Text>&nbsp;{getTodayDate()}</Text>
+          </Flex>
           <Box>
             <PatientWithoutTime />
           </Box>

@@ -1,62 +1,46 @@
-import React, { useState, useEffect } from "react";
-import AreaChoice from "./AreaChoice";
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import React from "react";
+import { Flex } from "@chakra-ui/react";
 import { useCookies } from "react-cookie";
 import StepperPrototype from "../stepper";
-
-import { useFetchLazerAreas } from "./useFetchLazerAreaList";
-import { usePostLazerAreas } from "./usePostLazerAreaList";
 import CustomButton from "@/Common/customeButton/CustomeButton";
 import Loading from "@/Common/loading";
 import TitleUserDashboard from "../shared/TitleUserDashboard";
+import { useFetchLazerAreas } from "./logic/useFetchLazerAreaList";
+import { usePostLazerAreas } from "./logic/usePostLazerAreaList";
+import AreaChoice from "./ui/AreaChoice";
+import { useCustomToast } from "@/utils/useCustomToast ";
+import { useChoosingArea } from "./logic/useChoosingArea";
 
 const ChoosingArea = ({ slug }) => {
-  const [checkedItems, setCheckedItems] = useState([]);
-  const [reserveId, setReserveId] = useState([]);
   const [{ auth_token } = cookies] = useCookies(["auth_token"]);
+  const { showToast } = useCustomToast();
 
   const { areas, loading, error } = useFetchLazerAreas(auth_token);
+
+  const {
+    checkedItems,
+    reserveId,
+    allChecked,
+    handleSelectAll,
+    handleCheckboxChange,
+  } = useChoosingArea(areas);
+
   const { submitHandler } = usePostLazerAreas(reserveId, auth_token);
-
-  useEffect(() => {
-    if (areas?.all_laser_area_object?.first_type) {
-      setCheckedItems(
-        new Array(areas.all_laser_area_object.first_type.length).fill(false)
-      );
-    }
-  }, [areas]);
-
-  const allChecked = checkedItems.length > 0 && checkedItems.every(Boolean);
-
-  const handleSelectAll = (isChecked) => {
-    setCheckedItems(new Array(checkedItems.length).fill(isChecked));
-    const allIds = isChecked
-      ? areas.all_laser_area_object.first_type.map((userId) => userId.value)
-      : [];
-    setReserveId(allIds);
-  };
-
-  const handleCheckboxChange = (index, isChecked) => {
-    const newCheckedItems = [...checkedItems];
-    newCheckedItems[index] = isChecked;
-    setCheckedItems(newCheckedItems);
-
-    const userIdValue = areas.all_laser_area_object.first_type[index].value;
-    setReserveId((prevReserveId) =>
-      isChecked
-        ? [...prevReserveId, userIdValue]
-        : prevReserveId.filter((id) => id !== userIdValue)
-    );
-  };
 
   const isDisabled = reserveId.length === 0;
 
   if (loading) {
-    return <Spinner />;
+    return <Loading />;
   }
 
   if (error) {
-    return <Text color="red.500">خطا در بارگذاری داده‌ها: {error}</Text>;
+    return showToast({
+      title: "خطا.",
+      description: "اوپراتور وجود ندارد یا خطایی پیش آمده",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+    });
   }
 
   return (

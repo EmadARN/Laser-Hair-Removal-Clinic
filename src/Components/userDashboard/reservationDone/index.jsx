@@ -1,17 +1,7 @@
 import React from "react";
 import { Grid, Box, Text, Button } from "@chakra-ui/react";
-import RedGreenBox from "@/Common/RedGreenBox/RedGreenBox";
 
-const ReservationDone = ({ slug }) => {
-  const reservationDetails = [
-    { label: "تاریخ", value: "دوشنبه ۱۰/۱/۱۴۰۲" },
-    { label: "اپراتور", value: "نام اپراتور" },
-    { label: "نواحی انتخاب شده", value: "نام ناحیه" },
-    { label: "مبلغ پرداخت شده", value: "50.000تومان" },
-    { label: "مبلغ کل", value: "230.000تومان" },
-    { label: "باقی مانده جهت پرداخت", value: "200.000تومان" },
-  ];
-
+const ReservationDone = () => {
   return (
     <Grid
       w="100%"
