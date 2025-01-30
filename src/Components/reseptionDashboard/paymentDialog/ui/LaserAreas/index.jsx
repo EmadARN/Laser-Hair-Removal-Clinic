@@ -142,10 +142,9 @@ const LaserAreas = ({ ...props }) => {
     handleSelectChange,
     removeHandle,
     submitEditLazerArea,
-  } = useLaserAreas(props.idKeeper,props.onClose);
+  } = useLaserAreas(props.idKeeper, props.onClose);
 
   const buttonWidth = useBreakpointValue({ base: "100%", md: "30%" });
-console.log('lazerareas',LazerAreas);
 
   return (
     <>

@@ -226,6 +226,7 @@ import LaserAreas from "./ui/LaserAreas";
 import CustomPayment from "./ui/customPayment";
 import usePaymentDialog from "./logic/usePaymentDialog";
 import paymentDialogContent from "./ui/paymentDialogContent";
+import { useSelector } from "react-redux";
 
 const PaymentDialog = ({
   handlePaymentMethodChange,
@@ -235,6 +236,7 @@ const PaymentDialog = ({
   paymentHandleClick,
   handlePaymentChange,
 }) => {
+  const { cutomerList } = useSelector((state) => state.receptionDashboardSlice);
   const {
     step,
     setStep,
@@ -264,7 +266,8 @@ const PaymentDialog = ({
     oneWayPaymentValu,
     confrimChange,
     handlePaymentMethodChange,
-    paymentHandleClick
+    paymentHandleClick,
+    cutomerList
   );
 
   const renderContent = () => {

@@ -4,6 +4,7 @@ import InformationBox from "./InformationBox";
 import { extractTime } from "@/utils/extractDate";
 import PaymentMethodSection from "./PaymentMethodSection";
 import ConfirmTransaction from "./ConfitmTransaction";
+import { getCustomerName } from "@/utils/getCustomerName";
 
 const paymentDialogContent = (
   step,
@@ -18,7 +19,8 @@ const paymentDialogContent = (
   oneWayPaymentValu,
   confrimChange,
   handlePaymentMethodChange,
-  paymentHandleClick
+  paymentHandleClick,
+  cutomerList
 ) => {
   const renderHeader = () => (
     <Box display="flex" alignItems="center">
@@ -39,7 +41,7 @@ const paymentDialogContent = (
     <Box width="100%" p={2} display="flex" flexDirection="column" gap={3}>
       <InformationBox
         title="نام و نام خانوادگی"
-        value={selectedReserve.user || ""}
+        value={getCustomerName(selectedReserve.user,cutomerList) || ""}
       />
       <InformationBox
         title="زمان نوبت"

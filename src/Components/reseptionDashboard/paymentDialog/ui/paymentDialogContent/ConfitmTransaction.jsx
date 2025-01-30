@@ -45,6 +45,7 @@
 // export default ConfitmTransaction;
 import React from "react";
 import { Button, Flex, Text } from "@chakra-ui/react";
+import { formatNumber } from "@/utils/formatNumber";
 
 const ConfirmTransaction = ({ selectedReserve, paymentHandleClick }) => {
   return (
@@ -73,9 +74,11 @@ const ConfirmTransaction = ({ selectedReserve, paymentHandleClick }) => {
         alignItems="center"
         mt={{ base: 4, md: 0 }}
       >
-        <Text color="#555">مبلغ قابل پرداخت</Text>
+        <Text color="#555" fontWeight="bold" fontSize="14px">
+          مبلغ قابل پرداخت
+        </Text>
         <Text color="blue">
-          {selectedReserve.total_price_amount || ""} تومان
+          {formatNumber(selectedReserve.total_price_amount) || ""} تومان
         </Text>
       </Flex>
     </Flex>

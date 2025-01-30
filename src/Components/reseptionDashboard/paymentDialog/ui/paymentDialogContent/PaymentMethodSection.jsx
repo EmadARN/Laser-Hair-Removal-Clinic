@@ -111,7 +111,7 @@ const PaymentMethodSection = ({
         onClick={() => setStep(step + 2)}
       >
         <CiShare1 color="blue" />
-        <Text as="button" color="blue" ml={1}>
+        <Text as="button" color="blue" ml={1} fontWeight="bold" fontSize="14px">
           پرداخت به چند روش
         </Text>
       </Box>

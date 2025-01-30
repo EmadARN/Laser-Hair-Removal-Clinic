@@ -83,7 +83,7 @@ const InformationBox = ({ title, value, setStep, step }) => (
               onClick={() => setStep(step + 1)}
             >
               <CiEdit color="blue" />
-              <Text color="blue" ml={1}>
+              <Text color="blue" ml={1} fontWeight="bold" fontSize="14px">
                 تغییر نواحی
               </Text>
             </Flex>

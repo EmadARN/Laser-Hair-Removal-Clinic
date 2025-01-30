@@ -115,7 +115,7 @@ const CustomPayment = ({
   return (
     <Flex flexDirection="column" gap={5} p={3}>
       {payment.map(({ key, paymentPriceKepper, selectedValue, title }) => (
-        <Box key={key} mb={4}>
+        <Box key={key} mb={2}>
           <EachPaymentBox
             handlePrice={(event) => handlePrice(event, key)}
             paymentPriceKepper={paymentPriceKepper}

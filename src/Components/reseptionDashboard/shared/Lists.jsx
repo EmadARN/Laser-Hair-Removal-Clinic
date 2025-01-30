@@ -70,36 +70,41 @@ const Lists = ({
         }}
         boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
       >
-        <AreaBox fontSize={responsiveFontSize}>{firstArea}</AreaBox>
-        <AreaBox fontSize={responsiveFontSize}>{secondArea}</AreaBox>
-        <AreaBox fontSize={responsiveFontSize}>{thirdArea}</AreaBox>
-        <AreaBox fontSize={responsiveFontSize} display={displayfourthArea}>
-          {fourthArea}
-        </AreaBox>
+        <Flex width={"70%"}>
+          <AreaBox fontSize={responsiveFontSize}>{firstArea}</AreaBox>
+          <AreaBox fontSize={responsiveFontSize}>{secondArea}</AreaBox>
+          <AreaBox fontSize={responsiveFontSize}>{thirdArea}</AreaBox>
+          <AreaBox fontSize={responsiveFontSize} display={displayfourthArea}>
+            {fourthArea}
+          </AreaBox>
+        </Flex>
 
         <Flex
           gap={2}
           justifyContent={{ base: "flex-end", md: "center" }}
           alignItems="center"
           flexWrap="wrap"
+          width={"30%"}
         >
           <Button
-            onClick={() => handleProcessPaymentCharge(item)} // فراخوانی هندلر شارژ
+            width={"15%"}
+            onClick={() => handleProcessPaymentCharge(item)}
             size={{ base: "xs", md: "sm" }}
             bg="transparent"
             color="blue"
             px={2}
-            isDisabled={isCancelled ? true : isDisabled}
+            isDisabled={isCancelled || isCompelte ? true : isDisabled}
           >
             {isCompelte ? "پرداخت شده" : "پرداخت"}
           </Button>
           <Button
+            width={"40%"}
             onClick={() => handleOpenModal(item)} // باز کردن مودال لغو
             display={display}
             isDisabled={isCancelled ? true : isDisabled}
             size={{ base: "xs", md: "sm" }}
             bg="transparent"
-            color={!isPaymentTable ? "red" : "gray"}
+            color={isPaymentTable || isCancelled ? "gray" : "red"}
             px={2}
           >
             {isCancelled ? "لغو شده" : "لغو نوبت"}
@@ -117,18 +122,6 @@ const Lists = ({
         cancelText="بازگشت"
         onConfirm={handleConfirmCancel}
         onCancel={handleCloseModal}
-      />
-
-      {/* مودال شارژ */}
-      <CustomModal
-        isOpen={isChargeModalOpen}
-        onClose={handleCloseChargeModal}
-        title="ورود به شارژ"
-        description="آیا می‌خواهید به حساب خود شارژ وارد کنید؟"
-        confirmText="ورود به شارژ"
-        cancelText="لغو"
-        onConfirm={handleOpenChargeModal} // فراخوانی هندلر ورود به شارژ
-        onCancel={handleCloseChargeModal}
       />
     </>
   );

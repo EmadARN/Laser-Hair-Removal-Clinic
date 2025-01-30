@@ -4,8 +4,15 @@ import { MdCancel } from "react-icons/md";
 import { Modal, ModalOverlay, ModalContent } from "@chakra-ui/react";
 import { getCustomerName } from "@/utils/getCustomerName";
 import { ProfileField } from "./ProfileField";
+import { extractDate, extractTime } from "@/utils/extractDate";
 
-const PatientsProfile = ({ isOpen, onClose, profileInfo, cutomerList,handleChargeClick }) => {
+const PatientsProfile = ({
+  isOpen,
+  onClose,
+  profileInfo,
+  cutomerList,
+  handleChargeClick,
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -47,12 +54,18 @@ const PatientsProfile = ({ isOpen, onClose, profileInfo, cutomerList,handleCharg
             />
             <ProfileField
               label="آخرین جلسه"
-              value={profileInfo ? profileInfo.reserve_time_str : ""}
+              value={
+                profileInfo
+                  ? ` ${extractTime(
+                      profileInfo.reserve_time_str
+                    )} - ${extractDate(profileInfo.reserve_time_str)}`
+                  : ""
+              }
             />
           </Box>
           <Box width="100%" mt={4}>
             <Button
-            onClick={handleChargeClick}
+              onClick={handleChargeClick}
               width="100%"
               bgColor="brand.400"
               color="white"

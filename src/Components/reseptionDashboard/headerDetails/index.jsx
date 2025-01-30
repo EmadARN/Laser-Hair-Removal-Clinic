@@ -18,6 +18,7 @@ const HeaderDetails = () => {
           fontWeight="bold"
           color="gray.500"
           whiteSpace="nowrap"
+          mr={4}
         >
           نوبت های روز
         </Text>

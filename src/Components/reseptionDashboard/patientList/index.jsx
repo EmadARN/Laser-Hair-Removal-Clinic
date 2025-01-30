@@ -159,12 +159,12 @@ const PatientList = ({ todayReserve, isPaymentTable }) => {
     <Box w={{ base: "100vw", md: "100%" }} px={4}>
       <TableContainer>
         <Table
-          cursor={"pointer"}
           overflowY="auto"
           width="100%"
           size="sm"
           dir="rtl"
-          variant="striped"
+          boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+          bgColor="graySky.100"
         >
           <Tbody>
             {todayReserve?.all_list
