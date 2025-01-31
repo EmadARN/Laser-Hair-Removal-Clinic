@@ -180,14 +180,12 @@ export const getSettingInformation = createAsyncThunk(
 
 export const getAsyncOperatorList = createAsyncThunk(
   "admin/getAsyncOperatorList",
-  async (_, { getState, rejectWithValue }) => {
-    const { token } = getState().adminDashboard;
-    console.log("token", token);
-
+  async (payload, {  rejectWithValue }) => {
+    
     try {
       const { data } = await api.get("/Core/operator/list/", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${payload.token}`,
         },
       });
 

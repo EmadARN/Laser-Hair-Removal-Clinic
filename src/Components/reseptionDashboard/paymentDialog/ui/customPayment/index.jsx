@@ -78,10 +78,11 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import React from "react";
 import EachPaymentBox from "./EachPaymentBox";
 import { useDispatch, useSelector } from "react-redux";
+import { setConfirmChange } from "@/features/receptionDashboard/paymentSlice";
 
 const CustomPayment = ({
   setStep,
-  setConfirmChange,
+
   handlePaymentChange,
   handlePrice,
 }) => {
