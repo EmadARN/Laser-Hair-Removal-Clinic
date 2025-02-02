@@ -25,7 +25,7 @@ const Lists = ({
   });
 
   const [isModalOpen, setModalOpen] = useState(false); // مدیریت وضعیت مودال لغو
-  const [isChargeModalOpen, setChargeModalOpen] = useState(false); // مدیریت وضعیت مودال شارژ
+
   const [selectedItem, setSelectedItem] = useState(null); // آیتم انتخاب‌شده
 
   const handleOpenModal = (item) => {
@@ -36,14 +36,6 @@ const Lists = ({
   const handleCloseModal = () => {
     setModalOpen(false);
     setSelectedItem(null);
-  };
-
-  const handleOpenChargeModal = () => {
-    setChargeModalOpen(true); // باز کردن مودال شارژ
-  };
-
-  const handleCloseChargeModal = () => {
-    setChargeModalOpen(false); // بستن مودال شارژ
   };
 
   const handleConfirmCancel = () => {

@@ -16,17 +16,16 @@ const PaidTurns = ({ display }) => {
     "auth_Employee_token",
   ]);
   const dispatch = useDispatch();
-  const { todayReserve, cutomerList } = useSelector(
+  const { todayReserve, cutomerList, LazerAreas } = useSelector(
     (store) => store.receptionDashboardSlice
   );
 
   useEffect(() => {
     dispatch(todayDate({ auth_Employee_token }));
-  }, [dispatch,auth_Employee_token]);
+  }, [dispatch, auth_Employee_token]);
 
   return (
     <Accordion
-  
       defaultIndex={[0]}
       allowMultiple
       mt={10}
@@ -47,7 +46,9 @@ const PaidTurns = ({ display }) => {
               isDisabled={true}
               todayReserve={todayReserve}
               isPaymentTable={true}
+              auth_Employee_token={auth_Employee_token}
               cutomerList={cutomerList}
+              LazerAreas={LazerAreas}
             />
           </Stack>
         </AccordionPanel>

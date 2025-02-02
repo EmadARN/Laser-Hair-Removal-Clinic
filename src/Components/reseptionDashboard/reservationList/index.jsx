@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, useDisclosure } from "@chakra-ui/react";
 import { extractTime } from "@/utils/extractDate";
 import { getCustomerName } from "@/utils/getCustomerName";
 import Lists from "../shared/Lists";
 import PaymentDialog from "../paymentDialog";
-import { lazerAreas } from "@/constants";
 import usePaymentcontrol from "./logic/usePaymentcontrol";
+import { getLazerAreas } from "@/features/receptionDashboard/receptionThunks";
+import { useDispatch } from "react-redux";
 
 export const ReservationList = ({
   isDisabled,
@@ -15,7 +16,10 @@ export const ReservationList = ({
   auth_Employee_token,
   isPaymentTable,
   cutomerList,
+  LazerAreas,
 }) => {
+  const dispatch = useDispatch();
+
   const cancelModal = useDisclosure();
   const paymentModal = useDisclosure();
 
@@ -32,25 +36,28 @@ export const ReservationList = ({
     auth_Employee_token,
     cancelModal
   );
+  useEffect(() => {
+    dispatch(getLazerAreas({ auth_Employee_token }));
+  }, [dispatch, auth_Employee_token, isPaymentTable]);
 
   return (
     <Box w={{ base: "100vw", md: "100%" }} px={4}>
       <Box>
         {todayReserve?.all_list
-          ?.filter(
-            (item) =>
-              !isPaymentTable || item.payed || item.reserve_type === "sc"
-          )
+          ?.filter((item) => {
+            return !isPaymentTable || item.payed || item.reserve_type === "sc";
+          })
           .map((item) => {
             const matchedAreas = item.laser_area_list
               .map(
                 (area) =>
-                  lazerAreas.find((lazerArea) => lazerArea.value === area)
-                    ?.label
+                  LazerAreas?.all_laser_area_object &&
+                  LazerAreas?.all_laser_area_object?.first_type.find(
+                    (lazerArea) => lazerArea.value === area
+                  )?.label
               )
               .filter(Boolean) // حذف مقادیر null یا undefined
               .join(", "); // تبدیل آرایه به یک رشته با جداکننده‌ی ", "
-
             return (
               <Box key={item.id} width={{ base: "110vw", md: "100%" }}>
                 <Lists
@@ -58,7 +65,7 @@ export const ReservationList = ({
                   firstArea={getCustomerName(item.user)}
                   secondArea={getCustomerName(item.user, cutomerList)}
                   thirdArea={extractTime(item.reserve_time_str)}
-                  fourthArea={matchedAreas || item.laser_area_name} // استفاده از مقدار پیش‌فرض اگر مقایسه‌ای انجام نشد
+                  fourthArea={matchedAreas} // استفاده از مقدار پیش‌فرض اگر مقایسه‌ای انجام نشد
                   item={item}
                   ButtonValue={ButtonValue}
                   isPaymentTable={isPaymentTable}
