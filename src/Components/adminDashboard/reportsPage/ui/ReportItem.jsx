@@ -11,21 +11,37 @@ const ReportItem = ({ item, customerListAdmin }) => {
       boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
       bgColor="#FEFEFE"
     >
-      <Flex justifyContent="space-between" alignItems="center">
+      <Flex justifyContent="space-between" alignItems="center" gap={4}>
         {/* نام کاربر */}
-        <Text fontWeight="bold" fontSize={{ base: "14px", md: "16px" }}>
-          {getCustomerName(item.user, customerListAdmin)}
-        </Text>
+        <Box flex="1" minWidth="0">
+          <Text
+            fontWeight="bold"
+            fontSize={{ base: "14px", md: "16px" }}
+            noOfLines={1}
+          >
+            {getCustomerName(item.user, customerListAdmin)}
+          </Text>
+        </Box>
 
         {/* تاریخ رزرو */}
-        <Text fontSize={{ base: "12px", md: "14px" }} color="gray.600">
-          {extractDate(item.reserve_time_str)}
-        </Text>
+        <Box flex="1" minWidth="0" textAlign="right">
+          <Text fontSize={{ base: "12px", md: "14px" }} color="gray.600">
+            {extractDate(item.reserve_time_str)}
+          </Text>
+        </Box>
 
         {/* ناحیه لیزر */}
-        <Text fontSize={{ base: "12px", md: "14px" }} color="blue.600">
-          {item.laser_area_name}
-        </Text>
+        <Box flex="1" maxWidth={{ base: "50px", md: "110px" }} textAlign="left">
+          <Text
+            fontSize={{ base: "12px", md: "14px" }}
+            color="brand.400"
+            overflow="hidden"
+            textOverflow="ellipsis"
+            whiteSpace="nowrap"
+          >
+            {item.laser_area_name}
+          </Text>
+        </Box>
       </Flex>
     </Box>
   );

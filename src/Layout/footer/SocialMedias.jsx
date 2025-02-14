@@ -1,15 +1,7 @@
+import { socialMedias } from "@/constants";
 import { Box, Flex, Icon, Link, Tooltip } from "@chakra-ui/react";
-import { FaInstagram, FaTelegram, FaWhatsapp } from "react-icons/fa";
-import { SiEitaa } from "react-icons/si";
 
 const SocialMedias = () => {
-  const socialMedias = [
-    { name: "اینستاگرام", icon: FaInstagram, color: "#E1306C", link: "#" },
-    { name: "تلگرام", icon: FaTelegram, color: "#0088cc", link: "#" },
-    { name: "ایتا", icon: SiEitaa, color: "orange", link: "#" },
-    { name: "واتساپ", icon: FaWhatsapp, color: "#25D366", link: "#" },
-  ];
-
   return (
     <Box py={6}>
       <Flex justify="center" gap={8}>

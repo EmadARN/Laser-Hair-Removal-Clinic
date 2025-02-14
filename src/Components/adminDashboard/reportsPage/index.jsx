@@ -1,5 +1,5 @@
 import { Box, Flex, VStack } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import RepoertHeader from "./ui/RepoertHeader";
@@ -17,6 +17,7 @@ const Reports = () => {
   const { dateReserve, customerListAdmin } = useSelector(
     (store) => store.adminDashboard
   );
+  const [filteredData, setFilteredData] = useState();
 
   const { dateRange, handleDateChange, handleTodayClick } = useDateRange();
   const summary = useSummary(dateReserve);
@@ -37,6 +38,9 @@ const Reports = () => {
           to={dateRange.to}
           onDateChange={handleDateChange}
           onTodayClick={handleTodayClick}
+          dateReserve={dateReserve}
+          customerListAdmin={customerListAdmin}
+          setFilteredData={setFilteredData}
         />
       </Box>
       <Box>
@@ -81,14 +85,22 @@ const Reports = () => {
 
       <Box mt={{ base: 6, md: 8 }}>
         <VStack align="stretch" spacing={2}>
-          {dateReserve &&
-            dateReserve.complete_list.map((item) => (
-              <ReportItem
-                key={item.id}
-                item={item}
-                customerListAdmin={customerListAdmin}
-              />
-            ))}
+          {filteredData && filteredData.length > 0
+            ? filteredData.map((searchitem) => (
+                <ReportItem
+                  key={searchitem.id}
+                  item={searchitem}
+                  customerListAdmin={customerListAdmin}
+                />
+              ))
+            : dateReserve &&
+              dateReserve.complete_list.map((item) => (
+                <ReportItem
+                  key={item.id}
+                  item={item}
+                  customerListAdmin={customerListAdmin}
+                />
+              ))}
         </VStack>
       </Box>
     </Box>

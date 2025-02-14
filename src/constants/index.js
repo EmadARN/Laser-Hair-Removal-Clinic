@@ -29,8 +29,10 @@ import ReservationDone from "@/Components/userDashboard/reservationDone";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import Setting from "@/Components/adminDashboard/settingPage";
 import UserInformation from "@/Components/userDashboard/form/registerForm";
+import { FaInstagram, FaTelegram, FaWhatsapp } from "react-icons/fa";
+import { SiEitaa } from "react-icons/si";
 
-//َaboutUs
+//! aboutUs
 export const numberTicker = [
   { count: 1399, title: "سال تاسیس" },
   { count: 2849, title: "مشتریان" },
@@ -38,7 +40,7 @@ export const numberTicker = [
   { count: 4, title: "تعداد دستگاه" },
 ];
 
-//Home
+//! Home
 export const data = [
   { id: 0, title: "خانه", icon: <HomeIcon />, src: "/" },
   { id: 1, title: "حساب کاربری", icon: <UserIcon />, src: "/userDashboard" },
@@ -55,6 +57,14 @@ export const data = [
     src: "/aboutUs",
   },
 ];
+
+export const socialMedias = [
+  { name: "اینستاگرام", icon: FaInstagram, color: "#E1306C", link: "#" },
+  { name: "تلگرام", icon: FaTelegram, color: "#0088cc", link: "#" },
+  { name: "ایتا", icon: SiEitaa, color: "orange", link: "#" },
+  { name: "واتساپ", icon: FaWhatsapp, color: "#25D366", link: "#" },
+];
+
 export const datasWhyLaser = (Compare) => {
   return [
     {
@@ -89,6 +99,7 @@ export const datasWhyLaser = (Compare) => {
     },
   ];
 };
+
 export const dataBanners = [
   { header: "رزور آنلاین", text: "از خانه نوبت خود را رزو کنید" },
   {
@@ -97,6 +108,7 @@ export const dataBanners = [
   },
   { header: "بهترین دستگاه ها", text: "دستگاه لیزر الکساندرایت نابلکس" },
 ];
+
 export const boxes = [
   {
     icon: <FaSun size={32} color="#7563DC" />,
@@ -184,6 +196,7 @@ export const get_turn_data = [
     desc: "جهت نهایی سازی نوبت خود، مراجعین عزیز می بایست مبلغ در نظر گرفته شده به عنوان وثیقه را پرداخت کنند.",
   },
 ];
+
 export const contactDetails = [
   {
     title: "شماره تماس",
@@ -201,7 +214,8 @@ export const contactDetails = [
   },
 ];
 
-//AdminDashboard
+//! AdminDashboard
+
 export const admintData = [
   {
     id: 0,
@@ -253,6 +267,7 @@ export const admintData = [
     icon: <TbSettings2 />,
   },
 ];
+
 export const oprators = [
   [
     { id: 1, name: "علی احمدی", status: "فعال" },
@@ -292,6 +307,7 @@ export const userInputs = [
     isPassword: true,
   },
 ];
+
 export const headers = [
   { title: "روز", key: "day" },
   { title: "شیفت صبح", key: "morning" },
@@ -299,6 +315,7 @@ export const headers = [
   { title: "ساعت شروع نوبت دهی", key: "start" },
   { title: "ساعت اتمام نوبت دهی", key: "end" },
 ];
+
 export const daysOfWeek = [
   "شنبه",
   "یکشنبه",
@@ -308,6 +325,7 @@ export const daysOfWeek = [
   "پنجشنبه",
   "جمعه",
 ];
+
 export const persianMonths = [
   "فروردین",
   "اردیبهشت",
@@ -322,6 +340,7 @@ export const persianMonths = [
   "بهمن",
   "اسفند",
 ];
+
 export const tableHeaders = [
   { label: "روز", key: "day" },
   { label: "شیفت صبح", key: "morningShift" },
@@ -330,7 +349,8 @@ export const tableHeaders = [
   { label: "ساعت اتمام نوبت دهی", key: "afternoonTime" },
 ];
 
-//ReceptionDashboard
+//! ReceptionDashboard
+
 export const receptionData = [
   {
     id: 0,
@@ -347,6 +367,7 @@ export const receptionData = [
     icon: <IoMdPeople />,
   },
 ];
+
 export const TableData = [
   {
     id: 1,
@@ -398,7 +419,8 @@ export const TableData = [
   },
 ];
 
-//UserDashboard
+//!UserDashboard
+
 export const userData = [
   {
     slug: "userInformation",
@@ -415,17 +437,20 @@ export const userData = [
     component: <ReservationDone />,
   },
 ];
+
 export const steps = [
   { description: "اطلاعات مراجع", icon: FaUser },
   { description: "انتخاب نواحی", icon: FaMapMarkerAlt },
   { description: "تاریخ و ساعت", icon: FaCalendarAlt },
   { description: "تایید و پرداخت", icon: FaWallet },
 ];
+
 export const items = [
   { text: "انتخاب شما", color: "#7563dc" }, // بنفش
   { text: "قابل انتخاب", color: "gray.400" }, // طوسی
   { text: "در انتظار پرداخت سایر مراجعین", color: "gray.400" }, // طوسی
 ];
+
 export const UserData = [
   { id: 1, title: "تاریخ" },
   { id: 2, title: "زمان" },
@@ -435,6 +460,7 @@ export const UserData = [
   // { id: 3, title: "مبلغ پرداخت شده", value: "50.000تومان " },
   // { id: 3, title: "مبلغ قابل پرداخت", value: "200.000تومان " },
 ];
+
 export const dataForMap = (confrimInfoDetailCustomer, customerInformation) => {
   return [
     { id: 1, title: "نام", value: confrimInfoDetailCustomer.name || "" },
@@ -483,8 +509,7 @@ export const TurnData = (date, slots, operatorName) => {
   ];
 };
 
-
-export const  lazerAreas = [
+export const lazerAreas = [
   { value: "278401855741925133398455544592257173971", label: "صورت کامل" },
 
   { value: "52880784631365082508082463346048104802", label: "پشت لب و چانه" },

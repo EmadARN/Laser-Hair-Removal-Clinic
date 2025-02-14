@@ -20,7 +20,13 @@ const usePagination = (filteredClients) => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
-  return { currentPage, handlePrevPage, handleNextPage, totalPages ,currentClients};
+  return {
+    currentPage,
+    handlePrevPage,
+    handleNextPage,
+    totalPages,
+    currentClients,
+  };
 };
 
 export default usePagination;
