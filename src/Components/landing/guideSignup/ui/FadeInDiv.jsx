@@ -2,7 +2,12 @@ import { Box, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 const FadeInDiv = ({ tabs, active }) => (
-  <Box position="relative" width="full" height="full" mt={{ base: 0, lg: 10 }}>
+  <Box
+    position="relative"
+    width={{ base: "60%", md: "100%", lg: "100%" }}
+    height="full"
+    mt={{ base: 0, lg: 10 }}
+  >
     {tabs.map((tab) => (
       <motion.div
         key={tab.id}

@@ -12,9 +12,11 @@ import React from "react";
 const Home = () => {
   return (
     <Layout bgColor={"#F7F7F7"}>
-      <Header />
+      <Grid pt={{ base: "100px", lg: "50px" }}>
+        <Header />
+      </Grid>
       <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6} my={8}>
-        <GridItem colSpan={12} mt={{ base: 24, md: 0 }}>
+        <GridItem colSpan={12} mt={{ base: 24, md: 24 }}>
           <Banner />
         </GridItem>
         <GridItem colSpan={12} my={12}>

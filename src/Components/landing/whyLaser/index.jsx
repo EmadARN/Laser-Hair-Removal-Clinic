@@ -24,9 +24,9 @@ const WhyLaser = () => {
     window.addEventListener("scroll", handleScroll);
     // زمانی که اسکرول اتفاق افتاد و مقدار isVisible تغییر کرد، انیمیشن را شروع می‌کنیم
     if (isVisible) {
-      controls.start({ opacity: 1, y: 0 });
+      controls.start({ y: 0 });
     } else {
-      controls.start({ opacity: 0, y: 50 });
+      controls.start({ y: 50 });
     }
     // پاک کردن رویداد اسکرول هنگام unmount شدن کامپوننت
     return () => window.removeEventListener("scroll", handleScroll);
@@ -34,7 +34,7 @@ const WhyLaser = () => {
   return (
     <>
       <MotionBox
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ y: 50 }}
         animate={controls}
         transition={{ duration: 0.5 }}
         px={{ base: 10, md: 28 }}
@@ -44,7 +44,7 @@ const WhyLaser = () => {
         backgroundColor="#ffff"
         color={"gray.600"}
         minHeight="600px"
-        textAlign="center" // متن را وسط چپ کنیم
+        textAlign="center"
       >
         <Heading
           sx={{ display: "flex", justifyContent: "center" }}

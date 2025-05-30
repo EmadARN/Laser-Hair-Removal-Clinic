@@ -1,10 +1,10 @@
+
 import React from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import { TextGenerateEffect } from "./ui/TextEffect";
 import HeaderBtn from "./ui/HeaderBtn";
-
 
 const MotionHeading = motion(Heading);
 const MotionButton = motion(Box);
@@ -23,39 +23,45 @@ const Header = () => {
 
   return (
     <Flex
-      h={{ base: "100%", md: "60vh", lg: "100vh" }}
       w="100%"
-      direction={{ base: "column-reverse", lg: "row" }} // در نمایشگرهای کوچک (base) عمودی و در بزرگ (lg) افقی
+      direction={{ base: "column-reverse", lg: "row" }} // در موبایل عمودی، در دسکتاپ افقی
+      alignItems="center" // تراز عمودی
+      justifyContent="space-between" // فاصله بین باکس‌ها
     >
       <Box
-        w={{ base: "100%", lg: "35%" }} // عرض ۱۰۰٪ در نمایشگر کوچک و ۳۵٪ در بزرگ
+        w={{ base: "100%", lg: "40%" }} // عرض کمتر برای متن در دسکتاپ
         h="100%"
-        p={4}
-        display={"flex"}
-        flexDirection={"column"}
-        justifyContent={"center"}
-        position={"relative"}
+        p={6}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="flex-start" // تراز متن به سمت چپ
+        position="relative"
       >
         <MotionHeading
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
           color="gray.600"
-          fontSize={{ base: "18px", md: "28px" }}
+          fontSize={{ base: "14px", md: "18px", lg: "28px" }}
         >
           لیزر موهای زائد
         </MotionHeading>
+
         <TextGenerateEffect words={text} />
+
         <MotionButton
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1 }}
+          mt={{ sm: "0px", lg: "100px" }} // فاصله کمتر از 120px
         >
           <HeaderBtn />
         </MotionButton>
       </Box>
+
       <Box
-        w={{ base: "100%", lg: "65%" }} // عرض ۱۰۰٪ در نمایشگر کوچک و ۶۵٪ در بزرگ
+        w={{ base: "100%", lg: "65%" }} // عرض بیشتر برای ویدئو
         h="100%"
         display="flex"
         justifyContent="center"
@@ -66,17 +72,18 @@ const Header = () => {
         <MotionVideo
           as="video"
           src="/video/1778694294.webm"
-         
           autoPlay
           loop
           muted
           controls={false}
-          initial={{ x: "-100%", opacity: 0 }} // شروع از سمت چپ با اوپسیتی 0
-          animate={{ x: 0, opacity: 1 }} // حرکت به سمت راست با اوپسیتی 1
-          transition={{ duration: 1 }} // زمان انیمیشن
+          initial={{ x: "-100%", opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1 }}
           style={{
             transform: "scale(3)",
-            width: "100%",
+            width: "100%", // عرض کامل باکس
+            height: "auto", // ارتفاع خودکار
+            objectFit: "cover", // پر کردن باکس بدون تغییر نسبت
           }}
         />
       </Box>
