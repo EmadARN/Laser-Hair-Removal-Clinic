@@ -68,8 +68,11 @@ const VerificationCode = ({
             onChange={(event) => handleCodeChangeWrapper(event, index)}
             onKeyDown={(event) => handleKeyDownWrapper(event, index)}
             onFocus={handleFocus}
-            marginX={2}
-            width={{ base: "40px", sm: "60px", md: "70px" }}
+            width={{ base: "40px", sm: "50px", md: "60px", lg: "70px" }}
+            height={{ base: "40px", sm: "50px" }}
+            fontSize={{ base: "15px", md: "18px" }}
+            borderRadius="8px"
+            border="1px solid #ccc"
           />
         ))}
       </Box>
