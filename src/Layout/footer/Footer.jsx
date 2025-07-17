@@ -1,13 +1,11 @@
 import {
   Box,
   Container,
-  Link,
   SimpleGrid,
   Stack,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import SocialMedias from "./SocialMedias";
 import FooterSub from "./FooterSub";

@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SearchInput from "@/Common/searchInput/SearchInput";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,7 @@ const DailyShift = () => {
   const { todayReserve, cutomerList, LazerAreas } = useSelector(
     (store) => store.receptionDashboardSlice
   );
+  const [filteredData, setFilteredData] = useState();
 
   useEffect(() => {
     dispatch(todayDate({ auth_Employee_token }));
@@ -29,7 +30,13 @@ const DailyShift = () => {
 
       {/* SearchInput بخش */}
       <Box p={4} width={{ base: "60vw", md: "100%" }}>
-        <SearchInput size="lg" placeholder="جستجو در نوبت های روز" />
+        <SearchInput
+          size="lg"
+          placeholder="جستجو در نوبت های روز"
+          datas={todayReserve && todayReserve?.all_list}
+          utilityDatas={cutomerList}
+          onSearch={setFilteredData}
+        />
       </Box>
 
       {/* ReservationList بخش */}
@@ -40,6 +47,7 @@ const DailyShift = () => {
           auth_Employee_token={auth_Employee_token}
           cutomerList={cutomerList}
           LazerAreas={LazerAreas}
+          filteredData={filteredData}
         />
       </Box>
 

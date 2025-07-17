@@ -32,7 +32,7 @@ const Faqs = () => {
   }, [controls, isVisible]);
 
   return (
-    <Box py={10}  px={5} height="100vh" ref={ref}>
+    <Box py={10} px={5} height="100vh" ref={ref}>
       <Heading
         sx={{ display: "flex", justifyContent: "center" }}
         as="h2"
@@ -42,7 +42,6 @@ const Faqs = () => {
         سوالات متداول لیزر موهای زائد
       </Heading>
       <Flex
-      
         direction={{ base: "column", md: "row-reverse" }}
         align="center"
         justify="center"

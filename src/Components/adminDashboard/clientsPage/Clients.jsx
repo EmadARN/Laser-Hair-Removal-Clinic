@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Box, Table, Tbody, Button, HStack, Text } from "@chakra-ui/react";
-
+import { Box, Table, Button, HStack, Text } from "@chakra-ui/react";
 import Lists from "../shared/Lists";
 import AccordionLists from "../shared/AccordionLists";
-
 import SearchComponent from "@/Common/searchInput/SearchInput";
 import usePagination from "./logic/usePagination";
 import useCutomerInformation from "./logic/useCutomerInformation";
@@ -11,7 +9,7 @@ import useCutomerInformation from "./logic/useCutomerInformation";
 const Clients = () => {
   const [step, setStep] = useState(0);
   const [filteredClients, setFilteredClients] = useState([]);
-  const [itemKeeper, setItemKeeper] = useState();
+  const [filteredData, setFilteredData] = useState();
 
   const {
     currentPage,
@@ -30,12 +28,6 @@ const Clients = () => {
     clientData,
     mdCancelHandler,
   } = useCutomerInformation(setStep);
-
-  
-
-  const handleSearch = (results) => {
-    setFilteredClients(results);
-  };
 
   useEffect(() => {
     if (customerListAdmin?.customer_list) {
@@ -63,7 +55,8 @@ const Clients = () => {
             filterKeys={["name", "last_name"]}
             placeholder="جستجو در بین مراجعین"
             size="lg"
-            onSearch={handleSearch}
+            datas={currentClients}
+            onSearch={setFilteredData}
           />
         </Box>
         <Box
@@ -80,24 +73,29 @@ const Clients = () => {
             size="sm"
             dir="rtl"
           >
-            <Tbody>
-              {!loading &&
-              !error &&
-              currentClients &&
-              Array.isArray(currentClients)
-                ? currentClients.map((item, index) => (
-                    <Box key={index} onClick={() => handleRowClick(item)}>
-                      <Lists
-                        firstArea={item.name + " " + item.last_name}
-                        editDeleteDisplay="none"
-                        leftArrowDisplay="flex"
-                      />
-                    </Box>
-                  ))
-                : error
-                ? console.log("Error:", error)
-                : null}
-            </Tbody>
+            {filteredData && filteredData.length > 0
+              ? filteredData.map((searchitem, index) => (
+                  <Box key={index} onClick={() => handleRowClick(searchitem)}>
+                    <Lists
+                      firstArea={searchitem.name + " " + searchitem.last_name}
+                      editDeleteDisplay="none"
+                      leftArrowDisplay="flex"
+                    />
+                  </Box>
+                ))
+              : !loading && !error && Array.isArray(currentClients)
+              ? currentClients.map((item, index) => (
+                  <Box key={index} onClick={() => handleRowClick(item)}>
+                    <Lists
+                      firstArea={item.name + " " + item.last_name}
+                      editDeleteDisplay="none"
+                      leftArrowDisplay="flex"
+                    />
+                  </Box>
+                ))
+              : error
+              ? null
+              : null}
           </Table>
         </Box>
         <HStack mt={4} justifyContent="end" ml={4}>

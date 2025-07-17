@@ -3,11 +3,10 @@ import { Flex, Button, Box, Icon } from "@chakra-ui/react";
 const TabButtons = ({ tabs, active, setActive }) => (
   <Flex
     flexDirection={{ base: "column", lg: "row" }}
-    alignItems="start"
     justifyContent="center"
     overflowX="auto"
     maxWidth="full"
-    width="full"
+    width={{ base: "50%", lg: "100%" }}
   >
     {tabs.map((tab, index) => (
       <Flex

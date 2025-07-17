@@ -25,13 +25,7 @@ const Slider = () => {
   }, []);
 
   return (
-    <Box
-    
-      flex="1"
-      p={{ base: 3, md: 5 }}
-      position="relative"
-      h="100%"
-    >
+    <Box flex="1" p={{ base: 3, md: 5 }} position="relative" h="100%">
       <Heading
         color={"gray.600"}
         as="h2"

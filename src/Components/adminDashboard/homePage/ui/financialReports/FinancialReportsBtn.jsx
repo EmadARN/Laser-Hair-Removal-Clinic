@@ -44,7 +44,7 @@ const FinancialReportsBtn = ({ Label1, Label2, value1, value2 }) => {
             fontSize: { base: "10px", md: "14px" },
           }}
         >
-          {value2 || (value1 && formatNumber(value1 || value2)) || 0}
+          {value2 || (value1 && formatNumber(value1 || value2))}
         </Text>
       </Box>
     </ButtonGroup>

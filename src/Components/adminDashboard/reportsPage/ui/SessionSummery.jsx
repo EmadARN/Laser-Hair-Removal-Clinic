@@ -16,7 +16,7 @@ const SessionSummery = ({ completeListLength, totalPriceAmount }) => {
       <Box width="50%">
         <SessionSummeryBox
           number={completeListLength}
-          icon={<HiMiniUserGroup size={"20px"} color="blue" />}
+          icon={<HiMiniUserGroup size={"20px"} color="#7563DC" />}
           title="تعداد جلسات لیزر"
         />
       </Box>
@@ -24,7 +24,7 @@ const SessionSummery = ({ completeListLength, totalPriceAmount }) => {
       <Box width="50%">
         <SessionSummeryBox
           number={totalPriceAmount}
-          icon={<FaWallet size={"20px"} color="blue" />}
+          icon={<FaWallet size={"20px"} color="#7563DC" />}
           title="درامد"
         />
       </Box>

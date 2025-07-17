@@ -4,7 +4,6 @@ import { get_turn_data } from "@/constants";
 import TabButtons from "./ui/TabButtons";
 import FadeInDiv from "./ui/FadeInDiv";
 
-
 export const GuideSignup = ({
   tabs: propTabs = get_turn_data,
   contentClassName,
@@ -27,13 +26,7 @@ export const GuideSignup = ({
   };
 
   return (
-    <Box
-      px={{ base: 10, md: 28 }}
-      py={{ base: 4, md: 8 }}
-      minH="350px"
-      bgColor="#fff"
-      rounded="25px"
-    >
+    <Box py={{ base: 4, md: 8 }} minH="350px" bgColor="#fff" rounded="25px">
       <Heading
         sx={{ display: "flex", justifyContent: "center" }}
         as="h2"
@@ -43,7 +36,10 @@ export const GuideSignup = ({
       >
         نحوه دریافت نوبت
       </Heading>
-      <Flex flexDirection={{ base: "row", lg: "column" }}>
+      <Flex
+        flexDirection={{ base: "row", lg: "column" }}
+        justifyContent="space-around"
+      >
         <TabButtons tabs={tabs} active={active} setActive={setActive} />
         <FadeInDiv tabs={tabs} active={active} className={contentClassName} />
       </Flex>

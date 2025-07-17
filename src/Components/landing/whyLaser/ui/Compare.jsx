@@ -70,7 +70,7 @@ export const Compare = ({
         top="10px"
         left="0"
         width="full"
-        height={{ base: "31.3vh", md: "50vh" }}
+        height={{ base: "30vh", md: "50vh" }}
         sx={{ clipPath: `inset(0 ${100 - sliderXPercent}% 0 0)` }}
       >
         <Image

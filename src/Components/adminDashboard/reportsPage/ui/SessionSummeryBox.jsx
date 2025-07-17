@@ -14,14 +14,14 @@ const SessionSummeryBox = ({ icon, title, number }) => {
       alignItems="center"
     >
       <Box display="flex" alignItems="center" gap={3}>
-        <Box bgColor={"blue.50"} padding={4} borderRadius="50%">
+        <Box bgColor={"purple.50"}  padding={4} borderRadius="50%">
           {icon}
         </Box>
         <Box>{title}</Box>
       </Box>
 
       <Box>
-        <Text color="blue">{formatNumber(number)}</Text>
+        <Text color="brand.400">{formatNumber(number)}</Text>
       </Box>
     </Box>
   );
