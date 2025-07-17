@@ -142,7 +142,7 @@ const LaserAreas = ({ ...props }) => {
     handleSelectChange,
     removeHandle,
     submitEditLazerArea,
-  } = useLaserAreas(props.idKeeper, props.onClose);
+  } = useLaserAreas(props.idKeeper, props.onClose,props.setStep);
 
   const buttonWidth = useBreakpointValue({ base: "100%", md: "30%" });
 
@@ -198,7 +198,7 @@ const LaserAreas = ({ ...props }) => {
           </Button>
           <Button
             onClick={() => {
-              props.onClose();
+          
               props.setStep(0);
             }}
             width={buttonWidth}

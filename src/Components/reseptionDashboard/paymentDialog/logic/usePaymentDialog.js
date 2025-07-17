@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setConfirmChange,
   setPaymentPriceKepper1,
   setPaymentPriceKepper2,
   setSelectedValue,
@@ -22,14 +23,17 @@ const usePaymentDialog = (onClose) => {
     confrimChange,
   } = useSelector((state) => state.payment);
 
+
   const handleCancel = () => {
     setStep(0);
+  
     [
       setPaymentPriceKepper1,
       setPaymentPriceKepper2,
       setSelectedValue,
       setSelectedValue2,
     ].forEach((action) => dispatch(action("")));
+    dispatch(setConfirmChange(false));
     onClose();
   };
 

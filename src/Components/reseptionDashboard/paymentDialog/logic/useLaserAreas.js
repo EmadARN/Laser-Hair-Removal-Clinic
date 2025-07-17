@@ -7,7 +7,7 @@ import {
   todayDate,
 } from "@/features/receptionDashboard/receptionThunks";
 
-export const useLaserAreas = (idKeeper,onClose) => {
+export const useLaserAreas = (idKeeper,onClose,setStep) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [laserAreaList, setLaserAreaList] = useState([]);
   const [{ auth_Employee_token }] = useCookies(["auth_Employee_token"]);
@@ -45,8 +45,9 @@ export const useLaserAreas = (idKeeper,onClose) => {
       );
       if (result.meta.requestStatus === "fulfilled"){
         await  dispatch(todayDate({ auth_Employee_token }));
+        setStep(0)
       }
-      onClose()
+     
     }
 
   
