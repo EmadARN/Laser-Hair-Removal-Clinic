@@ -30,7 +30,7 @@ const UserForm = ({ userToEdit, isEdit, token }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4}>
+      <Grid  templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4}>
         {renderInputs(userInputs.slice(0, 2))}
       </Grid>
 
@@ -47,7 +47,7 @@ const UserForm = ({ userToEdit, isEdit, token }) => {
         />
 
         {formData.user_type !== "r" ? (
-          <Grid pt={4} templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4}>
+          <Grid  pt={4} templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4}>
             {renderInputs(userInputs.slice(2, 4).reverse())}
           </Grid>
         ) : (
@@ -58,19 +58,23 @@ const UserForm = ({ userToEdit, isEdit, token }) => {
       {formData.user_type === "r" &&
         userInputs
           .slice(3)
-          .map(({ label, name, placeholder, isPassword }) => (
-            <UsernamePasswordInput
+          .map(({ label, name, placeholder, isPassword }) => {
+        
+            return (
+              <UsernamePasswordInput
               key={name}
               label={label}
               name={name}
-              value={formData[name]}
+              value={formData[name] || ""}
               placeholder={placeholder}
               isPassword={isPassword}
               showPassword={showPassword}
               setShowPassword={setShowPassword}
               handleChange={handleChange}
             />
-          ))}
+            )
+          
+})}
 
       <CustomButton
         mt={6}
