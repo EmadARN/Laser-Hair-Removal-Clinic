@@ -3,11 +3,13 @@ import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 const InputControl = ({
   name,
   value,
-  handleChange,
+  onChange,
   label,
   placeholder,
   type = "text",
 }) => {
+
+
   return (
     <FormControl mb={4}>
       <FormLabel>{label}</FormLabel>
@@ -15,7 +17,7 @@ const InputControl = ({
         name={name}
         value={value}
         type={type}
-        onChange={handleChange}
+        onChange={onChange}
         placeholder={placeholder}
       />
     </FormControl>
