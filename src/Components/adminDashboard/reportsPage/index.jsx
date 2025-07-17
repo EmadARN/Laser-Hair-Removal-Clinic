@@ -63,7 +63,7 @@ const Reports = () => {
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
         >
-          <LaserSessionsChart completeListLength={sessionCounts} />
+          <LaserSessionsChart sessionCounts={sessionCounts} />
         </Box>
         <Box
           w={{ base: "100%", md: "49%" }}
@@ -75,7 +75,7 @@ const Reports = () => {
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
         >
-          <LineChart totalPriceAmount={totalIncomes} />
+          <LineChart totalIncomes={totalIncomes} />
         </Box>
       </Flex>
 

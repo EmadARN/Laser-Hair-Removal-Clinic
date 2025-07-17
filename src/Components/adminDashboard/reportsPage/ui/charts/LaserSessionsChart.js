@@ -14,7 +14,7 @@ import { persianMonths } from "@/constants";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const LaserSessionsChart = ({ sessionCounts }) => {
-  console.log("sessionCounts", sessionCounts);
+
 
   const data = {
     labels: persianMonths,
@@ -42,6 +42,10 @@ const LaserSessionsChart = ({ sessionCounts }) => {
     scales: {
       y: {
         beginAtZero: true,
+        ticks: {
+          stepSize: 1, // این خط اضافه می‌شه
+          precision: 0, // برای حذف اعشار (اختیاری ولی مفید)
+        },
       },
     },
   };
