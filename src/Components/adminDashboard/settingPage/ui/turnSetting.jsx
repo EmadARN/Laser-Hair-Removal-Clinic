@@ -10,8 +10,10 @@ import {
 } from "@chakra-ui/react";
 import CustomButton from "@/Common/customeButton/CustomeButton";
 import { formatNumber } from "@/utils/formatNumber";
+import Loading from "@/Common/loading";
 
-const TurnSetting = ({ handleInputs, submitHandler,turnSetting }) => {
+const TurnSetting = ({ handleInputs, submitHandler,turnSetting ,loading}) => {
+  console.log("turen",turnSetting)
   return (
     <form onSubmit={submitHandler}>
       <Box
@@ -48,6 +50,7 @@ const TurnSetting = ({ handleInputs, submitHandler,turnSetting }) => {
                 type="time"
                 min="08:00"
                 max="11:00"
+                value={turnSetting.morning_time} 
                 onChange={handleInputs}
               />
             </FormControl>
@@ -61,6 +64,7 @@ const TurnSetting = ({ handleInputs, submitHandler,turnSetting }) => {
                 type="time"
                 min="12:00"
                 max="23:59"
+                value={turnSetting.afternoon_time}
                 onChange={handleInputs}
               />
             </FormControl>
@@ -83,7 +87,7 @@ const TurnSetting = ({ handleInputs, submitHandler,turnSetting }) => {
               py={4}
               type="submit"
             >
-              ثبت تغییرات
+         {loading ?<Loading/>:"ثبت تغییرات" }
             </CustomButton>
           </Box>
         </Stack>

@@ -63,7 +63,7 @@ const EditUserModal = ({
           <CustomButton
             colorScheme="blue"
             mr={3}
-            onClick={() => changePasswordAsync(passwordChange)}
+            onClick={() => changePasswordAsync(onClose)}
           >
             ثبت
           </CustomButton>

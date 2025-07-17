@@ -4,6 +4,7 @@ import UserInfoBox from "./ui/UserInfoBox";
 import TurnSetting from "./ui/turnSetting";
 import useSettingLogic from "./logic/useSettingLogic";
 import { useCustomToast } from "@/utils/useCustomToast ";
+import { useSelector } from "react-redux";
 
 const Setting = () => {
   const { showToast } = useCustomToast();
@@ -20,6 +21,10 @@ const Setting = () => {
     userNames,
     auth_Admin_token,
   } = useSettingLogic(showToast);
+
+  const {  loading } = useSelector(
+    (store) => store.adminDashboard
+  );
 
   return (
     <>
@@ -38,11 +43,12 @@ const Setting = () => {
       </Box>
       <Box width={"100%"} sx={{ mt: 8 }}>
         <TurnSetting
+        loading={loading}
           handleInputs={handleInputs}
           setTurnSetting={setTurnSetting}
           turnSetting={turnSetting}
           token={auth_Admin_token}
-          submitHandler={() => submitHandler(showToast)}
+          submitHandler={ submitHandler}
         />
       </Box>
     </>
