@@ -11,6 +11,7 @@ import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { extractTime } from "@/utils/extractDate";
 
 const AccordionLists = ({ clientData, mdCancelHandler, clientInformation }) => {
+  console.log("clientdata",clientInformation)
   return (
     <>
       <Box display={"flex"} alignItems={"center"} gap={6} mt={6}>
@@ -57,16 +58,7 @@ const AccordionLists = ({ clientData, mdCancelHandler, clientInformation }) => {
                   {clientData.name + " " + clientData.last_name}
                 </Box>
               </Box>
-              <Box mb={3} display={"flex"} flexDirection={"column"} gap={3}>
-                <Text fontSize={{ base: "12px", md: "16px" }}>کد ملی</Text>
-                <Box
-                  fontWeight={"bold"}
-                  fontSize={{ base: "13px", md: "18px" }}
-                  as="span"
-                >
-                  {clientData.national_code}
-                </Box>
-              </Box>
+            
               <Box mb={3} display={"flex"} flexDirection={"column"} gap={3}>
                 <Text fontSize={{ base: "12px", md: "16px" }}> شماره تماس</Text>
                 <Box
