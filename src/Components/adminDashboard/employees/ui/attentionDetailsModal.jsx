@@ -24,15 +24,27 @@ export const FooterContent = ({ user, token }) => {
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteAsyncUser({ token, id: user.username }));
-      showToast({
-        title: "کاربر حذف شد.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-      // فراخوانی مجدد لیست کاربران
-      dispatch(getAsyncUsersList({ token }));
+      const response = await dispatch(
+        deleteAsyncUser({ token, id: user.username })
+      );
+
+      if (response.meta.requestStatus === "fulfilled") {
+        showToast({
+          title: "کاربر با موفقیت حذف شد.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        dispatch(getAsyncUsersList({ token }));
+      } else if (response.meta.requestStatus === "rejected") {
+        showToast({
+          title: "امکان حذف این کاربر وجود ندارد.",
+          description: response.payload || "کاربر حذف نشد.",
+          status: "warning",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     } catch (error) {
       showToast({
         title: "خطا در حذف کاربر.",
@@ -52,3 +64,4 @@ export const FooterContent = ({ user, token }) => {
     </Stack>
   );
 };
+
