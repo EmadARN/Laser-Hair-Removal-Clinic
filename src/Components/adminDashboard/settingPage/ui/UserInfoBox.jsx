@@ -14,7 +14,7 @@ const UserInfoBox = ({
   changePasswordAsync,
   setPasswordChange,
 }) => {
-  const [username, setUsername] = useState(userNames.username);
+
 
   return (
     <Box
@@ -46,7 +46,7 @@ const UserInfoBox = ({
               نام کاربری
             </Text>
             <Text fontSize={{ base: "15px", md: "17px" }} fontWeight={"bold"}>
-              {username}
+           {userNames?.username}
             </Text>
           </Box>
 
@@ -81,8 +81,7 @@ const UserInfoBox = ({
         changePasswordAsync={changePasswordAsync}
         isOpen={isOpen}
         onClose={onClose}
-        username={username}
-        setUsername={setUsername}
+
       />
     </Box>
   );

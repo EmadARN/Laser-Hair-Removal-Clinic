@@ -21,6 +21,7 @@ const Setting = () => {
     userNames,
     auth_Admin_token,
   } = useSettingLogic(showToast);
+  console.log("user",userNames)
 
   const {  loading } = useSelector(
     (store) => store.adminDashboard
