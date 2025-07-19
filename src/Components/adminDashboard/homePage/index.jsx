@@ -16,6 +16,8 @@ import {
 } from "@/features/adminDashboard/adminThunks";
 import { getDateParts } from "../utils/getDateParts";
 import FinancialReportsBtn from "./ui/financialReports/FinancialReportsBtn";
+import ReusableSession from "../shared/ReussableSession";
+import { RiShieldUserFill } from "react-icons/ri";
 
 const Home = () => {
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
@@ -66,7 +68,8 @@ const Home = () => {
     operatorsDate,
     dateReserve
   );
-  console.log("dateReserve", dateReserve);
+  console.log("customerListAdmin", customerListAdmin);
+  console.log("totalAmount", totalAmount);
 
   return (
     <>
@@ -101,33 +104,52 @@ const Home = () => {
           value2={totalAmount}
         />
       </Flex>
-      <Flex
-        direction={{ base: "column", md: "row" }}
-        wrap="wrap"
-        justify="space-around"
-        align="center"
-        gap={8}
-        mb={10}
-        sx={{ mt: 8, bgColor: "#FEFEFE", p: 4, rounded: "8px" }}
-        boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
-      >
-        <Box w={{ base: "100%", md: "20%" }} h="100%" maxW="400px" maxH="300px">
-          <TodayIncomeDoughnut
-            totalPaidAmountThisMonth={totalPaidAmount}
-            totalAmountThisMonth={totalAmount}
-          />
-        </Box>
-        <Box w={{ base: "100%", md: "50%" }} h="100%" maxW="400px" maxH="300px">
-          <TodayIncomeChart
-            totalPaidAmountThisMonth={totalPaidAmount}
-            totalAmountThisMonth={totalAmount}
-          />
-        </Box>
-      </Flex>
-      <CustomerTable
+      {totalAmount === 0 && totalPaidAmount === 0 ? (
+        <ReusableSession text="در این تاریخ داده ای وجود ندارد" icon={<RiShieldUserFill />} />
+      ) : (
+        <>
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          wrap="wrap"
+          justify="space-around"
+          align="center"
+          gap={8}
+          mb={10}
+          sx={{ mt: 8, bgColor: "#FEFEFE", p: 4, rounded: "8px" }}
+          boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+        >
+          <Box
+            w={{ base: "100%", md: "20%" }}
+            h="100%"
+            maxW="400px"
+            maxH="300px"
+          >
+            <TodayIncomeDoughnut
+              totalPaidAmountThisMonth={totalPaidAmount}
+              totalAmountThisMonth={totalAmount}
+            />
+          </Box>
+          <Box
+            w={{ base: "100%", md: "50%" }}
+            h="100%"
+            maxW="400px"
+            maxH="300px"
+          >
+            <TodayIncomeChart
+              totalPaidAmountThisMonth={totalPaidAmount}
+              totalAmountThisMonth={totalAmount}
+            />
+          </Box>
+        </Flex>
+
+              <CustomerTable
         dateReserve={dateReserve}
         customerListAdmin={customerListAdmin}
       />
+      </>
+      )}
+
+
     </>
   );
 };
