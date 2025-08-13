@@ -68,8 +68,7 @@ const Home = () => {
     operatorsDate,
     dateReserve
   );
-  console.log("customerListAdmin", customerListAdmin);
-  console.log("totalAmount", totalAmount);
+
 
   return (
     <>
