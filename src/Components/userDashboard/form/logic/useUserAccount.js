@@ -33,7 +33,7 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
 
   useEffect(() => {
     dispatch(getCutomerList({ token: auth_token }));
-  }, [auth_token,dispatch]);
+  }, [auth_token, dispatch]);
 
   // فیلتر کردن و ادغام داده‌ها بر اساس شماره موبایل کاربر
   useEffect(() => {
@@ -99,9 +99,23 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
   };
 
   // تابع ارسال اطلاعات فرم به سرور
-  const submitHandler = async () => {
+  // const submitHandler = async () => {
+  //   const result = await dispatch(
+  //     EditCustomerInformation({ ...inputsData, auth_token })
+  //   );
+  //   showToast({
+  //     title: result.meta.requestStatus === "fulfilled" ? "موفقیت‌آمیز" : "خطا",
+  //     description:
+  //       result.meta.requestStatus === "fulfilled"
+  //         ? "اطلاعات ویرایش شد"
+  //         : "خطا در ویرایش اطلاعات",
+  //     status: result.meta.requestStatus === "fulfilled" ? "success" : "error",
+  //   });
+  //   setHasChanges(false); // تغییرات اعمال شد، دکمه را غیرفعال کنید
+  // };
+  const submitHandler = async (formValues) => {
     const result = await dispatch(
-      EditCustomerInformation({ ...inputsData, auth_token })
+      EditCustomerInformation({ ...formValues, auth_token })
     );
     showToast({
       title: result.meta.requestStatus === "fulfilled" ? "موفقیت‌آمیز" : "خطا",
@@ -111,7 +125,7 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
           : "خطا در ویرایش اطلاعات",
       status: result.meta.requestStatus === "fulfilled" ? "success" : "error",
     });
-    setHasChanges(false); // تغییرات اعمال شد، دکمه را غیرفعال کنید
+    setHasChanges(false);
   };
 
   // برگشت مقادیر مورد نیاز برای استفاده در کامپوننت

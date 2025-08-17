@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 const FadeInDiv = ({ tabs, active }) => (
   <Box
     position="relative"
-    width={{ base: "60%", md: "100%", lg: "100%" }}
+    width={{ base: "60%", md: "70%", lg: "80%" }}
     height="full"
+    mx="auto"
     mt={{ base: 0, lg: 10 }}
   >
     {tabs.map((tab) => (
