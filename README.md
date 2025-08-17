@@ -7,6 +7,7 @@
     <img src="https://img.shields.io/badge/-Framer_Motion-black?style=for-the-badge&logoColor=white&logo=framer&color=0055FF" alt="framer-motion" />
     <img src="https://img.shields.io/badge/-Chakra_UI-black?style=for-the-badge&logoColor=white&logo=chakraui&color=319795" alt="chakra-ui" />
     <img src="https://img.shields.io/badge/-Formik-black?style=for-the-badge&logoColor=white&logo=formik&color=2C3E50" alt="formik" />
+    <img src="https://img.shields.io/badge/-Redux-black?style=for-the-badge&logoColor=white&logo=redux&color=764ABC" alt="redux" />
   
 </div>
 
