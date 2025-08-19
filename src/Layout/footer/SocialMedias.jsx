@@ -15,7 +15,7 @@ const SocialMedias = () => {
               justifyContent="center"
               width="35px"
               height="35px"
-              borderRadius="full"
+              borderRadius="8px"
               bg="gray.200"
               _hover={{
                 bg: media.color + "20", // یک حالت رنگ پس‌زمینه ملایم
