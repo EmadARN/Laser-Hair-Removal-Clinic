@@ -5,16 +5,10 @@
 <div>
     <img src="https://img.shields.io/badge/-Next.js-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="nextjs" />
     <img src="https://img.shields.io/badge/-Framer_Motion-black?style=for-the-badge&logoColor=white&logo=framer&color=0055FF" alt="framer-motion" />
-    <img src="https://img.shields.io/badge/-Hero_UI-black?style=for-the-badge&logoColor=white&logo=heroicons&color=38B2AC" alt="hero-ui" />
-    <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
-    <img src="https://img.shields.io/badge/-Tiptap-black?style=for-the-badge&logoColor=white&logo=tiptap&color=4B5563" alt="tiptap" />
-    <img src="https://img.shields.io/badge/-Leaflet-black?style=for-the-badge&logoColor=white&logo=leaflet&color=199900" alt="leaflet" />
-    <img src="https://img.shields.io/badge/-Axios-black?style=for-the-badge&logoColor=white&logo=axios&color=5A29E4" alt="axios" />
-    <img src="https://img.shields.io/badge/-React_Hook_Form-black?style=for-the-badge&logoColor=white&logo=reacthookform&color=EC5990" alt="react-hook-form" />
-    <img src="https://img.shields.io/badge/-Zod-black?style=for-the-badge&logoColor=white&logo=zod&color=3E67B1" alt="zod" />
-    <img src="https://img.shields.io/badge/-Zustand-black?style=for-the-badge&logoColor=white&logo=zustand&color=FFCA28" alt="zustand" />
-    <img src="https://img.shields.io/badge/-TanStack_Query-black?style=for-the-badge&logoColor=white&logo=tanstack&color=FF4154" alt="tanstack-query" />
-    <img src="https://img.shields.io/badge/-GraphQL-black?style=for-the-badge&logoColor=white&logo=graphql&color=E10098" alt="graphql" />
+    <img src="https://img.shields.io/badge/-Chakra_UI-black?style=for-the-badge&logoColor=white&logo=chakraui&color=319795" alt="chakra-ui" />
+    <img src="https://img.shields.io/badge/-Formik-black?style=for-the-badge&logoColor=white&logo=formik&color=2C3E50" alt="formik" />
+    <img src="https://img.shields.io/badge/-Redux-black?style=for-the-badge&logoColor=white&logo=redux&color=764ABC" alt="redux" />
+  
 </div>
 
   <h3 align="center"> Laser Hair Removal Clinic</h3>

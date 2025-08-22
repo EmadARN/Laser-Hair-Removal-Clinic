@@ -29,10 +29,6 @@ const WeeklyCalendar = () => {
   const { operators, operatorsDate, dateRanges, dataRangeStatus, settingInfo } =
     useSelector((state) => state.adminDashboard);
 
-
-    
-
-
   const {
     year: date_year,
     month: date_month,
@@ -162,7 +158,6 @@ const WeeklyCalendar = () => {
       })
     );
 
-  
     downloadPDF();
   };
 
@@ -198,8 +193,7 @@ const WeeklyCalendar = () => {
       <Box width={{ base: "120vw", sm: "100vw", md: "100%" }}>
         {/* Table */}
         <Box
-        width="100%"
-      
+          width="100%"
           overflowX="auto"
           borderWidth="1px"
           borderRadius="md"

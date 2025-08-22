@@ -10,46 +10,20 @@ const SocialMedias = () => {
             <Link
               href={media.link}
               isExternal
-              position="relative"
-              display="inline-block"
-              width="40px"
-              height="40px"
-              overflow="hidden"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              width="35px"
+              height="35px"
+              borderRadius="8px"
+              bg="gray.200"
               _hover={{
-                ".colorIcon": {
-                  top: "0",
-                  opacity: 1,
-                },
-                ".bwIcon": {
-                  top: "-100%",
-                },
+                bg: media.color + "20", // یک حالت رنگ پس‌زمینه ملایم
+                transform: "scale(1.2)",
               }}
               transition="all 0.3s ease"
             >
-              {/* آیکون سیاه و سفید */}
-              <Icon
-                as={media.icon}
-                boxSize={8}
-                color="#ddd"
-                position="absolute"
-                top="0"
-                left="0"
-                zIndex={1}
-                className="bwIcon"
-                transition="top 0.5s ease"
-              />
-              {/* آیکون رنگی */}
-              <Icon
-                as={media.icon}
-                boxSize={8}
-                color={media.color}
-                position="absolute"
-                top="100%"
-                left="0"
-                opacity={0}
-                className="colorIcon"
-                transition="top 0.5s ease, opacity 0.3s ease"
-              />
+              <Icon as={media.icon} boxSize={6} color={media.color} />
             </Link>
           </Tooltip>
         ))}
