@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { motion } from "framer-motion";
@@ -70,11 +69,13 @@ const Header = () => {
         overflow="hidden"
       >
         <MotionVideo
+          autoPlay
+          muted
+          loop
+          playsInline
+          webkit-playsinline="true"
           as="video"
           src="/video/1778694294.webm"
-          autoPlay
-          loop
-          muted
           controls={false}
           initial={{ x: "-100%", opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
