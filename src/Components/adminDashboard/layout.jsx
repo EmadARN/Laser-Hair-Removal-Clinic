@@ -1,20 +1,28 @@
 import React from "react";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, useMediaQuery } from "@chakra-ui/react";
 import { admintData } from "@/constants";
 import SideBarDashboard from "@/Layout/sidebar/Sidebar";
+import Menu from "@/Layout/menu";
 
 const Dashboard = ({ children }) => {
+  const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
+
   return (
     <Grid bgColor="#ffffff" templateColumns={"repeat(12, 1fr)"}>
-      <GridItem colSpan={1}>
-        <SideBarDashboard
-          admintDatas={admintData}
-          h={"100vh"}
-          textHead="ادمین"
-          active={false}
-        />
+      <GridItem colSpan={isSmallScreen ? 12 : 1}>
+        {isSmallScreen ? (
+          <Menu show={true} admintDatas={admintData} />
+        ) : (
+          <SideBarDashboard
+            admintDatas={admintData}
+            h={"100vh"}
+            textHead="ادمین"
+            active={false}
+          />
+        )}
       </GridItem>
-      <GridItem colSpan={11} px={6}>
+
+      <GridItem colSpan={isSmallScreen ? 12 : 11} px={6}>
         {children}
       </GridItem>
     </Grid>
