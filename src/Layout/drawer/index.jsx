@@ -30,7 +30,7 @@ const RightBar = () => {
           },
         }}
         size={"xs"}
-        icon={<Bars3Icon />}
+        icon={<Bars3Icon style={{ width: "25px", height: "25px" }} />}
         aria-label={"Open Menu"}
         onClick={onOpen}
       />

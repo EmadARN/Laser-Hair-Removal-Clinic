@@ -5,20 +5,19 @@ import CounterMain from "./ui/CounterMain";
 
 const AboutUs = () => {
   return (
-    <Flex p={12} flexDirection="column" gap={6}>
+    <Flex p={{ base: 6, md: 12 }} flexDirection="column" gap={{ base: 4, md: 6 }}>
       <Flex
-        container
-        mt={17}
-        p={12}
-        width={"100%"}
-        justifyContent={"space-around"}
+        mt={{ base: 8, md: 17 }}
+        p={{ base: 6, md: 12 }}
+        width="100%"
+        justifyContent="space-around"
       >
         <Box>
           <AboutHeader />
         </Box>
       </Flex>
 
-      <Box my={24}>
+      <Box my={{ base: 12, md: 24 }}>
         <CounterMain />
       </Box>
     </Flex>
