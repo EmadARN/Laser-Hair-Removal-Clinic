@@ -14,7 +14,7 @@ const CounterMain = () => {
 
     if (top < windowHeight && top > 0) {
       setIsVisible(true);
-      window.removeEventListener("scroll", handleScroll); // پس از یکبار نمایش، لیسنر را حذف می‌کنیم
+      window.removeEventListener("scroll", handleScroll);
     }
   };
 
@@ -49,22 +49,31 @@ const CounterMain = () => {
   }, [isVisible]);
 
   return (
-    <Box ref={ref} p={8} textAlign="center">
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+    <Box ref={ref} p={{ base: 4, md: 8 }} textAlign="center">
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 6, md: 10 }}>
         <Box>
-          <Text fontSize="2xl" fontWeight="bold" mb={4} color="gray.600">
+          <Text
+            fontSize={{ base: "lg", md: "2xl" }}
+            fontWeight="bold"
+            mb={{ base: 2, md: 4 }}
+            color="gray.600"
+          >
             لیزر ساید در یک نگاه
           </Text>
-          <Text fontSize="lg" color="gray.500">
+          <Text fontSize={{ base: "sm", md: "lg" }} color="gray.500">
             اینجا شما می‌توانید به آمارها و اطلاعات مربوط به شرکت ما دسترسی پیدا
             کنید. هدف ما ارائه بهترین خدمات در زمینه لیزر است.
           </Text>
         </Box>
-        <VStack spacing={4} align="stretch">
-          <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
+        <VStack spacing={{ base: 3, md: 4 }} align="stretch">
+          <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={{ base: 3, md: 4 }}>
             {numberTicker.map((item, index) => (
-              <Box key={index} p={4} bg="white" borderRadius="md">
-                <Text fontSize="3xl" color="gray.500">
+              <Box key={index} p={{ base: 3, md: 4 }} bg="white" borderRadius="md">
+                <Text
+                  fontSize={{ base: "2xl", md: "3xl" }}
+                  color="gray.500"
+                  mb={1}
+                >
                   <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1, scale: 1.2 }}
@@ -74,7 +83,7 @@ const CounterMain = () => {
                     {counts[index]}
                   </motion.span>
                 </Text>
-                <Text fontSize="xl" color="gray.600">
+                <Text fontSize={{ base: "md", md: "xl" }} color="gray.600">
                   {item.title}
                 </Text>
               </Box>
