@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, useMediaQuery } from "@chakra-ui/react";
 import { receptionData } from "@/constants";
 import SideBarDashboard from "@/Layout/sidebar/Sidebar";
 import Menu from "@/Layout/menu";
