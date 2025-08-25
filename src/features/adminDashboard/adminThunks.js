@@ -225,7 +225,7 @@ export const getAsyncListDateOperator = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.get(
-        `/Admin/operator/program/list/${payload.date_year}/${payload.date_month}${payload.date_day}/`,
+        `/Admin/operator/program/list/${payload.date_year}/${payload.date_month}/${payload.date_day}/`,
         {
           headers: {
             Authorization: `Bearer ${payload.token}`,
