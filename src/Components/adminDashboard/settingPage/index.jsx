@@ -1,10 +1,10 @@
 import { Box, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import UserInfoBox from "./ui/UserInfoBox";
-import TurnSetting from "./ui/TurnSetting";
 import useSettingLogic from "./logic/useSettingLogic";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { useSelector } from "react-redux";
+import TurnSetting from "./ui/TurnSetting";
 
 const Setting = () => {
   const { showToast } = useCustomToast();
