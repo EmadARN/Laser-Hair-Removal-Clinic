@@ -30,7 +30,7 @@ import { toPersianDigits } from "@/utils/toPersianDigits";
 import Setting from "@/Components/adminDashboard/settingPage";
 import UserInformation from "@/Components/userDashboard/form/registerForm";
 import { FaInstagram, FaTelegram, FaWhatsapp } from "react-icons/fa";
-import { SiEitaa } from "react-icons/si";
+import { FaTelegramPlane } from "react-icons/fa";
 
 //! aboutUs
 export const numberTicker = [
@@ -61,7 +61,7 @@ export const data = [
 export const socialMedias = [
   { name: "اینستاگرام", icon: FaInstagram, color: "#E1306C", link: "#" },
   { name: "تلگرام", icon: FaTelegram, color: "#0088cc", link: "#" },
-  { name: "ایتا", icon: SiEitaa, color: "orange", link: "#" },
+  { name: "ایتا", icon: FaTelegramPlane, color: "orange", link: "#" },
   { name: "واتساپ", icon: FaWhatsapp, color: "#25D366", link: "#" },
 ];
 
