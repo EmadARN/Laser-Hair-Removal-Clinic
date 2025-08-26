@@ -31,7 +31,7 @@ const SideBarDashboard = ({ admintDatas, receptionDatas, active }) => {
   ]);
   const router = useRouter();
   const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false); // مدیریت وضعیت باز یا بسته بودن مدال
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleLogout = async () => {
     try {

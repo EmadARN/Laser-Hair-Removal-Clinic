@@ -23,11 +23,6 @@ const DailyShift = () => {
 
   return (
     <>
-      {/* HeaderDetails بخش  */}
-      <Box pt={6} pr={{ base: 4, md: 0 }}>
-        <HeaderDetails />
-      </Box>
-
       {/* SearchInput بخش */}
       <Box p={4} width={{ base: "60vw", md: "100%" }}>
         <SearchInput

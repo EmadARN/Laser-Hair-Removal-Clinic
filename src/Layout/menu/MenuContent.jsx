@@ -18,14 +18,14 @@ const MenuContent = ({
     <Flex
       direction="column"
       w={{ base: "full", md: "220px" }}
-      p={5}
+      p={4}
       borderRadius="xl"
       shadow="lg"
       h="full"
-      justifyContent="space-between" // باعث می‌شود دکمه خروج پایین باشد
+      justifyContent="space-between" 
     >
       {/* منوی اصلی */}
-      <VStack align="stretch" spacing={4}>
+      <VStack align="stretch" spacing={3}>
         {menuItems.map((item) => (
           <MenuItemButton
             key={item.id}
@@ -45,7 +45,7 @@ const MenuContent = ({
           variant="ghost"
           justifyContent="flex-start"
           _hover={{ bg: "red.100" }}
-          sx={{ color: "red", pl: 6 }}
+          sx={{ color: "red", pl: 6, fontWeight: "light" }}
         >
           خروج
         </Button>

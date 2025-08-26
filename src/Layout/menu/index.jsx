@@ -71,31 +71,34 @@ const Menu = ({ show = true, admintDatas = [], receptionDatas = [] }) => {
     <>
       {isSmallScreen ? (
         <>
+          {/* دکمه همبرگر همیشه ثابت بالای صفحه */}
           <IconButton
             aria-label="Open Menu"
             icon={<HamburgerIcon />}
             onClick={onOpen}
-            position="fixed"
-            top="4"
-            right="4" // تغییر از left به right برای RTL
-            zIndex="overlay"
+            display="inline"
+            zIndex={1000}
             size="lg"
             variant="ghost"
           />
+
           <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-            {" "}
-            {/* placement به right برای RTL */}
             <DrawerOverlay />
-            <DrawerContent sx={{ pt: 12 }} dir="rtl">
-              <DrawerCloseButton />
+            <DrawerContent sx={{ pt: 12, zIndex: 2000 }} dir="rtl">
+              <DrawerCloseButton
+                position="absolute"
+                left="1rem"
+                right="auto"
+                top="1rem"
+                zIndex={3000}
+                aria-label="بستن"
+              />{" "}
               {menuContent}
             </DrawerContent>
           </Drawer>
         </>
       ) : (
-        <Box position="fixed" right="4" top="16" dir="rtl">
-          {" "}
-          {/* تغییر left به right */}
+        <Box position="fixed" right="1rem" top="4rem" dir="rtl">
           {menuContent}
         </Box>
       )}

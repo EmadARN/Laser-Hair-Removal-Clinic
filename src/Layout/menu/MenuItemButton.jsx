@@ -11,7 +11,7 @@ const MenuItemButton = ({ item, active, onClick }) => (
     fontWeight="medium"
     _hover={{ bg: "gray.200" }}
     borderRadius="md"
-    gap={2}
+ 
   >
     <HStack spacing={2}>
       <Text>{item.label}</Text>

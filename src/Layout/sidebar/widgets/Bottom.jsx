@@ -15,6 +15,7 @@ const Bottom = ({ active }) => {
       }
     }
   }, [pathname]);
+  
   return (
     <Box
       sx={{
