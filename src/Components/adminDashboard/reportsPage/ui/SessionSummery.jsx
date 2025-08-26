@@ -13,7 +13,7 @@ const SessionSummery = ({ completeListLength, totalPriceAmount }) => {
       alignItems="center"
       gap={{ base: 4, sm: 5 }}
     >
-      <Box width="50%">
+      <Box width={{ base: "100%", md: "50%" }}>
         <SessionSummeryBox
           number={completeListLength}
           icon={<HiMiniUserGroup size={"20px"} color="#7563DC" />}
@@ -21,7 +21,7 @@ const SessionSummery = ({ completeListLength, totalPriceAmount }) => {
         />
       </Box>
 
-      <Box width="50%">
+      <Box width={{ base: "100%", md: "50%" }}>
         <SessionSummeryBox
           number={totalPriceAmount}
           icon={<FaWallet size={"20px"} color="#7563DC" />}

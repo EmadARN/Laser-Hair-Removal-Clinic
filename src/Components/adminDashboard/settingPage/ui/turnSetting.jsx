@@ -2,7 +2,6 @@ import React from "react";
 import {
   Box,
   Text,
-  Button,
   FormControl,
   FormLabel,
   Input,
@@ -12,20 +11,17 @@ import CustomButton from "@/Common/customeButton/CustomeButton";
 import { formatNumber } from "@/utils/formatNumber";
 import Loading from "@/Common/loading";
 
-const TurnSetting = ({ handleInputs, submitHandler,turnSetting ,loading}) => {
-  console.log("turen",turnSetting)
+const TurnSetting = ({ handleInputs, submitHandler, turnSetting, loading }) => {
   return (
-    <form onSubmit={submitHandler}>
-      <Box
-        width={{ base: "170%", md: "100%" }}
-        display={"flex"}
-        flexDirection={"column"}
-        gap={3}
-        alignItems={"center"}
-        justifyContent={"center"}
-        mb={8}
-      >
-        <Box width="100%">
+    <Box
+      width={"100%"}
+      display={"flex"}
+      flexDirection={"column"}
+      gap={3}
+      justifyContent={"center"}
+    >
+      <form onSubmit={submitHandler} >
+        <Box >
           <Text fontWeight={"bold"} textAlign={"right"} color={"#111"}>
             تنظیمات نوبت دهی و ودیعه
           </Text>
@@ -34,7 +30,6 @@ const TurnSetting = ({ handleInputs, submitHandler,turnSetting ,loading}) => {
           spacing={3}
           boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
           bgColor={"#FEFEFE"}
-          width={{ sm: "100%", lg: "100%" }}
           height={"auto"}
           p={6}
           display={"flex"}
@@ -50,7 +45,7 @@ const TurnSetting = ({ handleInputs, submitHandler,turnSetting ,loading}) => {
                 type="time"
                 min="08:00"
                 max="11:00"
-                value={turnSetting.morning_time} 
+                value={turnSetting.morning_time}
                 onChange={handleInputs}
               />
             </FormControl>
@@ -87,12 +82,12 @@ const TurnSetting = ({ handleInputs, submitHandler,turnSetting ,loading}) => {
               py={4}
               type="submit"
             >
-         {loading ?<Loading/>:"ثبت تغییرات" }
+              {loading ? <Loading /> : "ثبت تغییرات"}
             </CustomButton>
           </Box>
         </Stack>
-      </Box>
-    </form>
+      </form>
+    </Box>
   );
 };
 

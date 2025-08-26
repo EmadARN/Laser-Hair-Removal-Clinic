@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import { CiEdit } from "react-icons/ci";
 import EditUserModal from "./EditUserModal";
@@ -14,11 +14,9 @@ const UserInfoBox = ({
   changePasswordAsync,
   setPasswordChange,
 }) => {
-
-
   return (
     <Box
-      width={{ base: "170%", md: "100%" }}
+      width={"100%"}
       display={"flex"}
       flexDirection={"column"}
       gap={3}
@@ -46,7 +44,7 @@ const UserInfoBox = ({
               نام کاربری
             </Text>
             <Text fontSize={{ base: "15px", md: "17px" }} fontWeight={"bold"}>
-           {userNames?.username}
+              {userNames?.username}
             </Text>
           </Box>
 
@@ -81,7 +79,6 @@ const UserInfoBox = ({
         changePasswordAsync={changePasswordAsync}
         isOpen={isOpen}
         onClose={onClose}
-
       />
     </Box>
   );

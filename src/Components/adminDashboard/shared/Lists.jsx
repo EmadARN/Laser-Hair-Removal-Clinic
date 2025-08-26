@@ -23,6 +23,7 @@ const Lists = ({
   FooterContent,
   iconBtnDisply,
   addDisplay,
+  isDelete,
 }) => {
   const responsiveFontSize = useBreakpointValue({
     base: "sm",
@@ -37,7 +38,7 @@ const Lists = ({
         justifyContent: "space-between",
         alignItems: "center",
         bgColor: bgColor || "#FEFEFE",
-        width: { base: "110%", md: "100%" },
+        width: { base: "95%", md: "100%" },
         rounded: rounded || "8px",
         color,
         p: 5,
@@ -92,6 +93,7 @@ const Lists = ({
           HeaderContent={HeaderContent}
           BodyContent={BodyContent}
           FooterContent={FooterContent}
+          isDelete={isDelete}
           btn={<RiDeleteBinLine size={18} color="red" />}
         />
       </Flex>

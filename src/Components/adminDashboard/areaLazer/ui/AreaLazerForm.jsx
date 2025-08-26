@@ -13,7 +13,6 @@ const AreaLazerForm = ({ areaToEdit, isEdit }) => {
   const {
     lazerArea,
     selectedItem,
-
     areaChangeHandler,
     handleButtonClick,
     handleSubmit,

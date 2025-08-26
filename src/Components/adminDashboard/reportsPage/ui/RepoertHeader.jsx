@@ -19,12 +19,13 @@ const RepoertHeader = ({
   return (
     <Box
       display="flex"
-      flexDirection={{ base: "column", md: "row" }}
+      flexDirection={"row"}
       justifyContent="space-between"
       alignItems="center"
       width="100%"
+      gap={4}
     >
-      <Box width={{ base: "100%", md: "auto" }} mb={{ base: 3, md: 0 }}>
+      <Box width={"100%"}>
         <SearchInput
           placeholder="جست و جو"
           size="lg"

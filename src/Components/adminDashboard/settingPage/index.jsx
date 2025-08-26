@@ -1,7 +1,7 @@
 import { Box, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import UserInfoBox from "./ui/UserInfoBox";
-import TurnSetting from "./ui/turnSetting";
+import TurnSetting from "./ui/TurnSetting";
 import useSettingLogic from "./logic/useSettingLogic";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { useSelector } from "react-redux";
@@ -21,14 +21,12 @@ const Setting = () => {
     userNames,
     auth_Admin_token,
   } = useSettingLogic(showToast);
-  console.log("user",userNames)
+  console.log("user", userNames);
 
-  const {  loading } = useSelector(
-    (store) => store.adminDashboard
-  );
+  const { loading } = useSelector((store) => store.adminDashboard);
 
   return (
-    <>
+    <Box width={"100%"} minWidth={"500px"}>
       <Box sx={{ py: 6 }}>تنظیمات</Box>
       <Box width={"100%"}>
         <UserInfoBox
@@ -42,17 +40,17 @@ const Setting = () => {
           handleInputChange={handleInputChange}
         />
       </Box>
-      <Box width={"100%"} sx={{ mt: 8 }}>
+      <Box width={"100%"} sx={{ mt: 8 }} >
         <TurnSetting
-        loading={loading}
+          loading={loading}
           handleInputs={handleInputs}
           setTurnSetting={setTurnSetting}
           turnSetting={turnSetting}
           token={auth_Admin_token}
-          submitHandler={ submitHandler}
+          submitHandler={submitHandler}
         />
       </Box>
-    </>
+    </Box>
   );
 };
 

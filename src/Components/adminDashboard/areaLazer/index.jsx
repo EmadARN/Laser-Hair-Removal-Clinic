@@ -27,8 +27,8 @@ const AreaLazer = () => {
   }
 
   return (
-    <>
-      <Box sx={{ py: 6 }}>
+    <Box width={"100%"} minWidth={"500px"}>
+      <Box sx={{ py: 6 }} width={"100%"}>
         <AdminHeader
           headerTitle="نواحی لیزر"
           btnValue="افزودن ناحیه جدید"
@@ -46,13 +46,12 @@ const AreaLazer = () => {
           iconBtnDisply="none"
         />
       </Box>
-      <Box></Box>
       <Box sx={{ mt: 8 }}>
         {AreaLaser.all_laser_area_object &&
         AreaLaser.all_laser_area_object.first_type.length > 0 ? (
           AreaLaser.all_laser_area_object.first_type.map((item, index) => {
             return (
-              <Box width={{ base: "110vw", md: "100%" }} key={index}>
+              <Box width={"100%"} key={index}>
                 <Lists
                   leftArrowDisplay="none"
                   key={index}
@@ -60,6 +59,7 @@ const AreaLazer = () => {
                   secondArea={formatNumber(item.price)}
                   thirdArea={item.operate_time}
                   display="none"
+                  isDelete={false}
                   ModalBodyContent={{
                     body: (
                       <AreaLazerForm
@@ -83,7 +83,7 @@ const AreaLazer = () => {
           <ReusableSession text="ناحیه ای وجود ندارد" icon={<BiTargetLock />} />
         )}
       </Box>
-    </>
+    </Box>
   );
 };
 

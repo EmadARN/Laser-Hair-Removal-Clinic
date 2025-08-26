@@ -35,21 +35,10 @@ const Clients = () => {
     }
   }, [customerListAdmin]);
 
-  // useEffect(() => {
-  //   const usernames = currentClients.map(item => item.username);
-
-  //   // فقط زمانی مقدار را تنظیم کن که مقدار جدید با مقدار قبلی تفاوت داشته باشد
-  //   if (JSON.stringify(usernames) !== JSON.stringify(itemKeeper)) {
-  //     setItemKeeper(usernames);
-  //   }
-  // }, [currentClients]);
-
-  //   console.log("iii",itemKeeper);
-
   if (step === 0) {
     return (
-      <>
-        <Box sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 4 } }}>
+      <Box width={"100%"} minWidth={"500px"}>
+        <Box sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 4 } }}width={"95%"}>
           <SearchComponent
             data={customerListAdmin?.customer_list || []}
             filterKeys={["name", "last_name"]}
@@ -60,7 +49,8 @@ const Clients = () => {
           />
         </Box>
         <Box
-          width={{ base: "110vw", md: "100%" }}
+          width={"100%"}
+          minWidth={"500px"}
           display={"flex"}
           justifyContent={"center"}
           px={{ base: 2, md: 4 }}
@@ -75,7 +65,11 @@ const Clients = () => {
           >
             {filteredData && filteredData.length > 0
               ? filteredData.map((searchitem, index) => (
-                  <Box key={index} onClick={() => handleRowClick(searchitem)}>
+                  <Box
+                    key={index}
+                    onClick={() => handleRowClick(searchitem)}
+                    width={"100%"}
+                  >
                     <Lists
                       firstArea={searchitem.name + " " + searchitem.last_name}
                       editDeleteDisplay="none"
@@ -85,7 +79,11 @@ const Clients = () => {
                 ))
               : !loading && !error && Array.isArray(currentClients)
               ? currentClients.map((item, index) => (
-                  <Box key={index} onClick={() => handleRowClick(item)}>
+                  <Box
+                    key={index}
+                    onClick={() => handleRowClick(item)}
+                    width={"100%"}
+                  >
                     <Lists
                       firstArea={item.name + " " + item.last_name}
                       editDeleteDisplay="none"
@@ -110,7 +108,7 @@ const Clients = () => {
             بعد
           </Button>
         </HStack>
-      </>
+      </Box>
     );
   } else {
     return (

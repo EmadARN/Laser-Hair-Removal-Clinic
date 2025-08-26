@@ -27,11 +27,9 @@ const Reports = () => {
     "1403/8/01",
     "1403/12/30"
   );
-  console.log("sessionCounts", sessionCounts);
-  console.log("totalIncomes", totalIncomes);
 
   return (
-    <Box px={{ base: 2, md: 8 }}>
+    <Box px={{ base: 2, md: 8 }} width={"100%"} minWidth={"500px"}>
       <Box py={{ base: 4, md: 6 }}>
         <RepoertHeader
           from={dateRange.from}
@@ -43,7 +41,7 @@ const Reports = () => {
           setFilteredData={setFilteredData}
         />
       </Box>
-      <Box>
+      <Box width={"100%"} >
         <SessionSummery
           completeListLength={summary.completeListLength}
           totalPriceAmount={summary.totalPriceAmount}

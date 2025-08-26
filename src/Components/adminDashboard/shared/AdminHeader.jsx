@@ -7,12 +7,13 @@ const AdminHeader = (props) => {
 
   return (
     <Box
-      // width={{base:"100vw",sm:"100vw"}}
+      width={"100%"}
       display="flex"
       alignItems={"center"}
-      justifyContent={{ base: "center", md: "space-between" }}
-      flexDirection={{ base: "column", md: "row" }}
-      p={4}
+      justifyContent={{ base: "space-around", md: "space-between" }}
+      flexDirection={{ md: "row" }}
+      gap={{ base: 16, md: 0 }}
+      p={{ base: 0, md: 6 }}
     >
       <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
         <span>{props.icon}</span>

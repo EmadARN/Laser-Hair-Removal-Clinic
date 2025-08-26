@@ -12,11 +12,17 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const ModalAttention = ({ btn, HeaderContent, BodyContent, FooterContent }) => {
+const ModalAttention = ({
+  btn,
+  HeaderContent,
+  BodyContent,
+  FooterContent,
+  isDelete,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <>
+    <Box sx={{ display: !isDelete ? "none" : "block" }}>
       <IconButton onClick={onOpen} icon={btn} />
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -51,7 +57,7 @@ const ModalAttention = ({ btn, HeaderContent, BodyContent, FooterContent }) => {
           <ModalFooter pt={10}>{FooterContent}</ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </Box>
   );
 };
 
