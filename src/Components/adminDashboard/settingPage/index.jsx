@@ -4,7 +4,7 @@ import UserInfoBox from "./ui/UserInfoBox";
 import useSettingLogic from "./logic/useSettingLogic";
 import { useCustomToast } from "@/utils/useCustomToast ";
 import { useSelector } from "react-redux";
-import TurnSetting from "./ui/TurnSetting";
+import TurnSetting from "./ui/turnSetting";
 
 const Setting = () => {
   const { showToast } = useCustomToast();
@@ -40,7 +40,7 @@ const Setting = () => {
           handleInputChange={handleInputChange}
         />
       </Box>
-      <Box width={"100%"} sx={{ mt: 8 }} >
+      <Box width={"100%"} sx={{ mt: 8 }}>
         <TurnSetting
           loading={loading}
           handleInputs={handleInputs}
