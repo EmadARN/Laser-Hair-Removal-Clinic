@@ -7,6 +7,7 @@ const TabButtons = ({ tabs, active, setActive }) => (
     overflowX="auto"
     maxWidth="full"
     width={{ base: "50%", lg: "100%" }}
+    py={1}
   >
     {tabs.map((tab, index) => (
       <Flex
