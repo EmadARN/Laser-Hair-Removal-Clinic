@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import CustomModal from "@/Common/attentionModal/CustomModal";
 import { logOutAsyncUsers } from "@/features/logOutSlice";
 import MenuContent from "./MenuContent";
+import { Logo } from "@/widget/Logo";
 
 const Menu = ({ show = true, admintDatas = [], receptionDatas = [] }) => {
   const [active, setActive] = useState("");
@@ -84,16 +85,31 @@ const Menu = ({ show = true, admintDatas = [], receptionDatas = [] }) => {
 
           <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
             <DrawerOverlay />
-            <DrawerContent sx={{ pt: 12, zIndex: 2000 }} dir="rtl">
-              <DrawerCloseButton
-                position="absolute"
-                left="1rem"
-                right="auto"
-                top="1rem"
-                zIndex={3000}
-                aria-label="بستن"
-              />{" "}
-              {menuContent}
+            <DrawerContent sx={{ pt: 4, zIndex: 2000 }} dir="rtl">
+              {/* هدر Drawer: لوگو سمت راست + دکمه بستن سمت چپ */}
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                px={4}
+                py={2}
+                borderBottom="1px solid #eee"
+              >
+                <Box color="#7563DC">
+                  <Logo />
+                </Box>
+                <DrawerCloseButton
+                  position="relative"
+                  top="0"
+                  left="0"
+                  right="0"
+                />
+              </Box>
+
+              {/* محتوا */}
+              <Box px={4} py={4} h={"100%"}>
+                {menuContent}
+              </Box>
             </DrawerContent>
           </Drawer>
         </>

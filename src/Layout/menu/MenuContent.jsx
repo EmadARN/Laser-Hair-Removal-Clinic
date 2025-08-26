@@ -1,6 +1,9 @@
 import { Button, VStack, Flex, Box } from "@chakra-ui/react";
 import { MdExitToApp } from "react-icons/md";
 import MenuItemButton from "./MenuItemButton";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import EnterExite from "@/Components/reseptionDashboard/enterExiteOperator";
 
 const MenuContent = ({
   menuItems,
@@ -9,6 +12,17 @@ const MenuContent = ({
   router,
   onLogoutClick,
 }) => {
+  const { pathname } = useRouter();
+  const [exist, setExist] = useState(false);
+
+  useEffect(() => {
+    if (pathname?.startsWith("/reseptionDashboard")) {
+      setExist(true);
+    } else {
+      setExist(false);
+    }
+  }, [pathname]);
+
   const handleClick = (slug) => {
     setActive(slug);
     router.push(slug);
@@ -20,9 +34,8 @@ const MenuContent = ({
       w={{ base: "full", md: "220px" }}
       p={4}
       borderRadius="xl"
-      shadow="lg"
       h="full"
-      justifyContent="space-between" 
+      justifyContent="space-between"
     >
       {/* منوی اصلی */}
       <VStack align="stretch" spacing={3}>
@@ -36,8 +49,24 @@ const MenuContent = ({
         ))}
       </VStack>
 
-      {/* دکمه خروج پایین */}
-      <Box pt={4}>
+      <Box mt={4}>
+        {exist && (
+          <Box
+            border="1px solid #1111"
+            borderRadius="8px"
+            w="100%"
+            display="flex"
+            justifyContent="center"
+            flexDirection="column"
+            mb={8}
+            fontSize="14px"
+            p={2}
+          >
+            <EnterExite />
+          </Box>
+        )}
+
+        {/* دکمه خروج پایین */}
         <Button
           leftIcon={<MdExitToApp />}
           onClick={onLogoutClick}

@@ -19,27 +19,21 @@ const SearchComponent = ({
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState(datas);
 
-  useEffect(() => {
-    setFilteredData(datas);
-  }, [datas]);
-
   const handleChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
 
-    if (datas.length > 0) {
-      const result = datas.filter((item) => {
-        const name = utilityDatas
-          ? getCustomerName(item.user, utilityDatas)
-          : item.name + " " + item.last_name || "";
+    const result = datas.filter((item) => {
+      const name = utilityDatas
+        ? getCustomerName(item.user, utilityDatas)
+        : `${item.name || ""} ${item.last_name || ""}`;
 
-        return name && name.toLowerCase().includes(value.toLowerCase());
-      });
+      return name.toLowerCase().includes(value.toLowerCase());
+    });
 
-      setFilteredData(result);
-      if (onSearch) {
-        onSearch(result);
-      }
+    setFilteredData(result);
+    if (onSearch) {
+      onSearch(result);
     }
   };
 
@@ -52,8 +46,7 @@ const SearchComponent = ({
   };
 
   return (
-    <InputGroup width="100%" height={"100%"}>
-      {/* آیکون سرچ سمت چپ */}
+    <InputGroup width="100%" height="100%">
       <InputLeftElement color="gray.500">
         <Search2Icon width={{ base: "10px", md: "20px" }} />
       </InputLeftElement>
@@ -70,7 +63,6 @@ const SearchComponent = ({
         }}
       />
 
-      {/* دکمه پاک‌کننده سمت راست */}
       {searchQuery && (
         <InputRightElement>
           <IconButton

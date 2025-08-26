@@ -105,7 +105,7 @@ const PatientWithoutTime = () => {
       <Button
         onClick={onOpen}
         leftIcon={<FaPlus />}
-        w={{ base: "60%", md: "90%" }}
+        w={{ base: "60%", md: "100%" }}
         py={3}
         px={{ base: 10, md: 8 }}
         variant="outline"
