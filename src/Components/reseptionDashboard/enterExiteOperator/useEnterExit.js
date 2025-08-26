@@ -15,62 +15,91 @@ const useEnterExit = () => {
     (store) => store.receptionDashboardSlice
   );
 
-  const [isEntered, setIsEntered] = useState(false);
+  // خواندن isEntered از localStorage در لود اولیه
+  const [isEntered, setIsEntered] = useState(
+    JSON.parse(localStorage.getItem("isEntered")) || false
+  );
   const [isModalOpen, setModalOpen] = useState(false);
-  const [selectedAction, setSelectedAction] = useState(null); // برای ذخیره انتخاب کاربر (ورود یا خروج)
-  console.log("operatorSchedule", operatorSchedule);
+  const [selectedAction, setSelectedAction] = useState(null);
 
-  // useEffect(() => {
-  //   if (!operatorSchedule.operator_name) {
-  //     showToast({
-  //       title: "خطا.",
-  //       description: "اوپراتور وجود ندارد یا خطایی پیش آمده",
-  //       status: "error",
-  //       duration: 3000,
-  //       isClosable: true,
-  //     });
-  //   }
-  // }, [operatorSchedule, showToast]);
-
+  // ذخیره یا پاک کردن isEntered در localStorage هر وقت تغییر کند
   useEffect(() => {
-    dispatch(getOperatorSchedule({ auth_Employee_token }));
+    if (isEntered) {
+      localStorage.setItem("isEntered", JSON.stringify(isEntered));
+    } else {
+      localStorage.removeItem("isEntered"); // پاک کردن در زمان خروج
+    }
+  }, [isEntered]);
+
+  // گرفتن داده‌ها از سرور
+  useEffect(() => {
+    if (auth_Employee_token) {
+      dispatch(getOperatorSchedule({ auth_Employee_token }));
+    }
   }, [dispatch, auth_Employee_token]);
 
+  // اگر سرور فیلد is_entered دارد، می‌توانید اینجا همگام‌سازی کنید
+  // useEffect(() => {
+  //   if (operatorSchedule && operatorSchedule.is_entered !== undefined) {
+  //     setIsEntered(operatorSchedule.is_entered);
+  //   }
+  // }, [operatorSchedule]);
+
   const openModal = (action) => {
-    setSelectedAction(action); // انتخاب عملیات (ورود یا خروج)
-    setModalOpen(true); // باز کردن مودال
+    setSelectedAction(action);
+    setModalOpen(true);
   };
 
   const closeModal = () => {
-    setModalOpen(false); // بستن مودال
-    setSelectedAction(null); // پاک کردن انتخاب
+    setModalOpen(false);
+    setSelectedAction(null);
   };
 
   const handleConfirm = () => {
     const username = operatorSchedule?.operator_username;
-    if (selectedAction === "enter") {
-      dispatch(enterExitedOprators({ username, auth_Employee_token }));
-      setIsEntered(true);
+    if (!username) {
       showToast({
-        title: "ورود موفق",
-        description: "اوپراتور با موفقیت وارد شد.",
-        status: "success",
+        title: "خطا",
+        description: "نام کاربری اوپراتور یافت نشد.",
+        status: "error",
         duration: 3000,
         isClosable: true,
       });
-    } else if (selectedAction === "exit") {
-      dispatch(enterExitedOprators({ username, auth_Employee_token }));
-      setIsEntered(false);
-      showToast({
-        title: "خروج موفق",
-        description: "اوپراتور با موفقیت خارج شد.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
+      return;
     }
-    dispatch(getOperatorSchedule({ auth_Employee_token }));
-    closeModal(); // بستن مودال بعد از تایید
+
+    dispatch(
+      enterExitedOprators({
+        username,
+        auth_Employee_token,
+        action: selectedAction,
+      })
+    )
+      .then(() => {
+        // تنظیم isEntered بر اساس عملیات
+        setIsEntered(selectedAction === "enter");
+        dispatch(getOperatorSchedule({ auth_Employee_token }));
+        showToast({
+          title: selectedAction === "enter" ? "ورود موفق" : "خروج موفق",
+          description: `اوپراتور با موفقیت ${
+            selectedAction === "enter" ? "وارد" : "خارج"
+          } شد.`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      })
+      .catch(() => {
+        showToast({
+          title: "خطا",
+          description: "عملیات ناموفق بود.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
+
+    closeModal();
   };
 
   return {
