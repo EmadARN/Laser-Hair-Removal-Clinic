@@ -103,6 +103,7 @@ const Lists = ({
       <CustomModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
+        isCancelled
         title="لغو نوبت"
         description="آیا از لغو این نوبت مطمئن هستید؟"
         confirmText="لغو"

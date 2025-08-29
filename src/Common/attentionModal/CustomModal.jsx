@@ -21,6 +21,7 @@ const CustomModal = ({
   onConfirm,
   onCancel,
   loading,
+  isCancelled,
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -36,8 +37,12 @@ const CustomModal = ({
           </Button>
           <Button
             onClick={() => {
-              onConfirm?.();
-              window.location.reload();
+              if (isCancelled) {
+                onCancel?.();
+                window.location.reload();
+              } else {
+                onConfirm?.();
+              }
             }}
             colorScheme="red"
           >
