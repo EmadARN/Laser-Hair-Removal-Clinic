@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import PatientList from "./patientList";
 import { todayDate } from "@/features/receptionDashboard/receptionThunks";
+import ReusableSession from "../adminDashboard/shared/ReussableSession";
+import { RiShieldUserFill } from "react-icons/ri";
 const ResClients = () => {
   const [{ auth_Employee_token } = cookies] = useCookies();
 
@@ -15,7 +17,17 @@ const ResClients = () => {
 
   useEffect(() => {
     dispatch(todayDate({ auth_Employee_token }));
-  }, [dispatch,auth_Employee_token]);
+  }, [dispatch, auth_Employee_token]);
+
+  if (!todayReserve) {
+    return (
+      <ReusableSession
+        text="مراجعین امروز یافت نشد"
+        icon={<RiShieldUserFill />}
+      />
+    );
+  }
+  console.log(todayReserve, "todayReserve");
 
   return (
     <>
