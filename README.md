@@ -54,6 +54,16 @@
   </table>
 </div>
 
+## <a >🖼️ Reseption Dashboard</a>
+
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="./public/readme/reseptions1.png" alt="Image 1" width="300"></td>
+    </tr>
+  </table>
+</div>
+
 ## <a name="introduction">🤖 Introduction</a>
 
 This platform is specially designed for laser hair removal clinics to make the work easier for admins, receptionists, and clients.
