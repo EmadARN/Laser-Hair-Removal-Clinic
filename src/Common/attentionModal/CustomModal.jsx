@@ -34,7 +34,13 @@ const CustomModal = ({
           <Button onClick={onCancel} variant="outline" ml={3}>
             {cancelText || "بازگشت"}
           </Button>
-          <Button onClick={onConfirm} colorScheme="red">
+          <Button
+            onClick={() => {
+              onConfirm?.();
+              window.location.reload();
+            }}
+            colorScheme="red"
+          >
             {loading ? <Loading /> : confirmText || "تایید"}
           </Button>
         </ModalFooter>

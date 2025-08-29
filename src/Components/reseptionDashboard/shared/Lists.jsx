@@ -20,13 +20,13 @@ const Lists = ({
 }) => {
   const responsiveFontSize = useBreakpointValue({
     base: "xs",
-    md: "sm",
-    lg: "md",
+    sm: "sm",
+    md: "md",
+    lg: "lg",
   });
 
-  const [isModalOpen, setModalOpen] = useState(false); // مدیریت وضعیت مودال لغو
-
-  const [selectedItem, setSelectedItem] = useState(null); // آیتم انتخاب‌شده
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const handleOpenModal = (item) => {
     setSelectedItem(item);
@@ -39,8 +39,8 @@ const Lists = ({
   };
 
   const handleConfirmCancel = () => {
-    cancelHandler(selectedItem); // فراخوانی هندلر لغو
-    handleCloseModal(); // بستن مودال لغو
+    cancelHandler(selectedItem);
+    handleCloseModal();
   };
 
   const isCancelled = item.reserve_type === "sc";
@@ -50,19 +50,21 @@ const Lists = ({
     <>
       <Flex
         sx={{
-          flexDirection: { base: "row", md: "row" },
+          flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
           bgColor: bgColor || "graySky.100",
-          width: { base: "110%", md: "100%" },
+          width: "100%",
           rounded: rounded || "8px",
           color,
-          p: 5,
-          my: 2,
+          p: { base: 2, md: 5 },
+          my: { base: 1, md: 2 },
+          overflowX: "auto",
+          whiteSpace: "nowrap",
         }}
         boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
       >
-        <Flex width={"70%"}>
+        <Flex gap={{ base: 1, md: 2 }} alignItems="center">
           <AreaBox fontSize={responsiveFontSize}>{firstArea}</AreaBox>
           <AreaBox fontSize={responsiveFontSize}>{secondArea}</AreaBox>
           <AreaBox fontSize={responsiveFontSize}>{thirdArea}</AreaBox>
@@ -71,15 +73,9 @@ const Lists = ({
           </AreaBox>
         </Flex>
 
-        <Flex
-          gap={2}
-          justifyContent={{ base: "flex-end", md: "center" }}
-          alignItems="center"
-          flexWrap="wrap"
-          width={"30%"}
-        >
+        <Flex gap={2} justifyContent="center" alignItems="center" ml={2}>
           <Button
-            width={"15%"}
+            width={{ base: "100%", md: "40%" }}
             onClick={() => handleProcessPaymentCharge(item)}
             size={{ base: "xs", md: "sm" }}
             bg="transparent"
@@ -90,8 +86,8 @@ const Lists = ({
             {isCompelte ? "پرداخت شده" : "پرداخت"}
           </Button>
           <Button
-            width={"40%"}
-            onClick={() => handleOpenModal(item)} // باز کردن مودال لغو
+            width={{ base: "100%", md: "40%" }}
+            onClick={() => handleOpenModal(item)}
             display={display}
             isDisabled={isCancelled ? true : isDisabled}
             size={{ base: "xs", md: "sm" }}
@@ -104,7 +100,6 @@ const Lists = ({
         </Flex>
       </Flex>
 
-      {/* مودال لغو نوبت */}
       <CustomModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
@@ -123,14 +118,16 @@ export default Lists;
 
 const AreaBox = ({ children, display = "block", fontSize }) => (
   <Box
-    flex="1"
-    minWidth={{ base: "80px", md: "120px" }}
+    flex="0 0 auto"
+    minWidth={{ base: "100px", md: "120px" }}
     textAlign="right"
     fontSize={fontSize}
     display={display}
     overflow="hidden"
     whiteSpace="nowrap"
     textOverflow="ellipsis"
+    py={1}
+    mr={2}
   >
     {children}
   </Box>

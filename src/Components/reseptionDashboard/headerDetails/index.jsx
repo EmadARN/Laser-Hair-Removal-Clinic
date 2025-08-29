@@ -9,8 +9,8 @@ const HeaderDetails = () => {
       fontWeight="bold"
       color="gray.500"
       align="center"
-      justify={{ base: "flex-start", md: "space-between" }} // 👈 موبایل: چسبیده / دسکتاپ: فاصله
-      w="100%"
+      justify={{ base: "space-between", md: "space-between" }}
+      sx={{ width: "100%", minW: "400px" }}
     >
       <Text fontSize={{ base: "12px", md: "16px" }} whiteSpace="nowrap">
         خوش آمدید

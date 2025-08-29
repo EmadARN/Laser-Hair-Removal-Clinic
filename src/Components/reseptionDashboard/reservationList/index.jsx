@@ -38,7 +38,7 @@ export const ReservationList = ({
   }, [dispatch, auth_Employee_token, isPaymentTable]);
 
   return (
-    <Box w={{ base: "100vw", md: "100%" }} px={4}>
+    <Box w="100%" px={4}>
       <Box>
         {filteredData && filteredData.length > 0
           ? filteredData.map((item) => {
@@ -54,7 +54,7 @@ export const ReservationList = ({
                 .join(", ");
 
               return (
-                <Box key={item.id} width={{ base: "110vw", md: "100%" }}>
+                <Box key={item.id} width="100%" gap={2}>
                   <Lists
                     firstArea={getCustomerName(item.user)}
                     secondArea={getCustomerName(item.user, cutomerList)}
