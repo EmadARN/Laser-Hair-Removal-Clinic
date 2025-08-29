@@ -54,12 +54,13 @@
   </table>
 </div>
 
-## <a >🖼️ Reseption Dashboard</a>
+## <a >🖼️ Reseption and Auth</a>
 
 <div align="center">
   <table>
     <tr>
       <td><img src="./public/readme/reseptions1.png" alt="Image 1" width="300"></td>
+       <td><img src="./public/readme/reseptionsAuth.png"  alt="Image 2" width="300"></td>
     </tr>
   </table>
 </div>
