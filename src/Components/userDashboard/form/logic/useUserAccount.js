@@ -25,11 +25,8 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
     doctor: "-",
     offline_number: 0,
   });
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [drugHistory, setDrugHistory] = useState("false");
-  const [diseaseHistory, setDiseaseHistory] = useState("false");
   const [filteredForms, setFilteredForms] = useState([]);
-  const [hasChanges, setHasChanges] = useState(false); // State جدید برای ردیابی تغییرات
+  const [hasChanges, setHasChanges] = useState(false);
 
   useEffect(() => {
     dispatch(getCutomerList({ token: auth_token }));
@@ -48,19 +45,24 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
           (user) => user.username === phoneNumber
         ) || [];
 
-      // ادغام اطلاعات بر اساس شماره کاربر
+      // ادغام اطلاعات
       const mergedData = filteredInfo.map((info) => {
         const matchingUser = filteredList.find(
           (user) => user.username === info.user
         );
-        return { ...info, ...matchingUser };
+        return {
+          ...info,
+          ...matchingUser,
+          drug_hist: Boolean(info.drug_hist), // تبدیل به بولی
+          decease_hist: Boolean(info.decease_hist), // تبدیل به بولی
+        };
       });
 
       setFilteredForms(mergedData);
     }
   }, [customerList, phoneNumber]);
 
-  // مقداردهی به فرم بر اساس اولین مورد فیلتر شده
+  // مقداردهی به inputsData
   useEffect(() => {
     if (filteredForms.length > 0) {
       setInputsData((prev) => ({
@@ -70,49 +72,20 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
     }
   }, [filteredForms]);
 
-  // بررسی اینکه آیا فرم کامل است یا خیر (برای فعال/غیرفعال کردن دکمه ارسال)
-  useEffect(() => {
-    const requiredFields = [
-      "name",
-      "last_name",
-      "phone_number",
-      "national_code",
-      "address",
-      "house_number",
-    ];
-    setIsDisabled(!requiredFields.every((field) => inputsData[field]?.trim()));
-  }, [inputsData]);
-
-  // تابع برای تغییر مقادیر ورودی‌های فرم
+  // بررسی تغییرات فرم
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputsData((prev) => ({ ...prev, [name]: value }));
-    setHasChanges(true); // تغییرات رخ داده است
+    setHasChanges(true);
   };
 
-  // تابع برای تغییر مقادیر رادیو باتن‌ها (تاریخچه دارو و بیماری)
+  // تابع برای تغییر مقادیر رادیو باتن‌ها
   const handleRadioChange = (name, value) => {
     setInputsData((prev) => ({ ...prev, [name]: value === "true" }));
-    if (name === "drug_hist") setDrugHistory(value);
-    if (name === "decease_hist") setDiseaseHistory(value);
-    setHasChanges(true); // تغییرات رخ داده است
+    setHasChanges(true);
   };
 
-  // تابع ارسال اطلاعات فرم به سرور
-  // const submitHandler = async () => {
-  //   const result = await dispatch(
-  //     EditCustomerInformation({ ...inputsData, auth_token })
-  //   );
-  //   showToast({
-  //     title: result.meta.requestStatus === "fulfilled" ? "موفقیت‌آمیز" : "خطا",
-  //     description:
-  //       result.meta.requestStatus === "fulfilled"
-  //         ? "اطلاعات ویرایش شد"
-  //         : "خطا در ویرایش اطلاعات",
-  //     status: result.meta.requestStatus === "fulfilled" ? "success" : "error",
-  //   });
-  //   setHasChanges(false); // تغییرات اعمال شد، دکمه را غیرفعال کنید
-  // };
+  // تابع ارسال اطلاعات
   const submitHandler = async (formValues) => {
     const result = await dispatch(
       EditCustomerInformation({ ...formValues, auth_token })
@@ -128,19 +101,15 @@ const useUserAccount = (phoneNumber, setSteperState, dispatch) => {
     setHasChanges(false);
   };
 
-  // برگشت مقادیر مورد نیاز برای استفاده در کامپوننت
   return {
     inputsData,
-    isDisabled,
-    drugHistory,
-    diseaseHistory,
     filteredForms,
     handleChange,
     handleRadioChange,
     submitHandler,
     loading,
     setSteperState,
-    hasChanges, // اضافه کردن hasChanges به مقادیر برگشتی
+    hasChanges,
   };
 };
 

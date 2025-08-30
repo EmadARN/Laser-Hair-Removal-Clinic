@@ -1,10 +1,9 @@
-// FormInput.jsx
 import InputControl from "@/Common/formController/InputControl";
 import RadioControl from "@/Common/formController/RadioControl";
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 
-const FormInput = ({ formik, drugHistory, diseaseHistory, handleRadioChange }) => {
+const FormInput = ({ formik, handleRadioChange }) => {
   const getValue = (name) => formik.values[name];
   const getError = (name) => formik.touched?.[name] && formik.errors?.[name];
 
@@ -58,15 +57,21 @@ const FormInput = ({ formik, drugHistory, diseaseHistory, handleRadioChange }) =
       <Flex wrap="wrap" gap={4}>
         <RadioControl
           label="مصرف دارو:"
-          value={drugHistory}
-          handleChange={handleRadioChange}
+          value={String(getValue("drug_hist"))} // تبدیل به رشته برای RadioControl
+          handleChange={(value) => {
+            formik.setFieldValue("drug_hist", value === "true");
+            handleRadioChange("drug_hist", value);
+          }}
           name="drug_hist"
           error={getError("drug_hist")}
         />
         <RadioControl
           label="سابقه بیماری:"
-          value={diseaseHistory}
-          handleChange={handleRadioChange}
+          value={String(getValue("decease_hist"))} // تبدیل به رشته برای RadioControl
+          handleChange={(value) => {
+            formik.setFieldValue("decease_hist", value === "true");
+            handleRadioChange("decease_hist", value);
+          }}
           name="decease_hist"
           error={getError("decease_hist")}
         />
