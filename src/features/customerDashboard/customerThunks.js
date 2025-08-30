@@ -213,18 +213,16 @@ export const getAsyncUserName = createAsyncThunk(
 
 export const getSessionRecords = createAsyncThunk(
   "customer/getSessionRecords",
-  async (payload, { rejectWithValue }) => {
-    console.log("getSession", payload);
-
+  async ({ username, token, rejectWithValue }) => {
     try {
       const { data } = await api.post(
         "/Reserve/user/reserve/list/",
         {
-          username: payload.phoneNumber,
+          username,
         },
         {
           headers: {
-            Authorization: `Bearer ${payload.auth_token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );

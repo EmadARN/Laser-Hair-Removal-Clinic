@@ -29,25 +29,23 @@ const FirstBox = ({
   const date = new Date();
 
   const lastReserve = sessionRecords?.last_reserve;
-  const payed = lastReserve && lastReserve.payed;
-  const reserveDate = toPersianDigits(
-    extractDate(lastReserve && lastReserve.reserve_time_str)
-  );
+  const payed = lastReserve?.payed;
 
-  const nowDay = date.toLocaleDateString("fa-IR");
+  let compareDate = false;
+  if (lastReserve?.reserve_time_str) {
+    const reserveDateObj = new Date(lastReserve.reserve_time_str);
+    const now = new Date();
+    compareDate = reserveDateObj < now;
+  }
 
-  const compareDate =
-    reserveDate.split("/")[2]?.padStart(2, toPersianDigits(0)) <
-    nowDay.split("/")[2]
-      ? true
-      : false;
-  const reserveCompelete = compareDate === true && payed === true;
+  const reserveCompelete = compareDate && payed === true;
+
   const isExistingUser =
     lastReserve &&
     lastReserve.reserve_type !== "sc" &&
     payed !== true &&
-    compareDate !== true &&
-    reserveCompelete !== true;
+    !compareDate &&
+    !reserveCompelete;
 
   return (
     <Box

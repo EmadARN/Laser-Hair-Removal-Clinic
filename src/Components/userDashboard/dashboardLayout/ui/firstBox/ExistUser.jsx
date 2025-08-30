@@ -121,8 +121,9 @@ const ExistUser = ({
         ))}
         <Box mt={3} display="flex" justifyContent="center" width="100%">
           <Button
-            bgColor="#1111"
-            color="#888"
+            bgColor="#f50d0d19"
+            color="#a5a5a5ff"
+            _hover={{ bgColor: "#ff000028" }}
             borderRadius="7px"
             onClick={onOpen}
             width="95%"

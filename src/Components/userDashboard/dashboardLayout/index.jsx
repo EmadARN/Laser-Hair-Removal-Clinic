@@ -24,6 +24,7 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   const { userNames, customerList, sessionRecords } = useSelector(
     (store) => store.customerDashboard
   );
+  console.log(phoneNumber, "phoneNumber");
 
   useEffect(() => {
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
@@ -33,10 +34,10 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   }, []);
 
   useEffect(() => {
-    if (auth_token) {
+    if (auth_token && phoneNumber) {
       dispatch(getCutomerList({ token: auth_token }));
       dispatch(getAsyncUserName({ token: auth_token }));
-      dispatch(getSessionRecords({ phoneNumber, auth_token }));
+      dispatch(getSessionRecords({ username: phoneNumber, token: auth_token }));
     }
   }, [dispatch, auth_token, phoneNumber]);
 
@@ -60,9 +61,10 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   // تابع برای کلیک روی گزارش‌ها و انجام عملیات مربوطه
   const reportsClick = () => {
     dispatch(setSteperState(steperState + 1));
-    dispatch(getSessionRecords({ phoneNumber, auth_token }));
+    if (phoneNumber && auth_token) {
+      dispatch(getSessionRecords({ username: phoneNumber, token: auth_token }));
+    }
   };
-
   // تابع برای کلیک روی حساب کاربری و تغییر وضعیت استپر
   const accountClick = () => {
     dispatch(setSteperState(steperState + 2));
