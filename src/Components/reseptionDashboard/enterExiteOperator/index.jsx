@@ -39,7 +39,7 @@ const EnterExite = () => {
         borderRadius="8px"
         mt={3}
         w="100%"
-        minW={{ base: "70px", md: "130px" }}
+        minWidth={{ base: "70px", md: "130px" }}
         fontSize={{ base: "8px", md: "14px" }}
         color="brand.400"
         fontWeight="bold"

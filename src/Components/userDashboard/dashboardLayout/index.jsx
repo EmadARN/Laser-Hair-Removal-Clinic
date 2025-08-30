@@ -24,7 +24,6 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
   const { userNames, customerList, sessionRecords } = useSelector(
     (store) => store.customerDashboard
   );
-  console.log(phoneNumber, "phoneNumber");
 
   useEffect(() => {
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
@@ -109,6 +108,7 @@ const DashboardLayout = ({ dispatch, steperState, setSteperState }) => {
             fontSize={{ base: "xs", md: "sm" }}
             fontWeight="bold"
             color="gray.500"
+            whiteSpace={"nowrap"}
           >
             {getDayPart()} بخیر
           </Text>

@@ -3,8 +3,7 @@ import NewUser from "./NewUser";
 import ExistUser from "./ExistUser";
 import { Box } from "@chakra-ui/react";
 import Loading from "@/Common/loading";
-import { extractDate } from "@/utils/extractDate";
-import { toPersianDigits } from "@/utils/toPersianDigits";
+
 
 const FirstBox = ({
   sessionRecords,
@@ -26,7 +25,6 @@ const FirstBox = ({
   if (loading || !showContent) {
     return <Loading />;
   }
-  const date = new Date();
 
   const lastReserve = sessionRecords?.last_reserve;
   const payed = lastReserve?.payed;

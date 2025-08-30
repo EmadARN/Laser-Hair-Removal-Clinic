@@ -36,7 +36,7 @@ const FadeInDiv = ({ tabs, active }) => (
           color="gray.600"
           shadow="md"
           minH={{ base: "220px", lg: "130px" }}
-          minW={{ base: "170px", lg: "200px" }}
+          minWidth={{ base: "170px", lg: "200px" }}
           h="100%"
           w="100%"
           overflow="auto"

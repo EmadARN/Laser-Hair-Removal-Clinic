@@ -9,7 +9,7 @@ function ShiftButton({ label, onClick, isSelected }) {
       border="1px solid #e0e0e0"
       bg={isSelected ? "purple.500" : "white"}
       color={isSelected ? "white" : "black"}
-      minW="80px"
+      minWidth="80px"
       textAlign="center"
       cursor="pointer"
       _hover={{ bg: "purple.200" }}

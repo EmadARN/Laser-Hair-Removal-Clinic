@@ -76,10 +76,10 @@ export const Compare = ({
         <Image
           alt="first image"
           src={firstImage}
-          layout="fill"
-          objectFit="cover"
-          style={styles.imageFirst}
+          fill
+          style={{ ...styles.imageFirst, objectFit: "cover" }}
           draggable={false}
+          priority
         />
       </Box>
 
@@ -94,11 +94,11 @@ export const Compare = ({
       >
         <Image
           alt="second image"
-          layout="fill"
-          objectFit="cover"
+          fill
           src={secondImage}
-          style={styles.imageSecond}
+          style={{ ...styles.imageFirst, objectFit: "cover" }}
           draggable={false}
+          priority
         />
       </Box>
 

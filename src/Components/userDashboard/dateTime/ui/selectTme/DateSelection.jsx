@@ -32,7 +32,7 @@ const DateSelection = ({
             border="1px solid #e0e0e0"
             bg={selectedDateId === item.date_id ? "brand.400" : "white"}
             color={selectedDateId === item.date_id ? "white" : "black"}
-            minW={{ base: "60px", sm: "80px" }}
+            minWidth={{ base: "60px", sm: "80px" }}
             flex="none" // Prevent flex items from growing or shrinking
             textAlign="center"
             cursor="pointer"

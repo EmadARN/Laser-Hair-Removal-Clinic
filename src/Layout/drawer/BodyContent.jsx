@@ -8,14 +8,8 @@ const BodyContent = () => {
     <>
       {data.map((item) => {
         return (
-          <>
-            <Box
-              key={item.id}
-              display="flex"
-              alignItems="center"
-              mt="30px"
-              gap={2}
-            >
+          <React.Fragment key={item.id}>
+            <Box display="flex" alignItems="center" mt="30px" gap={2}>
               <Icon color="gray.500" fontSize={"26px"}>
                 {item.icon}
               </Icon>
@@ -29,7 +23,7 @@ const BodyContent = () => {
                 </Text>
               </Link>
             </Box>
-          </>
+          </React.Fragment>
         );
       })}
     </>

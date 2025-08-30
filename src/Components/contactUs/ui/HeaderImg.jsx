@@ -10,8 +10,8 @@ const HeaderImg = () => {
       height={"100%"}
     >
       <Image
-      width={700} 
-      height={600}
+        width={700}
+        height={600}
         src="/images/welcome_1.jpg"
         alt="Picture of the author"
       />
