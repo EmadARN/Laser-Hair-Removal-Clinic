@@ -41,12 +41,12 @@ const Clients = () => {
   const hasSearch = filteredData !== undefined;
   const dataToShow = hasSearch ? filteredData : currentClients;
 
-  // بررسی وضعیت خالی بودن داده
-  const isEmpty =
+  // بررسی وضعیت خالی بودن داده برای جدول
+  const isTableEmpty =
     !loading && !error && (!dataToShow || dataToShow.length === 0);
 
   if (step === 0) {
-    if (isEmpty) {
+    if (isTableEmpty) {
       return (
         <ReusableSession
           text="مراجعینی برای نمایش وجود ندارد"
@@ -122,6 +122,21 @@ const Clients = () => {
   }
 
   // حالت آکاردئون
+  const isAccordionEmpty =
+    !loading &&
+    !error &&
+    (!clientInformation?.reserve_list ||
+      clientInformation.reserve_list.length === 0);
+
+  if (isAccordionEmpty) {
+    return (
+      <ReusableSession
+        text="اطلاعات رزرو برای این مراجع یافت نشد"
+        icon={<RiShieldUserFill />}
+      />
+    );
+  }
+
   return (
     <AccordionLists
       mdCancelHandler={mdCancelHandler}
