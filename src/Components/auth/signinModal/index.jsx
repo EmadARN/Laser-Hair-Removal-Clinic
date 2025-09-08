@@ -11,8 +11,6 @@ import VerificationCode from "./ui/verificationCode/VerificationCode";
 import useVerificationNumber from "./logic/useVerificationNumber";
 import useVerificationCode from "./logic/useVerificationCode";
 
-
-
 const MainModal = ({ onClose, onOpen, isOpen }) => {
   const { page, setPage, handlePhoneNumberSubmit, loading } =
     useVerificationNumber();

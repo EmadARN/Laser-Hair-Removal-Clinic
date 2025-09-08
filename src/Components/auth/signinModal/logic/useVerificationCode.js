@@ -2,41 +2,50 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
-import { useCustomToast } from "@/utils/useCustomToast ";
+import { useCustomToast } from "@/utils/useCustomToast";
 import { postAsyncCode, postAsyncNumber } from "@/features/signin/authSlice";
 
 const useVerificationCode = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [inputCode, setInputCode] = useState(["", "", "", "", "", ""]);
   const [time, setTime] = useState(90);
+  const [hasResent, setHasResent] = useState(false); // جلوگیری از لوپ
 
   const { showToast } = useCustomToast();
   const [cookies, setCookie] = useCookies(["auth_token"]);
   const router = useRouter();
   const dispatch = useDispatch();
 
-  //Timer
+  // گرفتن شماره از localStorage
   useEffect(() => {
     const storedPhoneNumber = localStorage.getItem("phoneNumber");
     if (storedPhoneNumber) {
       setPhoneNumber(storedPhoneNumber);
     }
+  }, []);
 
+  // تایمر
+  useEffect(() => {
     if (time > 0) {
-      const timer = setInterval(
-        () => setTime((prevTime) => prevTime - 1),
-        1000
-      );
+      const timer = setInterval(() => setTime((prev) => prev - 1), 1000);
       return () => clearInterval(timer);
     }
 
-    // زمانی که تایمر به صفر می‌رسد، کد جدید را ارسال کن
-    if (time === 0) {
+    // وقتی تایمر صفر شد فقط یک بار SMS ارسال شه
+    if (time === 0 && !hasResent) {
       dispatch(postAsyncNumber({ phone_number: phoneNumber }));
-      setTime(90); // بازنشانی تایمر به ۹۰ ثانیه
+      setHasResent(true); // اجازه دوباره نمیدیم تا کاربر خودش ریست کنه
     }
-  }, [time, phoneNumber, dispatch]);
+  }, [time, phoneNumber, dispatch, hasResent]);
 
+  // ارسال کد دستی (دکمه ارسال مجدد)
+  const handleResend = () => {
+    dispatch(postAsyncNumber({ phone_number: phoneNumber }));
+    setTime(90);
+    setHasResent(false);
+  };
+
+  // ثبت کد
   const handleCodeSubmit = async () => {
     const newCodeValue = inputCode.join("");
     if (!newCodeValue) return;
@@ -74,7 +83,7 @@ const useVerificationCode = () => {
     inputCode,
     setInputCode,
     time,
-    setTime,
+    handleResend,
     handleCodeSubmit,
   };
 };
