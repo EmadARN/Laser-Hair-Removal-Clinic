@@ -20,8 +20,8 @@ const TurnSetting = ({ handleInputs, submitHandler, turnSetting, loading }) => {
       gap={3}
       justifyContent={"center"}
     >
-      <form onSubmit={submitHandler} >
-        <Box >
+      <form onSubmit={submitHandler}>
+        <Box>
           <Text fontWeight={"bold"} textAlign={"right"} color={"#111"}>
             تنظیمات نوبت دهی و ودیعه
           </Text>
@@ -82,7 +82,7 @@ const TurnSetting = ({ handleInputs, submitHandler, turnSetting, loading }) => {
               py={4}
               type="submit"
             >
-              {loading ? <Loading /> : "ثبت تغییرات"}
+              ثبت تغییرات
             </CustomButton>
           </Box>
         </Stack>

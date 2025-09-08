@@ -5,6 +5,8 @@ import AccordionLists from "../shared/AccordionLists";
 import SearchComponent from "@/Common/searchInput/SearchInput";
 import usePagination from "./logic/usePagination";
 import useCutomerInformation from "./logic/useCutomerInformation";
+import ReusableSession from "../shared/ReussableSession";
+import { RiShieldUserFill } from "react-icons/ri";
 
 const Clients = () => {
   const [step, setStep] = useState(0);
@@ -35,10 +37,21 @@ const Clients = () => {
     }
   }, [customerListAdmin]);
 
+  if (!loading && !error && currentClients?.length === 0) {
+    return (
+      <ReusableSession
+        text="مراجعینی برای نمایش وجود ندارد"
+        icon={<RiShieldUserFill />}
+      />
+    );
+  }
   if (step === 0) {
     return (
       <Box width={"100%"} minWidth={"500px"}>
-        <Box sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 4 } }}width={"95%"}>
+        <Box
+          sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 4 } }}
+          width={"95%"}
+        >
           <SearchComponent
             data={customerListAdmin?.customer_list || []}
             filterKeys={["name", "last_name"]}

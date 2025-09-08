@@ -5,11 +5,9 @@ import {
   getAsyncUserName,
   settingAsyncChanging,
   changePassword,
-  
 } from "@/features/adminDashboard/adminThunks";
 import { removeCommas } from "@/utils/formatNumber";
 import { useCustomToast } from "@/utils/useCustomToast ";
-
 
 const useSettingLogic = () => {
   const { showToast } = useCustomToast();
@@ -22,8 +20,6 @@ const useSettingLogic = () => {
     password: "",
     old_password: "",
   });
-
-
 
   const [{ auth_Admin_token }] = useCookies(["auth_Admin_token"]);
   const { userNames } = useSelector((store) => store.adminDashboard);
@@ -39,7 +35,7 @@ const useSettingLogic = () => {
     const { name, value } = e.target;
     const rawValue = removeCommas(value); // مقدار اصلی بدون ویرگول
     // setTurnSetting((prev) => ({ ...prev, [name]: value }));
-    setTurnSetting((prev) => ({ ...prev, [name]: rawValue })); 
+    setTurnSetting((prev) => ({ ...prev, [name]: rawValue }));
   };
 
   const handleInputChange = (e) => {
@@ -61,7 +57,7 @@ const useSettingLogic = () => {
   };
 
   const changePasswordAsync = async (onClose) => {
-    const result=await dispatch(
+    const result = await dispatch(
       changePassword({
         password: passwordChange.password,
         old_password: passwordChange.old_password,
@@ -70,7 +66,7 @@ const useSettingLogic = () => {
     );
     if (result.meta.requestStatus === "fulfilled") {
       showToast({ title: "رمز عبور با موفقیت تغییر کرد", status: "success" });
-    }else{
+    } else {
       showToast({ title: "خطا در تغییر رمز", status: "error" });
     }
     onClose();
