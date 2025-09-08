@@ -11,7 +11,7 @@ import ReusableSession from "../shared/ReussableSession";
 const Clients = () => {
   const [step, setStep] = useState(0);
   const [filteredClients, setFilteredClients] = useState([]);
-  const [filteredData, setFilteredData] = useState();
+  const [filteredData, setFilteredData] = useState([]);
 
   const {
     currentPage,
@@ -45,8 +45,15 @@ const Clients = () => {
       Array.isArray(currentClients) &&
       currentClients.length > 0;
 
+    const dataToRender = hasFilteredData
+      ? filteredData
+      : hasCurrentClients
+      ? currentClients
+      : [];
+
     return (
       <Box width={"100%"} minWidth={"500px"}>
+        {/* Search Component */}
         <Box
           sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 4 } }}
           width={"95%"}
@@ -61,6 +68,7 @@ const Clients = () => {
           />
         </Box>
 
+        {/* Main Table / ReusableSession */}
         <Box
           width={"100%"}
           minWidth={"500px"}
@@ -68,25 +76,13 @@ const Clients = () => {
           justifyContent={"center"}
           px={{ base: 2, md: 4 }}
         >
-          {hasFilteredData ? (
+          {loading ? (
+            <Text>در حال بارگذاری...</Text>
+          ) : error ? (
+            <Text>خطا در بارگذاری داده‌ها</Text>
+          ) : dataToRender.length > 0 ? (
             <Table mt={6} cursor="pointer" width="100%" size="sm" dir="rtl">
-              {filteredData.map((searchitem, index) => (
-                <Box
-                  key={index}
-                  onClick={() => handleRowClick(searchitem)}
-                  width={"100%"}
-                >
-                  <Lists
-                    firstArea={searchitem.name + " " + searchitem.last_name}
-                    editDeleteDisplay="none"
-                    leftArrowDisplay="flex"
-                  />
-                </Box>
-              ))}
-            </Table>
-          ) : hasCurrentClients ? (
-            <Table mt={6} cursor="pointer" width="100%" size="sm" dir="rtl">
-              {currentClients.map((item, index) => (
+              {dataToRender.map((item, index) => (
                 <Box
                   key={index}
                   onClick={() => handleRowClick(item)}
@@ -101,7 +97,6 @@ const Clients = () => {
               ))}
             </Table>
           ) : (
-            // اینجا نمایش فقط ReusableSession
             <ReusableSession
               text="مراجعینی برای نمایش وجود ندارد"
               icon={<RiShieldUserFill />}
@@ -109,7 +104,8 @@ const Clients = () => {
           )}
         </Box>
 
-        {hasCurrentClients && (
+        {/* Pagination */}
+        {dataToRender.length > 0 && (
           <HStack mt={4} justifyContent="end" ml={4}>
             <Button onClick={handlePrevPage} isDisabled={currentPage === 1}>
               قبل
