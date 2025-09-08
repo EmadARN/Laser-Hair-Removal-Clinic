@@ -29,7 +29,7 @@ const LayoutModal = ({ handleClick, phoneNumber, time, handleBackClick }) => {
       </Box>
       <Flex alignItems="center" mb={4}>
         <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "md" }}>
-          کد تایید به شماره‌ی
+          کد تایید به شماره‌
           <Box px={1} as="span" textDecoration="underline">
             {phoneNumber}
           </Box>

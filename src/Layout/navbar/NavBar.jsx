@@ -8,6 +8,7 @@ import { Logo } from "@/widget/Logo";
 import Link from "next/link";
 import CustomButton from "@/Common/customeButton/CustomeButton";
 import RightBar from "../drawer";
+import { whitespace } from "stylis";
 
 export default function NavBar({ bgColor, py }) {
   const router = useRouter();
@@ -72,9 +73,15 @@ export default function NavBar({ bgColor, py }) {
             fontFamily="IRANYekan-Medium"
             color="gray.600"
           >
-            <NavLink path="/">لیزر ساید</NavLink>
-            <NavLink path="/contactUs">ارتباط با ما</NavLink>
-            <NavLink path="/aboutUs">درباره ما</NavLink>
+            <NavLink path="/" style={{ whitespace: "nowrap" }}>
+              لیزر ساید
+            </NavLink>
+            <NavLink path="/contactUs" style={{ whitespace: "nowrap" }}>
+              ارتباط با ما
+            </NavLink>
+            <NavLink path="/aboutUs" style={{ whitespace: "nowrap" }}>
+              درباره ما
+            </NavLink>
           </Flex>
         </Box>
 

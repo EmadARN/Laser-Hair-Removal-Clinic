@@ -34,10 +34,6 @@ const SessionList = ({ sessions, onSessionClick, ComparePayeds }) => {
             const compare =
               session?.reserve_type === "pe" &&
               toPersianDigits(formattedDate) < nowDay;
-            // console.log("formattedDate", formattedDate);
-            // console.log("nowDay", nowDay);
-
-            // console.log(formattedDate < nowDay);
 
             return (
               <Tr

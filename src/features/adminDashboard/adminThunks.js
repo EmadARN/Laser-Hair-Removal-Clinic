@@ -32,8 +32,6 @@ export const getAsyncUsersList = createAsyncThunk(
 export const addAsyncUsers = createAsyncThunk(
   "user/addAsyncUsers",
   async (payload, { rejectWithValue }) => {
-
-
     try {
       const { data } = await api.post("/Core/signup/admin/", payload, {
         headers: {
@@ -42,8 +40,6 @@ export const addAsyncUsers = createAsyncThunk(
       });
       return data;
     } catch (error) {
-      console.log(error);
-
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -52,8 +48,6 @@ export const addAsyncUsers = createAsyncThunk(
 export const editAsyncUser = createAsyncThunk(
   "user/editAsyncUser",
   async (payload, { rejectWithValue }) => {
-    console.log(payload);
-
     try {
       const { data } = await api.post(
         `/Core/change/user/information/`,
@@ -66,8 +60,6 @@ export const editAsyncUser = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      console.log(error);
-
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -76,7 +68,6 @@ export const editAsyncUser = createAsyncThunk(
 export const deleteAsyncUser = createAsyncThunk(
   "user/deleteAsyncUser",
   async (payload, { rejectWithValue }) => {
-  
     try {
       await api.post(
         `/Core/delete/user/`,
@@ -91,7 +82,6 @@ export const deleteAsyncUser = createAsyncThunk(
       );
       return { id: payload.id };
     } catch (error) {
-      console.log("err",error)
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -132,23 +122,24 @@ export const addLazerArea = createAsyncThunk(
 
 export const editLazerArea = createAsyncThunk(
   "user/editLazerArea",
-  
-  async (payload, { rejectWithValue }) => {
-  console.log("payload",payload)
 
+  async (payload, { rejectWithValue }) => {
     try {
-      const { data } = await api.post("/Laser/edit/laser/area/", {
-        name:payload.name,
-        price:payload.price
-      }, {
-        headers: {
-          Authorization: `Bearer ${payload.token}`,
+      const { data } = await api.post(
+        "/Laser/edit/laser/area/",
+        {
+          name: payload.name,
+          price: payload.price,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`,
+          },
+        }
+      );
 
       return data;
     } catch (error) {
-      console.log("error",error)
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -189,8 +180,7 @@ export const getSettingInformation = createAsyncThunk(
 
 export const getAsyncOperatorList = createAsyncThunk(
   "admin/getAsyncOperatorList",
-  async (payload, {  rejectWithValue }) => {
-    
+  async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.get("/Core/operator/list/", {
         headers: {
@@ -213,8 +203,6 @@ export const fetchWeekData = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error);
-
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -243,14 +231,12 @@ export const getAsyncListDateOperator = createAsyncThunk(
 export const operatorProgramList = createAsyncThunk(
   "user/operatorProgramList",
   async (payload, { rejectWithValue }) => {
-    console.log("payload success", payload);
     try {
       const { data } = await api.post("/Admin/set/operator/program/", payload, {
         headers: {
           Authorization: `Bearer ${payload.token}`,
         },
       });
-      console.log("operatorProgramlist success::", data);
 
       return data;
     } catch (error) {
@@ -294,7 +280,6 @@ export const changePassword = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log("errror",error);
       return rejectWithValue(error.response?.data?.message || error.message);
     }
   }

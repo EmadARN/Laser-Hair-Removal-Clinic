@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const useLoginAdminRecptionHooks = (dispatch) => {
   const { userType } = useSelector((store) => store.signin);
-  console.log("uu", userType);
 
   const [cookies, setCookie] = useCookies([
     "auth_Admin_token",

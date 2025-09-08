@@ -14,7 +14,6 @@ const TitleUserDashboard = () => {
   const [cookies] = useCookies(["auth_token"]);
   const tokenAuth = cookies.auth_token;
   const dispatch = useDispatch();
-  console.log("dasdad", router.query.dashboardSlug);
 
   const handleCancelReserve = () => {
     if (router.query.dashboardSlug === "dateTime") {
@@ -26,7 +25,6 @@ const TitleUserDashboard = () => {
           tokenAuth,
         })
       );
-      console.log("JHello");
     }
   };
   const handleBack = () => {
@@ -44,7 +42,7 @@ const TitleUserDashboard = () => {
     return () => {
       window.removeEventListener("popstate", onPopState);
     };
-  }, [router.query.dashboardSlug,handleCancelReserve]);
+  }, [router.query.dashboardSlug, handleCancelReserve]);
 
   return (
     <Flex sx={{ justifyContent: "space-between", bgColor: "#1111", w: "full" }}>

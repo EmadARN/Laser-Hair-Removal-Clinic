@@ -27,7 +27,6 @@ const ResClients = () => {
       />
     );
   }
-  console.log(todayReserve, "todayReserve");
 
   return (
     <>

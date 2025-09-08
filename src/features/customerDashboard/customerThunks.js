@@ -4,8 +4,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const postCustomerInformation = createAsyncThunk(
   "customerDashboard/postCustomerInformation",
   async (payload, { rejectWithValue }) => {
-    console.log("payload", payload);
-
     try {
       const { data } = await api.post(
         "Core/add/customer/information/",
@@ -17,18 +15,13 @@ export const postCustomerInformation = createAsyncThunk(
           },
         }
       );
-      console.log("postCustomerInformation", data);
       return data;
-    } catch (error) {
-      console.log("error payload postCustomerInformation", error);
-    }
+    } catch (error) {}
   }
 );
 export const EditCustomerInformation = createAsyncThunk(
   "customerDashboard/EditCustomerInformation",
   async (payload, { rejectWithValue }) => {
-    console.log("payload", payload);
-
     try {
       const { data } = await api.post(
         "Core/add/customer/information/",
@@ -40,11 +33,8 @@ export const EditCustomerInformation = createAsyncThunk(
           },
         }
       );
-      console.log("EditCustomerInformation", data);
       return data;
-    } catch (error) {
-      console.log("error payload EditCustomerInformation", error);
-    }
+    } catch (error) {}
   }
 );
 
@@ -57,18 +47,13 @@ export const getLazerAreaList = createAsyncThunk(
           Authorization: `Bearer ${payload.token}`,
         },
       });
-      console.log("getLazerAreaList", data);
       return data;
-    } catch (error) {
-      console.log("error payload getLazerAreaList", error);
-    }
+    } catch (error) {}
   }
 );
 export const postLazerAreaList = createAsyncThunk(
   "customerDashboard/postLazerAreaList",
   async (payload, { rejectWithValue }) => {
-    console.log("payload", payload);
-
     try {
       const { data } = await api.post(
         "/Reserve/client/pending/reserve/",
@@ -81,18 +66,13 @@ export const postLazerAreaList = createAsyncThunk(
           },
         }
       );
-      console.log("postLazerAreaList", data);
       return data;
-    } catch (error) {
-      console.log("error payload postLazerAreaList", error);
-    }
+    } catch (error) {}
   }
 );
 export const getreserveInformation = createAsyncThunk(
   "customerDashboard/getreserveInformation",
   async (payload, { rejectWithValue }) => {
-    console.log("payload:", payload);
-
     try {
       const { data } = await api.get(
         `/Reserve/reserve/information/${payload.reserveId}/`,
@@ -102,7 +82,6 @@ export const getreserveInformation = createAsyncThunk(
           },
         }
       );
-      console.log("getreserveInformation", data);
       return data;
     } catch (error) {
       console.log("error payload getreserveInformation", error);
@@ -121,7 +100,6 @@ export const getTimeList = createAsyncThunk(
           },
         }
       );
-      console.log("getTimeList", data);
       return data;
     } catch (error) {
       console.log("error payload getTimeList", error);
@@ -132,8 +110,6 @@ export const getTimeList = createAsyncThunk(
 export const postAddTime = createAsyncThunk(
   "customerDashboard/postAddTime",
   async (payload, { rejectWithValue }) => {
-    console.log("payload", payload);
-
     try {
       const { data } = await api.post(
         "/Reserve/client/add/time/",
@@ -147,7 +123,6 @@ export const postAddTime = createAsyncThunk(
           },
         }
       );
-      console.log("postAddTime", data);
       return data;
     } catch (error) {
       console.log("error payload postAddTime", error);
@@ -158,7 +133,6 @@ export const postAddTime = createAsyncThunk(
 export const confirmInfo = createAsyncThunk(
   "customerDashboard/confirmInfo",
   async (payload, { rejectWithValue }) => {
-    console.log("confirminfp", payload);
     try {
       const { data } = await api.post(
         "Core/customer/information/",
@@ -170,7 +144,6 @@ export const confirmInfo = createAsyncThunk(
         }
       );
 
-      console.log("data", data);
       return data;
     } catch (error) {
       console.log("error payload confirm info", error);
@@ -196,8 +169,6 @@ export const getCutomerList = createAsyncThunk(
 export const getAsyncUserName = createAsyncThunk(
   "customer/getAsyncUserName",
   async (payload, { rejectWithValue }) => {
-    console.log("ppp", payload);
-
     try {
       const { data } = await api.get("/Core/get/username/", {
         headers: {
@@ -227,8 +198,6 @@ export const getSessionRecords = createAsyncThunk(
         }
       );
 
-      console.log("session success", data);
-
       return data;
     } catch (error) {
       console.log("session error", error);
@@ -252,7 +221,6 @@ export const cancelReserve = createAsyncThunk(
           },
         }
       );
-      console.log("CANCEL", data);
 
       return data;
     } catch (error) {

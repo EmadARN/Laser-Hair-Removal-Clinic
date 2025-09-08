@@ -16,7 +16,6 @@ const ConfirmInfo = ({ slug }) => {
   const { confrimInfoDetail, loading, error } = useSelector(
     (store) => store.customerDashboard
   );
-  console.log("confrimInfoDetail", confrimInfoDetail);
 
   // گرفتن مقادیر از localStorage
   const username = localStorage.getItem("phoneNumber");

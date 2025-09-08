@@ -18,7 +18,6 @@ const SessionDetailsModal = ({ isOpen, onClose, sessionDetails }) => {
   const toPersian = (extract, value) => {
     return toPersianDigits(extract(value));
   };
-  console.log(sessionDetails);
 
   const isCancelled = sessionDetails?.reserveStatus === "کنسل شده";
   const isPaid = sessionDetails?.paid;
