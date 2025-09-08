@@ -37,7 +37,14 @@ const Clients = () => {
     }
   }, [customerListAdmin]);
 
-  if (!loading && !error && currentClients?.length === 0) {
+  // بررسی اینکه چه داده‌ای برای نمایش وجود دارد
+  const hasSearch = filteredData !== undefined; // آیا کاربر جستجو کرده؟
+  const dataToShow = hasSearch ? filteredData : currentClients;
+
+  // نمایش ReusableSession وقتی داده‌ای وجود ندارد
+  const isEmpty =
+    !loading && !error && (!dataToShow || dataToShow.length === 0);
+  if (isEmpty) {
     return (
       <ReusableSession
         text="مراجعینی برای نمایش وجود ندارد"
@@ -45,6 +52,7 @@ const Clients = () => {
       />
     );
   }
+  
   if (step === 0) {
     return (
       <Box width={"100%"} minWidth={"500px"}>
