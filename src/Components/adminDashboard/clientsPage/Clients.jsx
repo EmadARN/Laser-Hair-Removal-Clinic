@@ -5,7 +5,7 @@ import AccordionLists from "../shared/AccordionLists";
 import SearchComponent from "@/Common/searchInput/SearchInput";
 import usePagination from "./logic/usePagination";
 import useCutomerInformation from "./logic/useCutomerInformation";
-\import { RiShieldUserFill } from "react-icons/ri";
+import { RiShieldUserFill } from "react-icons/ri";
 import ReusableSession from "../shared/ReussableSession";
 
 const Clients = () => {
