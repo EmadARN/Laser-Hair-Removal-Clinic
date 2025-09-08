@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
+import { useCustomToast } from "@/utils/useCustomToast";
 import { postAsyncCode, postAsyncNumber } from "@/features/signin/authSlice";
-import { useCustomToast } from "@/utils/useCustomToast ";
 
-const useVerificationCode = () => {
+const useVerificationCode = (page) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [inputCode, setInputCode] = useState(["", "", "", "", "", ""]);
-  const [time, setTime] = useState(90);
-  const [hasResent, setHasResent] = useState(false); // جلوگیری از لوپ
+  const [time, setTime] = useState(null);
+  const [hasResent, setHasResent] = useState(false);
 
   const { showToast } = useCustomToast();
   const [cookies, setCookie] = useCookies(["auth_token"]);
@@ -24,6 +24,14 @@ const useVerificationCode = () => {
     }
   }, []);
 
+  // ✅ هر بار که کاربر وارد استپ دوم میشه تایمر از اول شروع بشه
+  useEffect(() => {
+    if (page === 1) {
+      setTime(90);
+      setHasResent(false);
+    }
+  }, [page]);
+
   // تایمر
   useEffect(() => {
     if (time > 0) {
@@ -31,14 +39,14 @@ const useVerificationCode = () => {
       return () => clearInterval(timer);
     }
 
-    // وقتی تایمر صفر شد فقط یک بار SMS ارسال شه
     if (time === 0 && !hasResent) {
       dispatch(postAsyncNumber({ phone_number: phoneNumber }));
-      setHasResent(true); // اجازه دوباره نمیدیم تا کاربر خودش ریست کنه
+      setHasResent(true);
+      setTime(null);
     }
   }, [time, phoneNumber, dispatch, hasResent]);
 
-  // ارسال کد دستی (دکمه ارسال مجدد)
+  // ارسال مجدد کد
   const handleResend = () => {
     dispatch(postAsyncNumber({ phone_number: phoneNumber }));
     setTime(90);
