@@ -9,6 +9,7 @@ import { resetAuthState } from "@/features/signin/authSlice";
 import useLoginAdminRecptionHooks from "./logic/useLoginAdminRecptionHooks";
 import FormLogin from "./ui/formLogin/FormLogin";
 import AnimationSide from "./ui/AnimationSide";
+import InfoToast from "../InfoToast";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -98,6 +99,7 @@ const LoginPage = () => {
       }}
     >
       <BgAnimate />
+      <InfoToast />
       {/* {!isCaptchaVerified ? (
         <Captcha onVerify={handleCaptchaSuccess} />
       ) : ( */}

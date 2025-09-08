@@ -37,25 +37,27 @@ const Clients = () => {
     }
   }, [customerListAdmin]);
 
-  // بررسی اینکه چه داده‌ای برای نمایش وجود دارد
-  const hasSearch = filteredData !== undefined; // آیا کاربر جستجو کرده؟
+  // آیا جستجو فعال است؟
+  const hasSearch = filteredData !== undefined;
   const dataToShow = hasSearch ? filteredData : currentClients;
 
-  // نمایش ReusableSession وقتی داده‌ای وجود ندارد
+  // بررسی وضعیت خالی بودن داده
   const isEmpty =
     !loading && !error && (!dataToShow || dataToShow.length === 0);
-  if (isEmpty) {
-    return (
-      <ReusableSession
-        text="مراجعینی برای نمایش وجود ندارد"
-        icon={<RiShieldUserFill />}
-      />
-    );
-  }
-  
+
   if (step === 0) {
+    if (isEmpty) {
+      return (
+        <ReusableSession
+          text="مراجعینی برای نمایش وجود ندارد"
+          icon={<RiShieldUserFill />}
+        />
+      );
+    }
+
     return (
       <Box width={"100%"} minWidth={"500px"}>
+        {/* سرچ */}
         <Box
           sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 4 } }}
           width={"95%"}
@@ -69,6 +71,8 @@ const Clients = () => {
             onSearch={setFilteredData}
           />
         </Box>
+
+        {/* جدول */}
         <Box
           width={"100%"}
           minWidth={"500px"}
@@ -84,39 +88,23 @@ const Clients = () => {
             size="sm"
             dir="rtl"
           >
-            {filteredData && filteredData.length > 0
-              ? filteredData.map((searchitem, index) => (
-                  <Box
-                    key={index}
-                    onClick={() => handleRowClick(searchitem)}
-                    width={"100%"}
-                  >
-                    <Lists
-                      firstArea={searchitem.name + " " + searchitem.last_name}
-                      editDeleteDisplay="none"
-                      leftArrowDisplay="flex"
-                    />
-                  </Box>
-                ))
-              : !loading && !error && Array.isArray(currentClients)
-              ? currentClients.map((item, index) => (
-                  <Box
-                    key={index}
-                    onClick={() => handleRowClick(item)}
-                    width={"100%"}
-                  >
-                    <Lists
-                      firstArea={item.name + " " + item.last_name}
-                      editDeleteDisplay="none"
-                      leftArrowDisplay="flex"
-                    />
-                  </Box>
-                ))
-              : error
-              ? null
-              : null}
+            {dataToShow.map((item, index) => (
+              <Box
+                key={index}
+                onClick={() => handleRowClick(item)}
+                width={"100%"}
+              >
+                <Lists
+                  firstArea={item.name + " " + item.last_name}
+                  editDeleteDisplay="none"
+                  leftArrowDisplay="flex"
+                />
+              </Box>
+            ))}
           </Table>
         </Box>
+
+        {/* pagination */}
         <HStack mt={4} justifyContent="end" ml={4}>
           <Button onClick={handlePrevPage} isDisabled={currentPage === 1}>
             قبل
@@ -131,15 +119,16 @@ const Clients = () => {
         </HStack>
       </Box>
     );
-  } else {
-    return (
-      <AccordionLists
-        mdCancelHandler={mdCancelHandler}
-        clientData={clientData}
-        clientInformation={clientInformation.reserve_list}
-      />
-    );
   }
+
+  // حالت آکاردئون
+  return (
+    <AccordionLists
+      mdCancelHandler={mdCancelHandler}
+      clientData={clientData}
+      clientInformation={clientInformation.reserve_list}
+    />
+  );
 };
 
 export default Clients;
