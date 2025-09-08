@@ -24,7 +24,7 @@ const useVerificationCode = (page) => {
     }
   }, []);
 
-  // ✅ هر بار که کاربر وارد استپ دوم میشه تایمر از اول شروع بشه
+  // هر بار که کاربر وارد استپ دوم می‌شود، تایمر از اول شروع شود
   useEffect(() => {
     if (page === 1) {
       setTime(90);
@@ -40,15 +40,22 @@ const useVerificationCode = (page) => {
     }
 
     if (time === 0 && !hasResent) {
-      dispatch(postAsyncNumber({ phone_number: phoneNumber }));
-      setHasResent(true);
-      setTime(null);
+      const storedPhoneNumber =
+        phoneNumber || localStorage.getItem("phoneNumber");
+      if (storedPhoneNumber) {
+        dispatch(postAsyncNumber({ phone_number: storedPhoneNumber }));
+        setHasResent(true);
+      }
     }
   }, [time, phoneNumber, dispatch, hasResent]);
 
   // ارسال مجدد کد
   const handleResend = () => {
-    dispatch(postAsyncNumber({ phone_number: phoneNumber }));
+    const storedPhoneNumber =
+      phoneNumber || localStorage.getItem("phoneNumber");
+    if (!storedPhoneNumber) return;
+
+    dispatch(postAsyncNumber({ phone_number: storedPhoneNumber }));
     setTime(90);
     setHasResent(false);
   };
@@ -60,7 +67,7 @@ const useVerificationCode = (page) => {
 
     const result = await dispatch(
       postAsyncCode({
-        phone_number: phoneNumber,
+        phone_number: phoneNumber || localStorage.getItem("phoneNumber"),
         code: newCodeValue,
         router: router.pathname,
       })
@@ -73,16 +80,18 @@ const useVerificationCode = (page) => {
         status: "success",
       });
       router.push("/userDashboard");
+
       if (result.payload.token) {
         setCookie("auth_token", result.payload.token, { path: "/" });
       }
     } else {
       showToast({
-        title: "خطا ",
+        title: "خطا",
         description: "ورود ناموفق",
         status: "error",
       });
     }
+
     setInputCode(["", "", "", "", "", ""]);
   };
 

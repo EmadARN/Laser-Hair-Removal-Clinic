@@ -43,11 +43,13 @@ const LayoutModal = ({ handleClick, phoneNumber, time, handleBackClick }) => {
         </Flex>
       </Flex>
 
-      <Box id="box" mb={6}>
-        <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "md" }}>
-          ارسال مجدد کد تایید در {time} ثانیه
-        </Text>
-      </Box>
+      {time > 0 && (
+        <Box id="box" mb={6}>
+          <Text flexWrap={"nowrap"} fontSize={{ base: "xs", md: "md" }}>
+            ارسال مجدد کد تایید در {time} ثانیه
+          </Text>
+        </Box>
+      )}
     </>
   );
 };
