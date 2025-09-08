@@ -72,7 +72,7 @@ export default function InfoToast() {
                 </Text>{" "}
                 با نام کاربری{" "}
                 <Text as="span" fontWeight="bold" color="yellow.300">
-                  reseption
+                  reception
                 </Text>{" "}
                 و رمز عبور{" "}
                 <Text as="span" fontWeight="bold" color="yellow.300">
@@ -129,7 +129,7 @@ export default function InfoToast() {
                 </Text>
                 :{" "}
                 <Text as="span" fontWeight="bold" color="yellow.300">
-                  reseption / 1234
+                  reception / 1234
                 </Text>
               </Text>
             </Box>

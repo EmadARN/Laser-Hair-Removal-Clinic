@@ -5,7 +5,7 @@ import AccordionLists from "../shared/AccordionLists";
 import SearchComponent from "@/Common/searchInput/SearchInput";
 import usePagination from "./logic/usePagination";
 import useCutomerInformation from "./logic/useCutomerInformation";
-import ReusableSession from "../shared/ReussableSession";
+import ReusableSession from "@/Common/ReusableSession";
 import { RiShieldUserFill } from "react-icons/ri";
 
 const Clients = () => {
@@ -37,27 +37,16 @@ const Clients = () => {
     }
   }, [customerListAdmin]);
 
-  // آیا جستجو فعال است؟
-  const hasSearch = filteredData !== undefined;
-  const dataToShow = hasSearch ? filteredData : currentClients;
-
-  // بررسی وضعیت خالی بودن داده برای جدول
-  const isTableEmpty =
-    !loading && !error && (!dataToShow || dataToShow.length === 0);
-
   if (step === 0) {
-    if (isTableEmpty) {
-      return (
-        <ReusableSession
-          text="مراجعینی برای نمایش وجود ندارد"
-          icon={<RiShieldUserFill />}
-        />
-      );
-    }
+    const hasFilteredData = filteredData && filteredData.length > 0;
+    const hasCurrentClients =
+      !loading &&
+      !error &&
+      Array.isArray(currentClients) &&
+      currentClients.length > 0;
 
     return (
       <Box width={"100%"} minWidth={"500px"}>
-        {/* سرچ */}
         <Box
           sx={{ py: { base: 4, md: 6 }, px: { base: 2, md: 4 } }}
           width={"95%"}
@@ -72,7 +61,6 @@ const Clients = () => {
           />
         </Box>
 
-        {/* جدول */}
         <Box
           width={"100%"}
           minWidth={"500px"}
@@ -80,70 +68,72 @@ const Clients = () => {
           justifyContent={"center"}
           px={{ base: 2, md: 4 }}
         >
-          <Table
-            mt={6}
-            cursor="pointer"
-            overflowY="auto"
-            width="100%"
-            size="sm"
-            dir="rtl"
-          >
-            {dataToShow.map((item, index) => (
-              <Box
-                key={index}
-                onClick={() => handleRowClick(item)}
-                width={"100%"}
-              >
-                <Lists
-                  firstArea={item.name + " " + item.last_name}
-                  editDeleteDisplay="none"
-                  leftArrowDisplay="flex"
-                />
-              </Box>
-            ))}
-          </Table>
+          {hasFilteredData ? (
+            <Table mt={6} cursor="pointer" width="100%" size="sm" dir="rtl">
+              {filteredData.map((searchitem, index) => (
+                <Box
+                  key={index}
+                  onClick={() => handleRowClick(searchitem)}
+                  width={"100%"}
+                >
+                  <Lists
+                    firstArea={searchitem.name + " " + searchitem.last_name}
+                    editDeleteDisplay="none"
+                    leftArrowDisplay="flex"
+                  />
+                </Box>
+              ))}
+            </Table>
+          ) : hasCurrentClients ? (
+            <Table mt={6} cursor="pointer" width="100%" size="sm" dir="rtl">
+              {currentClients.map((item, index) => (
+                <Box
+                  key={index}
+                  onClick={() => handleRowClick(item)}
+                  width={"100%"}
+                >
+                  <Lists
+                    firstArea={item.name + " " + item.last_name}
+                    editDeleteDisplay="none"
+                    leftArrowDisplay="flex"
+                  />
+                </Box>
+              ))}
+            </Table>
+          ) : (
+            // اینجا نمایش فقط ReusableSession
+            <ReusableSession
+              text="مراجعینی برای نمایش وجود ندارد"
+              icon={<RiShieldUserFill />}
+            />
+          )}
         </Box>
 
-        {/* pagination */}
-        <HStack mt={4} justifyContent="end" ml={4}>
-          <Button onClick={handlePrevPage} isDisabled={currentPage === 1}>
-            قبل
-          </Button>
-          <Text>{`${currentPage} از ${totalPages}`}</Text>
-          <Button
-            onClick={handleNextPage}
-            isDisabled={currentPage === totalPages}
-          >
-            بعد
-          </Button>
-        </HStack>
+        {hasCurrentClients && (
+          <HStack mt={4} justifyContent="end" ml={4}>
+            <Button onClick={handlePrevPage} isDisabled={currentPage === 1}>
+              قبل
+            </Button>
+            <Text>{`${currentPage} از ${totalPages}`}</Text>
+            <Button
+              onClick={handleNextPage}
+              isDisabled={currentPage === totalPages}
+            >
+              بعد
+            </Button>
+          </HStack>
+        )}
       </Box>
     );
-  }
-
-  // حالت آکاردئون
-  const isAccordionEmpty =
-    !loading &&
-    !error &&
-    (!clientInformation?.reserve_list ||
-      clientInformation.reserve_list.length === 0);
-
-  if (isAccordionEmpty) {
+  } else {
     return (
-      <ReusableSession
-        text="اطلاعات رزرو برای این مراجع یافت نشد"
-        icon={<RiShieldUserFill />}
+      <AccordionLists
+        mdCancelHandler={mdCancelHandler}
+        clientData={clientData}
+        clientInformation={clientInformation.reserve_list}
       />
     );
   }
-
-  return (
-    <AccordionLists
-      mdCancelHandler={mdCancelHandler}
-      clientData={clientData}
-      clientInformation={clientInformation.reserve_list}
-    />
-  );
 };
 
 export default Clients;
