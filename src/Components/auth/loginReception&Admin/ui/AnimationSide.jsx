@@ -8,7 +8,7 @@ const AnimationSide = ({ clicHandler, btnClick }) => {
       <Box w={"100%"}>
         <Text
           sx={{
-            fontSize: { base: "16px", md: "30px" },
+            fontSize: { base: "10px", md: "30px" },
             fontWeight: "bold",
             color: "#fff",
           }}

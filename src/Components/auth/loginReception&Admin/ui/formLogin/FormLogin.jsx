@@ -9,7 +9,7 @@ const style = {
   h: { base: "auto", md: "40px" },
   "::placeholder": {
     color: "#ccc",
-    fontSize: { base: "12px", md: "16px" },
+    fontSize: { base: "10px", md: "16px" },
   },
   _focus: {
     borderColor: "brand.400",
@@ -35,13 +35,12 @@ const FormLogin = ({
     <form onSubmit={submitHandler} style={{ position: "relative" }}>
       <Box
         sx={{
-          mr: { base: 0, md: 20 },
-          pt: { base: 0, md: 6 },
+          py: { base: 0, md: 2 },
           color: "#fff",
         }}
       >
         <Text
-          sx={{ fontWeight: "bold", fontSize: { base: "12px", md: "24px" } }}
+          sx={{ fontWeight: "bold", fontSize: { base: "10px", md: "24px" } }}
         >
           {label}
         </Text>
@@ -96,7 +95,7 @@ const FormLogin = ({
           cursor: "pointer",
           position: "absolute",
 
-          fontSize: { base: "10px", md: "16px" },
+          fontSize: { base: "8px", md: "16px" },
         }}
       >
         فراموشی رمز عبور ؟

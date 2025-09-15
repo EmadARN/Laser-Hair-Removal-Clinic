@@ -47,7 +47,7 @@ const CustomButton = forwardRef(
           justifyContent,
           w,
           h: h || "40px",
-          fontSize: { base: "12px", md: "16px" },
+          fontSize: { base: "10px", md: "16px" },
         }}
         {...props}
         onClick={handleNextStep}

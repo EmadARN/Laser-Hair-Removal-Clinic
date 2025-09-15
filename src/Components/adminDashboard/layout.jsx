@@ -36,9 +36,12 @@ const Dashboard = ({ children }) => {
       )}
 
       {/* Content Area */}
-      <GridItem colSpan={isSmallScreen || isCollapsed ? 18 : 17} px={6}>
+      <GridItem
+        colSpan={isSmallScreen || isCollapsed ? 1 : 17}
+        px={{ base: 0, md: 6 }}
+      >
         {/* Header */}
-        <Box py={4} px={6} borderBottom="1px solid #eaeaea">
+        <Box py={4} w={"100%"} borderBottom="1px solid #eaeaea">
           {isSmallScreen ? (
             <Flex alignItems="center">
               <Menu show={true} admintDatas={admintData} />

@@ -51,9 +51,9 @@ const EditUserModal = ({
   );
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size={{ base: "full", md: "md" }}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent borderRadius={{ base: "0", md: "md" }}>
         <ModalHeader>ویرایش اطلاعات کاربری</ModalHeader>
         <ModalBody>
           {renderPasswordInput("رمز عبور جدید", "password")}
